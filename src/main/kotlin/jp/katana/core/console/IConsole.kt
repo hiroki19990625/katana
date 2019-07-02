@@ -1,5 +1,5 @@
 package jp.katana.core.console
 
-interface IKatanaConsole {
+interface IConsole {
     fun readCommand(): String
 }

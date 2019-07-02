@@ -1,7 +1,7 @@
 package jp.katana.server.console
 
 import jp.katana.core.ServerState
-import jp.katana.core.console.IKatanaConsole
+import jp.katana.core.console.IConsole
 import jp.katana.server.Server
 import net.minecrell.terminalconsole.SimpleTerminalConsole
 import org.jline.reader.LineReader
@@ -9,7 +9,7 @@ import org.jline.reader.LineReaderBuilder
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 
-class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), IKatanaConsole {
+class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), IConsole {
     private val commandQueue: BlockingQueue<String> = LinkedBlockingQueue()
 
     override fun isRunning(): Boolean {

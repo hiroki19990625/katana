@@ -1,7 +1,5 @@
 package jp.katana.core
 
-import java.net.InetAddress
-
 interface IServerProperties {
     var allowNethet: Boolean
     var allowEnd: Boolean
@@ -16,7 +14,7 @@ interface IServerProperties {
     var secureMode: Boolean
     var playerIdleTimeout: Int
     var pvp: Boolean
-    var serverIp: InetAddress
+    var serverIp: String
     var serverPort: Int
     var viewDistance: Short
     var whiteList: Boolean
