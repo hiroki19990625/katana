@@ -8,6 +8,7 @@ interface IServer {
     val state: ServerState
     val logger: Logger
 
+    fun start()
     fun shutdown(): Boolean
     fun shutdownForce(): Boolean
 }

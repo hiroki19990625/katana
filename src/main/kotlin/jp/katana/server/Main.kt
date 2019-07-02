@@ -4,7 +4,8 @@ class Main {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val server: Server = Server()
+            val server = Server()
+            server.start()
         }
     }
 }

@@ -6,14 +6,18 @@ import jp.katana.server.Server
 import net.minecrell.terminalconsole.SimpleTerminalConsole
 import org.jline.reader.LineReader
 import org.jline.reader.LineReaderBuilder
+import java.util.concurrent.BlockingQueue
+import java.util.concurrent.LinkedBlockingQueue
 
 class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), IKatanaConsole {
+    private val commandQueue: BlockingQueue<String> = LinkedBlockingQueue()
+
     override fun isRunning(): Boolean {
         return server.state == ServerState.Running
     }
 
     override fun runCommand(command: String?) {
-        server.logger.info("test: " + command!!)
+        commandQueue.put(command)
     }
 
     override fun buildReader(builder: LineReaderBuilder?): LineReader {
@@ -29,6 +33,6 @@ class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), IKata
     }
 
     override fun readCommand(): String {
-        return ""
+        return commandQueue.take()
     }
 }
