@@ -8,6 +8,12 @@ import java.io.File
 
 
 class Server : IServer {
+    companion object {
+        init {
+            System.setProperty("log4j.configurationFile", "log4j2-katana.xml")
+        }
+    }
+
     override val propertiesFile: File = File("properties.yml")
     override var state: ServerState = ServerState.Stopped
         private set
@@ -18,6 +24,8 @@ class Server : IServer {
 
     override fun start() {
         state = ServerState.Running
+
+
         consoleThread.start()
 
         try {
