@@ -32,6 +32,9 @@ class Server : IServer {
     override var totalTick: Long = 0
         private set
 
+    private val katanaConfigFile: File = File("katana.yml")
+    private var katanaConfig: KatanaConfig? = null
+
     private val consoleThread = Thread { startConsole() }
     private val mainThread = Thread { startMainThread() }
 
@@ -44,6 +47,7 @@ class Server : IServer {
 
         try {
             loadServerProperties()
+            loadKatanaConfig()
         } catch (e: Exception) {
             logger.error(e)
             return
@@ -58,6 +62,7 @@ class Server : IServer {
 
         try {
             saveServerProperties()
+            saveKatanaConfig()
         } catch (e: Exception) {
             logger.error(e)
             return shutdownForce()
@@ -70,6 +75,7 @@ class Server : IServer {
 
     override fun shutdownForce(): Boolean {
         state = ServerState.Stopped
+        logger.info(I18n["katana.server.stop"])
         return true
     }
 
@@ -111,6 +117,29 @@ class Server : IServer {
         val yaml = Yaml(options)
         yaml.dump(serverProperties, propertiesFile.writer())
         logger.info(I18n["katana.server.file.save", propertiesFile.name])
+    }
+
+    private fun loadKatanaConfig() {
+        val options = DumperOptions()
+        options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
+        val yaml = Yaml(options)
+        if (katanaConfigFile.exists()) {
+            katanaConfig = yaml.loadAs(katanaConfigFile.reader(), KatanaConfig::class.java)
+            logger.info(I18n["katana.server.file.load", katanaConfigFile.name])
+        } else {
+            katanaConfig = KatanaConfig()
+            katanaConfigFile.createNewFile()
+            yaml.dump(katanaConfig, katanaConfigFile.writer())
+            logger.info(I18n["katana.server.file.create", katanaConfigFile.name])
+        }
+    }
+
+    private fun saveKatanaConfig() {
+        val options = DumperOptions()
+        options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
+        val yaml = Yaml(options)
+        yaml.dump(katanaConfig, katanaConfigFile.writer())
+        logger.info(I18n["katana.server.file.save", katanaConfigFile.name])
     }
 
     private fun startMainThread() {
