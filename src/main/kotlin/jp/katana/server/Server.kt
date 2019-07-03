@@ -16,6 +16,8 @@ class Server : IServer {
         init {
             System.setProperty("log4j.skipJansi", "false")
             System.setProperty("log4j.configurationFile", "log4j2-katana.xml")
+
+            Thread.currentThread().name = I18n["katana.server.hostThread"]
         }
     }
 
@@ -27,10 +29,15 @@ class Server : IServer {
     override val logger = LogManager.getLogger(Server::class.java)!!
     override val console = KatanaConsole(this)
 
+    override var totalTick: Long = 0
+        private set
+
     private val consoleThread = Thread { startConsole() }
+    private val mainThread = Thread { startMainThread() }
 
     override fun start() {
         state = ServerState.Running
+        consoleThread.name = I18n["katana.server.consoleThread"]
         consoleThread.start()
 
         logger.info(I18n["katana.server.starting"])
@@ -38,22 +45,40 @@ class Server : IServer {
         try {
             loadServerProperties()
         } catch (e: Exception) {
+            logger.error(e)
             return
         }
 
-        while (state == ServerState.Running) {
-        }
+        mainThread.start()
     }
 
     override fun shutdown(): Boolean {
         state = ServerState.Stopping
+        logger.info(I18n["katana.server.stopping"])
+
+        try {
+            saveServerProperties()
+        } catch (e: Exception) {
+            logger.error(e)
+            return shutdownForce()
+        }
 
         state = ServerState.Stopped
+        logger.info(I18n["katana.server.stop"])
         return true
     }
 
     override fun shutdownForce(): Boolean {
+        state = ServerState.Stopped
         return true
+    }
+
+    override fun update(tick: Long): Boolean {
+        try {
+            return true
+        } catch (e: Exception) {
+            return false
+        }
     }
 
     private fun startConsole() {
@@ -61,21 +86,62 @@ class Server : IServer {
             console.start()
         } catch (e: Exception) {
             logger.error(e)
+            shutdownForce()
         }
     }
 
     private fun loadServerProperties() {
         val options = DumperOptions()
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
-        options.indicatorIndent = 2
-        options.indent = 4
         val yaml = Yaml(options)
         if (propertiesFile.exists()) {
-            serverProperties = yaml.loadAs(propertiesFile.reader(), IServerProperties::class.java)
+            serverProperties = yaml.loadAs(propertiesFile.reader(), ServerProperties::class.java)
+            logger.info(I18n["katana.server.file.load", propertiesFile.name])
         } else {
             serverProperties = ServerProperties()
             propertiesFile.createNewFile()
             yaml.dump(serverProperties, propertiesFile.writer())
+            logger.info(I18n["katana.server.file.create", propertiesFile.name])
+        }
+    }
+
+    private fun saveServerProperties() {
+        val options = DumperOptions()
+        options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
+        val yaml = Yaml(options)
+        yaml.dump(serverProperties, propertiesFile.writer())
+        logger.info(I18n["katana.server.file.save", propertiesFile.name])
+    }
+
+    private fun startMainThread() {
+        Thread.currentThread().name = I18n["katana.server.mainThread"]
+
+        val tickRate = 20
+        var now: Long
+        var old: Long
+        var diff = 0L
+        var sleep: Long
+        val rate = (1000 shl 16) / tickRate
+        var sleepReal: Long
+        while (state == ServerState.Running) {
+            old = System.currentTimeMillis() shl 16
+
+            update(totalTick++)
+
+            now = System.currentTimeMillis() shl 16
+            sleep = rate - (now - old) - diff
+            if (sleep < 0x20000) sleep = 0x20000
+            old = now
+            try {
+                sleepReal = sleep shr 16
+                Thread.sleep(sleepReal)
+                if (sleepReal <= 2)
+                    logger.warn(I18n["katana.server.tickDelay"])
+            } catch (e: Exception) {
+                logger.warn(e)
+            }
+            now = System.currentTimeMillis() shl 16
+            diff = now - old - sleep
         }
     }
 }

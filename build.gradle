@@ -29,6 +29,8 @@ dependencies {
     compile "org.jline:jline-terminal:3.11.0"
     compile "org.jline:jline-terminal-jna:3.11.0"
     compile "org.jline:jline-reader:3.11.0"
+
+    compile 'com.github.ben-manes.caffeine:caffeine:2.7.0'
 }
 
 compileKotlin {

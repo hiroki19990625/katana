@@ -11,7 +11,10 @@ interface IServer {
     val logger: Logger
     val console: IConsole
 
+    val totalTick: Long
+
     fun start()
     fun shutdown(): Boolean
     fun shutdownForce(): Boolean
+    fun update(tick: Long): Boolean
 }
