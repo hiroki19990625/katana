@@ -29,6 +29,8 @@ class Server : IServer {
     override val logger = LogManager.getLogger(Server::class.java)!!
     override val console = KatanaConsole(this)
 
+    override val tickRate: Byte
+        get() = katanaConfig!!.serverTickRate
     override var totalTick: Long = 0
         private set
 
@@ -145,7 +147,7 @@ class Server : IServer {
     private fun startMainThread() {
         Thread.currentThread().name = I18n["katana.server.mainThread"]
 
-        val tickRate = 20
+        val tickRate = tickRate
         var now: Long
         var old: Long
         var diff = 0L

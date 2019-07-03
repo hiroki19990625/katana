@@ -11,6 +11,7 @@ interface IServer {
     val logger: Logger
     val console: IConsole
 
+    val tickRate: Byte
     val totalTick: Long
 
     fun start()
