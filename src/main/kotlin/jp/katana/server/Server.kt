@@ -3,12 +3,15 @@ package jp.katana.server
 import jp.katana.core.IServer
 import jp.katana.core.IServerProperties
 import jp.katana.core.ServerState
+import jp.katana.core.network.INetworkManager
 import jp.katana.i18n.I18n
 import jp.katana.server.console.KatanaConsole
+import jp.katana.server.network.NetworkManager
 import org.apache.logging.log4j.LogManager
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 import java.io.File
+import java.net.InetAddress
 
 
 class Server : IServer {
@@ -28,7 +31,15 @@ class Server : IServer {
         private set
     override val logger = LogManager.getLogger(Server::class.java)!!
     override val console = KatanaConsole(this)
+    override var networkManager: INetworkManager? = null
+        private set
 
+    override val serverPort: Int
+        get() = serverProperties!!.serverPort
+    override val serverAddress: InetAddress
+        get() = InetAddress.getByName(serverProperties!!.serverIp)
+    override val maxPlayer: Int
+        get() = serverProperties!!.maxPlayer
     override val tickRate: Byte
         get() = katanaConfig!!.serverTickRate
     override var totalTick: Long = 0
@@ -50,8 +61,12 @@ class Server : IServer {
         try {
             loadServerProperties()
             loadKatanaConfig()
+
+            networkManager = NetworkManager(this)
+            networkManager?.start()
         } catch (e: Exception) {
             logger.error(e)
+            shutdownForce()
             return
         }
 
@@ -65,6 +80,8 @@ class Server : IServer {
         try {
             saveServerProperties()
             saveKatanaConfig()
+
+            networkManager?.shutdown()
         } catch (e: Exception) {
             logger.error(e)
             return shutdownForce()
