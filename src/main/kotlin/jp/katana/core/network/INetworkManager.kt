@@ -7,7 +7,7 @@ interface INetworkManager {
     fun start()
     fun shutdown()
 
-    fun addPlayer(address: InetSocketAddress, player: IPlayer)
-    fun removePlayer(address: InetSocketAddress)
-    fun getPlayer(address: InetSocketAddress)
+    fun addPlayer(address: InetSocketAddress, player: IPlayer): Boolean
+    fun removePlayer(address: InetSocketAddress): Boolean
+    fun getPlayer(address: InetSocketAddress): IPlayer?
 }
