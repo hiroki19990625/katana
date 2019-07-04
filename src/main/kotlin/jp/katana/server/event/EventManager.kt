@@ -5,6 +5,7 @@ import jp.katana.core.event.IEvent
 import jp.katana.core.event.IEventManager
 import jp.katana.server.event.player.PlayerCreateEvent
 import jp.katana.server.event.server.ServerStartEvent
+import org.apache.logging.log4j.LogManager
 
 class EventManager : IEventManager {
     private val events: HashMap<Class<*>, EventHandler<*>> = HashMap()
@@ -16,15 +17,15 @@ class EventManager : IEventManager {
     }
 
     override fun <T : IEvent> register(handler: EventHandler<T>) {
-        if (events.containsKey(handler.javaClass)) {
+        if (!events.containsKey(handler.javaClass)) {
             events[handler.javaClass] = handler
         }
     }
 
     override fun <V : IEvent> invoke(value: V) {
         val handler = EventHandler.generateClass<EventHandler<V>>()
-        if (events.containsKey(handler.javaClass)) {
-            events[handler.javaClass]!!(value)
+        if (events.containsKey(handler)) {
+            events[handler]!!(value)
         }
     }
 }
