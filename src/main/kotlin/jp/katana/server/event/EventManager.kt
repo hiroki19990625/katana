@@ -21,7 +21,8 @@ class EventManager : IEventManager {
         }
     }
 
-    override fun <T : EventHandler<V>, V> invoke(handler: Class<T>, value: V) {
+    override fun <V : IEvent> invoke(value: V) {
+        val handler = EventHandler.generateClass<EventHandler<V>>()
         if (events.containsKey(handler.javaClass)) {
             events[handler.javaClass]!!(value)
         }

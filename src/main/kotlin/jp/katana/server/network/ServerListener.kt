@@ -3,7 +3,6 @@ package jp.katana.server.network
 import com.whirvis.jraknet.RakNetPacket
 import com.whirvis.jraknet.server.RakNetServerListener
 import com.whirvis.jraknet.session.RakNetClientSession
-import jp.katana.core.event.EventHandler
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.event.player.PlayerCreateEvent
@@ -18,7 +17,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             logger.info(I18n["katana.server.client.connection", address, session.maximumTransferUnit])
 
             val event = PlayerCreateEvent()
-            server.eventManager.invoke(EventHandler.generateClass(), event)
+            server.eventManager(event)
 
             networkManager.addPlayer(address, event.player!!)
             networkManager.addSession(address, session)
