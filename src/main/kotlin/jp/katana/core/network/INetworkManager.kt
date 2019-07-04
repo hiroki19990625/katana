@@ -1,11 +1,13 @@
 package jp.katana.core.network
 
-import com.whirvis.jraknet.server.RakNetServer
-import jp.katana.server.Server
+import jp.katana.core.entity.IPlayer
+import java.net.InetSocketAddress
 
 interface INetworkManager {
-    val raknetServer: RakNetServer
-
     fun start()
     fun shutdown()
+
+    fun addPlayer(address: InetSocketAddress, player: IPlayer)
+    fun removePlayer(address: InetSocketAddress)
+    fun getPlayer(address: InetSocketAddress)
 }

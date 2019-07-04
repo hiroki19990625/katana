@@ -18,6 +18,7 @@ class ServerProperties() : IServerProperties {
     override var pvp: Boolean = true
     override var serverIp: String = "0.0.0.0"
     override var serverPort: Int = 19132
+    override var subMotd: String = ""
     override var viewDistance: Short = 8
     override var whiteList: Boolean = false
 }

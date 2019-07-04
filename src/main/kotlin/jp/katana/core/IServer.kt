@@ -7,6 +7,9 @@ import java.io.File
 import java.net.InetAddress
 
 interface IServer {
+    val protocolVersion: Int
+    val gameVersion: String
+
     val propertiesFile: File
     val serverProperties: IServerProperties?
     val state: ServerState
@@ -17,6 +20,8 @@ interface IServer {
     val serverPort: Int
     val serverAddress: InetAddress
     val maxPlayer: Int
+    val motd: String
+    val subMotd: String
     val tickRate: Byte
     val totalTick: Long
 

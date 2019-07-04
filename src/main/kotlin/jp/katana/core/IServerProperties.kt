@@ -16,6 +16,7 @@ interface IServerProperties {
     var pvp: Boolean
     var serverIp: String
     var serverPort: Int
+    var subMotd: String
     var viewDistance: Short
     var whiteList: Boolean
 }

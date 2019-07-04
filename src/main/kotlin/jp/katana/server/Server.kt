@@ -24,6 +24,9 @@ class Server : IServer {
         }
     }
 
+    override val protocolVersion: Int = 354
+    override val gameVersion: String = "1.11.4"
+
     override val propertiesFile: File = File("properties.yml")
     override var serverProperties: IServerProperties? = null
         private set
@@ -38,8 +41,22 @@ class Server : IServer {
         get() = serverProperties!!.serverPort
     override val serverAddress: InetAddress
         get() = InetAddress.getByName(serverProperties!!.serverIp)
-    override val maxPlayer: Int
+    override var maxPlayer: Int
         get() = serverProperties!!.maxPlayer
+        set(value) {
+            serverProperties!!.maxPlayer = value
+            logger.warn(I18n["katana.server.changeMaxPlayer"])
+        }
+    override var motd: String
+        get() = serverProperties!!.motd
+        set(value) {
+            serverProperties!!.motd = value
+        }
+    override var subMotd: String
+        get() = serverProperties!!.subMotd
+        set(value) {
+            serverProperties!!.subMotd = value
+        }
     override val tickRate: Byte
         get() = katanaConfig!!.serverTickRate
     override var totalTick: Long = 0
