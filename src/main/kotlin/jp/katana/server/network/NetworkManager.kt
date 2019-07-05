@@ -6,7 +6,9 @@ import com.whirvis.jraknet.session.RakNetClientSession
 import jp.katana.core.entity.IPlayer
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.IPlayerManager
+import jp.katana.core.network.Reliability
 import jp.katana.server.Server
+import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import java.net.InetSocketAddress
 
 class NetworkManager(private val server: Server) : INetworkManager, IPlayerManager {
@@ -62,11 +64,19 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
         return players.values.toList()
     }
 
-    fun sendPacket(player: IPlayer) {
+    override fun sendPacket(player: IPlayer, packet: MinecraftPacket, reliability: Reliability) {
         val address = player.address
         if (sessions.containsKey(address)) {
-            //sessions[address].sendMessage(Reliability.RELIABLE_ORDERED, ,)
+            sessions[address]!!.sendMessage(
+                com.whirvis.jraknet.protocol.Reliability.lookup(reliability.id.toInt()),
+                packet.channel,
+                packet
+            )
         }
+    }
+
+    override fun handlePacket(player: IPlayer, packet: MinecraftPacket) {
+        player.handlePacket(packet)
     }
 
     fun addSession(address: InetSocketAddress, session: RakNetClientSession): Boolean {

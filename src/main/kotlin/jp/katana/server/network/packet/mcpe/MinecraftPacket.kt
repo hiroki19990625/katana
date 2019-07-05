@@ -2,5 +2,6 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.server.utils.BinaryStream
 
-class MinecraftPacket : BinaryStream(){
+class MinecraftPacket : BinaryStream() {
+    val channel: Int = 0
 }
