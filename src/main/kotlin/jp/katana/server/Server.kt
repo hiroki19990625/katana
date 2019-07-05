@@ -8,6 +8,9 @@ import jp.katana.core.network.INetworkManager
 import jp.katana.i18n.I18n
 import jp.katana.server.console.KatanaConsole
 import jp.katana.server.event.EventManager
+import jp.katana.server.event.server.ServerStartEvent
+import jp.katana.server.event.server.ServerStopEvent
+import jp.katana.server.event.server.ServerUpdateTickEvent
 import jp.katana.server.network.NetworkManager
 import org.apache.logging.log4j.LogManager
 import org.yaml.snakeyaml.DumperOptions
@@ -90,12 +93,18 @@ class Server : IServer {
             return
         }
 
+        val event = ServerStartEvent(this)
+        eventManager(event)
+
         mainThread.start()
     }
 
     override fun shutdown(): Boolean {
         state = ServerState.Stopping
         logger.info(I18n["katana.server.stopping"])
+
+        val event = ServerStopEvent(this)
+        eventManager(event)
 
         try {
             saveServerProperties()
@@ -194,7 +203,10 @@ class Server : IServer {
         while (state == ServerState.Running) {
             old = System.currentTimeMillis() shl 16
 
-            update(totalTick++)
+            if (update(totalTick++)) {
+                val event = ServerUpdateTickEvent(this, totalTick - 1)
+                eventManager(event)
+            }
 
             now = System.currentTimeMillis() shl 16
             sleep = rate - (now - old) - diff

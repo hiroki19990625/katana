@@ -1,4 +1,4 @@
-package jp.katana.server.network
+package jp.katana.server.network.packet
 
 import jp.katana.server.network.packet.mcpe.MinecraftProtocols
 import jp.katana.server.utils.BinaryStream

@@ -4,6 +4,7 @@ import jp.katana.core.network.packet.mcpe.IMinecraftPacket
 import jp.katana.server.utils.BinaryStream
 
 class MinecraftPacket : BinaryStream(), IMinecraftPacket {
+    override val packetId: Int = 0
     override val channel: Int = 0
 
     override fun decode() {

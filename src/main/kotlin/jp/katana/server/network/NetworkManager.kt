@@ -9,6 +9,7 @@ import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.IPlayerManager
 import jp.katana.core.network.Reliability
 import jp.katana.server.Server
+import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.server.utils.BinaryStream
 import java.net.InetSocketAddress

@@ -7,6 +7,7 @@ import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.entity.Player
 import jp.katana.server.event.player.PlayerCreateEvent
+import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 
@@ -41,15 +42,18 @@ class ServerListener(private val server: Server, private val networkManager: Net
     }
 
     override fun handleMessage(session: RakNetClientSession?, packet: RakNetPacket?, channel: Int) {
-        val batch = BatchPacket()
-        batch.setBuffer(packet?.array())
-        batch.decode()
+        if (session != null) {
+            val address = session.address
+            val batch = BatchPacket()
+            batch.setBuffer(packet?.array())
+            batch.decode()
 
-        val data = BinaryStream()
-        data.setBuffer(batch.payload)
-        val buf = data.read(data.readUnsignedVarInt())
+            val data = BinaryStream()
+            data.setBuffer(batch.payload)
+            val buf = data.read(data.readUnsignedVarInt())
 
-        logger.info(buf[0])
+            //networkManager.handlePacket(address, )
+        }
     }
 
     override fun onSessionException(session: RakNetClientSession?, throwable: Throwable?) {
