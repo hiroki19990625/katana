@@ -19,23 +19,15 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
     private val players: HashMap<InetSocketAddress, IPlayer> = HashMap()
     private val sessions: HashMap<InetSocketAddress, RakNetClientSession> = HashMap()
 
+    private val networkThread: Thread = Thread { startNetworkThread() }
+
     override fun start() {
-        raknetServer.identifier = MinecraftIdentifier(
-            server.motd,
-            server.protocolVersion,
-            server.gameVersion,
-            0,
-            server.maxPlayer,
-            raknetServer.globallyUniqueId,
-            server.subMotd,
-            ""
-        )
-        raknetServer.addSelfListener()
-        raknetServer.addListener(ServerListener(server, this))
-        raknetServer.start()
+        if (networkThread.state == Thread.State.NEW)
+            networkThread.start()
     }
 
     override fun shutdown() {
+        // TODO Bug Fix.
         raknetServer.shutdown()
     }
 
@@ -130,5 +122,21 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
         if (identifier is MinecraftIdentifier) {
             identifier.onlinePlayerCount = count
         }
+    }
+
+    private fun startNetworkThread() {
+        raknetServer.identifier = MinecraftIdentifier(
+            server.motd,
+            server.protocolVersion,
+            server.gameVersion,
+            0,
+            server.maxPlayer,
+            raknetServer.globallyUniqueId,
+            server.subMotd,
+            ""
+        )
+        raknetServer.addSelfListener()
+        raknetServer.addListener(ServerListener(server, this))
+        raknetServer.start()
     }
 }

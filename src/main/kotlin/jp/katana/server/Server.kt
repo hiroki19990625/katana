@@ -25,7 +25,7 @@ class Server : IServer {
             System.setProperty("log4j.skipJansi", "false")
             System.setProperty("log4j.configurationFile", "log4j2-katana.xml")
 
-            Thread.currentThread().name = I18n["katana.server.hostThread"]
+            Thread.currentThread().name = I18n["katana.server.thread.hostThread"]
         }
     }
 
@@ -51,7 +51,7 @@ class Server : IServer {
         get() = serverProperties!!.maxPlayer
         set(value) {
             serverProperties!!.maxPlayer = value
-            logger.warn(I18n["katana.server.changeMaxPlayer"])
+            logger.warn(I18n["katana.server.warn.changeMaxPlayer"])
         }
     override var motd: String
         get() = serverProperties!!.motd
@@ -76,7 +76,7 @@ class Server : IServer {
 
     override fun start() {
         state = ServerState.Running
-        consoleThread.name = I18n["katana.server.consoleThread"]
+        consoleThread.name = I18n["katana.server.thread.consoleThread"]
         consoleThread.start()
 
         logger.info(I18n["katana.server.starting"])
@@ -85,8 +85,10 @@ class Server : IServer {
             loadServerProperties()
             loadKatanaConfig()
 
+            logger.info(I18n["katana.server.network.starting"])
             networkManager = NetworkManager(this)
             networkManager?.start()
+            logger.info(I18n["katana.server.network.startInfo", serverPort])
         } catch (e: Exception) {
             logger.error(e)
             shutdownForce()
@@ -191,7 +193,7 @@ class Server : IServer {
     }
 
     private fun startMainThread() {
-        Thread.currentThread().name = I18n["katana.server.mainThread"]
+        Thread.currentThread().name = I18n["katana.server.thread.mainThread"]
 
         val tickRate = tickRate
         var now: Long
@@ -216,7 +218,7 @@ class Server : IServer {
                 sleepReal = sleep shr 16
                 Thread.sleep(sleepReal)
                 if (sleepReal <= 2)
-                    logger.warn(I18n["katana.server.tickDelay"])
+                    logger.warn(I18n["katana.server.warn.tickDelay"])
             } catch (e: Exception) {
                 logger.warn(e)
             }
