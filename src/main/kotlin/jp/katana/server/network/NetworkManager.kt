@@ -1,5 +1,6 @@
 package jp.katana.server.network
 
+import com.whirvis.jraknet.Packet
 import com.whirvis.jraknet.identifier.MinecraftIdentifier
 import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.session.RakNetClientSession
@@ -9,6 +10,7 @@ import jp.katana.core.network.IPlayerManager
 import jp.katana.core.network.Reliability
 import jp.katana.server.Server
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
+import jp.katana.server.utils.BinaryStream
 import java.net.InetSocketAddress
 
 class NetworkManager(private val server: Server) : INetworkManager, IPlayerManager {
@@ -67,16 +69,27 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
     override fun sendPacket(player: IPlayer, packet: MinecraftPacket, reliability: Reliability) {
         val address = player.address
         if (sessions.containsKey(address)) {
+            packet.encode()
+
+            val binary = BinaryStream()
+            var buf = packet.array()
+            binary.writeUnsignedVarInt(buf.size)
+            binary.write(buf)
+
+            val batch = BatchPacket()
+            batch.payload = binary.array()
+            batch.encode()
+
             sessions[address]!!.sendMessage(
                 com.whirvis.jraknet.protocol.Reliability.lookup(reliability.id.toInt()),
                 packet.channel,
-                packet
+                Packet(batch.array())
             )
         }
     }
 
-    override fun handlePacket(player: IPlayer, packet: MinecraftPacket) {
-        player.handlePacket(packet)
+    override fun handlePacket(address: InetSocketAddress, packet: MinecraftPacket) {
+
     }
 
     fun addSession(address: InetSocketAddress, session: RakNetClientSession): Boolean {

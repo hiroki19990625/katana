@@ -12,6 +12,6 @@ interface INetworkManager {
     fun removePlayer(address: InetSocketAddress): Boolean
     fun getPlayer(address: InetSocketAddress): IPlayer?
 
-    fun sendPacket(player: IPlayer, packet: MinecraftPacket, reliability: Reliability)
-    fun handlePacket(player: IPlayer, packet: MinecraftPacket)
+    fun sendPacket(player: IPlayer, packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
+    fun handlePacket(address: InetSocketAddress, packet: MinecraftPacket)
 }
