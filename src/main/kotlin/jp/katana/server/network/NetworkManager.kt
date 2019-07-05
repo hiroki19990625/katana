@@ -5,10 +5,11 @@ import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.session.RakNetClientSession
 import jp.katana.core.entity.IPlayer
 import jp.katana.core.network.INetworkManager
+import jp.katana.core.network.IPlayerManager
 import jp.katana.server.Server
 import java.net.InetSocketAddress
 
-class NetworkManager(private val server: Server) : INetworkManager {
+class NetworkManager(private val server: Server) : INetworkManager, IPlayerManager {
     private val raknetServer: RakNetServer = RakNetServer(server.serverPort, server.maxPlayer)
     private val players: HashMap<InetSocketAddress, IPlayer> = HashMap()
     private val sessions: HashMap<InetSocketAddress, RakNetClientSession> = HashMap()
@@ -55,6 +56,17 @@ class NetworkManager(private val server: Server) : INetworkManager {
         if (players.containsKey(address)) return players[address]
 
         return null
+    }
+
+    override fun getPlayers(): List<IPlayer> {
+        return players.values.toList()
+    }
+
+    fun sendPacket(player: IPlayer) {
+        val address = player.address
+        if (sessions.containsKey(address)) {
+            //sessions[address].sendMessage(Reliability.RELIABLE_ORDERED, ,)
+        }
     }
 
     fun addSession(address: InetSocketAddress, session: RakNetClientSession): Boolean {

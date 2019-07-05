@@ -5,6 +5,7 @@ import com.whirvis.jraknet.server.RakNetServerListener
 import com.whirvis.jraknet.session.RakNetClientSession
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
+import jp.katana.server.entity.Player
 import jp.katana.server.event.player.PlayerCreateEvent
 import org.apache.logging.log4j.LogManager
 
@@ -18,6 +19,9 @@ class ServerListener(private val server: Server, private val networkManager: Net
 
             val event = PlayerCreateEvent()
             server.eventManager(event)
+
+            if (event.player == null)
+                event.player = Player(address)
 
             networkManager.addPlayer(address, event.player!!)
             networkManager.addSession(address, session)
