@@ -4,6 +4,7 @@ import jp.katana.core.IServer
 import jp.katana.core.IServerProperties
 import jp.katana.core.ServerState
 import jp.katana.core.event.IEventManager
+import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.network.INetworkManager
 import jp.katana.i18n.I18n
 import jp.katana.server.console.KatanaConsole
@@ -11,6 +12,8 @@ import jp.katana.server.event.EventManager
 import jp.katana.server.event.server.ServerStartEvent
 import jp.katana.server.event.server.ServerStopEvent
 import jp.katana.server.event.server.ServerUpdateTickEvent
+import jp.katana.server.factory.FactoryManager
+import jp.katana.server.factory.PacketFactory
 import jp.katana.server.network.NetworkManager
 import org.apache.logging.log4j.LogManager
 import org.yaml.snakeyaml.DumperOptions
@@ -39,6 +42,7 @@ class Server : IServer {
         private set
     override val logger = LogManager.getLogger(Server::class.java)!!
     override val console = KatanaConsole(this)
+    override val factoryManager: IFactoryManager = FactoryManager()
     override val eventManager: IEventManager = EventManager()
     override var networkManager: INetworkManager? = null
         private set
