@@ -7,6 +7,7 @@ import jp.katana.server.event.player.PlayerCreateEvent
 import jp.katana.server.event.server.ServerStartEvent
 import jp.katana.server.event.server.ServerStopEvent
 import jp.katana.server.event.server.ServerUpdateTickEvent
+import jp.katana.server.utils.ClassGenerator
 
 class EventManager : IEventManager {
     private val events: HashMap<Class<*>, EventHandler<*>> = HashMap()
@@ -20,16 +21,15 @@ class EventManager : IEventManager {
     }
 
     override fun <T : IEvent> register(handler: EventHandler<T>) {
-        if (!events.containsKey(handler.javaClass)) {
-            events[handler.javaClass] = handler
-        }
+        if (!events.containsKey(handler.javaClass)) events[handler.javaClass] = handler
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <V : IEvent> invoke(value: V) {
-        val handler = EventHandler.generateClass<EventHandler<V>>()
+        val handler = ClassGenerator.generateClass<EventHandler<V>>()
         if (events.containsKey(handler)) {
-
-            events[handler]!!(value)
+            val ev = events[handler] as EventHandler<V>
+            ev(value)
         }
     }
 }

@@ -1,12 +1,6 @@
 package jp.katana.core.event
 
 class EventHandler<T : IEvent> {
-    companion object {
-        inline fun <reified T> generateClass(): Class<T> {
-            return T::class.java
-        }
-    }
-
     private val list = mutableListOf<(T) -> Unit>()
 
     operator fun plusAssign(a: (T) -> Unit) {
