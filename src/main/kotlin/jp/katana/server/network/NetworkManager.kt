@@ -8,6 +8,7 @@ import jp.katana.core.entity.IPlayer
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.IPlayerManager
 import jp.katana.core.network.Reliability
+import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
@@ -20,6 +21,7 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
     private val sessions: HashMap<InetSocketAddress, RakNetClientSession> = HashMap()
 
     private val networkThread: Thread = Thread { startNetworkThread() }
+    private var networkStart = false
 
     override fun start() {
         if (networkThread.state == Thread.State.NEW)
@@ -27,7 +29,8 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
     }
 
     override fun shutdown() {
-        // TODO Bug Fix.
+        while (!networkStart)
+            Thread.sleep(1)
         raknetServer.shutdown()
     }
 
@@ -65,7 +68,7 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
             packet.encode()
 
             val binary = BinaryStream()
-            var buf = packet.array()
+            val buf = packet.array()
             binary.writeUnsignedVarInt(buf.size)
             binary.write(buf)
 
@@ -124,7 +127,13 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
         }
     }
 
+    internal fun updateState(f: Boolean) {
+        networkStart = f
+    }
+
     private fun startNetworkThread() {
+        Thread.currentThread().name = I18n["katana.server.thread.networkThread"]
+
         raknetServer.identifier = MinecraftIdentifier(
             server.motd,
             server.protocolVersion,

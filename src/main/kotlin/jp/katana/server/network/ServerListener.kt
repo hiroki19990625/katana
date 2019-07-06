@@ -63,4 +63,8 @@ class ServerListener(private val server: Server, private val networkManager: Net
     override fun onThreadException(throwable: Throwable?) {
         logger.warn(throwable)
     }
+
+    override fun onServerStart() {
+        networkManager.updateState(true)
+    }
 }
