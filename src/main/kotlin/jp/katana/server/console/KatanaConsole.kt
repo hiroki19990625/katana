@@ -33,7 +33,9 @@ class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), ICons
     }
 
     override fun shutdown() {
-        server.shutdown()
+        if (server.state == ServerState.Running) {
+            server.shutdown()
+        }
     }
 
     override fun readCommand(): String? {
