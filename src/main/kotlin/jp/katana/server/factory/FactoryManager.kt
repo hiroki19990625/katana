@@ -2,19 +2,18 @@ package jp.katana.server.factory
 
 import jp.katana.core.factory.IFactory
 import jp.katana.core.factory.IFactoryManager
-import org.apache.logging.log4j.LogManager
+import jp.katana.server.Server
 
-class FactoryManager : IFactoryManager {
+class FactoryManager(private val server: Server) : IFactoryManager {
     private val factories: HashMap<Class<*>, IFactory<*, *>> = HashMap()
 
     init {
-        register(CommandFactory())
+        register(CommandFactory(server))
         register(PacketFactory())
     }
 
     override fun <K, V> register(handler: IFactory<K, V>) {
         if (!factories.containsKey(handler.javaClass)) factories[handler.javaClass] = handler
-        LogManager.getLogger().info(handler.javaClass)
     }
 
     @Suppress("UNCHECKED_CAST")

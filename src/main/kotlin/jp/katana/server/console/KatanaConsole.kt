@@ -10,6 +10,7 @@ import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 
 class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), IConsole {
+    private val maxCommandQueue = 20
     private val commandQueue: BlockingQueue<String> = LinkedBlockingQueue()
 
     override fun isRunning(): Boolean {
@@ -17,7 +18,10 @@ class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), ICons
     }
 
     override fun runCommand(command: String?) {
-        commandQueue.put(command)
+        if (!command.isNullOrBlank()/* && commandQueue.size > 20*/)
+            commandQueue.put(command)
+        /*else
+            server.logger.info(I18n["katana.server.command.generic.tooManyRequests"])*/
     }
 
     override fun buildReader(builder: LineReaderBuilder?): LineReader {
@@ -32,7 +36,10 @@ class KatanaConsole(private val server: Server) : SimpleTerminalConsole(), ICons
         server.shutdown()
     }
 
-    override fun readCommand(): String {
-        return commandQueue.take()
+    override fun readCommand(): String? {
+        if (commandQueue.isNotEmpty())
+            return commandQueue.take()
+
+        return null
     }
 }

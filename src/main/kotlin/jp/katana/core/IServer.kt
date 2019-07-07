@@ -1,5 +1,6 @@
 package jp.katana.core
 
+import jp.katana.core.command.ICommandSender
 import jp.katana.core.console.IConsole
 import jp.katana.core.event.IEventManager
 import jp.katana.core.factory.IFactoryManager
@@ -33,4 +34,6 @@ interface IServer {
     fun shutdown(): Boolean
     fun shutdownForce(): Boolean
     fun update(tick: Long): Boolean
+
+    fun executeCommand(sender: ICommandSender, command: String)
 }

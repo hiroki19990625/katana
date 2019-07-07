@@ -3,17 +3,19 @@ package jp.katana.server
 import jp.katana.core.IServer
 import jp.katana.core.IServerProperties
 import jp.katana.core.ServerState
+import jp.katana.core.command.ICommandSender
 import jp.katana.core.event.IEventManager
 import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.network.INetworkManager
 import jp.katana.i18n.I18n
+import jp.katana.server.command.ServerCommandSender
 import jp.katana.server.console.KatanaConsole
 import jp.katana.server.event.EventManager
 import jp.katana.server.event.server.ServerStartEvent
 import jp.katana.server.event.server.ServerStopEvent
 import jp.katana.server.event.server.ServerUpdateTickEvent
+import jp.katana.server.factory.CommandFactory
 import jp.katana.server.factory.FactoryManager
-import jp.katana.server.factory.PacketFactory
 import jp.katana.server.network.NetworkManager
 import org.apache.logging.log4j.LogManager
 import org.yaml.snakeyaml.DumperOptions
@@ -42,7 +44,7 @@ class Server : IServer {
         private set
     override val logger = LogManager.getLogger(Server::class.java)!!
     override val console = KatanaConsole(this)
-    override val factoryManager: IFactoryManager = FactoryManager()
+    override val factoryManager: IFactoryManager = FactoryManager(this)
     override val eventManager: IEventManager = EventManager()
     override var networkManager: INetworkManager? = null
         private set
@@ -74,6 +76,8 @@ class Server : IServer {
 
     private val katanaConfigFile: File = File("katana.yml")
     private var katanaConfig: KatanaConfig? = null
+
+    private val serverCommandSender: ServerCommandSender = ServerCommandSender(this)
 
     private val consoleThread = Thread { startConsole() }
     private val mainThread = Thread { startMainThread() }
@@ -112,6 +116,9 @@ class Server : IServer {
         val event = ServerStopEvent(this)
         eventManager(event)
 
+        if (consoleThread.isAlive)
+            consoleThread.interrupt()
+
         try {
             saveServerProperties()
             saveKatanaConfig()
@@ -134,10 +141,30 @@ class Server : IServer {
     }
 
     override fun update(tick: Long): Boolean {
-        try {
-            return true
+        return try {
+            val command = console.readCommand()
+            if (command != null) {
+                executeCommand(serverCommandSender, command)
+            }
+            true
         } catch (e: Exception) {
-            return false
+            logger.warn(e)
+            false
+        }
+    }
+
+    override fun executeCommand(sender: ICommandSender, command: String) {
+        try {
+            val split = command.split(' ')
+            val label = split[0]
+            val args = split.drop(1)
+            val cmd = factoryManager.get(CommandFactory::class.java)!![command]
+            if (cmd != null)
+                cmd.execute(sender, label, args)
+            else
+                logger.info(I18n["katana.server.command.generic.unknown", label])
+        } catch (e: Exception) {
+            logger.warn(e)
         }
     }
 

@@ -1,15 +1,9 @@
 package jp.katana.server.command
 
 import jp.katana.core.command.ICommand
+import jp.katana.server.Server
 
-class Command : ICommand {
-    constructor(prefix: String, name: String) {
-        fullName = "$prefix:$name"
-        this.prefix = prefix
-        this.name = name
-    }
-
-    override val fullName: String
-    override val prefix: String
-    override val name: String
+abstract class Command(protected val server: Server, final override val prefix: String, final override val name: String) :
+    ICommand {
+    override val fullName: String = "$prefix:$name"
 }
