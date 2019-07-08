@@ -7,12 +7,14 @@ import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.entity.Player
 import jp.katana.server.event.player.PlayerCreateEvent
+import jp.katana.server.factory.PacketFactory
 import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 
 class ServerListener(private val server: Server, private val networkManager: NetworkManager) : RakNetServerListener {
     private val logger = LogManager.getLogger()
+    private val factory = server.factoryManager.get(PacketFactory::class.java)!!
 
     override fun onClientConnect(session: RakNetClientSession?) {
         if (session != null) {
@@ -48,11 +50,20 @@ class ServerListener(private val server: Server, private val networkManager: Net
             batch.setBuffer(packet?.array())
             batch.decode()
 
-            val data = BinaryStream()
+            var data = BinaryStream()
             data.setBuffer(batch.payload)
             val buf = data.read(data.readUnsignedVarInt())
+            data = BinaryStream()
+            data.setBuffer(buf)
+            val id = data.readUnsignedVarInt()
 
-            //networkManager.handlePacket(address, )
+            val pk = factory[id]
+            if (pk != null) {
+                pk.setBuffer(buf)
+                pk.decode()
+
+                networkManager.handlePacket(address, pk)
+            }
         }
     }
 

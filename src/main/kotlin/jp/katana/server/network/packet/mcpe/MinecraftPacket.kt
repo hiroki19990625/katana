@@ -3,7 +3,7 @@ package jp.katana.server.network.packet.mcpe
 import jp.katana.core.network.packet.mcpe.IMinecraftPacket
 import jp.katana.server.utils.BinaryStream
 
-class MinecraftPacket : BinaryStream(), IMinecraftPacket {
+abstract class MinecraftPacket : BinaryStream(), IMinecraftPacket, Cloneable {
     override val packetId: Int = 0
     override val channel: Int = 0
 
@@ -12,11 +12,11 @@ class MinecraftPacket : BinaryStream(), IMinecraftPacket {
         decodePayload()
     }
 
-    protected fun decodeHeader() {
-
+    protected open fun decodeHeader() {
+        readUnsignedVarInt()
     }
 
-    protected fun decodePayload() {
+    protected open fun decodePayload() {
 
     }
 
@@ -25,11 +25,11 @@ class MinecraftPacket : BinaryStream(), IMinecraftPacket {
         encodePayload()
     }
 
-    protected fun encodeHeader() {
-
+    protected open fun encodeHeader() {
+        writeUnsignedVarInt(packetId)
     }
 
-    protected fun encodePayload() {
+    protected open fun encodePayload() {
 
     }
 }
