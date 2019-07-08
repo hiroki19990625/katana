@@ -95,6 +95,8 @@ class Server : IServer {
 
             logger.info(I18n["katana.server.network.starting"])
             networkManager = NetworkManager(this)
+            if (state == ServerState.Stopped)
+                return
             networkManager?.start()
             logger.info(I18n["katana.server.network.startInfo", serverPort])
         } catch (e: Exception) {
@@ -116,18 +118,18 @@ class Server : IServer {
         val event = ServerStopEvent(this)
         eventManager(event)
 
-        if (consoleThread.isAlive)
-            consoleThread.interrupt()
-
         try {
             saveServerProperties()
             saveKatanaConfig()
 
             networkManager?.shutdown()
         } catch (e: Exception) {
-            logger.error(e)
+            logger.error("", e)
             return shutdownForce()
         }
+
+        if (consoleThread.isAlive)
+            consoleThread.interrupt()
 
         state = ServerState.Stopped
         logger.info(I18n["katana.server.stop"])
