@@ -15,8 +15,8 @@ abstract class MinecraftPacket : BinaryStream(), IMinecraftPacket, Cloneable {
         const val channel_text = 7
     }
 
-    override val packetId: Int = 0
-    override val channel: Int = 0
+    override val packetId: Int = MinecraftProtocols.none
+    override val channel: Int = channel_none
 
     override fun decode() {
         decodeHeader()
