@@ -7,7 +7,6 @@ import jp.katana.server.data.LoginData
 import jp.katana.server.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 import java.nio.charset.Charset
-import java.util.*
 
 class LoginPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.loginPacket
@@ -31,8 +30,8 @@ class LoginPacket : MinecraftPacket() {
         LogManager.getLogger().info(loginData.publicKey)
 
         val clientLen = stream.readIntLE()
-        val client = stream.read(clientLen)
-        clientData.decode(String(Base64.getDecoder().decode(client), Charset.forName("utf8")))
+        val client = String(stream.read(clientLen), Charset.forName("utf8"))
+        clientData.decode(client)
     }
 
     override fun encodePayload() {
