@@ -6,8 +6,8 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import com.nimbusds.jose.JWSObject
 import jp.katana.core.data.ILoginData
+import jp.katana.i18n.I18n
 import jp.katana.server.utils.Jwt
-import org.apache.logging.log4j.LogManager
 import java.security.PublicKey
 import java.util.*
 
@@ -18,7 +18,9 @@ class LoginData : ILoginData {
         private set
     override var clientUuid: UUID = UUID.randomUUID()
         private set
-    override var publicKey: String = ""
+    override var publicKey: PublicKey? = null
+        private set
+    override var jwtVerify: Boolean = false
         private set
 
     override fun decode(data: String) {
@@ -36,13 +38,16 @@ class LoginData : ILoginData {
                 }
 
                 if (lastKey != null && !Jwt.verify(lastKey, jwt)) {
-                    LogManager.getLogger().info("error")
+                    throw RuntimeException(I18n["katana.server.exception.jwtVerify"])
                 }
 
                 val obj = jwt.payload.toJSONObject()
                 val base64Key = obj.getAsString("identityPublicKey") ?: throw RuntimeException("error")
                 lastKey = Jwt.genECKey(base64Key)
             }
+
+            publicKey = lastKey
+            jwtVerify = mojangVerify
         }
     }
 

@@ -26,7 +26,7 @@ class BatchPacket : BinaryStream() {
 
                 this.payload = payload.copyOf(length)
             } catch (e: Exception) {
-                logger.error(e)
+                logger.error("", e)
             }
         }
     }

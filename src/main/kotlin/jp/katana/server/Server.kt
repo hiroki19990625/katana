@@ -100,7 +100,7 @@ class Server : IServer {
             networkManager?.start()
             logger.info(I18n["katana.server.network.startInfo", serverPort])
         } catch (e: Exception) {
-            logger.error(e)
+            logger.error("", e)
             shutdownForce()
             return
         }
@@ -150,7 +150,7 @@ class Server : IServer {
             }
             true
         } catch (e: Exception) {
-            logger.warn(e)
+            logger.warn("", e)
             false
         }
     }
@@ -166,7 +166,7 @@ class Server : IServer {
             else
                 logger.info(I18n["katana.server.command.generic.unknown", label])
         } catch (e: Exception) {
-            logger.warn(e)
+            logger.warn("", e)
         }
     }
 
@@ -174,7 +174,7 @@ class Server : IServer {
         try {
             console.start()
         } catch (e: Exception) {
-            logger.error(e)
+            logger.error("", e)
             shutdownForce()
         }
     }
@@ -253,7 +253,7 @@ class Server : IServer {
                 if (sleepReal <= 2)
                     logger.warn(I18n["katana.server.warn.tickDelay"])
             } catch (e: Exception) {
-                logger.warn(e)
+                logger.warn("", e)
             }
             now = System.currentTimeMillis() shl 16
             diff = now - old - sleep

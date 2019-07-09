@@ -68,11 +68,11 @@ class ServerListener(private val server: Server, private val networkManager: Net
     }
 
     override fun onSessionException(session: RakNetClientSession?, throwable: Throwable?) {
-        logger.warn(throwable.toString())
+        logger.warn("", throwable)
     }
 
     override fun onThreadException(throwable: Throwable?) {
-        logger.warn(throwable)
+        logger.warn("", throwable)
     }
 
     override fun onServerStart() {
