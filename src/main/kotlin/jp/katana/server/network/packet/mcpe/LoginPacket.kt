@@ -26,9 +26,6 @@ class LoginPacket : MinecraftPacket() {
         val chain = String(stream.read(chainLen), Charset.forName("utf8"))
         loginData.decode(chain)
 
-        LogManager.getLogger().info(loginData.jwtVerify)
-        LogManager.getLogger().info(loginData.publicKey)
-
         val clientLen = stream.readIntLE()
         val client = String(stream.read(clientLen), Charset.forName("utf8"))
         clientData.decode(client)
