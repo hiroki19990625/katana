@@ -1,5 +1,10 @@
 package jp.katana.core.network
 
+/**
+ * パケットの信頼性を提供します。
+ * @property id パケットの信頼性ID
+ * @constructor
+ */
 enum class Reliability(val id: Byte) {
     UNRELIABLE(0),
     UNRELIABLE_SEQUENCED(1),

@@ -9,6 +9,26 @@ import org.apache.logging.log4j.Logger
 import java.io.File
 import java.net.InetAddress
 
+/**
+ * サーバーを実装します。
+ * @property protocolVersion Int
+ * @property gameVersion String
+ * @property propertiesFile File
+ * @property serverProperties IServerProperties?
+ * @property state ServerState
+ * @property logger Logger
+ * @property console IConsole
+ * @property factoryManager IFactoryManager
+ * @property eventManager IEventManager
+ * @property networkManager INetworkManager?
+ * @property serverPort Int
+ * @property serverAddress InetAddress
+ * @property maxPlayer Int
+ * @property motd String
+ * @property subMotd String
+ * @property tickRate Byte
+ * @property totalTick Long
+ */
 interface IServer {
     val protocolVersion: Int
     val gameVersion: String

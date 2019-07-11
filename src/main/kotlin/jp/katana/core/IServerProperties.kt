@@ -1,5 +1,26 @@
 package jp.katana.core
 
+/**
+ * サーバーのプロパティファイルを実装します。
+ * @property allowNethet Boolean
+ * @property allowEnd Boolean
+ * @property difficulty Byte
+ * @property enableCommandBlock Boolean
+ * @property levelName String
+ * @property levelSeed String
+ * @property levelType String
+ * @property maxPlayer Int
+ * @property motd String
+ * @property networkCompressionThreshold Byte
+ * @property secureMode Boolean
+ * @property playerIdleTimeout Int
+ * @property pvp Boolean
+ * @property serverIp String
+ * @property serverPort Int
+ * @property subMotd String
+ * @property viewDistance Short
+ * @property whiteList Boolean
+ */
 interface IServerProperties {
     var allowNethet: Boolean
     var allowEnd: Boolean
