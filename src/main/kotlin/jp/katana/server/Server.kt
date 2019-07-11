@@ -17,7 +17,9 @@ import jp.katana.server.event.server.ServerUpdateTickEvent
 import jp.katana.server.factory.CommandFactory
 import jp.katana.server.factory.FactoryManager
 import jp.katana.server.network.NetworkManager
+import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.core.LoggerContext
 import org.yaml.snakeyaml.DumperOptions
 import org.yaml.snakeyaml.Yaml
 import java.io.File
@@ -122,6 +124,8 @@ class Server : IServer {
             saveServerProperties()
             saveKatanaConfig()
 
+            updateLogger()
+
             networkManager?.shutdown()
         } catch (e: Exception) {
             logger.error("", e)
@@ -225,6 +229,14 @@ class Server : IServer {
         logger.info(I18n["katana.server.file.save", katanaConfigFile.name])
     }
 
+    private fun updateLogger() {
+        val ctx = LogManager.getContext(false) as LoggerContext
+        val log4jConfig = ctx.configuration
+        val loggerConfig = log4jConfig.getLoggerConfig(LogManager.ROOT_LOGGER_NAME)
+        loggerConfig.level = Level.valueOf(katanaConfig!!.logLevel)
+        ctx.updateLoggers()
+    }
+
     private fun startMainThread() {
         Thread.currentThread().name = I18n["katana.server.thread.mainThread"]
 
@@ -251,7 +263,7 @@ class Server : IServer {
                 sleepReal = sleep shr 16
                 Thread.sleep(sleepReal)
                 if (sleepReal <= 2)
-                    logger.warn(I18n["katana.server.warn.tickDelay"])
+                    logger.debug(I18n["katana.server.warn.tickDelay"])
             } catch (e: Exception) {
                 logger.warn("", e)
             }
