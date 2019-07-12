@@ -3,10 +3,11 @@ package jp.katana.server.utils
 import com.whirvis.jraknet.Packet
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.util.*
 import kotlin.experimental.and
 
-
+/**
+ * バイナリのストリームを提供します。
+ */
 open class BinaryStream : Packet() {
     override fun readString(): String {
         return String(read(readUnsignedVarInt()))
@@ -30,25 +31,25 @@ open class BinaryStream : Packet() {
     }
 
     fun writeVarInt(v: Int) {
-        var v = v
-        v = v shl 32 shr 32
-        writeUnsignedVarInt(v shl 1 xor (v shr 31))
+        var value = v
+        value = value shl 32 shr 32
+        writeUnsignedVarInt(value shl 1 xor (value shr 31))
     }
 
     fun writeUnsignedVarInt(value: Int) {
-        var value = value
+        var v = value
         val buf = ByteArray(5)
-        value = value and -0x1
+        v = v and -0x1
 
         for (i in 0..4) {
-            if (value shr 7 != 0) {
-                buf[i] = (value or 0x80).toByte()
+            if (v shr 7 != 0) {
+                buf[i] = (v or 0x80).toByte()
             } else {
-                buf[i] = (value and 0x7f).toByte()
+                buf[i] = (v and 0x7f).toByte()
                 write(buf.copyOf(i + 1))
                 return
             }
-            value = value shr 7 and (Integer.MAX_VALUE shr 6)
+            v = v shr 7 and (Integer.MAX_VALUE shr 6)
         }
     }
 
@@ -78,18 +79,18 @@ open class BinaryStream : Packet() {
     }
 
     fun writeUnsignedVarLong(value: Int) {
-        var value = value
+        var v = value
         val buf = ByteArray(10)
 
         for (i in 0..9) {
-            if (value shr 7 != 0) {
-                buf[i] = (value or 0x80).toByte()
+            if (v shr 7 != 0) {
+                buf[i] = (v or 0x80).toByte()
             } else {
-                buf[i] = (value and 0x7f).toByte()
-                write(Arrays.copyOf(buf, i + 1))
+                buf[i] = (v and 0x7f).toByte()
+                write(buf.copyOf(i + 1))
                 return
             }
-            value = value shr 7 and (Integer.MAX_VALUE shr 6)
+            v = v shr 7 and (Integer.MAX_VALUE shr 6)
         }
     }
 

@@ -6,6 +6,9 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.util.*
 
+/**
+ * 多言語サポートを提供します。
+ */
 class I18n {
     companion object {
         private var bundle: ResourceBundle? = null
@@ -15,6 +18,11 @@ class I18n {
             bundle = ResourceBundle.getBundle("lang", Locale.JAPANESE, ResourceBundleUtf8Control())
         }
 
+        /**
+         * 多言語リソースを取得します。
+         * @param key リソースのキー
+         * @return リソースの文字列
+         */
         operator fun get(key: String): String {
             return try {
                 bundle!!.getString(key)
@@ -25,6 +33,12 @@ class I18n {
             }
         }
 
+        /**
+         * 多言語リソースを取得し、フォーマットします。
+         * @param key リソースのキー
+         * @param args リソースをフォーマットする値
+         * @return フォーマットされたリソースの文字列
+         */
         operator fun get(key: String, vararg args: Any): String {
             return try {
                 String.format(get(key), *args)
