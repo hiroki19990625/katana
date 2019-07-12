@@ -25,7 +25,31 @@ import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.net.InetAddress
 
-
+/**
+ * katanaサーバーのインスタンスを提供します。
+ * @property protocolVersion プロトコルのバージョン
+ * @property gameVersion ゲームのバージョン
+ * @property propertiesFile プロパティファイルの場所
+ * @property serverProperties プロパティファイルのインスタンス
+ * @property state サーバーのステータス
+ * @property logger サーバーのロガー
+ * @property console サーバーのコンソール
+ * @property factoryManager データファクトリのマネージャー
+ * @property eventManager イベントのマネージャー
+ * @property networkManager ネットワークのマネージャー
+ * @property serverPort サーバーのポート
+ * @property serverAddress サーバーのアドレス
+ * @property maxPlayer プレイヤーの最大人数
+ * @property motd サーバーのタイトル
+ * @property subMotd サーバーのサブタイトル
+ * @property tickRate サーバーの更新レート
+ * @property totalTick サーバーの起動時間
+ * @property katanaConfigFile サーバーの設定ファイルの場所
+ * @property katanaConfig サーバーの設定ファイルのインスタンス
+ * @property serverCommandSender サーバーのコマンド実行者
+ * @property consoleThread コンソールのスレッド
+ * @property mainThread サーバーのメインスレッド
+ */
 class Server : IServer {
     companion object {
         init {
@@ -84,6 +108,9 @@ class Server : IServer {
     private val consoleThread = Thread { startConsole() }
     private val mainThread = Thread { startMainThread() }
 
+    /**
+     * サーバーを開始します。
+     */
     override fun start() {
         state = ServerState.Running
         consoleThread.name = I18n["katana.server.thread.consoleThread"]
@@ -113,6 +140,10 @@ class Server : IServer {
         mainThread.start()
     }
 
+    /**
+     * サーバーを終了します。
+     * @return サーバーの終了に成功したかどうか
+     */
     override fun shutdown(): Boolean {
         state = ServerState.Stopping
         logger.info(I18n["katana.server.stopping"])
@@ -140,12 +171,21 @@ class Server : IServer {
         return true
     }
 
+    /**
+     * サーバーを強制的に終了します。
+     * @return サーバーの強制終了に成功したかどうか
+     */
     override fun shutdownForce(): Boolean {
         state = ServerState.Stopped
         logger.info(I18n["katana.server.stop"])
         return true
     }
 
+    /**
+     * サーバーの更新時に呼び出される。
+     * @param tick これまでの累計時間
+     * @return 更新に成功したかどうか
+     */
     override fun update(tick: Long): Boolean {
         return try {
             val command = console.readCommand()
@@ -159,6 +199,11 @@ class Server : IServer {
         }
     }
 
+    /**
+     * コマンドを実行した場合に呼び出される。
+     * @param sender コマンド実行者
+     * @param command コマンド文字列
+     */
     override fun executeCommand(sender: ICommandSender, command: String) {
         try {
             val split = command.split(' ')

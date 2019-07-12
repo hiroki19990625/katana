@@ -2,7 +2,10 @@ package jp.katana.server
 
 import jp.katana.core.IServerProperties
 
-class ServerProperties() : IServerProperties {
+/**
+ * サーバーのプロパティファイルを提供します。
+ **/
+class ServerProperties : IServerProperties {
     override var allowNethet: Boolean = true
     override var allowEnd: Boolean = true
     override var difficulty: Byte = 2

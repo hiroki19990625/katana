@@ -11,23 +11,23 @@ import java.net.InetAddress
 
 /**
  * サーバーを実装します。
- * @property protocolVersion Int
- * @property gameVersion String
- * @property propertiesFile File
- * @property serverProperties IServerProperties?
- * @property state ServerState
- * @property logger Logger
- * @property console IConsole
- * @property factoryManager IFactoryManager
- * @property eventManager IEventManager
- * @property networkManager INetworkManager?
- * @property serverPort Int
- * @property serverAddress InetAddress
- * @property maxPlayer Int
- * @property motd String
- * @property subMotd String
- * @property tickRate Byte
- * @property totalTick Long
+ * @property protocolVersion プロトコルのバージョン
+ * @property gameVersion ゲームのバージョン
+ * @property propertiesFile プロパティファイルの場所
+ * @property serverProperties プロパティファイルのインスタンス
+ * @property state サーバーのステータス
+ * @property logger サーバーのロガー
+ * @property console サーバーのコンソール
+ * @property factoryManager データファクトリのマネージャー
+ * @property eventManager イベントのマネージャー
+ * @property networkManager ネットワークのマネージャー
+ * @property serverPort サーバーのポート
+ * @property serverAddress サーバーのアドレス
+ * @property maxPlayer プレイヤーの最大人数
+ * @property motd サーバーのタイトル
+ * @property subMotd サーバーのサブタイトル
+ * @property tickRate サーバーの更新レート
+ * @property totalTick サーバーの起動時間
  */
 interface IServer {
     val protocolVersion: Int
@@ -50,10 +50,34 @@ interface IServer {
     val tickRate: Byte
     val totalTick: Long
 
+    /**
+     * サーバーを開始します。
+     */
     fun start()
+
+    /**
+     * サーバーを終了します。
+     * @return サーバーの終了に成功したかどうか
+     */
     fun shutdown(): Boolean
+
+    /**
+     * サーバーを強制的に終了します。
+     * @return サーバーの強制終了に成功したかどうか
+     */
     fun shutdownForce(): Boolean
+
+    /**
+     * サーバーの更新時に呼び出される。
+     * @param tick これまでの累計時間
+     * @return 更新に成功したかどうか
+     */
     fun update(tick: Long): Boolean
 
+    /**
+     * コマンドを実行した場合に呼び出される。
+     * @param sender コマンド実行者
+     * @param command コマンド文字列
+     */
     fun executeCommand(sender: ICommandSender, command: String)
 }
