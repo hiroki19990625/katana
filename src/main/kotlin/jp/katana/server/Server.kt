@@ -60,8 +60,8 @@ class Server : IServer {
         }
     }
 
-    override val protocolVersion: Int = 354
-    override val gameVersion: String = "1.11.4"
+    override val protocolVersion: Int = 361
+    override val gameVersion: String = "1.12.0"
 
     override val propertiesFile: File = File("properties.yml")
     override var serverProperties: IServerProperties? = null
