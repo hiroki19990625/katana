@@ -85,7 +85,9 @@ class NetworkManager(private val server: Server) : INetworkManager, IPlayerManag
     }
 
     override fun handlePacket(address: InetSocketAddress, packet: MinecraftPacket) {
-
+        if (players.containsKey(address)) {
+            players[address]!!.handlePacket(packet)
+        }
     }
 
     fun addSession(address: InetSocketAddress, session: RakNetClientSession): Boolean {
