@@ -39,6 +39,13 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
         player.loginData = loginPacket.loginData
         player.clientData = loginPacket.clientData
+
+        if (server.serverProperties!!.secureMode) {
+            //
+        } else {
+            playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
+            player.sendPacket(playStatusPacket)
+        }
     }
 
     override fun handlePlayStatusPacket(playStatusPacket: PlayStatusPacket) {
