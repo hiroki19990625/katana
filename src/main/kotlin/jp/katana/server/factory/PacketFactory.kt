@@ -2,10 +2,12 @@ package jp.katana.server.factory
 
 import jp.katana.server.network.packet.mcpe.LoginPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
+import jp.katana.server.network.packet.mcpe.PlayStatusPacket
 
 class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
     init {
         this += LoginPacket()
+        this += PlayStatusPacket()
     }
 
     override fun plusAssign(value: MinecraftPacket) {

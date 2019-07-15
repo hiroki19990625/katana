@@ -14,5 +14,14 @@ class PlayStatusPacket : MinecraftPacket() {
 
     override val packetId: Int = MinecraftProtocols.PLAY_STATUS_PACKET
 
+    var status = -1
+        private set
 
+    override fun decodePayload() {
+        status = readInt()
+    }
+
+    override fun encodePayload() {
+        writeInt(status)
+    }
 }

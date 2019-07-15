@@ -5,18 +5,18 @@ import jp.katana.server.utils.BinaryStream
 
 abstract class MinecraftPacket : BinaryStream(), IMinecraftPacket, Cloneable {
     companion object {
-        const val channel_none = 0
-        const val channel_priority = 1
-        const val channel_chunk = 2
-        const val channel_movement = 3
-        const val channel_blocks = 4
-        const val channel_events = 5
-        const val channel_spawning = 6
-        const val channel_text = 7
+        const val CHANNEL_NONE = 0
+        const val CHANNEL_PRIORITY = 1
+        const val CHANNEL_CHUNK = 2
+        const val CHANNEL_MOVEMENT = 3
+        const val CHANNEL_BLOCKS = 4
+        const val CHANNEL_EVENTS = 5
+        const val CHANNEL_SPAWNING = 6
+        const val CHANNEL_TEXT = 7
     }
 
-    override val packetId: Int = MinecraftProtocols.none
-    override val channel: Int = channel_none
+    override val packetId: Int = MinecraftProtocols.NONE
+    override val channel: Int = CHANNEL_NONE
 
     override fun decode() {
         decodeHeader()
