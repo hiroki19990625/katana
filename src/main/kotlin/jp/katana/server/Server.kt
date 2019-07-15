@@ -58,10 +58,13 @@ class Server : IServer {
 
             Thread.currentThread().name = I18n["katana.server.thread.hostThread"]
         }
+
+        const val PROTOCOL_VERSION = 361
+        const val GAME_VERSION = "1.12.0"
     }
 
-    override val protocolVersion: Int = 361
-    override val gameVersion: String = "1.12.0"
+    override val protocolVersion: Int = PROTOCOL_VERSION
+    override val gameVersion: String = GAME_VERSION
 
     override val propertiesFile: File = File("properties.yml")
     override var serverProperties: IServerProperties? = null

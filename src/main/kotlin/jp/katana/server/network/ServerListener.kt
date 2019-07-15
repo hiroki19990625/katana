@@ -25,7 +25,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             server.eventManager(event)
 
             if (event.player == null)
-                event.player = Player(address)
+                event.player = Player(address, server)
 
             networkManager.addPlayer(address, event.player!!)
             networkManager.addSession(address, session)
