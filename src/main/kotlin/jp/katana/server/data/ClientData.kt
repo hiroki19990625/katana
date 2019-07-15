@@ -5,7 +5,6 @@ import jp.katana.core.data.IClientData
 import jp.katana.core.data.ISkin
 import jp.katana.i18n.I18n
 import jp.katana.server.utils.Jwt
-import org.apache.logging.log4j.LogManager
 import java.security.PublicKey
 
 class ClientData : IClientData {
@@ -50,7 +49,30 @@ class ClientData : IClientData {
             throw RuntimeException(I18n["katana.server.exception.jwtVerify"])
         }
 
-        LogManager.getLogger().info(jwt.payload)
+        val obj = jwt.payload.toJSONObject()
+        clientRandomId = obj.getAsString("ClientRandomId")
+        currentInputMode = obj.getAsNumber("CurrentInputMode").toByte()
+        defaultInputMode = obj.getAsNumber("DefaultInputMode").toByte()
+        deviceId = obj.getAsString("DeviceId");
+        deviceModel = obj.getAsString("DeviceModel")
+        deviceOS = obj.getAsNumber("DeviceOS").toByte()
+        gameVersion = obj.getAsString("GameVersion")
+        guiScale = obj.getAsNumber("GuiScale").toByte()
+        languageCode = obj.getAsString("LanguageCode")
+        platformOfflineId = obj.getAsString("PlatformOfflineId")
+        platformOnlineId = obj.getAsString("PlatformOnlineId")
+        premiumSkin = obj.getAsString("PremiumSkin")!!.toBoolean()
+        selfSignedId = obj.getAsString("SelfSignedId")
+        serverAddress = obj.getAsString("ServerAddress")
+        skin = Skin(
+            obj.getAsString("CapeData"),
+            obj.getAsString("SkinData"),
+            obj.getAsString("SkinGeometry"),
+            obj.getAsString("SkinGeometryName"),
+            obj.getAsString("SkinId")
+        )
+        thirdPartyName = obj.getAsString("ThirdPartyName")
+        uiProfile = obj.getAsString("UIProfile")
     }
 
     override fun encode(): String {
