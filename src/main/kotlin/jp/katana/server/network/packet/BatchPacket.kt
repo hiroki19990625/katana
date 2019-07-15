@@ -32,7 +32,7 @@ class BatchPacket : BinaryStream() {
     }
 
     fun encode() {
-        writeByte(MinecraftProtocols.batchPacket)
+        writeByte(MinecraftProtocols.BATCH_PACKET)
 
         if (!isEncrypt) {
             val output = ByteArray(1024 * 1024 * 64)

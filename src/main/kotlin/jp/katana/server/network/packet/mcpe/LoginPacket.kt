@@ -5,11 +5,11 @@ import jp.katana.core.data.ILoginData
 import jp.katana.server.data.ClientData
 import jp.katana.server.data.LoginData
 import jp.katana.server.utils.BinaryStream
-import org.apache.logging.log4j.LogManager
 import java.nio.charset.Charset
 
 class LoginPacket : MinecraftPacket() {
-    override val packetId: Int = MinecraftProtocols.loginPacket
+    override val packetId: Int = MinecraftProtocols.LOGIN_PACKET
+
     var protocol: Int = 0
 
     var loginData: ILoginData = LoginData()

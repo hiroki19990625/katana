@@ -2,31 +2,31 @@ package jp.katana.server.network.packet.mcpe
 
 class MinecraftProtocols {
     companion object {
-        const val none = 0x00
+        const val NONE = 0x00
 
-        const val loginPacket = 0x01
-        const val playStatusPacket = 0x02
-        const val serverToClientHandShakePacket = 0x03
-        const val clientToServerHandShakePacket = 0x04
-        const val disconnectPacket = 0x05
-        const val ResourcePacksInfoPacket = 0x06
-        const val ResourcePackStackPacket = 0x07
-        const val ResourcePackClientResponsePacket = 0x08
-        const val textPacket = 0x09
-        const val setTimePacket = 0x0a
-        const val startGamePacket = 0x0b
-        const val addPlayerPacket = 0x0c
-        const val addEntityPacket = 0x0d
-        const val removeEntityPacket = 0x0e
-        const val addItemEntityPacket = 0x0f
+        const val LOGIN_PACKET = 0x01
+        const val PLAY_STATUS_PACKET = 0x02
+        const val SERVER_TO_CLIENT_HANDSHAKE_PACKET = 0x03
+        const val CLIENT_TO_SERVER_HANDSHAKE_PACKET = 0x04
+        const val DISCONNECT_PACKET = 0x05
+        const val RESOURCE_PACKS_INFO_PACKET = 0x06
+        const val RESOURCE_PACK_STACK_PACKET = 0x07
+        const val RESOURCE_PACK_CLIENT_RESPONSE_PACKET = 0x08
+        const val TEXT_PACKET = 0x09
+        const val SET_TIME_PACKET = 0x0a
+        const val START_GAME_PACKET = 0x0b
+        const val ADD_PLAYER_PACKET = 0x0c
+        const val ADD_ENTITY_PACKET = 0x0d
+        const val REMOVE_ENTITY_PACKET = 0x0e
+        const val ADD_ITEM_ENTITY_PACKET = 0x0f
 
-        const val takeItemEntityPacket = 0x11
-        const val moveEntityAbsolutePacket = 0x12
-        const val movePlayerPacket = 0x13
-        const val riderJumpPacket = 0x14
-        const val updateBlockPacket = 0x15
-        const val addPaintingPacket = 0x16
-        const val explodePacket = 0x17
+        const val TAKE_ITEM_ENTITY_PACKET = 0x11
+        const val MOVE_ENTITY_ABSOLUTE_PACKET = 0x12
+        const val MOVE_PLAYER_PACKET = 0x13
+        const val RIDER_JUMP_PACKET = 0x14
+        const val UPDATE_BLOCK_PACKET = 0x15
+        const val ADD_PAINTING_PACKET = 0x16
+        const val EXPLODE_PACKET = 0x17
         const val LEVEL_SOUND_EVENT_PACKET_V1 = 0x18
         const val LEVEL_EVENT_PACKET = 0x19
         const val BLOCK_EVENT_PACKET = 0x1a
@@ -122,11 +122,20 @@ class MinecraftProtocols {
         const val NETWORK_CHUNK_PUBLISHER_UPDATE_PACKET = 0x79
         const val BIOME_DEFINITION_LIST_PACKET = 0x7a
         const val LEVEL_SOUND_EVENT_PACKET = 0x7b
-        const val LECTERN_UPDATE_PACKET = 0x7c
-        const val VIDEO_STREAM_CONNECT_PACKET = 0x7d
-        const val MAP_CREATE_LOCKED_COPY_PACKET = 0x7e
-        const val ON_SCREEN_TEXTURE_ANIMATION_PACKET = 0x7f
+        const val LEVEL_EVENT_GENERIC_PACKET = 0x7c
+        const val LECTERN_UPDATE_PACKET = 0x7d
+        const val VIDEO_STREAM_CONNECT_PACKET = 0x7e
+        //byte ADD_ENTITY_PACKET = 0x7f;
+        //byte REMOVE_ENTITY_PACKET = 0x80;
+        const val CLIENT_CACHE_STATUS_PACKET = 0x81
+        const val ON_SCREEN_TEXTURE_ANIMATION_PACKET = 0x82
+        const val MAP_CREATE_LOCKED_COPY_PACKET = 0x83
+        const val STRUCTURE_TEMPLATE_DATA_EXPORT_REQUEST = 0x84
+        const val STRUCTURE_TEMPLATE_DATA_EXPORT_RESPONSE = 0x85
+        const val UPDATE_BLOCK_PROPERTIES = 0x86
+        const val CLIENT_CACHE_BLOB_STATUS_PACKET = 0x87
+        const val CLIENT_CACHE_MISS_RESPONSE_PACKET = 0x88
 
-        const val batchPacket = 0xfe
+        const val BATCH_PACKET = 0xfe
     }
 }
