@@ -16,13 +16,13 @@ class Jwt {
         /**
          * MojangのBase64でエンコードされた公開鍵
          */
-        const val mojangPublicKeyBase64 =
+        private const val MOJANG_PUBLIC_KEY_BASE64 =
             "MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE8ELkixyLcwlZryUQcu1TvPOmI2B7vX83ndnWRUaXm74wFfa5f/lwQNTfrLVHa2PmenpGI6JhIMUJaWZrjmMj90NoKNFSNBuKdm8rYiXsfaz3K36x/1U26HpG0ZxK/V1V"
 
         /**
          * Mojangの公開鍵
          */
-        val mojangPublicKey = genECKey(mojangPublicKeyBase64)
+        val mojangPublicKey = genECKey(MOJANG_PUBLIC_KEY_BASE64)
 
         /**
          * 公開鍵を使用してJwtを検証します。
