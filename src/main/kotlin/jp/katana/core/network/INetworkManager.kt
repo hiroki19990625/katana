@@ -7,7 +7,7 @@ import java.net.InetSocketAddress
 /**
  * ネットワークの管理を実装します。
  */
-interface INetworkManager {
+interface INetworkManager : IPlayerManager {
     /**
      * ネットワークを開始します。
      */

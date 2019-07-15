@@ -13,7 +13,7 @@ import java.net.InetSocketAddress
 
 class Player(override val address: InetSocketAddress, private val server: Server) : IPlayer {
     private val logger = LogManager.getLogger()
-    override val packetHandler: IPacketHandler = PacketHandler(this)
+    override val packetHandler: IPacketHandler = PacketHandler(this, server)
 
     override var loginData: ILoginData? = null
         internal set

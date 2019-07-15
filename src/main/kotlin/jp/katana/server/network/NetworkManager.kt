@@ -15,7 +15,7 @@ import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.server.utils.BinaryStream
 import java.net.InetSocketAddress
 
-class NetworkManager(private val server: Server) : INetworkManager, IPlayerManager {
+class NetworkManager(private val server: Server) : INetworkManager {
     private val raknetServer: RakNetServer = RakNetServer(server.serverPort, server.maxPlayer)
     private val players: HashMap<InetSocketAddress, IPlayer> = HashMap()
     private val sessions: HashMap<InetSocketAddress, RakNetClientSession> = HashMap()

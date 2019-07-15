@@ -7,7 +7,7 @@ import jp.katana.server.network.packet.mcpe.LoginPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.server.network.packet.mcpe.PlayStatusPacket
 
-class PacketHandler(private val player: Player) : IPacketHandler {
+class PacketHandler(private val player: Player, private val server: Server) : IPacketHandler {
     override fun handlePacket(packet: MinecraftPacket) {
         if (packet is LoginPacket)
             handleLoginPacket(packet)
@@ -19,14 +19,20 @@ class PacketHandler(private val player: Player) : IPacketHandler {
         val protocol = loginPacket.protocol
 
         val playStatusPacket = PlayStatusPacket()
-        if (protocol > Server.PROTOCOL_VERSION) {
+        if (protocol > server.protocolVersion) {
             playStatusPacket.status = PlayStatusPacket.LOGIN_FAILED_SERVER
             player.sendPacket(playStatusPacket)
             return
         }
 
-        if (protocol < Server.PROTOCOL_VERSION) {
+        if (protocol < server.protocolVersion) {
             playStatusPacket.status = PlayStatusPacket.LOGIN_FAILED_CLIENT
+            player.sendPacket(playStatusPacket)
+            return
+        }
+
+        if (server.networkManager != null && server.networkManager!!.getPlayers().size > server.maxPlayer) {
+            playStatusPacket.status = PlayStatusPacket.LOGIN_FAILED_SERVER_FULL
             player.sendPacket(playStatusPacket)
             return
         }
