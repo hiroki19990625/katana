@@ -9,6 +9,7 @@ import com.nimbusds.jose.jwk.ECKey
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.SignedJWT
 import jp.katana.core.network.IPacketHandler
+import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.entity.Player
 import jp.katana.server.network.packet.mcpe.LoginPacket
@@ -136,11 +137,12 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val signedJWT = SignedJWT(header, payload)
         signedJWT.sign(signer)
 
-        player.isEncrypted = true
+        server.logger.info(I18n["katana.server.network.startingEncrypt"])
 
         val handshakePacket = ServerToClientHandshakePacket()
         handshakePacket.token = signedJWT.serialize()
-
         player.sendPacket(handshakePacket)
+
+        player.isEncrypted = true
     }
 }
