@@ -6,6 +6,8 @@ import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import java.net.InetSocketAddress
+import java.security.KeyPair
+import javax.crypto.Cipher
 
 interface IPlayer {
     val address: InetSocketAddress
@@ -13,6 +15,15 @@ interface IPlayer {
 
     val loginData: ILoginData?
     val clientData: IClientData?
+    val keyPair: KeyPair?
+
+    val sharedKey: ByteArray?
+    val decrypt: Cipher?
+    val encrypt: Cipher?
+
+    val isEncrypted: Boolean
+    val encryptCounter: Long
+    val decryptCounter: Long
 
     fun handlePacket(packet: MinecraftPacket)
     fun sendPacket(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)

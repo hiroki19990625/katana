@@ -6,7 +6,6 @@ import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.session.RakNetClientSession
 import jp.katana.core.entity.IPlayer
 import jp.katana.core.network.INetworkManager
-import jp.katana.core.network.IPlayerManager
 import jp.katana.core.network.Reliability
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
@@ -73,6 +72,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
             binary.write(buf)
 
             val batch = BatchPacket()
+            batch.isEncrypt = player.isEncrypted
             batch.payload = binary.array()
             batch.encode()
 

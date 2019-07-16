@@ -10,6 +10,8 @@ import jp.katana.server.network.PacketHandler
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import org.apache.logging.log4j.LogManager
 import java.net.InetSocketAddress
+import java.security.KeyPair
+import javax.crypto.Cipher
 
 class Player(override val address: InetSocketAddress, private val server: Server) : IPlayer {
     private val logger = LogManager.getLogger()
@@ -18,6 +20,22 @@ class Player(override val address: InetSocketAddress, private val server: Server
     override var loginData: ILoginData? = null
         internal set
     override var clientData: IClientData? = null
+        internal set
+    override var keyPair: KeyPair? = null
+        internal set
+
+    override var sharedKey: ByteArray? = null
+        internal set
+    override var decrypt: Cipher? = null
+        internal set
+    override var encrypt: Cipher? = null
+        internal set
+
+    override var isEncrypted: Boolean = false
+        internal set
+    override var encryptCounter: Long = 0
+        internal set
+    override var decryptCounter: Long = 0
         internal set
 
     override fun handlePacket(packet: MinecraftPacket) {
