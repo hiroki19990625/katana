@@ -103,10 +103,11 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
         val messageDigest = MessageDigest.getInstance("SHA-256")
         messageDigest.update(sharedSecret)
-        player.sharedKey = messageDigest.digest()
+        val sharedKey = messageDigest.digest()
 
         val iv = ByteArray(16)
-        player.sharedKey!!.copyInto(iv, 0, 16)
+        System.arraycopy(sharedKey, 0, iv, 0, 16)
+        player.sharedKey = sharedKey
 
         val secretKey = SecretKeySpec(player.sharedKey, "AES")
         val ivParameterSpec = IvParameterSpec(iv)

@@ -4,7 +4,6 @@ import jp.katana.server.network.packet.mcpe.MinecraftProtocols
 import jp.katana.server.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import sun.audio.AudioPlayer.player
 import java.io.IOException
 import java.security.MessageDigest
 import java.util.*
@@ -22,9 +21,9 @@ class BatchPacket : BinaryStream() {
     var encryptCounter: Long = 0
     var decryptCounter: Long = 0
 
-    val decrypt: Cipher? = null
-    val encrypt: Cipher? = null
-    val sharedKey: ByteArray = ByteArray(0)
+    var decrypt: Cipher? = null
+    var encrypt: Cipher? = null
+    var sharedKey: ByteArray = ByteArray(0)
 
     var payload: ByteArray = ByteArray(0)
 
@@ -92,7 +91,7 @@ class BatchPacket : BinaryStream() {
         compresser.end()
 
         var buffer = output.copyOf(length)
-        if (!isEncrypt) {
+        if (isEncrypt) {
             val binaryStream = BinaryStream()
             binaryStream.writeLongLE(encryptCounter)
             binaryStream.write(payload)

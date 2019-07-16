@@ -73,6 +73,10 @@ class NetworkManager(private val server: Server) : INetworkManager {
 
             val batch = BatchPacket()
             batch.isEncrypt = player.isEncrypted
+            batch.decrypt = player.decrypt
+            batch.encrypt = player.encrypt
+            batch.decryptCounter = player.decryptCounter
+            batch.encryptCounter = player.encryptCounter
             batch.payload = binary.array()
             batch.encode()
 
