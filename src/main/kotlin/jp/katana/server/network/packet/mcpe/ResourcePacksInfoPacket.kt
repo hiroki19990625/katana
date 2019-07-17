@@ -22,11 +22,13 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
         writeBoolean(mustAccept)
         writeBoolean(unknownBool)
 
+        writePacks(behaviourPackEntries)
+        writePacks(resourcePackEntries)
     }
 
     private fun readPacks(list: MutableList<IResourcePack>) {
         val len = readShortLE()
-        for (i in 0..len) {
+        for (i in 1..len) {
             list.add(
                 ResourcePack(
                     readString(),
