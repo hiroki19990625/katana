@@ -72,12 +72,10 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     override fun handlePlayStatusPacket(playStatusPacket: PlayStatusPacket) {
         // No cause
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun handleServerToClientPacket(serverToClientHandshakePacket: ServerToClientHandshakePacket) {
         // No cause
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun handleClientToServerPacket(clientHandshakePacket: ServerToClientHandshakePacket) {

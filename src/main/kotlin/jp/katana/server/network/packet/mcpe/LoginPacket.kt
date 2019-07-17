@@ -32,6 +32,6 @@ class LoginPacket : MinecraftPacket() {
     }
 
     override fun encodePayload() {
-
+        //TODO generate jwt
     }
 }

@@ -1,6 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.data.IResourcePack
+import jp.katana.server.data.ResourcePack
 
 class ResourcePacksInfoPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACKS_INFO_PACKET
@@ -26,21 +27,32 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
     private fun readPacks(list: MutableList<IResourcePack>) {
         val len = readShortLE()
         for (i in 0..len) {
-            list.add(object : IResourcePack {
-                override val packId: String = readString()
-                override val packVersion: String = readString()
-                override val packSize: Long = readLongLE()
-
-                override val encryptionKey: String = readString()
-                override val subPackName: String = readString()
-                override val contentIdentity: String = readString()
-
-                override val unknownBool: Boolean = readBoolean()
-            })
+            list.add(
+                ResourcePack(
+                    readString(),
+                    readString(),
+                    readLongLE(),
+                    readString(),
+                    readString(),
+                    readString(),
+                    readBoolean()
+                )
+            )
         }
     }
 
     private fun writePacks(list: MutableList<IResourcePack>) {
+        writeShortLE(list.size)
+        for (pack in list) {
+            writeString(pack.packId)
+            writeString(pack.packVersion)
+            writeLongLE(pack.packSize)
 
+            writeString(pack.encryptionKey)
+            writeString(pack.subPackName)
+            writeString(pack.contentIdentity)
+
+            writeBoolean(pack.unknownBool)
+        }
     }
 }
