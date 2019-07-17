@@ -10,6 +10,7 @@ class ServerProperties : IServerProperties {
     override var allowEnd: Boolean = true
     override var difficulty: Byte = 2
     override var enableCommandBlock: Boolean = false
+    override var forceResource: Boolean = false
     override var levelName: String = "world"
     override var levelSeed: String = "-1"
     override var levelType: String = "default"

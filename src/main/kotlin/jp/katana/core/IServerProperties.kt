@@ -26,6 +26,7 @@ interface IServerProperties {
     var allowEnd: Boolean
     var difficulty: Byte
     var enableCommandBlock: Boolean
+    var forceResource: Boolean
     var levelName: String
     var levelSeed: String
     var levelType: String
