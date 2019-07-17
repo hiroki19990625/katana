@@ -8,6 +8,8 @@ class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
         this += PlayStatusPacket()
         this += ServerToClientHandshakePacket()
         this += ClientToServerHandshakePacket()
+        this += DisconnectPacket()
+        this += ResourcePacksInfoPacket()
     }
 
     override fun plusAssign(value: MinecraftPacket) {
