@@ -12,10 +12,7 @@ import jp.katana.core.network.IPacketHandler
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.entity.Player
-import jp.katana.server.network.packet.mcpe.LoginPacket
-import jp.katana.server.network.packet.mcpe.MinecraftPacket
-import jp.katana.server.network.packet.mcpe.PlayStatusPacket
-import jp.katana.server.network.packet.mcpe.ServerToClientHandshakePacket
+import jp.katana.server.network.packet.mcpe.*
 import sun.security.ec.ECKeyPairGenerator
 import java.net.URI
 import java.security.MessageDigest
@@ -67,6 +64,9 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         } else {
             playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
             player.sendPacket(playStatusPacket)
+
+            val resourcePacksInfoPacket = ResourcePacksInfoPacket()
+            player.sendPacket(resourcePacksInfoPacket)
         }
     }
 
@@ -79,7 +79,19 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
     }
 
     override fun handleClientToServerPacket(clientHandshakePacket: ServerToClientHandshakePacket) {
-        server.logger.info("encrypted!")
+        //TODO Encryption Support.
+    }
+
+    override fun handleDisconnectPacket(disconnectPacket: DisconnectPacket) {
+        // No cause
+    }
+
+    override fun handleResourcePacksInfoPacket(resourcePacksInfoPacket: ResourcePacksInfoPacket) {
+        // No cause
+    }
+
+    override fun handleResourcePackStackPacket(resourcePackStackPacket: ResourcePackStackPacket) {
+        // No cause
     }
 
     private fun initSecure() {
