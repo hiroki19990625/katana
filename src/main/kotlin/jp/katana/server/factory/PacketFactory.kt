@@ -11,6 +11,7 @@ class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
         this += DisconnectPacket()
         this += ResourcePacksInfoPacket()
         this += ResourcePackStackPacket()
+        this += ResourcePackClientResponsePacket()
     }
 
     override fun plusAssign(value: MinecraftPacket) {

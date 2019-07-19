@@ -94,6 +94,12 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         // No cause
     }
 
+    override fun handleResourcePackClientResponsePacket(resourcePackClientResponsePacket: ResourcePackClientResponsePacket) {
+        if (resourcePackClientResponsePacket.status == ResourcePackClientResponsePacket.STATUS_REFUSED) {
+
+        }
+    }
+
     private fun initSecure() {
         val remotePublicKey = player.loginData!!.publicKey as ECPublicKey
         val gen = ECKeyPairGenerator()

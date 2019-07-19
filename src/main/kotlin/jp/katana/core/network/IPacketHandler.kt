@@ -11,4 +11,5 @@ interface IPacketHandler {
     fun handleDisconnectPacket(disconnectPacket: DisconnectPacket)
     fun handleResourcePacksInfoPacket(resourcePacksInfoPacket: ResourcePacksInfoPacket)
     fun handleResourcePackStackPacket(resourcePackStackPacket: ResourcePackStackPacket)
+    fun handleResourcePackClientResponsePacket(resourcePackClientResponsePacket: ResourcePackClientResponsePacket)
 }
