@@ -95,8 +95,22 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
     }
 
     override fun handleResourcePackClientResponsePacket(resourcePackClientResponsePacket: ResourcePackClientResponsePacket) {
-        if (resourcePackClientResponsePacket.status == ResourcePackClientResponsePacket.STATUS_REFUSED) {
+        when (resourcePackClientResponsePacket.status) {
+            ResourcePackClientResponsePacket.STATUS_REFUSED -> {
+                player.disconnect("disconnectionScreen.resourcePack")
+            }
 
+            ResourcePackClientResponsePacket.STATUS_SEND_PACKS -> {
+
+            }
+
+            ResourcePackClientResponsePacket.STATUS_HAVE_ALL_PACKS -> {
+
+            }
+
+            ResourcePackClientResponsePacket.STATUS_COMPLETED -> {
+
+            }
         }
     }
 

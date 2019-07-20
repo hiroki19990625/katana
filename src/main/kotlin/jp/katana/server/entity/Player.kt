@@ -7,6 +7,7 @@ import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
 import jp.katana.server.Server
 import jp.katana.server.network.PacketHandler
+import jp.katana.server.network.packet.mcpe.DisconnectPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import org.apache.logging.log4j.LogManager
 import java.net.InetSocketAddress
@@ -44,5 +45,11 @@ class Player(override val address: InetSocketAddress, private val server: Server
 
     override fun sendPacket(packet: MinecraftPacket, reliability: Reliability) {
         server.networkManager?.sendPacket(this, packet, reliability)
+    }
+
+    override fun disconnect(reason: String) {
+        val disconnectPacket = DisconnectPacket()
+        disconnectPacket.message = reason;
+        sendPacket(disconnectPacket)
     }
 }

@@ -27,4 +27,6 @@ interface IPlayer {
 
     fun handlePacket(packet: MinecraftPacket)
     fun sendPacket(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
+
+    fun disconnect(reason: String)
 }
