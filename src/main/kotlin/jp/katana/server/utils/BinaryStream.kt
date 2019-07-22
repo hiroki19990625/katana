@@ -3,6 +3,7 @@ package jp.katana.server.utils
 import com.whirvis.jraknet.Packet
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.nio.charset.Charset
 import kotlin.experimental.and
 
 /**
@@ -11,6 +12,14 @@ import kotlin.experimental.and
 open class BinaryStream : Packet() {
     override fun readString(): String {
         return String(read(readUnsignedVarInt()))
+    }
+
+    override fun writeString(s: String): Packet {
+        val array: ByteArray = s.toByteArray(Charset.forName("utf8"))
+        writeUnsignedVarInt(array.size)
+        write(array)
+
+        return this
     }
 
     fun readFloatLE(): Float {

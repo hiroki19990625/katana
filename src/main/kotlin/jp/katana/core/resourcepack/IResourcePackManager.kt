@@ -1,5 +1,6 @@
 package jp.katana.core.resourcepack
 
+import jp.katana.core.data.IResourcePack
 import java.io.File
 
 interface IResourcePackManager {
@@ -7,4 +8,6 @@ interface IResourcePackManager {
 
     fun loadPack(pack: File)
     fun unloadPack(pack: File)
+
+    fun getResourcePacks(): List<IResourcePack>
 }

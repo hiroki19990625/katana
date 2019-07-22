@@ -47,6 +47,10 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun getResourcePacks(): List<IResourcePack> {
+        return resourcePacks.toList()
+    }
+
     private fun readJson(bytes: ByteArray, pack: File): IResourcePack? {
         val jsonParser = JsonParser()
         val data = jsonParser.parse(String(bytes, Charset.forName("utf8")))
@@ -62,7 +66,8 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
             val versionStr = String.format("%s.%s.%s", version[0].asInt, version[1].asInt, version[2].asInt)
 
             server.logger.info(I18n["katana.server.resourcePack.load", name, versionStr])
-            return ResourcePack(uuid, versionStr, packLength, "", name, "", false, hash)
+            server.logger.info(packLength)
+            return ResourcePack(uuid, versionStr, packLength, "", "", "", false, hash)
         }
         stream.close()
 

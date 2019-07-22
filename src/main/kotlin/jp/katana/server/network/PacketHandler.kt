@@ -66,6 +66,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
             player.sendPacket(playStatusPacket)
 
             val resourcePacksInfoPacket = ResourcePacksInfoPacket()
+            resourcePacksInfoPacket.resourcePackEntries.addAll(server.resourcePackManager.getResourcePacks())
+            resourcePacksInfoPacket.mustAccept = server.serverProperties!!.forceResource
             player.sendPacket(resourcePacksInfoPacket)
         }
     }
