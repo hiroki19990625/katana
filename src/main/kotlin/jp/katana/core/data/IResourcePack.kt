@@ -10,4 +10,6 @@ interface IResourcePack {
     val contentIdentity: String
 
     val unknownBool: Boolean
+
+    val hash: ByteArray
 }

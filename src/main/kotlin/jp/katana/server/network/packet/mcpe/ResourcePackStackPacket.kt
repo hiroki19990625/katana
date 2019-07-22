@@ -34,7 +34,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
     private fun readPacks(list: MutableList<IResourcePack>) {
         val len = readUnsignedVarInt()
         for (pack in 1..len) {
-            list.add(ResourcePack(readString(), readString(), 0, "", readString(), "", false))
+            list.add(ResourcePack(readString(), readString(), 0, "", readString(), "", false, ByteArray(0)))
         }
     }
 

@@ -37,7 +37,8 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
                     readString(),
                     readString(),
                     readString(),
-                    readBoolean()
+                    readBoolean(),
+                    ByteArray(0)
                 )
             )
         }

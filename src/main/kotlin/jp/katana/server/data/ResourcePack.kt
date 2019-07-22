@@ -9,5 +9,6 @@ class ResourcePack(
     override val encryptionKey: String,
     override val subPackName: String,
     override val contentIdentity: String,
-    override val unknownBool: Boolean
+    override val unknownBool: Boolean,
+    override val hash: ByteArray
 ) : IResourcePack

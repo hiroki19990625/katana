@@ -5,6 +5,7 @@ import jp.katana.core.console.IConsole
 import jp.katana.core.event.IEventManager
 import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.network.INetworkManager
+import jp.katana.core.resourcepack.IResourcePackManager
 import org.apache.logging.log4j.Logger
 import java.io.File
 import java.net.InetAddress
@@ -41,6 +42,7 @@ interface IServer {
     val factoryManager: IFactoryManager
     val eventManager: IEventManager
     val networkManager: INetworkManager?
+    val resourcePackManager: IResourcePackManager
 
     val serverPort: Int
     val serverAddress: InetAddress

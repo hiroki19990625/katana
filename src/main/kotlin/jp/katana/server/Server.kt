@@ -7,6 +7,7 @@ import jp.katana.core.command.ICommandSender
 import jp.katana.core.event.IEventManager
 import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.network.INetworkManager
+import jp.katana.core.resourcepack.IResourcePackManager
 import jp.katana.i18n.I18n
 import jp.katana.server.command.ServerCommandSender
 import jp.katana.server.console.KatanaConsole
@@ -17,6 +18,7 @@ import jp.katana.server.event.server.ServerUpdateTickEvent
 import jp.katana.server.factory.CommandFactory
 import jp.katana.server.factory.FactoryManager
 import jp.katana.server.network.NetworkManager
+import jp.katana.server.resourcepack.ResourcePackManager
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.core.LoggerContext
@@ -77,6 +79,7 @@ class Server : IServer {
     override val eventManager: IEventManager = EventManager()
     override var networkManager: INetworkManager? = null
         private set
+    override val resourcePackManager: IResourcePackManager = ResourcePackManager(this)
 
     override val serverPort: Int
         get() = serverProperties!!.serverPort
@@ -235,7 +238,7 @@ class Server : IServer {
         val options = DumperOptions()
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
-        if (propertiesFile.exists()) {
+        if (propertiesFile.isFile && propertiesFile.exists()) {
             serverProperties = yaml.loadAs(propertiesFile.reader(), ServerProperties::class.java)
             logger.info(I18n["katana.server.file.load", propertiesFile.name])
         } else {
@@ -258,7 +261,7 @@ class Server : IServer {
         val options = DumperOptions()
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
-        if (katanaConfigFile.exists()) {
+        if (katanaConfigFile.isFile && katanaConfigFile.exists()) {
             katanaConfig = yaml.loadAs(katanaConfigFile.reader(), KatanaConfig::class.java)
             logger.info(I18n["katana.server.file.load", katanaConfigFile.name])
         } else {
