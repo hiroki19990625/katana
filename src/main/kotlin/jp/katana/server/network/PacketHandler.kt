@@ -85,7 +85,16 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
     }
 
     override fun handleClientToServerPacket(clientToServerHandshakePacket: ClientToServerHandshakePacket) {
-        server.logger.info("Encrypted!")
+        server.logger.info(I18n["katana.server.network.encryptStarted", player.address])
+
+        val playStatusPacket = PlayStatusPacket()
+        playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
+        player.sendPacket(playStatusPacket)
+
+        val resourcePacksInfoPacket = ResourcePacksInfoPacket()
+        resourcePacksInfoPacket.resourcePackEntries.addAll(server.resourcePackManager.getResourcePacks())
+        resourcePacksInfoPacket.mustAccept = server.serverProperties!!.forceResource
+        player.sendPacket(resourcePacksInfoPacket)
     }
 
     override fun handleDisconnectPacket(disconnectPacket: DisconnectPacket) {
@@ -173,7 +182,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val signedJWT = SignedJWT(header, payload)
         signedJWT.sign(signer)
 
-        server.logger.info(I18n["katana.server.network.startingEncrypt"])
+        server.logger.info(I18n["katana.server.network.encryptStarting", player.address])
 
         val handshakePacket = ServerToClientHandshakePacket()
         handshakePacket.token = signedJWT.serialize()

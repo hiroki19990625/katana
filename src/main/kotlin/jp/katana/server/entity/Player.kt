@@ -34,10 +34,8 @@ class Player(override val address: InetSocketAddress, private val server: Server
 
     override var isEncrypted: Boolean = false
         internal set
-    override var encryptCounter: Long = 0
-        internal set
-    override var decryptCounter: Long = 0
-        internal set
+    override var encryptCounter: Long = -1
+    override var decryptCounter: Long = -1
 
     override fun handlePacket(packet: MinecraftPacket) {
         packetHandler.handlePacket(packet)

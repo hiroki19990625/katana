@@ -58,6 +58,8 @@ class ServerListener(private val server: Server, private val networkManager: Net
             batch.setBuffer(packet?.array())
             batch.decode()
 
+            player.decryptCounter++
+
             var data = BinaryStream()
             data.setBuffer(batch.payload)
             val buf = data.read(data.readUnsignedVarInt())

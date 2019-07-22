@@ -77,8 +77,11 @@ class NetworkManager(private val server: Server) : INetworkManager {
             batch.encrypt = player.encrypt
             batch.decryptCounter = player.decryptCounter
             batch.encryptCounter = player.encryptCounter
+            batch.sharedKey = player.sharedKey
             batch.payload = binary.array()
             batch.encode()
+
+            player.encryptCounter++
 
             sessions[address]!!.sendMessage(
                 com.whirvis.jraknet.protocol.Reliability.lookup(reliability.id.toInt()),

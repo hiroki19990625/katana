@@ -51,6 +51,8 @@ class BatchPacket : BinaryStream() {
             System.arraycopy(buffer, buffer.size - 8, calculateCheckSum, 0, 8)
 
             val binaryStream = BinaryStream()
+            logger.info("d: $decryptCounter")
+            logger.info("e: $encryptCounter")
             binaryStream.writeLongLE(decryptCounter)
             binaryStream.write(payload)
             binaryStream.write(sharedKey)
@@ -92,8 +94,10 @@ class BatchPacket : BinaryStream() {
         var buffer = output.copyOf(length)
         if (isEncrypt) {
             val binaryStream = BinaryStream()
+            logger.info("d: $decryptCounter")
+            logger.info("e: $encryptCounter")
             binaryStream.writeLongLE(encryptCounter)
-            binaryStream.write(payload)
+            binaryStream.write(buffer)
             binaryStream.write(sharedKey)
 
             try {

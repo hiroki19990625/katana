@@ -22,8 +22,8 @@ interface IPlayer {
     val encrypt: Cipher?
 
     val isEncrypted: Boolean
-    val encryptCounter: Long
-    val decryptCounter: Long
+    var encryptCounter: Long
+    var decryptCounter: Long
 
     fun handlePacket(packet: MinecraftPacket)
     fun sendPacket(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
