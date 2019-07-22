@@ -17,7 +17,7 @@ class ServerProperties : IServerProperties {
     override var maxPlayer: Int = 20
     override var motd: String = "Katana Server"
     override var networkCompressionThreshold: Byte = 2
-    override var secureMode: Boolean = false //TODO support secure mode
+    override var secureMode: Boolean = true
     override var playerIdleTimeout: Int = 0
     override var pvp: Boolean = true
     override var serverIp: String = "0.0.0.0"
