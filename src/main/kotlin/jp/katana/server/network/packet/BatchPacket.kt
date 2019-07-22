@@ -23,7 +23,7 @@ class BatchPacket : BinaryStream() {
 
     var decrypt: Cipher? = null
     var encrypt: Cipher? = null
-    var sharedKey: ByteArray = ByteArray(0)
+    var sharedKey: ByteArray? = null
 
     var payload: ByteArray = ByteArray(0)
 
@@ -44,8 +44,7 @@ class BatchPacket : BinaryStream() {
                 logger.error("", e)
             }
         } else {
-            val buffer = decrypt!!.update(payload)
-
+            val buffer = decrypt!!.update(read(remaining()))
             val payload = ByteArray(buffer.size - 8)
             val calculateCheckSum = ByteArray(8)
             System.arraycopy(buffer, 0, payload, 0, buffer.size - 8)
@@ -67,7 +66,7 @@ class BatchPacket : BinaryStream() {
             }
 
             val decompresser = Inflater()
-            decompresser.setInput(read(remaining()))
+            decompresser.setInput(payload)
 
             try {
                 val length = decompresser.inflate(payload)

@@ -7,7 +7,7 @@ interface IPacketHandler {
     fun handleLoginPacket(loginPacket: LoginPacket)
     fun handlePlayStatusPacket(playStatusPacket: PlayStatusPacket)
     fun handleServerToClientPacket(serverToClientHandshakePacket: ServerToClientHandshakePacket)
-    fun handleClientToServerPacket(clientHandshakePacket: ServerToClientHandshakePacket)
+    fun handleClientToServerPacket(clientToServerHandshakePacket: ClientToServerHandshakePacket)
     fun handleDisconnectPacket(disconnectPacket: DisconnectPacket)
     fun handleResourcePacksInfoPacket(resourcePacksInfoPacket: ResourcePacksInfoPacket)
     fun handleResourcePackStackPacket(resourcePackStackPacket: ResourcePackStackPacket)

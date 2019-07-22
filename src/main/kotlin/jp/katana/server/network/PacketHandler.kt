@@ -32,6 +32,10 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
             handleLoginPacket(packet)
         else if (packet is PlayStatusPacket)
             handlePlayStatusPacket(packet)
+        else if (packet is ServerToClientHandshakePacket)
+            handleServerToClientPacket(packet)
+        else if (packet is ClientToServerHandshakePacket)
+            handleClientToServerPacket(packet)
     }
 
     override fun handleLoginPacket(loginPacket: LoginPacket) {
@@ -80,8 +84,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         // No cause
     }
 
-    override fun handleClientToServerPacket(clientHandshakePacket: ServerToClientHandshakePacket) {
-        //TODO Encryption Support.
+    override fun handleClientToServerPacket(clientToServerHandshakePacket: ClientToServerHandshakePacket) {
+        server.logger.info("Encrypted!")
     }
 
     override fun handleDisconnectPacket(disconnectPacket: DisconnectPacket) {

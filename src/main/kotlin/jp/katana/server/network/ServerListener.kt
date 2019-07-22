@@ -11,6 +11,7 @@ import jp.katana.server.factory.PacketFactory
 import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
+import java.net.InetSocketAddress
 
 class ServerListener(private val server: Server, private val networkManager: NetworkManager) : RakNetServerListener {
     private val logger = LogManager.getLogger()
@@ -46,7 +47,14 @@ class ServerListener(private val server: Server, private val networkManager: Net
     override fun handleMessage(session: RakNetClientSession?, packet: RakNetPacket?, channel: Int) {
         if (session != null) {
             val address = session.address
+            val player = networkManager.getPlayer(address)!!
             val batch = BatchPacket()
+            batch.isEncrypt = player.isEncrypted
+            batch.decrypt = player.decrypt
+            batch.encrypt = player.encrypt
+            batch.decryptCounter = player.decryptCounter
+            batch.encryptCounter = player.encryptCounter
+            batch.sharedKey = player.sharedKey
             batch.setBuffer(packet?.array())
             batch.decode()
 
@@ -71,6 +79,10 @@ class ServerListener(private val server: Server, private val networkManager: Net
     }
 
     override fun onThreadException(throwable: Throwable?) {
+        logger.warn("", throwable)
+    }
+
+    override fun onHandlerException(address: InetSocketAddress?, throwable: Throwable?) {
         logger.warn("", throwable)
     }
 
