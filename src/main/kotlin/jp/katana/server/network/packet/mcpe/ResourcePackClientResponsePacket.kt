@@ -21,7 +21,8 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
         status = readByte()
         val len = readShortLE()
         for (entry in 1..len) {
-            packEntries.add(ResourcePackEntry(UUID.fromString(readString()), readString()))
+            val splits = readString().split('_')
+            packEntries.add(ResourcePackEntry(UUID.fromString(splits[0]), splits[1]))
         }
     }
 
@@ -29,8 +30,7 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
         writeByte(status.toInt())
         writeShortLE(packEntries.size)
         for (entry in packEntries) {
-            writeString(entry.uuid.toString())
-            writeString(entry.version)
+            writeString(entry.uuid.toString() + '_' + entry.version)
         }
     }
 }
