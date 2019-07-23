@@ -2,6 +2,8 @@ package jp.katana.server.network
 
 import com.whirvis.jraknet.RakNetPacket
 import com.whirvis.jraknet.peer.RakNetClientPeer
+import com.whirvis.jraknet.protocol.message.EncapsulatedPacket
+import com.whirvis.jraknet.protocol.message.acknowledge.Record
 import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.server.RakNetServerListener
 import jp.katana.i18n.I18n
@@ -80,8 +82,13 @@ class ServerListener(private val server: Server, private val networkManager: Net
                 networkManager.handlePacket(address, pk)
             }
             pk?.clear()
+            pk?.buffer()?.release()
             data.clear()
+            data.buffer().release()
             batch.clear()
+            batch.buffer().release()
+            packet?.clear()
+            packet?.buffer()?.release()
         }
     }
 

@@ -76,6 +76,9 @@ class BatchPacket : BinaryStream() {
             } catch (e: Exception) {
                 logger.error("", e)
             }
+
+            binaryStream.clear()
+            binaryStream.buffer().release()
         }
     }
 
@@ -108,9 +111,15 @@ class BatchPacket : BinaryStream() {
                 digst.write(*checkSum)
 
                 buffer = encrypt!!.update(digst.array())
+
+                digst.clear()
+                digst.buffer().release()
             } catch (e: Exception) {
                 logger.warn("Encrypt Error!")
             }
+
+            binaryStream.clear()
+            binaryStream.buffer().release()
         }
 
         write(*buffer)

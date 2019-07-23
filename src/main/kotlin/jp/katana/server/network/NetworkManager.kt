@@ -89,8 +89,11 @@ class NetworkManager(private val server: Server) : INetworkManager {
                 Packet(batch.array())
             )
             packet.clear()
+            packet.buffer().release()
             binary.clear()
+            binary.buffer().release()
             batch.clear()
+            batch.buffer().release()
         }
     }
 
