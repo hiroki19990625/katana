@@ -39,6 +39,7 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
         writeIntLE(maxChunkSize)
         writeIntLE(chunkCount)
         writeLongLE(packSize)
+        writeUnsignedVarInt(hash.size)
         write(hash)
         writeBoolean(premium)
         writeByte(type)

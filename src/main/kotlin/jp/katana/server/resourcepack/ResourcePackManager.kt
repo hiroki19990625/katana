@@ -72,8 +72,7 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
             val versionStr = String.format("%s.%s.%s", version[0].asInt, version[1].asInt, version[2].asInt)
 
             server.logger.info(I18n["katana.server.resourcePack.load", name, versionStr])
-            server.logger.info(packLength)
-            return ResourcePack(uuid, versionStr, packLength, "", "", "", false, hash)
+            return ResourcePack(pack, uuid, versionStr, packLength, "", "", "", false, hash)
         }
         stream.close()
 

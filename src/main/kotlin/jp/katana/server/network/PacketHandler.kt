@@ -44,6 +44,12 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
             handleResourcePackStackPacket(packet)
         else if (packet is ResourcePackClientResponsePacket) // 0x08
             handleResourcePackClientResponsePacket(packet)
+        else if (packet is ResourcePackDataInfoPacket) // 0x52
+            handleResourcePackDataInfoPacket(packet)
+        else if (packet is ResourcePackChunkDataPacket) // 0x53
+            handleResourcePackChunkDataPacket(packet)
+        else if (packet is ResourcePackChunkRequestPacket) // 0x54
+            handleResourcePackChunkRequestPacket(packet)
     }
 
     override fun handleLoginPacket(loginPacket: LoginPacket) {
@@ -156,6 +162,33 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         }
     }
 
+    override fun handleResourcePackDataInfoPacket(resourcePackDataInfoPacket: ResourcePackDataInfoPacket) {
+        // No cause
+    }
+
+    override fun handleResourcePackChunkDataPacket(resourcePackChunkDataPacket: ResourcePackChunkDataPacket) {
+        // No cause
+    }
+
+    override fun handleResourcePackChunkRequestPacket(resourcePackChunkRequestPacket: ResourcePackChunkRequestPacket) {
+        val pack = server.resourcePackManager.getResourcePack(resourcePackChunkRequestPacket.packId)
+        if (pack == null) {
+            player.disconnect("disconnectionScreen.resourcePack")
+            return
+        }
+
+        val index = resourcePackChunkRequestPacket.chunkIndex
+        val mb1 = ResourcePackDataInfoPacket.MB_1
+        val progress = mb1 * index
+        val resourcePackChunkDataPacket = ResourcePackChunkDataPacket()
+        resourcePackChunkDataPacket.packId = resourcePackChunkRequestPacket.packId
+        resourcePackChunkDataPacket.chunkIndex = index
+        resourcePackChunkDataPacket.data = pack.getDataChunk(progress, mb1)
+        resourcePackChunkDataPacket.progress = progress.toLong()
+
+        player.sendPacket(resourcePackChunkDataPacket)
+    }
+
     private fun initSecure() {
         val remotePublicKey = player.loginData!!.publicKey as ECPublicKey
         val gen = ECKeyPairGenerator()
@@ -219,6 +252,6 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
     }
 
     private fun startGame() {
-
+        server.logger.info("Logined.")
     }
 }

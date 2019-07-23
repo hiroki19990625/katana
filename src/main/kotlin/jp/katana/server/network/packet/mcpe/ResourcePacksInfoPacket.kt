@@ -31,6 +31,7 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
         for (i in 1..len) {
             list.add(
                 ResourcePack(
+                    null,
                     readString(),
                     readString(),
                     readLongLE(),

@@ -2,6 +2,7 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.data.IResourcePack
 import jp.katana.server.data.ResourcePack
+import java.io.File
 
 
 class ResourcePackStackPacket : MinecraftPacket() {
@@ -33,7 +34,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
     private fun readPacks(list: MutableList<IResourcePack>) {
         val len = readUnsignedVarInt()
         for (pack in 1..len) {
-            list.add(ResourcePack(readString(), readString(), 0, "", readString(), "", false, ByteArray(0)))
+            list.add(ResourcePack(null, readString(), readString(), 0, "", readString(), "", false, ByteArray(0)))
         }
     }
 
