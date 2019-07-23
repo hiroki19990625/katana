@@ -28,14 +28,22 @@ import javax.crypto.spec.SecretKeySpec
 
 class PacketHandler(private val player: Player, private val server: Server) : IPacketHandler {
     override fun handlePacket(packet: MinecraftPacket) {
-        if (packet is LoginPacket)
+        if (packet is LoginPacket) // 0x01
             handleLoginPacket(packet)
-        else if (packet is PlayStatusPacket)
+        else if (packet is PlayStatusPacket) // 0x02
             handlePlayStatusPacket(packet)
-        else if (packet is ServerToClientHandshakePacket)
+        else if (packet is ServerToClientHandshakePacket) // 0x03
             handleServerToClientPacket(packet)
-        else if (packet is ClientToServerHandshakePacket)
+        else if (packet is ClientToServerHandshakePacket) // 0x04
             handleClientToServerPacket(packet)
+        else if (packet is DisconnectPacket) // 0x05
+            handleDisconnectPacket(packet)
+        else if (packet is ResourcePacksInfoPacket) // 0x06
+            handleResourcePacksInfoPacket(packet)
+        else if (packet is ResourcePackStackPacket) // 0x07
+            handleResourcePackStackPacket(packet)
+        else if (packet is ResourcePackClientResponsePacket) // 0x08
+            handleResourcePackClientResponsePacket(packet)
     }
 
     override fun handleLoginPacket(loginPacket: LoginPacket) {
@@ -116,15 +124,34 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
             }
 
             ResourcePackClientResponsePacket.STATUS_SEND_PACKS -> {
+                for (entry in resourcePackClientResponsePacket.packEntries) {
+                    val pack = server.resourcePackManager.getResourcePack(entry.uuid.toString())
+                    if (pack == null) {
+                        player.disconnect("disconnectionScreen.resourcePack")
+                        return
+                    }
 
+                    val resourcePackDataInfoPacket = ResourcePackDataInfoPacket()
+                    resourcePackDataInfoPacket.packId = pack.packId
+                    resourcePackDataInfoPacket.chunkCount =
+                        (pack.packSize / resourcePackDataInfoPacket.maxChunkSize).toInt()
+                    resourcePackDataInfoPacket.packSize = pack.packSize
+                    resourcePackDataInfoPacket.hash = pack.hash
+
+                    player.sendPacket(resourcePackDataInfoPacket)
+                }
             }
 
             ResourcePackClientResponsePacket.STATUS_HAVE_ALL_PACKS -> {
+                val resourcePackStackPacket = ResourcePackStackPacket()
+                resourcePackStackPacket.mustAccept = server.serverProperties!!.forceResource
+                resourcePackStackPacket.resourcePackStack.addAll(server.resourcePackManager.getResourcePacks())
 
+                player.sendPacket(resourcePackStackPacket)
             }
 
             ResourcePackClientResponsePacket.STATUS_COMPLETED -> {
-
+                startGame()
             }
         }
     }
@@ -189,5 +216,9 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.sendPacket(handshakePacket)
 
         player.isEncrypted = true
+    }
+
+    private fun startGame() {
+
     }
 }

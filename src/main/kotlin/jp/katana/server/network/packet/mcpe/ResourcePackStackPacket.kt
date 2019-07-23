@@ -12,7 +12,6 @@ class ResourcePackStackPacket : MinecraftPacket() {
     var resourcePackStack = mutableListOf<IResourcePack>()
     var isExperimental = false
 
-
     override fun decodePayload() {
         mustAccept = readBoolean()
 

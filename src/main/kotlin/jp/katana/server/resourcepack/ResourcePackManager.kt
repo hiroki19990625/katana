@@ -15,7 +15,7 @@ import java.util.zip.ZipFile
 class ResourcePackManager(private val server: Server) : IResourcePackManager {
     override val packDirectory: File = File("resource_packs")
 
-    private val resourcePacks: MutableList<IResourcePack> = mutableListOf()
+    private val resourcePacks: MutableMap<String, IResourcePack> = mutableMapOf()
 
     init {
         if (packDirectory.isDirectory && packDirectory.exists()) {
@@ -36,19 +36,25 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
             val stream = zipFile.getInputStream(entry)
             val packInfo = readJson(stream.readBytes(), pack)
             if (packInfo != null)
-                resourcePacks.add(packInfo)
+                resourcePacks.put(packInfo.packId, packInfo)
 
             stream.close()
         }
         zipFile.close()
     }
 
-    override fun unloadPack(pack: File) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun unloadPack(uuid: String) {
+        if (resourcePacks.containsKey(uuid)) {
+            resourcePacks.remove(uuid)
+        }
+    }
+
+    override fun getResourcePack(uuid: String): IResourcePack? {
+        return resourcePacks[uuid]
     }
 
     override fun getResourcePacks(): List<IResourcePack> {
-        return resourcePacks.toList()
+        return resourcePacks.values.toList()
     }
 
     private fun readJson(bytes: ByteArray, pack: File): IResourcePack? {

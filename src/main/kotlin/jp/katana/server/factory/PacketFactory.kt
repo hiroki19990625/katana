@@ -4,14 +4,16 @@ import jp.katana.server.network.packet.mcpe.*
 
 class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
     init {
-        this += LoginPacket()
-        this += PlayStatusPacket()
-        this += ServerToClientHandshakePacket()
-        this += ClientToServerHandshakePacket()
-        this += DisconnectPacket()
-        this += ResourcePacksInfoPacket()
-        this += ResourcePackStackPacket()
-        this += ResourcePackClientResponsePacket()
+        this += LoginPacket() // 0x01
+        this += PlayStatusPacket() // 0x02
+        this += ServerToClientHandshakePacket() // 0x03
+        this += ClientToServerHandshakePacket() // 0x04
+        this += DisconnectPacket() // 0x05
+        this += ResourcePacksInfoPacket() // 0x06
+        this += ResourcePackStackPacket() // 0x07
+        this += ResourcePackClientResponsePacket() // 0x08
+
+        this += ResourcePackDataInfoPacket() // 0x52
     }
 
     override fun plusAssign(value: MinecraftPacket) {

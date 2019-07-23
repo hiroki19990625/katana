@@ -7,7 +7,8 @@ interface IResourcePackManager {
     val packDirectory: File
 
     fun loadPack(pack: File)
-    fun unloadPack(pack: File)
+    fun unloadPack(uuid: String)
 
+    fun getResourcePack(uuid: String): IResourcePack?
     fun getResourcePacks(): List<IResourcePack>
 }
