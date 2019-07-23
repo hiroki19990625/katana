@@ -1,8 +1,6 @@
 package jp.katana.server.utils
 
 import com.whirvis.jraknet.Packet
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 import java.nio.charset.Charset
 import kotlin.experimental.and
 
@@ -10,33 +8,17 @@ import kotlin.experimental.and
  * バイナリのストリームを提供します。
  */
 open class BinaryStream : Packet() {
-    override fun readString(): String {
+    fun readVarString(): String {
         return String(read(readUnsignedVarInt()))
     }
 
-    override fun writeString(s: String): Packet {
+
+    fun writeVarString(s: String): Packet {
         val array: ByteArray = s.toByteArray(Charset.forName("utf8"))
         writeUnsignedVarInt(array.size)
-        write(array)
+        write(*array)
 
         return this
-    }
-
-    fun readFloatLE(): Float {
-        val byteBuffer = ByteBuffer.allocate(4)
-        byteBuffer.putFloat(readFloat())
-        byteBuffer.flip()
-        byteBuffer.order(ByteOrder.LITTLE_ENDIAN)
-
-        return byteBuffer.float
-    }
-
-    fun writeFloatLE(value: Float) {
-        val byteBuffer = ByteBuffer.allocate(4)
-        byteBuffer.putFloat(value)
-        byteBuffer.flip()
-
-        write(byteBuffer.array())
     }
 
     fun writeVarInt(v: Int) {
@@ -55,7 +37,7 @@ open class BinaryStream : Packet() {
                 buf[i] = (v or 0x80).toByte()
             } else {
                 buf[i] = (v and 0x7f).toByte()
-                write(buf.copyOf(i + 1))
+                write(*buf.copyOf(i + 1))
                 return
             }
             v = v shr 7 and (Integer.MAX_VALUE shr 6)
@@ -96,7 +78,7 @@ open class BinaryStream : Packet() {
                 buf[i] = (v or 0x80).toByte()
             } else {
                 buf[i] = (v and 0x7f).toByte()
-                write(buf.copyOf(i + 1))
+                write(*buf.copyOf(i + 1))
                 return
             }
             v = v shr 7 and (Integer.MAX_VALUE shr 6)

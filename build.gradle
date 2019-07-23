@@ -14,7 +14,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    compile "com.whirvis:jraknet:2.10.7"
+    compile files("libs/jraknet-2.11.3.jar")
 
     compile "com.nimbusds:nimbus-jose-jwt:7.3"
 

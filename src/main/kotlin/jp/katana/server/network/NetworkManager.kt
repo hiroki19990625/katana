@@ -2,8 +2,8 @@ package jp.katana.server.network
 
 import com.whirvis.jraknet.Packet
 import com.whirvis.jraknet.identifier.MinecraftIdentifier
+import com.whirvis.jraknet.peer.RakNetClientPeer
 import com.whirvis.jraknet.server.RakNetServer
-import com.whirvis.jraknet.session.RakNetClientSession
 import jp.katana.core.entity.IPlayer
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.Reliability
@@ -17,7 +17,7 @@ import java.net.InetSocketAddress
 class NetworkManager(private val server: Server) : INetworkManager {
     private val raknetServer: RakNetServer = RakNetServer(server.serverPort, server.maxPlayer)
     private val players: HashMap<InetSocketAddress, IPlayer> = HashMap()
-    private val sessions: HashMap<InetSocketAddress, RakNetClientSession> = HashMap()
+    private val sessions: HashMap<InetSocketAddress, RakNetClientPeer> = HashMap()
 
     private val networkThread: Thread = Thread { startNetworkThread() }
     private var networkStart = false
@@ -69,7 +69,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
             val binary = BinaryStream()
             val buf = packet.array()
             binary.writeUnsignedVarInt(buf.size)
-            binary.write(buf)
+            binary.write(*buf)
 
             val batch = BatchPacket()
             batch.isEncrypt = player.isEncrypted
@@ -88,6 +88,12 @@ class NetworkManager(private val server: Server) : INetworkManager {
                 packet.channel,
                 Packet(batch.array())
             )
+            packet.clear()
+            packet.buffer().release()
+            binary.clear()
+            binary.buffer().release()
+            batch.clear()
+            batch.buffer().release()
         }
     }
 
@@ -97,7 +103,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
         }
     }
 
-    fun addSession(address: InetSocketAddress, session: RakNetClientSession): Boolean {
+    fun addSession(address: InetSocketAddress, session: RakNetClientPeer): Boolean {
         if (!sessions.containsKey(address)) {
             sessions[address] = session
             return true
@@ -126,7 +132,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
     }
 
     fun updateOnlinePlayerCount() {
-        updateOnlinePlayerCount(raknetServer.sessionCount)
+        updateOnlinePlayerCount(raknetServer.clientCount)
     }
 
     fun updateOnlinePlayerCount(count: Int) {

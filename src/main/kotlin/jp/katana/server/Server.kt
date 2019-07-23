@@ -1,5 +1,6 @@
 package jp.katana.server
 
+import io.netty.util.ResourceLeakDetector
 import jp.katana.core.IServer
 import jp.katana.core.IServerProperties
 import jp.katana.core.ServerState
@@ -57,6 +58,9 @@ class Server : IServer {
         init {
             System.setProperty("log4j.skipJansi", "false")
             System.setProperty("log4j.configurationFile", "log4j2-katana.xml")
+
+            // TODO: Memory Leak Ignore
+            ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.DISABLED)
 
             Thread.currentThread().name = I18n["katana.server.thread.hostThread"]
         }

@@ -12,6 +12,8 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
         const val TYPE_COPY_PROTECTED = 7
 
         const val MB_1 = 1048576
+        const val KB_512 = 524288
+        const val KB_256 = 262144
     }
 
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACK_DATA_INFO_PACKET
@@ -25,7 +27,7 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
     var type: Int = TYPE_RESOURCE
 
     override fun decodePayload() {
-        packId = readString()
+        packId = readVarString()
         maxChunkSize = readIntLE()
         chunkCount = readIntLE()
         packSize = readLongLE()
@@ -35,12 +37,12 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
     }
 
     override fun encodePayload() {
-        writeString(packId)
+        writeVarString(packId)
         writeIntLE(maxChunkSize)
         writeIntLE(chunkCount)
         writeLongLE(packSize)
         writeUnsignedVarInt(hash.size)
-        write(hash)
+        write(*hash)
         writeBoolean(premium)
         writeByte(type)
     }

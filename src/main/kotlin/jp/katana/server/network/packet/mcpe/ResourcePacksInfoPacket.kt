@@ -32,12 +32,12 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
             list.add(
                 ResourcePack(
                     null,
-                    readString(),
-                    readString(),
+                    readVarString(),
+                    readVarString(),
                     readLongLE(),
-                    readString(),
-                    readString(),
-                    readString(),
+                    readVarString(),
+                    readVarString(),
+                    readVarString(),
                     readBoolean(),
                     ByteArray(0)
                 )
@@ -48,13 +48,13 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
     private fun writePacks(list: MutableList<IResourcePack>) {
         writeShortLE(list.size)
         for (pack in list) {
-            writeString(pack.packId)
-            writeString(pack.packVersion)
+            writeVarString(pack.packId)
+            writeVarString(pack.packVersion)
             writeLongLE(pack.packSize)
 
-            writeString(pack.encryptionKey)
-            writeString(pack.subPackName)
-            writeString(pack.contentIdentity)
+            writeVarString(pack.encryptionKey)
+            writeVarString(pack.subPackName)
+            writeVarString(pack.contentIdentity)
 
             writeBoolean(pack.unknownBool)
         }
