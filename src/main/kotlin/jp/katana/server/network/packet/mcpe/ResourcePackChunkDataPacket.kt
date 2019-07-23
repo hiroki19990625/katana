@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import org.apache.logging.log4j.LogManager
+
 class ResourcePackChunkDataPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACK_CHUNK_DATA_PACKET
 

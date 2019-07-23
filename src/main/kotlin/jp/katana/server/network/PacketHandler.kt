@@ -28,28 +28,30 @@ import javax.crypto.spec.SecretKeySpec
 
 class PacketHandler(private val player: Player, private val server: Server) : IPacketHandler {
     override fun handlePacket(packet: MinecraftPacket) {
-        if (packet is LoginPacket) // 0x01
-            handleLoginPacket(packet)
-        else if (packet is PlayStatusPacket) // 0x02
-            handlePlayStatusPacket(packet)
-        else if (packet is ServerToClientHandshakePacket) // 0x03
-            handleServerToClientPacket(packet)
-        else if (packet is ClientToServerHandshakePacket) // 0x04
-            handleClientToServerPacket(packet)
-        else if (packet is DisconnectPacket) // 0x05
-            handleDisconnectPacket(packet)
-        else if (packet is ResourcePacksInfoPacket) // 0x06
-            handleResourcePacksInfoPacket(packet)
-        else if (packet is ResourcePackStackPacket) // 0x07
-            handleResourcePackStackPacket(packet)
-        else if (packet is ResourcePackClientResponsePacket) // 0x08
-            handleResourcePackClientResponsePacket(packet)
-        else if (packet is ResourcePackDataInfoPacket) // 0x52
-            handleResourcePackDataInfoPacket(packet)
-        else if (packet is ResourcePackChunkDataPacket) // 0x53
-            handleResourcePackChunkDataPacket(packet)
-        else if (packet is ResourcePackChunkRequestPacket) // 0x54
-            handleResourcePackChunkRequestPacket(packet)
+        when (packet // 0x01
+            ) {
+            is LoginPacket -> handleLoginPacket(packet)
+            is PlayStatusPacket -> // 0x02
+                handlePlayStatusPacket(packet)
+            is ServerToClientHandshakePacket -> // 0x03
+                handleServerToClientPacket(packet)
+            is ClientToServerHandshakePacket -> // 0x04
+                handleClientToServerPacket(packet)
+            is DisconnectPacket -> // 0x05
+                handleDisconnectPacket(packet)
+            is ResourcePacksInfoPacket -> // 0x06
+                handleResourcePacksInfoPacket(packet)
+            is ResourcePackStackPacket -> // 0x07
+                handleResourcePackStackPacket(packet)
+            is ResourcePackClientResponsePacket -> // 0x08
+                handleResourcePackClientResponsePacket(packet)
+            is ResourcePackDataInfoPacket -> // 0x52
+                handleResourcePackDataInfoPacket(packet)
+            is ResourcePackChunkDataPacket -> // 0x53
+                handleResourcePackChunkDataPacket(packet)
+            is ResourcePackChunkRequestPacket -> // 0x54
+                handleResourcePackChunkRequestPacket(packet)
+        }
     }
 
     override fun handleLoginPacket(loginPacket: LoginPacket) {
@@ -181,7 +183,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val mb1 = ResourcePackDataInfoPacket.MB_1
         val progress = mb1 * index
         val resourcePackChunkDataPacket = ResourcePackChunkDataPacket()
-        resourcePackChunkDataPacket.packId = resourcePackChunkRequestPacket.packId
+        resourcePackChunkDataPacket.packId = pack.packId
         resourcePackChunkDataPacket.chunkIndex = index
         resourcePackChunkDataPacket.data = pack.getDataChunk(progress, mb1)
         resourcePackChunkDataPacket.progress = progress.toLong()
