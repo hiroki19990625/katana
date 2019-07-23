@@ -2,11 +2,11 @@ package jp.katana.server.resourcepack
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import jp.katana.core.data.IResourcePack
+import jp.katana.core.data.IResourcePackInfo
 import jp.katana.core.resourcepack.IResourcePackManager
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
-import jp.katana.server.data.ResourcePack
+import jp.katana.server.data.ResourcePackInfo
 import java.io.File
 import java.nio.charset.Charset
 import java.security.MessageDigest
@@ -15,7 +15,7 @@ import java.util.zip.ZipFile
 class ResourcePackManager(private val server: Server) : IResourcePackManager {
     override val packDirectory: File = File("resource_packs")
 
-    private val resourcePacks: MutableMap<String, IResourcePack> = mutableMapOf()
+    private val resourcePacks: MutableMap<String, IResourcePackInfo> = mutableMapOf()
 
     init {
         if (packDirectory.isDirectory && packDirectory.exists()) {
@@ -49,15 +49,15 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
         }
     }
 
-    override fun getResourcePack(uuid: String): IResourcePack? {
+    override fun getResourcePack(uuid: String): IResourcePackInfo? {
         return resourcePacks[uuid]
     }
 
-    override fun getResourcePacks(): List<IResourcePack> {
+    override fun getResourcePacks(): List<IResourcePackInfo> {
         return resourcePacks.values.toList()
     }
 
-    private fun readJson(bytes: ByteArray, pack: File): IResourcePack? {
+    private fun readJson(bytes: ByteArray, pack: File): IResourcePackInfo? {
         val jsonParser = JsonParser()
         val data = jsonParser.parse(String(bytes, Charset.forName("utf8")))
         val packLength = pack.length()
@@ -72,7 +72,7 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
             val versionStr = String.format("%s.%s.%s", version[0].asInt, version[1].asInt, version[2].asInt)
 
             server.logger.info(I18n["katana.server.resourcePack.load", name, versionStr])
-            return ResourcePack(pack, uuid, versionStr, packLength, "", "", "", false, hash)
+            return ResourcePackInfo(pack, uuid, versionStr, packLength, "", "", "", false, hash)
         }
         stream.close()
 

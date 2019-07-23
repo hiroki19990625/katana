@@ -5,7 +5,7 @@ import java.io.File
 import java.io.FileInputStream
 
 
-interface IResourcePack {
+interface IResourcePackInfo {
     val file: File?
 
     val packId: String

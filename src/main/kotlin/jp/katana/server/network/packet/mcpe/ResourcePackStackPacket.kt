@@ -1,15 +1,15 @@
 package jp.katana.server.network.packet.mcpe
 
-import jp.katana.core.data.IResourcePack
-import jp.katana.server.data.ResourcePack
+import jp.katana.core.data.IResourcePackInfo
+import jp.katana.server.data.ResourcePackInfo
 
 
 class ResourcePackStackPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACK_STACK_PACKET
 
     var mustAccept = false
-    var behaviourPackStack = mutableListOf<IResourcePack>()
-    var resourcePackStack = mutableListOf<IResourcePack>()
+    var behaviourPackStack = mutableListOf<IResourcePackInfo>()
+    var resourcePackStack = mutableListOf<IResourcePackInfo>()
     var isExperimental = false
 
     override fun decodePayload() {
@@ -30,14 +30,14 @@ class ResourcePackStackPacket : MinecraftPacket() {
         writeBoolean(isExperimental)
     }
 
-    private fun readPacks(list: MutableList<IResourcePack>) {
+    private fun readPacks(list: MutableList<IResourcePackInfo>) {
         val len = readUnsignedVarInt()
         for (pack in 1..len) {
-            list.add(ResourcePack(null, readVarString(), readVarString(), 0, "", readVarString(), "", false, ByteArray(0)))
+            list.add(ResourcePackInfo(null, readVarString(), readVarString(), 0, "", readVarString(), "", false, ByteArray(0)))
         }
     }
 
-    private fun writePacks(list: MutableList<IResourcePack>) {
+    private fun writePacks(list: MutableList<IResourcePackInfo>) {
         writeUnsignedInt(list.size.toLong())
         for (pack in list) {
             writeVarString(pack.packId)

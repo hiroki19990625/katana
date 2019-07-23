@@ -1,9 +1,9 @@
 package jp.katana.server.data
 
-import jp.katana.core.data.IResourcePack
+import jp.katana.core.data.IResourcePackInfo
 import java.io.File
 
-class ResourcePack(
+class ResourcePackInfo(
     override val file: File?,
     override val packId: String,
     override val packVersion: String,
@@ -13,4 +13,4 @@ class ResourcePack(
     override val contentIdentity: String,
     override val unknownBool: Boolean,
     override val hash: ByteArray
-) : IResourcePack
+) : IResourcePackInfo
