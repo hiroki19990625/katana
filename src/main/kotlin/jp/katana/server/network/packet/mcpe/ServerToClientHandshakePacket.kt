@@ -6,10 +6,10 @@ class ServerToClientHandshakePacket : MinecraftPacket() {
     var token: String = ""
 
     override fun decodePayload() {
-        token = readString()
+        token = readVarString()
     }
 
     override fun encodePayload() {
-        writeString(token)
+        writeVarString(token)
     }
 }

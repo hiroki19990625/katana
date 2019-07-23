@@ -1,7 +1,5 @@
 package jp.katana.server.network.packet.mcpe
 
-import org.apache.logging.log4j.LogManager
-
 class ResourcePackChunkDataPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACK_CHUNK_DATA_PACKET
 
@@ -11,17 +9,17 @@ class ResourcePackChunkDataPacket : MinecraftPacket() {
     var data: ByteArray = ByteArray(0)
 
     override fun decodePayload() {
-        packId = readString()
+        packId = readVarString()
         chunkIndex = readIntLE()
         progress = readLongLE()
         data = read(readIntLE())
     }
 
     override fun encodePayload() {
-        writeString(packId)
+        writeVarString(packId)
         writeIntLE(chunkIndex)
         writeLongLE(progress)
         writeIntLE(data.size)
-        write(data)
+        write(*data)
     }
 }

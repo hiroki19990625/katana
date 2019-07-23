@@ -8,11 +8,11 @@ class DisconnectPacket : MinecraftPacket() {
 
     override fun decodePayload() {
         hideDisconnectionScreen = readBoolean()
-        message = readString()
+        message = readVarString()
     }
 
     override fun encodePayload() {
         writeBoolean(hideDisconnectionScreen)
-        writeString(message)
+        writeVarString(message)
     }
 }

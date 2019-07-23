@@ -52,8 +52,8 @@ class BatchPacket : BinaryStream() {
 
             val binaryStream = BinaryStream()
             binaryStream.writeLongLE(decryptCounter)
-            binaryStream.write(payload)
-            binaryStream.write(sharedKey)
+            binaryStream.write(*payload)
+            binaryStream.write(*sharedKey!!)
 
             val messageDigest = MessageDigest.getInstance("SHA-256")
             messageDigest.update(binaryStream.array())
@@ -93,8 +93,8 @@ class BatchPacket : BinaryStream() {
         if (isEncrypt) {
             val binaryStream = BinaryStream()
             binaryStream.writeLongLE(encryptCounter)
-            binaryStream.write(buffer)
-            binaryStream.write(sharedKey)
+            binaryStream.write(*buffer)
+            binaryStream.write(*sharedKey!!)
 
             try {
                 val messageDigest = MessageDigest.getInstance("SHA-256")
@@ -104,8 +104,8 @@ class BatchPacket : BinaryStream() {
                 System.arraycopy(result, 0, checkSum, 0, 8)
 
                 val digst = BinaryStream()
-                digst.write(buffer)
-                digst.write(checkSum)
+                digst.write(*buffer)
+                digst.write(*checkSum)
 
                 buffer = encrypt!!.update(digst.array())
             } catch (e: Exception) {
@@ -113,6 +113,6 @@ class BatchPacket : BinaryStream() {
             }
         }
 
-        write(buffer)
+        write(*buffer)
     }
 }

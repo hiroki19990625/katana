@@ -1,8 +1,9 @@
 package jp.katana.server.network
 
 import com.whirvis.jraknet.RakNetPacket
+import com.whirvis.jraknet.peer.RakNetClientPeer
+import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.server.RakNetServerListener
-import com.whirvis.jraknet.session.RakNetClientSession
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.entity.Player
@@ -17,10 +18,10 @@ class ServerListener(private val server: Server, private val networkManager: Net
     private val logger = LogManager.getLogger()
     private val factory = server.factoryManager.get(PacketFactory::class.java)!!
 
-    override fun onClientConnect(session: RakNetClientSession?) {
-        if (session != null) {
-            val address = session.address
-            logger.info(I18n["katana.server.client.connection", address, session.maximumTransferUnit])
+    override fun onLogin(rServer: RakNetServer?, peer: RakNetClientPeer?) {
+        if (peer != null) {
+            val address = peer.address
+            logger.info(I18n["katana.server.client.connection", address, peer.maximumTransferUnit])
 
             val event = PlayerCreateEvent()
             server.eventManager(event)
@@ -29,14 +30,19 @@ class ServerListener(private val server: Server, private val networkManager: Net
                 event.player = Player(address, server)
 
             networkManager.addPlayer(address, event.player!!)
-            networkManager.addSession(address, session)
+            networkManager.addSession(address, peer)
             networkManager.updateOnlinePlayerCount()
         }
     }
 
-    override fun onClientDisconnect(session: RakNetClientSession?, reason: String?) {
-        if (session != null) {
-            val address = session.address
+    override fun onDisconnect(
+        server: RakNetServer?,
+        address: InetSocketAddress?,
+        peer: RakNetClientPeer?,
+        reason: String?
+    ) {
+        if (peer != null) {
+            val address = peer.address
             logger.info(I18n["katana.server.client.disConnection", address, reason ?: "none"])
             networkManager.removePlayer(address)
             networkManager.removeSession(address)
@@ -44,9 +50,9 @@ class ServerListener(private val server: Server, private val networkManager: Net
         }
     }
 
-    override fun handleMessage(session: RakNetClientSession?, packet: RakNetPacket?, channel: Int) {
-        if (session != null) {
-            val address = session.address
+    override fun handleMessage(server: RakNetServer?, peer: RakNetClientPeer?, packet: RakNetPacket?, channel: Int) {
+        if (peer != null) {
+            val address = peer.address
             val player = networkManager.getPlayer(address)!!
             val batch = BatchPacket()
             batch.isEncrypt = player.isEncrypted
@@ -73,22 +79,21 @@ class ServerListener(private val server: Server, private val networkManager: Net
 
                 networkManager.handlePacket(address, pk)
             }
+            pk?.clear()
+            data.clear()
+            batch.clear()
         }
     }
 
-    override fun onSessionException(session: RakNetClientSession?, throwable: Throwable?) {
+    override fun onPeerException(server: RakNetServer?, peer: RakNetClientPeer?, throwable: Throwable?) {
         logger.warn("", throwable)
     }
 
-    override fun onThreadException(throwable: Throwable?) {
+    override fun onHandlerException(server: RakNetServer?, address: InetSocketAddress?, throwable: Throwable?) {
         logger.warn("", throwable)
     }
 
-    override fun onHandlerException(address: InetSocketAddress?, throwable: Throwable?) {
-        logger.warn("", throwable)
-    }
-
-    override fun onServerStart() {
+    override fun onStart(server: RakNetServer?) {
         networkManager.updateState(true)
     }
 }

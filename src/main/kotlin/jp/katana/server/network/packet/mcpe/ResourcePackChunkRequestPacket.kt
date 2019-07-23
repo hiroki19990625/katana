@@ -7,12 +7,12 @@ class ResourcePackChunkRequestPacket : MinecraftPacket() {
     var chunkIndex: Int = 0
 
     override fun decodePayload() {
-        packId = readString()
+        packId = readVarString()
         chunkIndex = readIntLE()
     }
 
     override fun encodePayload() {
-        writeString(packId)
+        writeVarString(packId)
         writeIntLE(chunkIndex)
     }
 }

@@ -141,6 +141,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
                     val resourcePackDataInfoPacket = ResourcePackDataInfoPacket()
                     resourcePackDataInfoPacket.packId = pack.packId
+                    resourcePackDataInfoPacket.maxChunkSize = ResourcePackDataInfoPacket.KB_256
                     resourcePackDataInfoPacket.chunkCount =
                         (pack.packSize / resourcePackDataInfoPacket.maxChunkSize).toInt()
                     resourcePackDataInfoPacket.packSize = pack.packSize
@@ -180,13 +181,13 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         }
 
         val index = resourcePackChunkRequestPacket.chunkIndex
-        val mb1 = ResourcePackDataInfoPacket.MB_1
-        val progress = mb1 * index
+        val mb1 = ResourcePackDataInfoPacket.KB_256
+        val offset = mb1 * index
         val resourcePackChunkDataPacket = ResourcePackChunkDataPacket()
         resourcePackChunkDataPacket.packId = pack.packId
         resourcePackChunkDataPacket.chunkIndex = index
-        resourcePackChunkDataPacket.data = pack.getDataChunk(progress, mb1)
-        resourcePackChunkDataPacket.progress = progress.toLong()
+        resourcePackChunkDataPacket.data = pack.getDataChunk(offset, mb1)
+        resourcePackChunkDataPacket.progress = offset.toLong()
 
         player.sendPacket(resourcePackChunkDataPacket)
     }
