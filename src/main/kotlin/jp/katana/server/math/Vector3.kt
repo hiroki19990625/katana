@@ -74,4 +74,11 @@ data class Vector3(var x: Double, var y: Double, var z: Double) {
     fun toVector2XZ(): Vector2 {
         return Vector2(x, z)
     }
+
+    override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + z.hashCode()
+        return result
+    }
 }

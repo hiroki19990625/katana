@@ -14,6 +14,32 @@ class VectorTests {
         Assertions.assertTrue(Vector2(x, y) != Vector2(y, x))
         Assertions.assertTrue(Vector3(x, y, z) == Vector3(x, y, z))
         Assertions.assertTrue(Vector3(x, y, z) != Vector3(y, y, z))
+        Assertions.assertTrue(
+            Vector2Int(x.toInt(), y.toInt()) == Vector2Int(
+                x.toInt(),
+                y.toInt()
+            )
+        )
+        Assertions.assertTrue(
+            Vector2Int(x.toInt(), y.toInt()) != Vector2Int(
+                y.toInt(),
+                y.toInt()
+            )
+        )
+        Assertions.assertTrue(
+            Vector3Int(x.toInt(), y.toInt(), z.toInt()) == Vector3Int(
+                x.toInt(),
+                y.toInt(),
+                z.toInt()
+            )
+        )
+        Assertions.assertTrue(
+            Vector3Int(x.toInt(), y.toInt(), z.toInt()) != Vector3Int(
+                y.toInt(),
+                y.toInt(),
+                z.toInt()
+            )
+        )
 
         Assertions.assertTrue(Vector2(x, y) + Vector2(x, y) == Vector2(x + x, y + y))
         Assertions.assertTrue(Vector2(x, y) - Vector2(x, y) == Vector2(x - x, y - y))
@@ -31,5 +57,8 @@ class VectorTests {
         Assertions.assertTrue(Vector2(x, y).toVector3XY() == Vector3(x, y, 0.0))
         Assertions.assertTrue(Vector2(x, y).toVector3XZ() == Vector3(x, 0.0, y))
 
+        Assertions.assertTrue(Vector3(x, y, z).toVector3Int() == Vector3Int(x.toInt(), y.toInt(), z.toInt()))
+        Assertions.assertTrue(Vector3(x, y, z).toVector2XY() == Vector2(x, y))
+        Assertions.assertTrue(Vector3(x, y, z).toVector2XZ() == Vector2(x, z))
     }
 }
