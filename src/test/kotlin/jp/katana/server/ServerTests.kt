@@ -1,6 +1,7 @@
 package jp.katana.server
 
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class ServerTests {
 
@@ -15,6 +16,9 @@ class ServerTests {
         server.shutdown()
     }
 
+    /**
+     * 異なるポートで開く
+     */
     @Test
     fun startServerChangePort() {
         val server = Server()
@@ -30,5 +34,20 @@ class ServerTests {
         Thread.sleep(1000)
         server.serverProperties!!.serverPort = 19132
         newServer.shutdown()
+    }
+
+    /**
+     * 二重スタート
+     */
+    @Test
+    fun invalidPort() {
+        val server = Server()
+
+        Assertions.assertThrows(IllegalThreadStateException::class.java, fun() {
+            server.start()
+            server.start()
+        })
+
+        server.shutdown()
     }
 }
