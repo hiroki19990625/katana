@@ -49,4 +49,12 @@ data class Vector2Int(var x: Int, var y: Int) {
     override fun equals(other: Any?): Boolean {
         return other is Vector2Int && x == other.x && y == other.y
     }
+
+    //TODO: Convert Func
+
+    override fun hashCode(): Int {
+        var result = x
+        result = 31 * result + y
+        return result
+    }
 }
