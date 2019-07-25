@@ -1,6 +1,8 @@
 package jp.katana.server.utils
 
 import com.whirvis.jraknet.Packet
+import jp.katana.core.data.ISkin
+import jp.katana.server.data.Skin
 import java.nio.charset.Charset
 import kotlin.experimental.and
 
@@ -104,5 +106,30 @@ open class BinaryStream : Packet() {
         }
 
         return value
+    }
+
+    fun readSkin(): ISkin {
+        val skinId = readVarString()
+        val skinData = String(read(readUnsignedVarInt()))
+        val capeData = String(read(readUnsignedVarInt()))
+        val geometryName = readVarString()
+        val geometryData = readVarString()
+
+        return Skin(capeData, skinData, geometryData, geometryName, skinId)
+    }
+
+    fun writeSkin(skin: ISkin) {
+        writeVarString(skin.skinId)
+
+        val skinData = skin.skinData.toByteArray()
+        writeUnsignedVarInt(skinData.size)
+        write(*skinData)
+
+        val capeData = skin.capeData.toByteArray()
+        writeUnsignedVarInt(capeData.size)
+        write(*capeData)
+
+        writeVarString(skin.skinGeometryName)
+        writeVarString(skin.skinGeometry)
     }
 }
