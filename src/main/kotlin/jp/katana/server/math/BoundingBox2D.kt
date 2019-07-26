@@ -50,11 +50,58 @@ data class BoundingBox2D(val pos: Vector2, val bound: Vector2) {
         return false
     }
 
-    fun addPosition(pos: Vector2): BoundingBox2D {
-        return BoundingBox2D(this.pos + pos, this.bound)
+    operator fun plus(a: BoundingBox2D): BoundingBox2D {
+        return BoundingBox2D(pos + a.pos, bound + a.bound)
     }
 
-    fun addBound(bound: Vector2): BoundingBox2D {
-        return BoundingBox2D(this.pos, this.bound + bound)
+    operator fun plusAssign(a: BoundingBox2D) {
+        pos += a.pos
+        bound += a.bound
+    }
+
+    operator fun minus(a: BoundingBox2D): BoundingBox2D {
+        return BoundingBox2D(pos - a.pos, bound - a.bound)
+    }
+
+    operator fun minusAssign(a: BoundingBox2D) {
+        pos -= a.pos
+        bound -= a.bound
+    }
+
+    operator fun times(a: Double): BoundingBox2D {
+        return BoundingBox2D(pos * a, bound * a)
+    }
+
+    operator fun timesAssign(a: Double) {
+        pos *= a
+        bound *= a
+    }
+
+    operator fun div(a: Double): BoundingBox2D {
+        return BoundingBox2D(pos / a, bound / a)
+    }
+
+    operator fun divAssign(a: Double) {
+        pos /= a
+        bound /= a
+    }
+
+    operator fun rem(a: Double): BoundingBox2D {
+        return BoundingBox2D(pos % a, bound % a)
+    }
+
+    operator fun remAssign(a: Double) {
+        pos %= a
+        bound %= a
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is BoundingBox2D && pos == other.pos && bound == other.bound
+    }
+
+    override fun hashCode(): Int {
+        var result = pos.hashCode()
+        result = 31 * result + bound.hashCode()
+        return result
     }
 }

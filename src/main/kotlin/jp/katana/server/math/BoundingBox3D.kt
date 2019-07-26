@@ -61,4 +61,59 @@ data class BoundingBox3D(val pos: Vector3, val bound: Vector3) {
 
         return false
     }
+
+    operator fun plus(a: BoundingBox3D): BoundingBox3D {
+        return BoundingBox3D(pos + a.pos, bound + a.bound)
+    }
+
+    operator fun plusAssign(a: BoundingBox3D) {
+        pos += a.pos
+        bound += a.bound
+    }
+
+    operator fun minus(a: BoundingBox3D): BoundingBox3D {
+        return BoundingBox3D(pos - a.pos, bound - a.bound)
+    }
+
+    operator fun minusAssign(a: BoundingBox3D) {
+        pos -= a.pos
+        bound -= a.bound
+    }
+
+    operator fun times(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos * a, bound * a)
+    }
+
+    operator fun timesAssign(a: Double) {
+        pos *= a
+        bound *= a
+    }
+
+    operator fun div(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos / a, bound / a)
+    }
+
+    operator fun divAssign(a: Double) {
+        pos /= a
+        bound /= a
+    }
+
+    operator fun rem(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos % a, bound % a)
+    }
+
+    operator fun remAssign(a: Double) {
+        pos %= a
+        bound %= a
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is BoundingBox3D && pos == other.pos && bound == other.bound
+    }
+
+    override fun hashCode(): Int {
+        var result = pos.hashCode()
+        result = 31 * result + bound.hashCode()
+        return result
+    }
 }
