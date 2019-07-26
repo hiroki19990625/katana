@@ -10,5 +10,8 @@ build/*
 
 logs
 logs/*
+resource_packs
+resource_packs/
+resource_packs/*
 properties.yml
 katana.yml

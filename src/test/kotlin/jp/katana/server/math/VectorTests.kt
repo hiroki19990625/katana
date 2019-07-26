@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class VectorTests {
     @Test
-    fun tests() {
+    fun equalTests() {
         val x = 10.5
         val y = 5.5
         val z = 20.5
@@ -40,6 +40,13 @@ class VectorTests {
                 z.toInt()
             )
         )
+    }
+
+    @Test
+    fun operateTests() {
+        val x = 10.5
+        val y = 5.5
+        val z = 20.5
 
         Assertions.assertTrue(Vector2(x, y) + Vector2(x, y) == Vector2(x + x, y + y))
         Assertions.assertTrue(Vector2(x, y) - Vector2(x, y) == Vector2(x - x, y - y))
@@ -52,6 +59,13 @@ class VectorTests {
         Assertions.assertTrue(Vector3(x, y, z) / 2.0 == Vector3(x / 2.0, y / 2.0, z / 2.0))
         Assertions.assertTrue(Vector3(x, y, z) * 2.0 == Vector3(x * 2.0, y * 2.0, z * 2.0))
         Assertions.assertTrue(Vector3(x, y, z) % 2.0 == Vector3(x % 2.0, y % 2.0, z % 2.0))
+    }
+
+    @Test
+    fun convertTests() {
+        val x = 10.5
+        val y = 5.5
+        val z = 20.5
 
         Assertions.assertTrue(Vector2(x, y).toVector2Int() == Vector2Int(x.toInt(), y.toInt()))
         Assertions.assertTrue(Vector2(x, y).toVector3XY() == Vector3(x, y, 0.0))
