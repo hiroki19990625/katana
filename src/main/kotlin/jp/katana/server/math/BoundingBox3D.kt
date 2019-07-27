@@ -107,6 +107,86 @@ data class BoundingBox3D(val pos: Vector3, val bound: Vector3) {
         bound %= a
     }
 
+    infix fun `+p`(a: Vector3): BoundingBox3D {
+        return BoundingBox3D(pos + a, bound)
+    }
+
+    infix fun `+=p`(a: Vector3) {
+        pos += a
+    }
+
+    infix fun `-p`(a: Vector3): BoundingBox3D {
+        return BoundingBox3D(pos - a, bound)
+    }
+
+    infix fun `-=p`(a: Vector3) {
+        pos -= a
+    }
+
+    infix fun `*p`(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos * a, bound)
+    }
+
+    infix fun `*=p`(a: Double) {
+        pos *= a
+    }
+
+    infix fun `divp`(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos / a, bound)
+    }
+
+    infix fun `div=p`(a: Double) {
+        pos /= a
+    }
+
+    infix fun `%p`(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos % a, bound)
+    }
+
+    infix fun `%=p`(a: Double) {
+        pos %= a
+    }
+
+    infix fun `+b`(a: Vector3): BoundingBox3D {
+        return BoundingBox3D(pos, bound + a)
+    }
+
+    infix fun `+=b`(a: Vector3) {
+        bound += a
+    }
+
+    infix fun `-b`(a: Vector3): BoundingBox3D {
+        return BoundingBox3D(pos, bound - a)
+    }
+
+    infix fun `-=b`(a: Vector3) {
+        bound -= a
+    }
+
+    infix fun `*b`(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos, bound * a)
+    }
+
+    infix fun `*=b`(a: Double) {
+        bound *= a
+    }
+
+    infix fun `divb`(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos, bound / a)
+    }
+
+    infix fun `div=b`(a: Double) {
+        bound /= a
+    }
+
+    infix fun `%b`(a: Double): BoundingBox3D {
+        return BoundingBox3D(pos, bound % a)
+    }
+
+    infix fun `%=b`(a: Double) {
+        bound %= a
+    }
+
     override fun equals(other: Any?): Boolean {
         return other is BoundingBox3D && pos == other.pos && bound == other.bound
     }
