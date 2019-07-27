@@ -187,6 +187,30 @@ data class BoundingBox3D(val pos: Vector3, val bound: Vector3) {
         bound %= a
     }
 
+    fun relativeCenter(): Vector3 {
+        return bound / 2.0
+    }
+
+    fun absoluteCenter(): Vector3 {
+        return bound / 2.0 + pos
+    }
+
+    fun top(): Vector3 {
+        return Vector3(bound.x / 2 + pos.x, pos.y, pos.z)
+    }
+
+    fun bottom(): Vector3 {
+        return Vector3(bound.x / 2.0 + pos.x, pos.y + bound.y, pos.z)
+    }
+
+    fun left(): Vector3 {
+        return Vector3(pos.x, bound.y / 2.0 + pos.y, pos.z)
+    }
+
+    fun right(): Vector3 {
+        return Vector3(pos.x, bound.y / 2.0 + pos.y, pos.z + bound.z)
+    }
+
     override fun equals(other: Any?): Boolean {
         return other is BoundingBox3D && pos == other.pos && bound == other.bound
     }
