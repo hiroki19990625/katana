@@ -1,5 +1,7 @@
 package jp.katana.server.math
 
+import jp.katana.core.world.IWorld
+
 data class Vector2(var x: Double, var y: Double) {
     operator fun plus(a: Vector2): Vector2 {
         return Vector2(x + a.x, y + a.y)
@@ -68,6 +70,22 @@ data class Vector2(var x: Double, var y: Double) {
 
     fun toVector3XZ(): Vector3 {
         return Vector3(x, 0.0, y)
+    }
+
+    fun toPositionXY(world: IWorld): Position {
+        return Position(world, Vector3(x, y, 0.0))
+    }
+
+    fun toPositionXZ(world: IWorld): Position {
+        return Position(world, Vector3(x, 0.0, y))
+    }
+
+    fun toBlockPositionXY(world: IWorld): BlockPosition {
+        return BlockPosition(world, Vector3(x, y, 0.0).toVector3Int())
+    }
+
+    fun toBlockPositionXZ(world: IWorld): BlockPosition {
+        return BlockPosition(world, Vector3(x, 0.0, y).toVector3Int())
     }
 
     override fun hashCode(): Int {
