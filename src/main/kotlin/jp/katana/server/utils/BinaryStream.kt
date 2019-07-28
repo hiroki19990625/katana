@@ -3,6 +3,8 @@ package jp.katana.server.utils
 import com.whirvis.jraknet.Packet
 import jp.katana.core.data.ISkin
 import jp.katana.server.data.Skin
+import jp.katana.server.math.Vector3
+import jp.katana.server.math.Vector3Int
 import java.nio.charset.Charset
 import kotlin.experimental.and
 
@@ -131,5 +133,51 @@ open class BinaryStream : Packet() {
 
         writeVarString(skin.skinGeometryName)
         writeVarString(skin.skinGeometry)
+    }
+
+    fun readBlockPosition(): Vector3Int {
+        return Vector3Int(readVarInt(), readUnsignedVarInt(), readVarInt())
+    }
+
+    fun writeBlockPosition(pos: Vector3Int) {
+        writeVarInt(pos.x)
+        writeUnsignedVarInt(pos.y)
+        writeVarInt(pos.z)
+    }
+
+    fun readUnsignedBlockPosition(): Vector3Int {
+        return Vector3Int(readVarInt(), readVarInt(), readVarInt())
+    }
+
+    fun writeUnsignedBlockPosition(pos: Vector3Int) {
+        writeVarInt(pos.x)
+        writeVarInt(pos.y)
+        writeVarInt(pos.z)
+    }
+
+    fun readVector3(): Vector3 {
+        return Vector3(readFloatLE().toDouble(), readFloatLE().toDouble(), readFloatLE().toDouble())
+    }
+
+    fun writeVector3(pos: Vector3) {
+        writeFloatLE(pos.x)
+        writeFloatLE(pos.y)
+        writeFloatLE(pos.z)
+    }
+
+    fun readEntityUniqueId(): Long {
+        return readVarLong().toLong()
+    }
+
+    fun writeEntityUniqueId(id: Long) {
+        writeVarLong(id.toInt())
+    }
+
+    fun readEntityRuntimeId(): Long {
+        return readUnsignedVarLong().toLong()
+    }
+
+    fun writeEntityRuntimeId(id: Long) {
+        writeUnsignedVarLong(id.toInt())
     }
 }
