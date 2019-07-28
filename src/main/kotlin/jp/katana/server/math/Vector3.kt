@@ -3,6 +3,10 @@ package jp.katana.server.math
 import jp.katana.core.world.IWorld
 
 data class Vector3(var x: Double, var y: Double, var z: Double) {
+    companion object {
+        val ZERO = Vector3(0.0, 0.0, 0.0)
+    }
+
     operator fun plus(a: Vector3): Vector3 {
         return Vector3(x + a.x, y + a.y, z + a.z)
     }
