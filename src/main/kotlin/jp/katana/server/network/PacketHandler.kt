@@ -255,6 +255,11 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
     }
 
     private fun startGame() {
-        server.logger.info("Logined.")
+        val startGamePacket = StartGamePacket()
+        player.sendPacket(startGamePacket)
+
+        val playStatusPacket = PlayStatusPacket()
+        playStatusPacket.status = PlayStatusPacket.PLAYER_SPAWN
+        player.sendPacket(playStatusPacket)
     }
 }

@@ -1,6 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
 import jp.katana.server.math.Vector3
+import jp.katana.server.math.Vector3Int
 
 class StartGamePacket : MinecraftPacket() {
     companion object {
@@ -20,8 +21,8 @@ class StartGamePacket : MinecraftPacket() {
     var yaw: Float = 0.0f
     var pitch: Float = 0.0f
     var seed: Int = 0
-    var dimension: Byte = 0
-    var generator = 1
+    var dimension: Int = 0
+    var generator: Int = 1
     var worldGamemode: Int = 0
     var difficulty: Int = 0
     var spawnX: Int = 0
@@ -70,6 +71,70 @@ class StartGamePacket : MinecraftPacket() {
         writeVector3(Vector3(x.toDouble(), y.toDouble(), z.toDouble()))
         writeFloatLE(yaw.toDouble())
         writeFloatLE(pitch.toDouble())
+
+        writeVarInt(seed)
+        writeVarInt(dimension)
+        writeVarInt(generator)
+        writeVarInt(worldGamemode)
+        writeVarInt(difficulty)
+
+        writeBlockPosition(Vector3Int(spawnX, spawnY, spawnZ))
+
+        writeBoolean(hasAchievementsDisabled)
+
+        writeVarInt(dayCycleStopTime)
+
+        writeBoolean(eduMode)
+        writeBoolean(hasEduFeaturesEnabled)
+
+        writeFloatLE(rainLevel.toDouble())
+        writeFloatLE(lightningLevel.toDouble())
+
+        writeBoolean(hasConfirmedPlatformLockedContent)
+        writeBoolean(multiplayerGame)
+        writeBoolean(broadcastToLAN)
+
+        writeVarInt(xblBroadcastIntent)
+        writeVarInt(platformBroadcastIntent)
+
+        writeBoolean(commandsEnabled)
+
+        writeBoolean(isTexturePacksRequired)
+
+        //TODO: GameRules
+        writeUnsignedVarInt(0)
+
+        writeBoolean(bonusChest)
+        writeBoolean(hasStartWithMapEnabled)
+
+        writeVarInt(permissionLevel)
+
+        writeIntLE(serverChunkTickRange)
+
+        writeBoolean(hasLockedBehaviorPack)
+        writeBoolean(hasLockedResourcePack)
+
+        writeBoolean(isFromLockedWorldTemplate)
+        writeBoolean(isUsingMsaGamertagsOnly)
+        writeBoolean(isFromWorldTemplate)
+        writeBoolean(isWorldTemplateOptionLocked)
+        writeBoolean(isOnlySpawningV1Villagers)
+
+        writeVarString(levelId)
+        writeVarString(worldName)
+        writeVarString(premiumWorldTemplateId)
+
+        writeBoolean(isTrial)
+
+        writeLongLE(currentTick)
+
+        writeVarInt(enchantmentSeed)
+
+        // Pallet
+        writeUnsignedVarInt(0)
+        writeUnsignedVarInt(0)
+
+        writeVarString(multiplayerCorrelationId)
     }
 
     override fun encodePayload() {
