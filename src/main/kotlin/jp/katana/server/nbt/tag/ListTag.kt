@@ -46,4 +46,14 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
             list.add(t)
         }
     }
+
+    override fun toString(): String {
+        var str = "${this.javaClass.simpleName} : $name = [" + "\n"
+        for (tag in list) {
+            str += tag.toString() + "\n"
+        }
+        str += "]"
+
+        return str
+    }
 }

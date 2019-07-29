@@ -105,7 +105,8 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
             return stream.readVarString()
         }
 
-        return stream.readString()
+        val len = readShort()
+        return String(stream.read(len.toInt()))
     }
 
     fun writeString(value: String) {
@@ -114,7 +115,9 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
             return
         }
 
-        stream.writeString(value)
+        val buf = value.toByteArray()
+        writeShort(buf.size.toShort())
+        stream.write(*buf)
     }
 
     fun getBuffer(): ByteArray {

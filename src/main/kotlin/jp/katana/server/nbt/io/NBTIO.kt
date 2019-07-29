@@ -17,6 +17,7 @@ class NBTIO {
         fun read(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): CompoundTag {
             val stream = NBTStream(endian, isNetwork)
             stream.setBuffer(buffer)
+
             val tag = CompoundTag("")
             tag.read(stream)
 
