@@ -63,6 +63,10 @@ class StartGamePacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.START_GAME_PACKET
 
     override fun decodePayload() {
+
+    }
+
+    override fun encodePayload() {
         writeEntityUniqueId(entityUniqueId)
         writeEntityRuntimeId(entityRuntimeId)
 
@@ -130,14 +134,10 @@ class StartGamePacket : MinecraftPacket() {
 
         writeVarInt(enchantmentSeed)
 
-        // Pallet
+        // TODO: Define Block and Item
         writeUnsignedVarInt(0)
         writeUnsignedVarInt(0)
 
         writeVarString(multiplayerCorrelationId)
-    }
-
-    override fun encodePayload() {
-
     }
 }
