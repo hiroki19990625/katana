@@ -13,7 +13,13 @@ interface IPacketHandler {
     fun handleResourcePackStackPacket(resourcePackStackPacket: ResourcePackStackPacket) // 0x07
     fun handleResourcePackClientResponsePacket(resourcePackClientResponsePacket: ResourcePackClientResponsePacket) // 0x08
 
+    fun handleRequestChunkRadiusPacket(requestChunkRadiusPacket: RequestChunkRadiusPacket) // 0x45
+    fun handleChunkRadiusUpdatedPacket(chunkRadiusUpdatedPacket: ChunkRadiusUpdatedPacket) // 0x46
+
     fun handleResourcePackDataInfoPacket(resourcePackDataInfoPacket: ResourcePackDataInfoPacket) // 0x52
     fun handleResourcePackChunkDataPacket(resourcePackChunkDataPacket: ResourcePackChunkDataPacket) // 0x53
     fun handleResourcePackChunkRequestPacket(resourcePackChunkRequestPacket: ResourcePackChunkRequestPacket) // 0x54
+
+    fun handleAvailableEntityIdentifiersPacket(availableEntityIdentifiersPacket: AvailableEntityIdentifiersPacket) // 0x77
+    fun handleBiomeDefinitionListPacket(biomeDefinitionListPacket: BiomeDefinitionListPacket) // 0x7a
 }

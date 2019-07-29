@@ -12,6 +12,7 @@ import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import org.apache.logging.log4j.LogManager
 import java.net.InetSocketAddress
 import java.security.KeyPair
+import java.util.*
 import javax.crypto.Cipher
 
 class Player(override val address: InetSocketAddress, private val server: Server) : IPlayer {
@@ -36,6 +37,8 @@ class Player(override val address: InetSocketAddress, private val server: Server
         internal set
     override var encryptCounter: Long = -1
     override var decryptCounter: Long = -1
+
+    override val uuid: UUID = UUID.randomUUID()
 
     override fun handlePacket(packet: MinecraftPacket) {
         packetHandler.handlePacket(packet)

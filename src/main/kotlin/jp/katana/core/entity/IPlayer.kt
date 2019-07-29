@@ -9,7 +9,7 @@ import java.net.InetSocketAddress
 import java.security.KeyPair
 import javax.crypto.Cipher
 
-interface IPlayer {
+interface IPlayer : IEntityLiving {
     val address: InetSocketAddress
     val packetHandler: IPacketHandler
 

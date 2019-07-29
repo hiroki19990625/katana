@@ -45,12 +45,20 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
                 handleResourcePackStackPacket(packet)
             is ResourcePackClientResponsePacket -> // 0x08
                 handleResourcePackClientResponsePacket(packet)
+            is RequestChunkRadiusPacket -> // 0x45
+                handleRequestChunkRadiusPacket(packet)
+            is ChunkRadiusUpdatedPacket -> // 0x46
+                handleChunkRadiusUpdatedPacket(packet)
             is ResourcePackDataInfoPacket -> // 0x52
                 handleResourcePackDataInfoPacket(packet)
             is ResourcePackChunkDataPacket -> // 0x53
                 handleResourcePackChunkDataPacket(packet)
             is ResourcePackChunkRequestPacket -> // 0x54
                 handleResourcePackChunkRequestPacket(packet)
+            is AvailableEntityIdentifiersPacket -> // 0x77
+                handleAvailableEntityIdentifiersPacket(packet)
+            is BiomeDefinitionListPacket -> // 0x7a
+                handleBiomeDefinitionListPacket(packet)
         }
     }
 
@@ -165,6 +173,16 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         }
     }
 
+    override fun handleRequestChunkRadiusPacket(requestChunkRadiusPacket: RequestChunkRadiusPacket) {
+        val chunkRadiusUpdatedPacket = ChunkRadiusUpdatedPacket()
+        chunkRadiusUpdatedPacket.radius = requestChunkRadiusPacket.radius
+        player.sendPacket(chunkRadiusUpdatedPacket)
+    }
+
+    override fun handleChunkRadiusUpdatedPacket(chunkRadiusUpdatedPacket: ChunkRadiusUpdatedPacket) {
+        // No cause
+    }
+
     override fun handleResourcePackDataInfoPacket(resourcePackDataInfoPacket: ResourcePackDataInfoPacket) {
         // No cause
     }
@@ -190,6 +208,14 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         resourcePackChunkDataPacket.progress = offset.toLong()
 
         player.sendPacket(resourcePackChunkDataPacket)
+    }
+
+    override fun handleAvailableEntityIdentifiersPacket(availableEntityIdentifiersPacket: AvailableEntityIdentifiersPacket) {
+        // No cause
+    }
+
+    override fun handleBiomeDefinitionListPacket(biomeDefinitionListPacket: BiomeDefinitionListPacket) {
+        // No cause
     }
 
     private fun initSecure() {
@@ -256,6 +282,14 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     private fun startGame() {
         val startGamePacket = StartGamePacket()
+        startGamePacket.entityUniqueId = player.uuid.mostSignificantBits
+        startGamePacket.entityRuntimeId = player.uuid.leastSignificantBits
         player.sendPacket(startGamePacket)
+
+        val biomeDefinitionListPacket = BiomeDefinitionListPacket()
+        player.sendPacket(biomeDefinitionListPacket)
+
+        val availableEntityIdentifiersPacket = AvailableEntityIdentifiersPacket()
+        player.sendPacket(availableEntityIdentifiersPacket)
     }
 }

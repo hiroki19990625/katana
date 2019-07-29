@@ -13,9 +13,16 @@ class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
         this += ResourcePackStackPacket() // 0x07
         this += ResourcePackClientResponsePacket() // 0x08
 
+        this += RequestChunkRadiusPacket()
+        this += ChunkRadiusUpdatedPacket()
+
         this += ResourcePackDataInfoPacket() // 0x52
         this += ResourcePackChunkDataPacket() // 0x53
         this += ResourcePackChunkRequestPacket() // 0x54
+
+        this += AvailableEntityIdentifiersPacket() // 0x77
+
+        this += BiomeDefinitionListPacket() // 0x7a
     }
 
     override fun plusAssign(value: MinecraftPacket) {

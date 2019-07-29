@@ -2,8 +2,6 @@ package jp.katana.server.network
 
 import com.whirvis.jraknet.RakNetPacket
 import com.whirvis.jraknet.peer.RakNetClientPeer
-import com.whirvis.jraknet.protocol.message.EncapsulatedPacket
-import com.whirvis.jraknet.protocol.message.acknowledge.Record
 import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.server.RakNetServerListener
 import jp.katana.i18n.I18n
@@ -74,6 +72,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             data = BinaryStream()
             data.setBuffer(buf)
             val id = data.readUnsignedVarInt()
+            logger.info(id.toString(16))
             val pk = factory[id]
             if (pk != null) {
                 pk.setBuffer(buf)
