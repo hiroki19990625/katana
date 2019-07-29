@@ -116,4 +116,17 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
 
         stream.writeString(value)
     }
+
+    fun getBuffer(): ByteArray {
+        return stream.array()
+    }
+
+    fun setBuffer(buffer: ByteArray) {
+        stream.setBuffer(buffer)
+    }
+
+    fun close() {
+        stream.clear()
+        stream.buffer().release()
+    }
 }

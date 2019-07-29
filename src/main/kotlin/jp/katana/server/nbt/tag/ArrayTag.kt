@@ -1,0 +1,7 @@
+package jp.katana.server.nbt.tag
+
+abstract class ArrayTag<T> : INamedTag {
+    abstract override var name: String
+    abstract override val type: Byte
+    abstract var value: Array<T>
+}
