@@ -64,7 +64,11 @@ class ServerListener(private val server: Server, private val networkManager: Net
             batch.setBuffer(packet?.array())
             batch.decode()
 
-            player.decryptCounter++
+            if (player.isEncrypted)
+                player.decryptCounter++
+
+            if (this.server.katanaConfig!!.packetDump)
+                logger.info(batch.payload.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
 
             var data = BinaryStream()
             data.setBuffer(batch.payload)

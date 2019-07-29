@@ -282,6 +282,10 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     private fun startGame() {
         val startGamePacket = StartGamePacket()
+        startGamePacket.entityUniqueId = player.uuid.mostSignificantBits
+        startGamePacket.entityRuntimeId = player.uuid.leastSignificantBits
+        startGamePacket.blockDefinitions = server.defineBlocks
+        startGamePacket.itemDefinitions = server.defineItems
         player.sendPacket(startGamePacket)
 
         val biomeDefinitionListPacket = BiomeDefinitionListPacket()

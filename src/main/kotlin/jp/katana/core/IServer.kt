@@ -1,9 +1,11 @@
 package jp.katana.core
 
+import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.command.ICommandSender
 import jp.katana.core.console.IConsole
 import jp.katana.core.event.IEventManager
 import jp.katana.core.factory.IFactoryManager
+import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
 import org.apache.logging.log4j.Logger
@@ -51,6 +53,9 @@ interface IServer {
     val subMotd: String
     val tickRate: Byte
     val totalTick: Long
+
+    val defineBlocks: IBlockDefinitions
+    val defineItems: IItemDefinitions
 
     /**
      * サーバーを開始します。

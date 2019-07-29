@@ -1,12 +1,5 @@
 package jp.katana.server.utils
 
-import jp.katana.server.utils.ZigZag.Companion.decodeZigZag32
-import jp.katana.server.utils.ZigZag.Companion.decodeZigZag64
-import jp.katana.server.utils.ZigZag.Companion.encodeZigZag32
-import jp.katana.server.utils.ZigZag.Companion.encodeZigZag64
-import java.io.IOException
-
-
 
 class VarInt {
     companion object {
@@ -39,7 +32,7 @@ class VarInt {
         }
 
         fun readVarInt(stream: BinaryStream): Int {
-            return decodeZigZag32(readUnsignedVarInt(stream))
+            return ZigZag.decodeZigZag32(readUnsignedVarInt(stream))
         }
 
         fun readUnsignedVarInt(stream: BinaryStream): Long {
@@ -47,7 +40,7 @@ class VarInt {
         }
 
         fun readVarLong(stream: BinaryStream): Long {
-            return decodeZigZag64(readUnsignedVarLong(stream))
+            return ZigZag.decodeZigZag64(readUnsignedVarLong(stream))
         }
 
         fun readUnsignedVarLong(stream: BinaryStream): Long {
@@ -55,7 +48,7 @@ class VarInt {
         }
 
         fun writeVarInt(stream: BinaryStream, value: Int) {
-            writeUnsignedVarInt(stream, encodeZigZag32(value))
+            writeUnsignedVarInt(stream, ZigZag.encodeZigZag32(value))
         }
 
         fun writeUnsignedVarInt(stream: BinaryStream, value: Long) {
@@ -63,7 +56,7 @@ class VarInt {
         }
 
         fun writeVarLong(stream: BinaryStream, value: Long) {
-            writeUnsignedVarLong(stream, encodeZigZag64(value))
+            writeUnsignedVarLong(stream, ZigZag.encodeZigZag64(value))
         }
 
         fun writeUnsignedVarLong(stream: BinaryStream, value: Long) {

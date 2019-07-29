@@ -4,12 +4,15 @@ import io.netty.util.ResourceLeakDetector
 import jp.katana.core.IServer
 import jp.katana.core.IServerProperties
 import jp.katana.core.ServerState
+import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.command.ICommandSender
 import jp.katana.core.event.IEventManager
 import jp.katana.core.factory.IFactoryManager
+import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
 import jp.katana.i18n.I18n
+import jp.katana.server.block.BlockDefinitions
 import jp.katana.server.command.ServerCommandSender
 import jp.katana.server.console.KatanaConsole
 import jp.katana.server.event.EventManager
@@ -18,6 +21,7 @@ import jp.katana.server.event.server.ServerStopEvent
 import jp.katana.server.event.server.ServerUpdateTickEvent
 import jp.katana.server.factory.CommandFactory
 import jp.katana.server.factory.FactoryManager
+import jp.katana.server.item.ItemDefinitions
 import jp.katana.server.network.NetworkManager
 import jp.katana.server.resourcepack.ResourcePackManager
 import org.apache.logging.log4j.Level
@@ -110,8 +114,11 @@ class Server : IServer {
     override var totalTick: Long = 0
         private set
 
+    override val defineBlocks: IBlockDefinitions = BlockDefinitions()
+    override val defineItems: IItemDefinitions = ItemDefinitions()
+
     private val katanaConfigFile: File = File("katana.yml")
-    private var katanaConfig: KatanaConfig? = null
+    var katanaConfig: KatanaConfig? = null
 
     private val serverCommandSender: ServerCommandSender = ServerCommandSender(this)
 

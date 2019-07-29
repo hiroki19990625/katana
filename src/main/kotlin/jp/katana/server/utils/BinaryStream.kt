@@ -15,7 +15,6 @@ open class BinaryStream : Packet() {
         return String(read(readUnsignedVarInt()))
     }
 
-
     fun writeVarString(s: String): Packet {
         val array: ByteArray = s.toByteArray(Charset.forName("utf8"))
         writeUnsignedVarInt(array.size)

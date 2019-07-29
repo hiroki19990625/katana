@@ -8,5 +8,7 @@ package jp.katana.server
 class KatanaConfig {
     var serverTickRate: Byte = 20
 
+    var packetDump: Boolean = false
+
     var logLevel: String = "INFO"
 }

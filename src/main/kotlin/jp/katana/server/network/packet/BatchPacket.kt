@@ -46,6 +46,7 @@ class BatchPacket : BinaryStream() {
         } else {
             val buffer = decrypt!!.update(read(remaining()))
             val payload = ByteArray(buffer.size - 8)
+            val outPayload = ByteArray(1024 * 1024 * 64)
             val calculateCheckSum = ByteArray(8)
             System.arraycopy(buffer, 0, payload, 0, buffer.size - 8)
             System.arraycopy(buffer, buffer.size - 8, calculateCheckSum, 0, 8)
@@ -69,10 +70,10 @@ class BatchPacket : BinaryStream() {
             decompresser.setInput(payload)
 
             try {
-                val length = decompresser.inflate(payload)
+                val length = decompresser.inflate(outPayload)
                 decompresser.end()
 
-                this.payload = payload.copyOf(length)
+                this.payload = outPayload.copyOf(length)
             } catch (e: Exception) {
                 logger.error("", e)
             }

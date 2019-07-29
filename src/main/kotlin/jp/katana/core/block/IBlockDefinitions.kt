@@ -1,11 +1,12 @@
 package jp.katana.core.block
 
 interface IBlockDefinitions {
-    fun fromRuntime(runtimeId: Int)
-    fun fromId(id: Int)
-    fun fromIdAndData(id: Int, data: Int)
+    fun fromRuntime(runtimeId: Int): IBlockDefine
+    fun fromId(id: Int): IBlockDefine
+    fun fromIdAndData(id: Int, data: Int): IBlockDefine
+    fun fromName(name: String): IBlockDefine
 
-    fun register(runtimeId: Int, blockDefine: IBlockDefine)
+    fun register(blockDefine: IBlockDefine)
 
     fun size(): Int
 
