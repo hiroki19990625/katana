@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.server.math.Vector3
+
 class StartGamePacket : MinecraftPacket() {
     companion object {
         const val GAME_PUBLISH_SETTING_NO_MULTI_PLAY = 0
@@ -60,7 +62,14 @@ class StartGamePacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.START_GAME_PACKET
 
     override fun decodePayload() {
+        writeEntityUniqueId(entityUniqueId)
+        writeEntityRuntimeId(entityRuntimeId)
 
+        writeVarInt(playerGamemode)
+
+        writeVector3(Vector3(x.toDouble(), y.toDouble(), z.toDouble()))
+        writeFloatLE(yaw.toDouble())
+        writeFloatLE(pitch.toDouble())
     }
 
     override fun encodePayload() {

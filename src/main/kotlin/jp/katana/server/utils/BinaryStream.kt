@@ -69,40 +69,40 @@ open class BinaryStream : Packet() {
         return value
     }
 
-    fun writeVarLong(v: Int) {
+    fun writeVarLong(v: Long) {
         writeUnsignedVarLong(v shl 1 xor (v shr 63))
     }
 
-    fun writeUnsignedVarLong(value: Int) {
+    fun writeUnsignedVarLong(value: Long) {
         var v = value
         val buf = ByteArray(10)
 
         for (i in 0..9) {
-            if (v shr 7 != 0) {
+            if (v.toLong() shr 7 != 0L) {
                 buf[i] = (v or 0x80).toByte()
             } else {
                 buf[i] = (v and 0x7f).toByte()
                 write(*buf.copyOf(i + 1))
                 return
             }
-            v = v shr 7 and (Integer.MAX_VALUE shr 6)
+            v = v shr 7 and (Integer.MAX_VALUE shr 6).toLong()
         }
     }
 
-    fun readVarLong(): Int {
+    fun readVarLong(): Long {
         val raw = readUnsignedVarLong()
         val temp = raw shl 63 shr 63 xor raw shr 1
         return temp xor (raw and (1 shl 63))
     }
 
-    fun readUnsignedVarLong(): Int {
-        var value = 0
+    fun readUnsignedVarLong(): Long {
+        var value = 0L
         var i = 0
         while (i <= 63) {
             val b = readByte()
-            value = value or ((b and 0x7f).toInt() shl i)
+            value = value or ((b and 0x7f).toLong() shl i)
             if (b and 0x80.toByte() == 0.toByte()) {
-                return Integer.parseUnsignedInt(Integer.toUnsignedString(value))
+                return value
             }
             i += 7
         }
@@ -166,18 +166,18 @@ open class BinaryStream : Packet() {
     }
 
     fun readEntityUniqueId(): Long {
-        return readVarLong().toLong()
+        return readVarLong()
     }
 
     fun writeEntityUniqueId(id: Long) {
-        writeVarLong(id.toInt())
+        writeVarLong(id)
     }
 
     fun readEntityRuntimeId(): Long {
-        return readUnsignedVarLong().toLong()
+        return readUnsignedVarLong()
     }
 
     fun writeEntityRuntimeId(id: Long) {
-        writeUnsignedVarLong(id.toInt())
+        writeUnsignedVarLong(id)
     }
 }
