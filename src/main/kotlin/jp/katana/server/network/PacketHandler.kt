@@ -282,8 +282,6 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     private fun startGame() {
         val startGamePacket = StartGamePacket()
-        startGamePacket.entityUniqueId = player.uuid.mostSignificantBits
-        startGamePacket.entityRuntimeId = player.uuid.leastSignificantBits
         player.sendPacket(startGamePacket)
 
         val biomeDefinitionListPacket = BiomeDefinitionListPacket()
@@ -291,5 +289,9 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
         val availableEntityIdentifiersPacket = AvailableEntityIdentifiersPacket()
         player.sendPacket(availableEntityIdentifiersPacket)
+
+        val playStatusPacket = PlayStatusPacket()
+        playStatusPacket.status = PlayStatusPacket.PLAYER_SPAWN
+        player.sendPacket(playStatusPacket)
     }
 }

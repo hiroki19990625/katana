@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.block.IBlockDefinitions
+import jp.katana.core.item.IItemDefinitions
 import jp.katana.server.math.Vector3
 import jp.katana.server.math.Vector3Int
 
@@ -58,6 +60,10 @@ class StartGamePacket : MinecraftPacket() {
     var isTrial = false
     var currentTick: Long = 0
     var enchantmentSeed: Int = 0
+
+    var blockDefinitions: IBlockDefinitions? = null
+    var itemDefinitions: IItemDefinitions? = null
+
     var multiplayerCorrelationId = ""
 
     override val packetId: Int = MinecraftProtocols.START_GAME_PACKET
@@ -134,9 +140,19 @@ class StartGamePacket : MinecraftPacket() {
 
         writeVarInt(enchantmentSeed)
 
-        // TODO: Define Block and Item
-        writeUnsignedVarInt(0)
-        writeUnsignedVarInt(0)
+        if (blockDefinitions == null)
+            writeUnsignedVarInt(0)
+        else {
+            writeUnsignedVarInt(blockDefinitions!!.size())
+            write(*blockDefinitions!!.binary())
+        }
+
+        if (itemDefinitions == null)
+            writeUnsignedVarInt(0)
+        else {
+            writeUnsignedVarInt(itemDefinitions!!.size())
+            write(*itemDefinitions!!.binary())
+        }
 
         writeVarString(multiplayerCorrelationId)
     }
