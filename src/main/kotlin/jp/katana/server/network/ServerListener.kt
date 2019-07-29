@@ -72,7 +72,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             data = BinaryStream()
             data.setBuffer(buf)
             val id = data.readUnsignedVarInt()
-            logger.info(id.toString(16))
+            logger.info("0x" + id.toString(16))
             val pk = factory[id]
             if (pk != null) {
                 pk.setBuffer(buf)

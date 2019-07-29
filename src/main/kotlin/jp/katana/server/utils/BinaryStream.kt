@@ -6,7 +6,6 @@ import jp.katana.server.data.Skin
 import jp.katana.server.math.Vector3
 import jp.katana.server.math.Vector3Int
 import java.nio.charset.Charset
-import kotlin.experimental.and
 
 /**
  * バイナリのストリームを提供します。
@@ -25,89 +24,44 @@ open class BinaryStream : Packet() {
         return this
     }
 
-    fun writeVarInt(v: Int) {
-        var value = v
-        value = value shl 32 shr 32
-        writeUnsignedVarInt(value shl 1 xor (value shr 31))
-    }
-
-    fun writeUnsignedVarInt(value: Int) {
-        var v = value
-        val buf = ByteArray(5)
-        v = v and -0x1
-
-        for (i in 0..4) {
-            if (v shr 7 != 0) {
-                buf[i] = (v or 0x80).toByte()
-            } else {
-                buf[i] = (v and 0x7f).toByte()
-                write(*buf.copyOf(i + 1))
-                return
-            }
-            v = v shr 7 and (Integer.MAX_VALUE shr 6)
-        }
-    }
-
-    fun readVarInt(): Int {
-        val raw = readUnsignedVarInt()
-        val temp = raw shl 63 shr 63 xor raw shr 1
-        return temp xor (raw and (1 shl 63))
+    fun readUnsignedVarIntByLong(): Long {
+        return VarInt.readUnsignedVarInt(this)
     }
 
     fun readUnsignedVarInt(): Int {
-        var value = 0
-
-        var i = 0
-        while (i <= 63) {
-            val b = readByte()
-            value = value or ((b and 0x7f).toInt() shl i)
-            if (b and 0x80.toByte() == 0.toByte()) {
-                return value
-            }
-            i += 7
-        }
-        return value
+        return VarInt.readUnsignedVarInt(this).toInt()
     }
 
-    fun writeVarLong(v: Long) {
-        writeUnsignedVarLong(v shl 1 xor (v shr 63))
+    fun writeUnsignedVarInt(v: Long) {
+        VarInt.writeUnsignedVarInt(this, v)
     }
 
-    fun writeUnsignedVarLong(value: Long) {
-        var v = value
-        val buf = ByteArray(10)
+    fun writeUnsignedVarInt(v: Int) {
+        VarInt.writeUnsignedVarInt(this, v.toLong())
+    }
 
-        for (i in 0..9) {
-            if (v.toLong() shr 7 != 0L) {
-                buf[i] = (v or 0x80).toByte()
-            } else {
-                buf[i] = (v and 0x7f).toByte()
-                write(*buf.copyOf(i + 1))
-                return
-            }
-            v = v shr 7 and (Integer.MAX_VALUE shr 6).toLong()
-        }
+    fun readVarInt(): Int {
+        return VarInt.readVarInt(this)
+    }
+
+    fun writeVarInt(v: Int) {
+        VarInt.writeVarInt(this, v)
     }
 
     fun readVarLong(): Long {
-        val raw = readUnsignedVarLong()
-        val temp = raw shl 63 shr 63 xor raw shr 1
-        return temp xor (raw and (1 shl 63))
+        return VarInt.readVarLong(this)
+    }
+
+    fun writeVarLong(v: Long) {
+        VarInt.writeVarLong(this, v)
     }
 
     fun readUnsignedVarLong(): Long {
-        var value = 0L
-        var i = 0
-        while (i <= 63) {
-            val b = readByte()
-            value = value or ((b and 0x7f).toLong() shl i)
-            if (b and 0x80.toByte() == 0.toByte()) {
-                return value
-            }
-            i += 7
-        }
+        return VarInt.readUnsignedVarLong(this)
+    }
 
-        return value
+    fun writeUnsignedVarLong(v: Long) {
+        VarInt.writeUnsignedVarLong(this, v)
     }
 
     fun readSkin(): ISkin {
