@@ -222,10 +222,14 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val remotePublicKey = player.loginData!!.publicKey as ECPublicKey
         val gen = ECKeyPairGenerator()
         val osName = System.getProperty("os.name").toLowerCase()
-        if (osName.contains("windows"))
-            gen.initialize(remotePublicKey.params, SecureRandom.getInstance("Windows-PRNG"))
-        else
-            gen.initialize(remotePublicKey.params, SecureRandom.getInstance("NativePRNG"))
+        val secureRandom: SecureRandom
+        if (osName.contains("windows")) {
+            secureRandom = SecureRandom.getInstance("Windows-PRNG")
+            gen.initialize(remotePublicKey.params, secureRandom)
+        } else {
+            secureRandom = SecureRandom.getInstance("NativePRNG")
+            gen.initialize(remotePublicKey.params, secureRandom)
+        }
         player.keyPair = gen.generateKeyPair()
 
         val ecPublicKey = player.keyPair!!.public as ECPublicKey
@@ -236,8 +240,12 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         keyAgreement.doPhase(remotePublicKey, true)
         val sharedSecret = keyAgreement.generateSecret()
 
+        var secretPrepend = ByteArray(16)
+        secureRandom.nextBytes(secretPrepend)
+        secretPrepend = Base64.getUrlEncoder().encode(secretPrepend)
+
         val messageDigest = MessageDigest.getInstance("SHA-256")
-        messageDigest.update(sharedSecret)
+        messageDigest.update(secretPrepend + sharedSecret)
         val sharedKey = messageDigest.digest()
 
         val iv = ByteArray(16)
@@ -254,7 +262,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.encrypt!!.init(Cipher.ENCRYPT_MODE, secretKey, ivParameterSpec)
 
         val payload = JWTClaimsSet.Builder()
-            .claim("salt", "")
+            .claim("salt", String(Base64.getUrlEncoder().encode(secretPrepend)))
             .build()
 
         val jwk = ECKey.Builder(Curve.P_384, ecPublicKey)
