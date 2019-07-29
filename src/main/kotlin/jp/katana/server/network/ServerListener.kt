@@ -67,16 +67,16 @@ class ServerListener(private val server: Server, private val networkManager: Net
             if (player.isEncrypted)
                 player.decryptCounter++
 
-            if (this.server.katanaConfig!!.packetDump)
-                logger.info(batch.payload.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
-
             var data = BinaryStream()
             data.setBuffer(batch.payload)
             val buf = data.read(data.readUnsignedVarInt())
             data = BinaryStream()
             data.setBuffer(buf)
             val id = data.readUnsignedVarInt()
-            logger.info("0x" + id.toString(16))
+            if (this.server.katanaConfig!!.showPacketId)
+                logger.info("0x" + id.toString(16))
+            if (this.server.katanaConfig!!.packetDump)
+                logger.info(buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
             val pk = factory[id]
             if (pk != null) {
                 pk.setBuffer(buf)
