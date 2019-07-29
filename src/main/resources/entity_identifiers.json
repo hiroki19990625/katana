@@ -1,0 +1,795 @@
+[
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:villager_v2",
+        "bid": "",
+        "rid": 115
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:cat",
+        "bid": "",
+        "rid": 75
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:turtle",
+        "bid": "",
+        "rid": 74
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:chicken",
+        "bid": "",
+        "rid": 10
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:pig",
+        "bid": "",
+        "rid": 12
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:sheep",
+        "bid": "",
+        "rid": 13
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:wolf",
+        "bid": "",
+        "rid": 14
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:villager",
+        "bid": "",
+        "rid": 15
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:mooshroom",
+        "bid": "",
+        "rid": 16
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:squid",
+        "bid": "",
+        "rid": 17
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:rabbit",
+        "bid": "",
+        "rid": 18
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:bat",
+        "bid": "",
+        "rid": 19
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:minecart",
+        "bid": "",
+        "rid": 84
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:iron_golem",
+        "bid": "",
+        "rid": 20
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:snow_golem",
+        "bid": "",
+        "rid": 21
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:ocelot",
+        "bid": "",
+        "rid": 22
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:horse",
+        "bid": "",
+        "rid": 23
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:llama",
+        "bid": "",
+        "rid": 29
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:polar_bear",
+        "bid": "",
+        "rid": 28
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:guardian",
+        "bid": "",
+        "rid": 49
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:panda",
+        "bid": "",
+        "rid": 113
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:parrot",
+        "bid": "",
+        "rid": 30
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:husk",
+        "bid": "",
+        "rid": 47
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:tropicalfish",
+        "bid": "",
+        "rid": 111
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:wither_skeleton",
+        "bid": "",
+        "rid": 48
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:cod",
+        "bid": "",
+        "rid": 112
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:zombie_villager",
+        "bid": "",
+        "rid": 44
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:pufferfish",
+        "bid": "",
+        "rid": 108
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:witch",
+        "bid": "",
+        "rid": 45
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:salmon",
+        "bid": "",
+        "rid": 109
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:dolphin",
+        "bid": "",
+        "rid": 31
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:donkey",
+        "bid": "",
+        "rid": 24
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:mule",
+        "bid": "",
+        "rid": 25
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:skeleton_horse",
+        "bid": "",
+        "rid": 26
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:zombie_horse",
+        "bid": "",
+        "rid": 27
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:hopper_minecart",
+        "bid": "",
+        "rid": 96
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:zombie",
+        "bid": "",
+        "rid": 32
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:tnt_minecart",
+        "bid": "",
+        "rid": 97
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:creeper",
+        "bid": "",
+        "rid": 33
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:chest_minecart",
+        "bid": "",
+        "rid": 98
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:skeleton",
+        "bid": "",
+        "rid": 34
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:spider",
+        "bid": "",
+        "rid": 35
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:command_block_minecart",
+        "bid": "",
+        "rid": 100
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:zombie_pigman",
+        "bid": "",
+        "rid": 36
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:slime",
+        "bid": "",
+        "rid": 37
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:enderman",
+        "bid": "",
+        "rid": 38
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:silverfish",
+        "bid": "",
+        "rid": 39
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:cave_spider",
+        "bid": "",
+        "rid": 40
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:ghast",
+        "bid": "",
+        "rid": 41
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:magma_cube",
+        "bid": "",
+        "rid": 42
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:blaze",
+        "bid": "",
+        "rid": 43
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:wither",
+        "bid": "",
+        "rid": 52
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:zombie_villager_v2",
+        "bid": "",
+        "rid": 116
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:drowned",
+        "bid": "",
+        "rid": 110
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:stray",
+        "bid": "",
+        "rid": 46
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:elder_guardian",
+        "bid": "",
+        "rid": 50
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:vindicator",
+        "bid": "",
+        "rid": 57
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:phantom",
+        "bid": "",
+        "rid": 58
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:ravager",
+        "bid": "",
+        "rid": 59
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:ender_dragon",
+        "bid": "",
+        "rid": 53
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:shulker",
+        "bid": "",
+        "rid": 54
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:endermite",
+        "bid": "",
+        "rid": 55
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:armor_stand",
+        "bid": "",
+        "rid": 61
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:item",
+        "bid": "",
+        "rid": 64
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:tnt",
+        "bid": "",
+        "rid": 65
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:falling_block",
+        "bid": "",
+        "rid": 66
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:xp_bottle",
+        "bid": "",
+        "rid": 68
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:xp_orb",
+        "bid": "",
+        "rid": 69
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:eye_of_ender_signal",
+        "bid": "",
+        "rid": 70
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:ender_crystal",
+        "bid": "",
+        "rid": 71
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:shulker_bullet",
+        "bid": "",
+        "rid": 76
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:fishing_hook",
+        "bid": "",
+        "rid": 77
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:dragon_fireball",
+        "bid": "",
+        "rid": 79
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:arrow",
+        "bid": "",
+        "rid": 80
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:snowball",
+        "bid": "",
+        "rid": 81
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:egg",
+        "bid": "",
+        "rid": 82
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:painting",
+        "bid": "",
+        "rid": 83
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:thrown_trident",
+        "bid": "",
+        "rid": 73
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:fireball",
+        "bid": "",
+        "rid": 85
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:splash_potion",
+        "bid": "",
+        "rid": 86
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:ender_pearl",
+        "bid": "",
+        "rid": 87
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:leash_knot",
+        "bid": "",
+        "rid": 88
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:wither_skull",
+        "bid": "",
+        "rid": 89
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:wither_skull_dangerous",
+        "bid": "",
+        "rid": 91
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:boat",
+        "bid": "",
+        "rid": 90
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:lightning_bolt",
+        "bid": "",
+        "rid": 93
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:small_fireball",
+        "bid": "",
+        "rid": 94
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:llama_spit",
+        "bid": "",
+        "rid": 102
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:area_effect_cloud",
+        "bid": "",
+        "rid": 95
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:lingering_potion",
+        "bid": "",
+        "rid": 101
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:fireworks_rocket",
+        "bid": "",
+        "rid": 72
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:evocation_fang",
+        "bid": "",
+        "rid": 103
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:evocation_illager",
+        "bid": "",
+        "rid": 104
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:vex",
+        "bid": "",
+        "rid": 105
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:pillager",
+        "bid": "",
+        "rid": 114
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:agent",
+        "bid": "",
+        "rid": 56
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:ice_bomb",
+        "bid": "",
+        "rid": 106
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:balloon",
+        "bid": "",
+        "rid": 107
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:cow",
+        "bid": "",
+        "rid": 11
+    },
+    {
+        "ha

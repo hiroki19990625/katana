@@ -22,11 +22,13 @@ class BlockDefinitions : IBlockDefinitions {
 
         val element = parser.parse(JsonReader(InputStreamReader(stream, StandardCharsets.UTF_8)))
         if (element is JsonArray) {
+            var id = 0
             element.forEach { el ->
                 run {
                     if (el is JsonObject) {
                         defines.add(
                             BlockDefine(
+                                id++,
                                 el.getAsJsonPrimitive("name").asString,
                                 el.getAsJsonPrimitive("id").asShort,
                                 el.getAsJsonPrimitive("data").asShort
@@ -39,7 +41,7 @@ class BlockDefinitions : IBlockDefinitions {
     }
 
     override fun fromRuntime(runtimeId: Int): IBlockDefine {
-        return defines.filterIndexed { index, _ -> index == runtimeId }.first()
+        return defines.first { define -> define.runtimeId == runtimeId }
     }
 
     override fun fromId(id: Int): IBlockDefine {

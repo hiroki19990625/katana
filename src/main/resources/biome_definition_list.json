@@ -1,0 +1,428 @@
+[
+    {
+        "roofed_forest_mutated": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "warm_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "sunflower_plains": {
+            "temperature": 0.8,
+            "downfall": 0.4
+        }
+    },
+    {
+        "mushroom_island_shore": {
+            "temperature": 0.9,
+            "downfall": 1.0
+        }
+    },
+    {
+        "ice_plains": {
+            "temperature": 0.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "jungle_mutated": {
+            "temperature": 0.95,
+            "downfall": 0.9
+        }
+    },
+    {
+        "flower_forest": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "cold_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "the_end": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "hell": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "desert_hills": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "extreme_hills_edge": {
+            "temperature": 0.2,
+            "downfall": 0.3
+        }
+    },
+    {
+        "lukewarm_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "forest_hills": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "savanna": {
+            "temperature": 1.2,
+            "downfall": 0.0
+        }
+    },
+    {
+        "ice_plains_spikes": {
+            "temperature": 0.0,
+            "downfall": 1.0
+        }
+    },
+    {
+        "cold_taiga_mutated": {
+            "temperature": -0.5,
+            "downfall": 0.4
+        }
+    },
+    {
+        "mesa_plateau": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "frozen_ocean": {
+            "temperature": 0.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "mega_taiga_hills": {
+            "temperature": 0.3,
+            "downfall": 0.8
+        }
+    },
+    {
+        "savanna_plateau": {
+            "temperature": 1.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "bamboo_jungle_hills": {
+            "temperature": 0.95,
+            "downfall": 0.9
+        }
+    },
+    {
+        "taiga_hills": {
+            "temperature": 0.25,
+            "downfall": 0.8
+        }
+    },
+    {
+        "extreme_hills_plus_trees": {
+            "temperature": 0.2,
+            "downfall": 0.3
+        }
+    },
+    {
+        "mega_taiga": {
+            "temperature": 0.3,
+            "downfall": 0.8
+        }
+    },
+    {
+        "savanna_plateau_mutated": {
+            "temperature": 1.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "deep_warm_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "extreme_hills_plus_trees_mutated": {
+            "temperature": 0.2,
+            "downfall": 0.3
+        }
+    },
+    {
+        "jungle": {
+            "temperature": 0.95,
+            "downfall": 0.9
+        }
+    },
+    {
+        "jungle_edge_mutated": {
+            "temperature": 0.95,
+            "downfall": 0.8
+        }
+    },
+    {
+        "frozen_river": {
+            "temperature": 0.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "forest": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "birch_forest": {
+            "temperature": 0.6,
+            "downfall": 0.6
+        }
+    },
+    {
+        "deep_lukewarm_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "swampland": {
+            "temperature": 0.8,
+            "downfall": 0.5
+        }
+    },
+    {
+        "deep_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "deep_frozen_ocean": {
+            "temperature": 0.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "legacy_frozen_ocean": {
+            "temperature": 0.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "taiga_mutated": {
+            "temperature": 0.25,
+            "downfall": 0.8
+        }
+    },
+    {
+        "bamboo_jungle": {
+            "temperature": 0.95,
+            "downfall": 0.9
+        }
+    },
+    {
+        "birch_forest_hills_mutated": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "birch_forest_mutated": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "desert_mutated": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "mesa": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "jungle_edge": {
+            "temperature": 0.95,
+            "downfall": 0.8
+        }
+    },
+    {
+        "jungle_hills": {
+            "temperature": 0.95,
+            "downfall": 0.9
+        }
+    },
+    {
+        "plains": {
+            "temperature": 0.8,
+            "downfall": 0.4
+        }
+    },
+    {
+        "redwood_taiga_mutated": {
+            "temperature": 0.25,
+            "downfall": 0.8
+        }
+    },
+    {
+        "swampland_mutated": {
+            "temperature": 0.8,
+            "downfall": 0.5
+        }
+    },
+    {
+        "ice_mountains": {
+            "temperature": 0.0,
+            "downfall": 0.5
+        }
+    },
+    {
+        "mesa_plateau_stone_mutated": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "taiga": {
+            "temperature": 0.25,
+            "downfall": 0.8
+        }
+    },
+    {
+        "extreme_hills_mutated": {
+            "temperature": 0.2,
+            "downfall": 0.3
+        }
+    },
+    {
+        "mesa_plateau_stone": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "birch_forest_hills": {
+            "temperature": 0.6,
+            "downfall": 0.6
+        }
+    },
+    {
+        "mushroom_island": {
+            "temperature": 0.9,
+            "downfall": 1.0
+        }
+    },
+    {
+        "mesa_bryce": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "mesa_plateau_mutated": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "deep_cold_ocean": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "cold_taiga_hills": {
+            "temperature": -0.5,
+            "downfall": 0.4
+        }
+    },
+    {
+        "cold_taiga": {
+            "temperature": -0.5,
+            "downfall": 0.4
+        }
+    },
+    {
+        "extreme_hills": {
+            "temperature": 0.2,
+            "downfall": 0.3
+        }
+    },
+    {
+        "beach": {
+            "temperature": 0.8,
+            "downfall": 0.4
+        }
+    },
+    {
+        "roofed_forest": {
+            "temperature": 0.7,
+            "downfall": 0.8
+        }
+    },
+    {
+        "cold_beach": {
+            "temperature": 0.05,
+            "downfall": 0.3
+        }
+    },
+    {
+        "savanna_mutated": {
+            "temperature": 1.1,
+            "downfall": 0.5
+        }
+    },
+    {
+        "redwood_taiga_hills_mutated": {
+            "temperature": 0.3,
+            "downfall": 0.8
+        }
+    },
+    {
+        "river": {
+            "temperature": 0.5,
+            "downfall": 0.5
+        }
+    },
+    {
+        "desert": {
+            "temperature": 2.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "stone_beach": {
+            "temperature": 0.2,
+            "downfall": 0.3
+        }
+    }
+]

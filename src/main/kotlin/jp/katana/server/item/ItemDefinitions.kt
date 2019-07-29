@@ -22,12 +22,14 @@ class ItemDefinitions : IItemDefinitions {
         val stream = this::class.java.classLoader.getResourceAsStream("runtime_item_ids.json") ?: throw IOException()
 
         val element = parser.parse(JsonReader(InputStreamReader(stream, StandardCharsets.UTF_8)))
+        var id = 0
         if (element is JsonArray) {
             element.forEach { el ->
                 run {
                     if (el is JsonObject) {
                         defines.add(
                             ItemDefine(
+                                id++,
                                 el.getAsJsonPrimitive("name").asString,
                                 el.getAsJsonPrimitive("id").asShort
                             )
@@ -39,7 +41,7 @@ class ItemDefinitions : IItemDefinitions {
     }
 
     override fun fromRuntime(runtimeId: Int): IItemDefine {
-        return defines.filterIndexed { index, _ -> index == runtimeId }.first()
+        return defines.first { define -> define.runtimeId == runtimeId }
     }
 
     override fun fromId(id: Int): IItemDefine {
