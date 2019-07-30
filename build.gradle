@@ -86,7 +86,7 @@ publishing {
 gitPublish {
     repoUri = 'git@github.com:hiroki19990625/katana.git'
     referenceRepoUri = "$buildDir/repo"
-    branch = 'gh-pages'
+    branch = 'origin/gh-pages'
     repoDir = file("$buildDir/repo")
     preserve {
         include '**/*'
