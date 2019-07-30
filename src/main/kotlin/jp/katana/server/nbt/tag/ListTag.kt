@@ -83,6 +83,10 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
         return list.contains(tag)
     }
 
+    fun removeAll() {
+        list.clear()
+    }
+
     override fun write(stream: NBTStream) {
         stream.writeByte(listType)
         stream.writeInt(list.size)
