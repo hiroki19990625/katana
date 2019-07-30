@@ -16,12 +16,12 @@ class MinecraftProtocols {
         const val SET_TIME_PACKET = 0x0a
         const val START_GAME_PACKET = 0x0b
         const val ADD_PLAYER_PACKET = 0x0c
-        const val ADD_ENTITY_PACKET = 0x0d
-        const val REMOVE_ENTITY_PACKET = 0x0e
-        const val ADD_ITEM_ENTITY_PACKET = 0x0f
+        const val ADD_ACTOR_PACKET = 0x0d
+        const val REMOVE_ACTOR_PACKET = 0x0e
+        const val ADD_ITEM_ACTOR_PACKET = 0x0f
 
-        const val TAKE_ITEM_ENTITY_PACKET = 0x11
-        const val MOVE_ENTITY_ABSOLUTE_PACKET = 0x12
+        const val TAKE_ITEM_ACTOR_PACKET = 0x11
+        const val MOVE_ACTOR_ABSOLUTE_PACKET = 0x12
         const val MOVE_PLAYER_PACKET = 0x13
         const val RIDER_JUMP_PACKET = 0x14
         const val UPDATE_BLOCK_PACKET = 0x15
@@ -30,7 +30,7 @@ class MinecraftProtocols {
         const val LEVEL_SOUND_EVENT_PACKET_V1 = 0x18
         const val LEVEL_EVENT_PACKET = 0x19
         const val BLOCK_EVENT_PACKET = 0x1a
-        const val ENTITY_EVENT_PACKET = 0x1b
+        const val ACTOR_EVENT_PACKET = 0x1b
         const val MOB_EFFECT_PACKET = 0x1c
         const val UPDATE_ATTRIBUTES_PACKET = 0x1d
         const val INVENTORY_TRANSACTION_PACKET = 0x1e
@@ -38,13 +38,13 @@ class MinecraftProtocols {
         const val MOB_ARMOR_EQUIPMENT_PACKET = 0x20
         const val INTERACT_PACKET = 0x21
         const val BLOCK_PICK_REQUEST_PACKET = 0x22
-        const val ENTITY_PICK_REQUEST_PACKET = 0x23
+        const val ACTOR_PICK_REQUEST_PACKET = 0x23
         const val PLAYER_ACTION_PACKET = 0x24
-        const val ENTITY_FALL_PACKET = 0x25
+        const val ACTOR_FALL_PACKET = 0x25
         const val HURT_ARMOR_PACKET = 0x26
-        const val SET_ENTITY_DATA_PACKET = 0x27
-        const val SET_ENTITY_MOTION_PACKET = 0x28
-        const val SET_ENTITY_LINK_PACKET = 0x29
+        const val SET_ACTOR_DATA_PACKET = 0x27
+        const val SET_ACTOR_MOTION_PACKET = 0x28
+        const val SET_ACTOR_LINK_PACKET = 0x29
         const val SET_HEALTH_PACKET = 0x2a
         const val SET_SPAWN_POSITION_PACKET = 0x2b
         const val ANIMATE_PACKET = 0x2c
@@ -59,7 +59,7 @@ class MinecraftProtocols {
         const val CRAFTING_EVENT_PACKET = 0x35
         const val GUI_DATA_PICK_ITEM_PACKET = 0x36
         const val ADVENTURE_SETTINGS_PACKET = 0x37
-        const val BLOCK_ENTITY_DATA_PACKET = 0x38
+        const val BLOCK_ACTOR_DATA_PACKET = 0x38
         const val PLAYER_INPUT_PACKET = 0x39
         const val FULL_CHUNK_DATA_PACKET = 0x3a
         const val SET_COMMANDS_ENABLED_PACKET = 0x3b
@@ -109,15 +109,15 @@ class MinecraftProtocols {
         const val SERVER_SETTINGS_RESPONSE_PACKET = 0x67
         const val SHOW_PROFILE_PACKET = 0x68
         const val SET_DEFAULT_GAME_TYPE_PACKET = 0x69
-        const val MOVE_ENTITY_DELTA_PACKET = 0x6f
-        const val SET_SCOREBOARD_IDENTITY_PACKET = 0x70
+        const val MOVE_ACTOR_DELTA_PACKET = 0x6f
+        const val SET_SCOREBOARD_IDACTOR_PACKET = 0x70
         const val SET_LOCAL_PLAYER_AS_INITIALIZED_PACKET = 0x71
         const val UPDATE_SOFT_ENUM_PACKET = 0x72
         const val NETWORK_STACK_LATENCY_PACKET = 0x73
 
         const val SCRIPT_CUSTOM_EVENT_PACKET = 0x75
         const val SPAWN_PARTICLE_EFFECT_PACKET = 0x76
-        const val AVAILABLE_ENTITY_IDENTIFIERS_PACKET = 0x77
+        const val AVAILABLE_ACTOR_IDENTIFIERS_PACKET = 0x77
         const val LEVEL_SOUND_EVENT_PACKET_V2 = 0x78
         const val NETWORK_CHUNK_PUBLISHER_UPDATE_PACKET = 0x79
         const val BIOME_DEFINITION_LIST_PACKET = 0x7a

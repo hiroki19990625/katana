@@ -12,6 +12,10 @@ class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
         this += ResourcePacksInfoPacket() // 0x06
         this += ResourcePackStackPacket() // 0x07
         this += ResourcePackClientResponsePacket() // 0x08
+        this += TextPacket() // 0x09
+        this += SetTimePacket() // 0x0a
+        this += StartGamePacket() // 0x0b
+        this += AddPlayerPacket() // 0x0c
 
         this += RequestChunkRadiusPacket()
         this += ChunkRadiusUpdatedPacket()
