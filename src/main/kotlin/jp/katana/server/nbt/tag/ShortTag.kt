@@ -12,4 +12,8 @@ class ShortTag(override var name: String, override var value: Short) : ValueTag<
     override fun read(stream: NBTStream) {
         value = stream.readShort()
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is ShortTag && other.value == value || other is Short && other == value
+    }
 }

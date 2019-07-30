@@ -12,4 +12,8 @@ class FloatTag(override var name: String, override var value: Float) : ValueTag<
     override fun read(stream: NBTStream) {
         value = stream.readFloat()
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is FloatTag && other.value == value || other is Float && other == value
+    }
 }

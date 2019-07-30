@@ -12,4 +12,8 @@ class StringTag(override var name: String, override var value: String) : ValueTa
     override fun read(stream: NBTStream) {
         value = stream.readString()
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is StringTag && other.value == value || other is String && other == value
+    }
 }

@@ -12,4 +12,8 @@ class LongTag(override var name: String, override var value: Long) : ValueTag<Lo
     override fun read(stream: NBTStream) {
         value = stream.readLong()
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is LongTag && other.value == value || other is Long && other == value
+    }
 }

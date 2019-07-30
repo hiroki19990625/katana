@@ -6,7 +6,7 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
     override val type: Byte = INamedTag.LIST
     var listType: Byte = listType
         private set
-    val list = mutableListOf<INamedTag>()
+    private val list = mutableListOf<INamedTag>()
 
     fun add(tag: INamedTag): Boolean {
         return if (tag.type == listType)
@@ -15,8 +15,60 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
             false
     }
 
-    fun <T : INamedTag> get(index: Int): T {
-        return list[index] as T
+    fun getByte(index: Int): ByteTag {
+        return list[index] as ByteTag
+    }
+
+    fun getShort(index: Int): ShortTag {
+        return list[index] as ShortTag
+    }
+
+    fun getInt(index: Int): IntTag {
+        return list[index] as IntTag
+    }
+
+    fun getLong(index: Int): LongTag {
+        return list[index] as LongTag
+    }
+
+    fun getFloat(index: Int): FloatTag {
+        return list[index] as FloatTag
+    }
+
+    fun getDouble(index: Int): DoubleTag {
+        return list[index] as DoubleTag
+    }
+
+    fun getByteArray(index: Int): ByteArrayTag {
+        return list[index] as ByteArrayTag
+    }
+
+    fun getString(index: Int): StringTag {
+        return list[index] as StringTag
+    }
+
+    fun getList(index: Int): ListTag {
+        return list[index] as ListTag
+    }
+
+    fun getCompound(index: Int): CompoundTag {
+        return list[index] as CompoundTag
+    }
+
+    fun getIntArray(index: Int): IntArrayTag {
+        return list[index] as IntArrayTag
+    }
+
+    fun getLongArray(index: Int): LongArrayTag {
+        return list[index] as LongArrayTag
+    }
+
+    fun get(index: Int): INamedTag {
+        return list[index]
+    }
+
+    fun getAll(): Array<INamedTag> {
+        return list.toTypedArray()
     }
 
     fun remove(tag: INamedTag): Boolean {

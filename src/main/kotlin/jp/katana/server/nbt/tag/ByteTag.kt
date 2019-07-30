@@ -12,4 +12,8 @@ class ByteTag(override var name: String, override var value: Byte) : ValueTag<By
     override fun read(stream: NBTStream) {
         value = stream.readByte()
     }
+
+    override fun equals(other: Any?): Boolean {
+        return other is ByteTag && other.value == value || other is Byte && other == value
+    }
 }
