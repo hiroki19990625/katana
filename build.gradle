@@ -2,7 +2,6 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
     id 'org.jetbrains.dokka' version '0.9.18'
-    id "org.ajoberstar.github-pages" version "1.5.1"
 
     id 'maven-publish'
 }
@@ -79,15 +78,6 @@ publishing {
     repositories {
         maven {
             url = "$buildDir/repo"
-        }
-    }
-}
-
-githubPages {
-    repoUri = "https://github.com/hiroki19990625/katana.git"
-    pages {
-        from(file('build/repo')) {
-            into '.'
         }
     }
 }
