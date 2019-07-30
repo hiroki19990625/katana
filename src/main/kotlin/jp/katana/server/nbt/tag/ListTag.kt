@@ -63,7 +63,7 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
         return list[index] as LongArrayTag
     }
 
-    fun get(index: Int): INamedTag {
+    operator fun get(index: Int): INamedTag {
         return list[index]
     }
 

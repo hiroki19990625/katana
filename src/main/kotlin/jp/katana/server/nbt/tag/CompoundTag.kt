@@ -64,7 +64,7 @@ class CompoundTag(override var name: String) : INamedTag {
         return map[name] as LongArrayTag
     }
 
-    fun get(name: String): INamedTag {
+    operator fun get(name: String): INamedTag {
         return map[name]!!
     }
 
