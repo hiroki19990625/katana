@@ -24,7 +24,7 @@ class PacketFactory : SimpleFactory<Int, MinecraftPacket>() {
         this += ResourcePackChunkDataPacket() // 0x53
         this += ResourcePackChunkRequestPacket() // 0x54
 
-        this += AvailableEntityIdentifiersPacket() // 0x77
+        this += AvailableActorIdentifiersPacket() // 0x77
 
         this += BiomeDefinitionListPacket() // 0x7a
     }

@@ -1,7 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
-class AvailableEntityIdentifiersPacket : MinecraftPacket() {
-    override val packetId: Int = MinecraftProtocols.AVAILABLE_ENTITY_IDENTIFIERS_PACKET
+class AvailableActorIdentifiersPacket : MinecraftPacket() {
+    override val packetId: Int = MinecraftProtocols.AVAILABLE_ACTOR_IDENTIFIERS_PACKET
 
     var tag: ByteArray = ByteArray(0)
 

@@ -55,8 +55,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
                 handleResourcePackChunkDataPacket(packet)
             is ResourcePackChunkRequestPacket -> // 0x54
                 handleResourcePackChunkRequestPacket(packet)
-            is AvailableEntityIdentifiersPacket -> // 0x77
-                handleAvailableEntityIdentifiersPacket(packet)
+            is AvailableActorIdentifiersPacket -> // 0x77
+                handleAvailableActorIdentifiersPacket(packet)
             is BiomeDefinitionListPacket -> // 0x7a
                 handleBiomeDefinitionListPacket(packet)
         }
@@ -210,7 +210,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.sendPacket(resourcePackChunkDataPacket)
     }
 
-    override fun handleAvailableEntityIdentifiersPacket(availableEntityIdentifiersPacket: AvailableEntityIdentifiersPacket) {
+    override fun handleAvailableActorIdentifiersPacket(availableActorIdentifiersPacket: AvailableActorIdentifiersPacket) {
         // No cause
     }
 
@@ -299,7 +299,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val biomeDefinitionListPacket = BiomeDefinitionListPacket()
         player.sendPacket(biomeDefinitionListPacket)
 
-        val availableEntityIdentifiersPacket = AvailableEntityIdentifiersPacket()
+        val availableEntityIdentifiersPacket = AvailableActorIdentifiersPacket()
         player.sendPacket(availableEntityIdentifiersPacket)
 
         val playStatusPacket = PlayStatusPacket()
