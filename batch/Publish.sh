@@ -3,8 +3,8 @@ cd ../
 
 chmod 0744 gradlew
 
-git_dir=.git
-if [ ! -d "$git_dir" ]; then
+repo_dir=maven-repo
+if [ ! -d "$repo_dir" ]; then
     git clone "https://github.com/hiroki19990625/maven-repo.git"
 fi
 
