@@ -14,10 +14,14 @@ repositories {
     jcenter()
 }
 
+configurations {
+    extraLibs
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    implementation files("libs/jraknet-2.11.3.jar")
+    extraLibs files("libs/jraknet-2.11.3.jar")
 
     implementation "com.nimbusds:nimbus-jose-jwt:7.3"
 
@@ -37,6 +41,8 @@ dependencies {
     implementation 'com.github.ben-manes.caffeine:caffeine:2.7.0'
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
+
+    configurations.implementation.extendsFrom(configurations.extraLibs)
 }
 
 compileKotlin {
@@ -49,6 +55,10 @@ compileTestKotlin {
 jar {
     manifest {
         attributes 'Main-Class': 'jp.katana.server.Main'
+    }
+
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -66,8 +76,11 @@ dokka {
 
 publishing {
     publications {
-        shadow(MavenPublication) { publication ->
-            project.shadow.component(publication)
+        maven(MavenPublication) {
+            groupId = 'jp.katana'
+            artifactId = 'katana'
+            version = '1.0-SNAPSHOT'
+            from components.java
         }
     }
 
