@@ -3,12 +3,12 @@ cd ../
 
 chmod 0744 gradlew
 
-cd repo
-
 git_dir=.git
 if [ ! -d "$git_dir" ]; then
     git clone "https://github.com/hiroki19990625/maven-repo.git"
 fi
+
+cd maven-repo
 
 git config --global user.email "ci_user@ci.com"
 git config --global user.name "hiroki19990625"
