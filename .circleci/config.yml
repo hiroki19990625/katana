@@ -41,4 +41,4 @@ jobs:
       # run tests!
       - run: gradle test
 
-      - run cd batch && chmod 0744 Publish.sh && ./Publish.sh
+      - run: cd batch && chmod 0744 Publish.sh && ./Publish.sh
