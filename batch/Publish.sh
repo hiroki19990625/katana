@@ -16,7 +16,9 @@ git config --global user.name "hiroki19990625"
 
 git pull
 
-../gradlew publish
+cd ../
+./gradlew publish
+cd repo
 
 git add .
 git commit -m "publish repo"
