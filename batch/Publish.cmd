@@ -1,6 +1,6 @@
 cd ../
 call gradlew publish
-cd build/repo
+cd repo
 call git add .
 call git commit -m "publish repo"
 call git push

@@ -66,18 +66,14 @@ dokka {
 
 publishing {
     publications {
-        maven(MavenPublication) {
-            groupId = 'jp.katana'
-            artifactId = 'katana'
-            version = '1.0-SNAPSHOT'
-
-            from components.java
+        shadow(MavenPublication) { publication ->
+            project.shadow.component(publication)
         }
     }
 
     repositories {
         maven {
-            url = "$buildDir/repo"
+            url = "$buildDir/../repo"
         }
     }
 }
