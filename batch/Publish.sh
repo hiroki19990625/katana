@@ -2,7 +2,6 @@
 cd ../
 
 chmod 0744 gradlew
-./gradlew publish
 
 cd repo
 
@@ -15,6 +14,9 @@ git config --global user.email "ci_user@ci.com"
 git config --global user.name "hiroki19990625"
 
 git pull
+
+../gradlew publish
+
 git add .
 git commit -m "publish repo"
 git push
