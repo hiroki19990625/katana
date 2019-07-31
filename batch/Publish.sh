@@ -6,7 +6,7 @@ chmod 0744 gradlew
 repo_dir=repo
 if [ ! -d "$repo_dir" ]; then
     git clone "https://github.com/hiroki19990625/maven-repo.git"
-    mvdir -r maven-repo repo
+    mv maven-repo repo
 fi
 
 cd repo
