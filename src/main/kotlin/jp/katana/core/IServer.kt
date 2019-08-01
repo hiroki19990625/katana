@@ -1,5 +1,6 @@
 package jp.katana.core
 
+import jp.katana.core.actor.IActorDefinitions
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.command.ICommandSender
 import jp.katana.core.console.IConsole
@@ -8,6 +9,7 @@ import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
+import jp.katana.core.world.biome.IBiomeDefinitions
 import org.apache.logging.log4j.Logger
 import java.io.File
 import java.net.InetAddress
@@ -56,6 +58,8 @@ interface IServer {
 
     val defineBlocks: IBlockDefinitions
     val defineItems: IItemDefinitions
+    val defineActors: IActorDefinitions
+    val defineBiomes: IBiomeDefinitions
 
     /**
      * サーバーを開始します。

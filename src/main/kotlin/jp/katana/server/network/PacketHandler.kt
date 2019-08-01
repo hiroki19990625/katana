@@ -297,6 +297,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.sendPacket(startGamePacket)
 
         val biomeDefinitionListPacket = BiomeDefinitionListPacket()
+        biomeDefinitionListPacket.tag = server.defineBiomes.binary()
         player.sendPacket(biomeDefinitionListPacket)
 
         val availableActorIdentifiersPacket = AvailableActorIdentifiersPacket()
