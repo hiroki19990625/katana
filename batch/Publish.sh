@@ -1,6 +1,11 @@
 #!/bin/sh
 cd ../
 
+current_branch="$(git rev-parse --abbrev-ref HEAD)"
+if [ "$current_branch" != "master" ]; then
+    exit
+fi
+
 chmod 0744 gradlew
 
 repo_dir=repo
