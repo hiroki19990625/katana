@@ -1,6 +1,6 @@
 package jp.katana.core.network
 
-import jp.katana.core.entity.IPlayer
+import jp.katana.core.actor.IActorPlayer
 import java.net.InetSocketAddress
 
 interface IPlayerManager {
@@ -10,7 +10,7 @@ interface IPlayerManager {
      * @param player プレイヤーの実装
      * @return 実行の結果
      */
-    fun addPlayer(address: InetSocketAddress, player: IPlayer): Boolean
+    fun addPlayer(address: InetSocketAddress, player: IActorPlayer): Boolean
 
     /**
      * プレイヤーの削除を行います。
@@ -24,11 +24,11 @@ interface IPlayerManager {
      * @param address プレイヤーのIPアドレスとポート
      * @return 取得したプレイヤー
      */
-    fun getPlayer(address: InetSocketAddress): IPlayer?
+    fun getPlayer(address: InetSocketAddress): IActorPlayer?
 
     /**
      * 追加されたプレイヤーを全て取得します。
      * @return 追加された全てのプレイヤー
      */
-    fun getPlayers(): List<IPlayer>
+    fun getPlayers(): List<IActorPlayer>
 }

@@ -14,8 +14,8 @@ class StartGamePacket : MinecraftPacket() {
         const val GAME_PUBLISH_SETTING_PUBLIC = 4
     }
 
-    var entityUniqueId: Long = 0
-    var entityRuntimeId: Long = 0
+    var actorUniqueId: Long = 0
+    var actorRuntimeId: Long = 0
     var playerGamemode: Int = 0
     var x: Float = 0.0f
     var y: Float = 0.0f
@@ -73,8 +73,8 @@ class StartGamePacket : MinecraftPacket() {
     }
 
     override fun encodePayload() {
-        writeEntityUniqueId(entityUniqueId)
-        writeEntityRuntimeId(entityRuntimeId)
+        writeActorUniqueId(actorUniqueId)
+        writeActorRuntimeId(actorRuntimeId)
 
         writeVarInt(playerGamemode)
 

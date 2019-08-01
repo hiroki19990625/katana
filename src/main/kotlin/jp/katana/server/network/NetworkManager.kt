@@ -4,7 +4,7 @@ import com.whirvis.jraknet.Packet
 import com.whirvis.jraknet.identifier.MinecraftIdentifier
 import com.whirvis.jraknet.peer.RakNetClientPeer
 import com.whirvis.jraknet.server.RakNetServer
-import jp.katana.core.entity.IPlayer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.Reliability
 import jp.katana.i18n.I18n
@@ -16,7 +16,7 @@ import java.net.InetSocketAddress
 
 class NetworkManager(private val server: Server) : INetworkManager {
     private val raknetServer: RakNetServer = RakNetServer(server.serverPort, server.maxPlayer)
-    private val players: HashMap<InetSocketAddress, IPlayer> = HashMap()
+    private val players: HashMap<InetSocketAddress, IActorPlayer> = HashMap()
     private val sessions: HashMap<InetSocketAddress, RakNetClientPeer> = HashMap()
 
     private val networkThread: Thread = Thread { startNetworkThread() }
@@ -33,7 +33,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
         raknetServer.shutdown()
     }
 
-    override fun addPlayer(address: InetSocketAddress, player: IPlayer): Boolean {
+    override fun addPlayer(address: InetSocketAddress, player: IActorPlayer): Boolean {
         if (!players.containsKey(address)) {
             players[address] = player
             return true
@@ -51,17 +51,17 @@ class NetworkManager(private val server: Server) : INetworkManager {
         return false
     }
 
-    override fun getPlayer(address: InetSocketAddress): IPlayer? {
+    override fun getPlayer(address: InetSocketAddress): IActorPlayer? {
         if (players.containsKey(address)) return players[address]
 
         return null
     }
 
-    override fun getPlayers(): List<IPlayer> {
+    override fun getPlayers(): List<IActorPlayer> {
         return players.values.toList()
     }
 
-    override fun sendPacket(player: IPlayer, packet: MinecraftPacket, reliability: Reliability) {
+    override fun sendPacket(player: IActorPlayer, packet: MinecraftPacket, reliability: Reliability) {
         val address = player.address
         if (sessions.containsKey(address)) {
             packet.encode()

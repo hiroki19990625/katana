@@ -1,4 +1,4 @@
-package jp.katana.core.entity
+package jp.katana.core.actor
 
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
@@ -9,7 +9,7 @@ import java.net.InetSocketAddress
 import java.security.KeyPair
 import javax.crypto.Cipher
 
-interface IPlayer : IEntityLiving {
+interface IActorPlayer : IActorLiving {
     val address: InetSocketAddress
     val packetHandler: IPacketHandler
 

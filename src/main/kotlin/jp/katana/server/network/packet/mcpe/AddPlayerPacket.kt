@@ -8,8 +8,8 @@ class AddPlayerPacket : MinecraftPacket() {
 
     var uuid: UUID = UUID.randomUUID()
     var username = ""
-    var entityUniqueId = 0L
-    var entityRuntimeId = 0L
+    var actorUniqueId = 0L
+    var actorRuntimeId = 0L
     var platformChatId = ""
     var position = Vector3.ZERO
     var motion = Vector3.ZERO
@@ -20,14 +20,14 @@ class AddPlayerPacket : MinecraftPacket() {
     // metadata
     // adventure settings
     var long = 0L
-    // entity link
+    // actor link
     var deviceId = ""
 
     override fun decodePayload() {
         uuid = readUUID()
         username = readString()
-        entityUniqueId = readEntityUniqueId()
-        entityRuntimeId = readEntityRuntimeId()
+        actorUniqueId = readActorUniqueId()
+        actorRuntimeId = readActorRuntimeId()
         platformChatId = readString()
         position = readVector3()
         motion = readVector3()
@@ -38,15 +38,15 @@ class AddPlayerPacket : MinecraftPacket() {
         // metadata
         // adventure settings
         long = readLongLE()
-        // entity link
+        // actor link
         deviceId = readString()
     }
 
     override fun encodePayload() {
         writeUUID(uuid)
         writeString(username)
-        writeEntityUniqueId(entityUniqueId)
-        writeEntityRuntimeId(entityRuntimeId)
+        writeActorUniqueId(actorUniqueId)
+        writeActorRuntimeId(actorRuntimeId)
         writeString(platformChatId)
         writeVector3(position)
         writeVector3(motion)
@@ -57,7 +57,7 @@ class AddPlayerPacket : MinecraftPacket() {
         // metadata
         // adventure settings
         writeLongLE(long)
-        // entity link
+        // actor link
         writeString(deviceId)
     }
 }
