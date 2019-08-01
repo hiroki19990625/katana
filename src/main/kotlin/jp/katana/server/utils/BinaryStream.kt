@@ -118,19 +118,19 @@ open class BinaryStream : Packet() {
         writeFloatLE(pos.z)
     }
 
-    fun readEntityUniqueId(): Long {
+    fun readActorUniqueId(): Long {
         return readVarLong()
     }
 
-    fun writeEntityUniqueId(id: Long) {
+    fun writeActorUniqueId(id: Long) {
         writeVarLong(id)
     }
 
-    fun readEntityRuntimeId(): Long {
+    fun readActorRuntimeId(): Long {
         return readUnsignedVarLong()
     }
 
-    fun writeEntityRuntimeId(id: Long) {
+    fun writeActorRuntimeId(id: Long) {
         writeUnsignedVarLong(id)
     }
 }

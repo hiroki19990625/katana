@@ -11,7 +11,7 @@ import com.nimbusds.jwt.SignedJWT
 import jp.katana.core.network.IPacketHandler
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
-import jp.katana.server.entity.Player
+import jp.katana.server.actor.Player
 import jp.katana.server.network.packet.mcpe.*
 import sun.security.ec.ECKeyPairGenerator
 import java.net.URI
@@ -290,8 +290,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     private fun startGame() {
         val startGamePacket = StartGamePacket()
-        startGamePacket.entityUniqueId = player.uuid.mostSignificantBits
-        startGamePacket.entityRuntimeId = player.uuid.leastSignificantBits
+        startGamePacket.actorUniqueId = player.uuid.mostSignificantBits
+        startGamePacket.actorRuntimeId = player.uuid.leastSignificantBits
         startGamePacket.blockDefinitions = server.defineBlocks
         startGamePacket.itemDefinitions = server.defineItems
         player.sendPacket(startGamePacket)
@@ -299,8 +299,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val biomeDefinitionListPacket = BiomeDefinitionListPacket()
         player.sendPacket(biomeDefinitionListPacket)
 
-        val availableEntityIdentifiersPacket = AvailableActorIdentifiersPacket()
-        player.sendPacket(availableEntityIdentifiersPacket)
+        val availableActorIdentifiersPacket = AvailableActorIdentifiersPacket()
+        player.sendPacket(availableActorIdentifiersPacket)
 
         val playStatusPacket = PlayStatusPacket()
         playStatusPacket.status = PlayStatusPacket.PLAYER_SPAWN

@@ -1,8 +1,8 @@
-package jp.katana.server.entity
+package jp.katana.server.actor
 
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
-import jp.katana.core.entity.IPlayer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
 import jp.katana.server.Server
@@ -15,7 +15,7 @@ import java.security.KeyPair
 import java.util.*
 import javax.crypto.Cipher
 
-class Player(override val address: InetSocketAddress, private val server: Server) : IPlayer {
+class Player(override val address: InetSocketAddress, private val server: Server) : IActorPlayer {
     private val logger = LogManager.getLogger()
     override val packetHandler: IPacketHandler = PacketHandler(this, server)
 

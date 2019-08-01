@@ -1,6 +1,6 @@
-package jp.katana.core.entity
+package jp.katana.core.actor
 
-interface IEntityDefine {
+interface IActorDefine {
     val hasSpawnEgg: Boolean
     val experimental: Boolean
     val summonable: Boolean

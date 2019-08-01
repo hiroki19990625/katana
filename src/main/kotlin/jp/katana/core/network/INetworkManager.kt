@@ -1,6 +1,6 @@
 package jp.katana.core.network
 
-import jp.katana.core.entity.IPlayer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import java.net.InetSocketAddress
 
@@ -24,7 +24,7 @@ interface INetworkManager : IPlayerManager {
      * @param packet Minecraftのパケット
      * @param reliability パケットの信頼性
      */
-    fun sendPacket(player: IPlayer, packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
+    fun sendPacket(player: IActorPlayer, packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
 
     /**
      * パケットを受信した時に呼び出されます。
