@@ -301,6 +301,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.sendPacket(biomeDefinitionListPacket)
 
         val availableActorIdentifiersPacket = AvailableActorIdentifiersPacket()
+        availableActorIdentifiersPacket.tag = server.defineActors.binary()
         player.sendPacket(availableActorIdentifiersPacket)
 
         val playStatusPacket = PlayStatusPacket()
