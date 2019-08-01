@@ -4,6 +4,7 @@ import io.netty.util.ResourceLeakDetector
 import jp.katana.core.IServer
 import jp.katana.core.IServerProperties
 import jp.katana.core.ServerState
+import jp.katana.core.actor.IActorDefinitions
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.command.ICommandSender
 import jp.katana.core.event.IEventManager
@@ -11,7 +12,9 @@ import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
+import jp.katana.core.world.biome.IBiomeDefinitions
 import jp.katana.i18n.I18n
+import jp.katana.server.actor.ActorDefinitions
 import jp.katana.server.block.BlockDefinitions
 import jp.katana.server.command.ServerCommandSender
 import jp.katana.server.console.KatanaConsole
@@ -24,6 +27,7 @@ import jp.katana.server.factory.FactoryManager
 import jp.katana.server.item.ItemDefinitions
 import jp.katana.server.network.NetworkManager
 import jp.katana.server.resourcepack.ResourcePackManager
+import jp.katana.server.world.biome.BiomeDefinitions
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.core.LoggerContext
@@ -116,6 +120,8 @@ class Server : IServer {
 
     override val defineBlocks: IBlockDefinitions = BlockDefinitions()
     override val defineItems: IItemDefinitions = ItemDefinitions()
+    override val defineActors: IActorDefinitions = ActorDefinitions()
+    override val defineBiomes: IBiomeDefinitions = BiomeDefinitions()
 
     private val katanaConfigFile: File = File("katana.yml")
     var katanaConfig: KatanaConfig? = null
