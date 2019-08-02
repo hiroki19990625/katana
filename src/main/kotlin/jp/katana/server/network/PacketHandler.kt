@@ -13,6 +13,8 @@ import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.actor.Player
 import jp.katana.server.network.packet.mcpe.*
+import jp.katana.server.world.gamerule.BooleanGameRule
+import jp.katana.server.world.gamerule.GameRules
 import sun.security.ec.ECKeyPairGenerator
 import java.net.URI
 import java.security.MessageDigest
@@ -289,11 +291,14 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
     }
 
     private fun startGame() {
+        val gameRules = GameRules()
+        gameRules.put(BooleanGameRule("showcoordinates", true))
         val startGamePacket = StartGamePacket()
         startGamePacket.actorUniqueId = player.uuid.mostSignificantBits
         startGamePacket.actorRuntimeId = player.uuid.leastSignificantBits
         startGamePacket.blockDefinitions = server.defineBlocks
         startGamePacket.itemDefinitions = server.defineItems
+        startGamePacket.gameRules = gameRules
         player.sendPacket(startGamePacket)
 
         val biomeDefinitionListPacket = BiomeDefinitionListPacket()

@@ -62,7 +62,7 @@ class StartGamePacket : MinecraftPacket() {
     var currentTick: Long = 0
     var enchantmentSeed: Int = 0
 
-    val gameRules: IGameRules? = null
+    var gameRules: IGameRules? = null
 
     var blockDefinitions: IBlockDefinitions? = null
     var itemDefinitions: IItemDefinitions? = null
@@ -118,7 +118,7 @@ class StartGamePacket : MinecraftPacket() {
         if (gameRules == null)
             writeUnsignedVarInt(0)
         else {
-            writeGameRules(gameRules)
+            writeGameRules(gameRules!!)
         }
 
         writeBoolean(bonusChest)
