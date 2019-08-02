@@ -2,6 +2,7 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.item.IItemDefinitions
+import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.server.math.Vector3
 import jp.katana.server.math.Vector3Int
 
@@ -61,6 +62,8 @@ class StartGamePacket : MinecraftPacket() {
     var currentTick: Long = 0
     var enchantmentSeed: Int = 0
 
+    val gameRules: IGameRules? = null
+
     var blockDefinitions: IBlockDefinitions? = null
     var itemDefinitions: IItemDefinitions? = null
 
@@ -112,7 +115,11 @@ class StartGamePacket : MinecraftPacket() {
         writeBoolean(isTexturePacksRequired)
 
         //TODO: GameRules
-        writeUnsignedVarInt(0)
+        if (gameRules == null)
+            writeUnsignedVarInt(0)
+        else {
+            writeGameRules(gameRules)
+        }
 
         writeBoolean(bonusChest)
         writeBoolean(hasStartWithMapEnabled)

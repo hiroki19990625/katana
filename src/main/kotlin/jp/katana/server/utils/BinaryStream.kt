@@ -2,6 +2,7 @@ package jp.katana.server.utils
 
 import com.whirvis.jraknet.Packet
 import jp.katana.core.data.ISkin
+import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.server.data.Skin
 import jp.katana.server.math.Vector3
 import jp.katana.server.math.Vector3Int
@@ -61,6 +62,24 @@ open class BinaryStream : Packet() {
 
     fun writeUnsignedVarLong(v: Long) {
         VarInt.writeUnsignedVarLong(this, v)
+    }
+
+    fun readGameRules(rules: IGameRules) {
+        val len = readUnsignedVarInt()
+        for (i in 0 until len) {
+            val name = readVarString()
+            val type = readByte()
+            val rule = rules.getRuleType(name, type)
+            rule.read(this)
+            rules.put(rule)
+        }
+    }
+
+    fun writeGameRules(rules: IGameRules) {
+        writeUnsignedVarInt(rules.size())
+        for (rule in rules.getAll()) {
+            rule.write(this)
+        }
     }
 
     fun readSkin(): ISkin {
