@@ -7,7 +7,7 @@ import jp.katana.server.event.player.PlayerCreateEvent
 import jp.katana.server.event.server.ServerStartEvent
 import jp.katana.server.event.server.ServerStopEvent
 import jp.katana.server.event.server.ServerUpdateTickEvent
-import jp.katana.server.utils.ClassGenerator
+import jp.katana.utils.ClassGenerator
 
 class EventManager : IEventManager {
     private val events: HashMap<Class<*>, EventHandler<*>> = HashMap()

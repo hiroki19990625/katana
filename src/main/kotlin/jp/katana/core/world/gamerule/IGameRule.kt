@@ -1,6 +1,6 @@
 package jp.katana.core.world.gamerule
 
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 
 interface IGameRule<T> {
     companion object {

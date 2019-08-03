@@ -1,7 +1,7 @@
 package jp.katana.server.world.gamerule
 
 import jp.katana.core.world.gamerule.IGameRule
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 
 class IntGameRule(name: String, override var value: Int) : IGameRule<Int> {
     override val type: Byte = IGameRule.INT

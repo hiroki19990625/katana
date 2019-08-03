@@ -7,7 +7,7 @@ import com.google.gson.JsonPrimitive
 import com.nimbusds.jose.JWSObject
 import jp.katana.core.data.ILoginData
 import jp.katana.i18n.I18n
-import jp.katana.server.utils.Jwt
+import jp.katana.utils.Jwt
 import java.security.PublicKey
 import java.util.*
 

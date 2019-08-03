@@ -1,6 +1,6 @@
 package jp.katana.server.factory
 
-import jp.katana.server.nbt.tag.*
+import jp.katana.nbt.tag.*
 
 class NBTTagFactory : SimpleFactory<Byte, (String) -> INamedTag>() {
     init {

@@ -6,9 +6,9 @@ import com.google.gson.JsonParser
 import com.google.gson.stream.JsonReader
 import jp.katana.core.actor.IActorDefine
 import jp.katana.core.actor.IActorDefinitions
-import jp.katana.server.nbt.Endian
-import jp.katana.server.nbt.io.NBTIO
-import jp.katana.server.nbt.tag.*
+import jp.katana.nbt.Endian
+import jp.katana.nbt.io.NBTIO
+import jp.katana.nbt.tag.*
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
