@@ -77,15 +77,17 @@ class ServerListener(private val server: Server, private val networkManager: Net
                 logger.info("0x" + id.toString(16))
             if (this.server.katanaConfig!!.packetDump)
                 logger.info(buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
-            val pk = factory[id]
-            if (pk != null) {
+            val f = factory[id]
+            if (f != null) {
+                val pk = f()
                 pk.setBuffer(buf)
                 pk.decode()
 
                 networkManager.handlePacket(address, pk)
+
+                pk.clear()
+                pk.buffer()?.release()
             }
-            pk?.clear()
-            pk?.buffer()?.release()
             data.clear()
             data.buffer().release()
             batch.clear()
