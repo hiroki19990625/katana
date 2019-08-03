@@ -1,6 +1,13 @@
 package jp.katana.core.world.gamerule
 
+import jp.katana.server.factory.GameRuleTypeFactory
+import jp.katana.server.factory.SimpleFactory
+
 interface IGameRules {
+    companion object {
+        val factory: SimpleFactory<Byte, (String) -> IGameRule<*>> = GameRuleTypeFactory()
+    }
+
     fun put(rule: IGameRule<*>)
     operator fun <T : IGameRule<*>> get(name: String): T
     fun getAll(): Array<IGameRule<*>>
