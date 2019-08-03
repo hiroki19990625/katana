@@ -10,7 +10,7 @@ import jp.katana.server.actor.Player
 import jp.katana.server.event.player.PlayerCreateEvent
 import jp.katana.server.factory.PacketFactory
 import jp.katana.server.network.packet.BatchPacket
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 import java.net.InetSocketAddress
 

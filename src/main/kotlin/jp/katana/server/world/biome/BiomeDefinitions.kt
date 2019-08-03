@@ -6,10 +6,10 @@ import com.google.gson.JsonParser
 import com.google.gson.stream.JsonReader
 import jp.katana.core.world.biome.IBiomeDefine
 import jp.katana.core.world.biome.IBiomeDefinitions
-import jp.katana.server.nbt.Endian
-import jp.katana.server.nbt.io.NBTIO
-import jp.katana.server.nbt.tag.CompoundTag
-import jp.katana.server.nbt.tag.FloatTag
+import jp.katana.nbt.Endian
+import jp.katana.nbt.io.NBTIO
+import jp.katana.nbt.tag.CompoundTag
+import jp.katana.nbt.tag.FloatTag
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets

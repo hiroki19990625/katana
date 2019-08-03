@@ -11,7 +11,7 @@ import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 import java.net.InetSocketAddress
 
 class NetworkManager(private val server: Server) : INetworkManager {

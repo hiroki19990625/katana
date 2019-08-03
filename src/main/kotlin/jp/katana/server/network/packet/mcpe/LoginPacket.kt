@@ -4,7 +4,7 @@ import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
 import jp.katana.server.data.ClientData
 import jp.katana.server.data.LoginData
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 import java.nio.charset.Charset
 
 class LoginPacket : MinecraftPacket() {

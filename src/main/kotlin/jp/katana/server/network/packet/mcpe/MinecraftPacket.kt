@@ -1,7 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.network.packet.mcpe.IMinecraftPacket
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 
 abstract class MinecraftPacket : BinaryStream(), IMinecraftPacket, Cloneable {
     companion object {

@@ -1,6 +1,6 @@
 package jp.katana.server.network.packet.mcpe
 
-import jp.katana.server.math.Vector3
+import jp.katana.math.Vector3
 import java.util.*
 
 class AddPlayerPacket : MinecraftPacket() {

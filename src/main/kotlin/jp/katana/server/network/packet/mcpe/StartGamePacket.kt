@@ -3,8 +3,8 @@ package jp.katana.server.network.packet.mcpe
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.world.gamerule.IGameRules
-import jp.katana.server.math.Vector3
-import jp.katana.server.math.Vector3Int
+import jp.katana.math.Vector3
+import jp.katana.math.Vector3Int
 
 class StartGamePacket : MinecraftPacket() {
     companion object {

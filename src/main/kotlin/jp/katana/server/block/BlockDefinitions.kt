@@ -6,7 +6,7 @@ import com.google.gson.JsonParser
 import com.google.gson.stream.JsonReader
 import jp.katana.core.block.IBlockDefine
 import jp.katana.core.block.IBlockDefinitions
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets

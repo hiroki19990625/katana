@@ -1,7 +1,7 @@
 package jp.katana.server.network.packet
 
 import jp.katana.server.network.packet.mcpe.MinecraftProtocols
-import jp.katana.server.utils.BinaryStream
+import jp.katana.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import java.io.IOException

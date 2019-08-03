@@ -4,7 +4,7 @@ import jp.katana.core.factory.IFactory
 import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.server.Server
-import jp.katana.server.nbt.tag.INamedTag
+import jp.katana.nbt.tag.INamedTag
 
 class FactoryManager(server: Server) : IFactoryManager {
     private val factories: HashMap<Class<*>, IFactory<*, *>> = HashMap()
