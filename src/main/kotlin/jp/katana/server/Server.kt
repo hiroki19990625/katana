@@ -80,18 +80,18 @@ class Server : IServer {
     override val protocolVersion: Int = PROTOCOL_VERSION
     override val gameVersion: String = GAME_VERSION
 
-    override val propertiesFile: File = File("properties.yml")
+    override var propertiesFile: File = File("properties.yml")
     override var serverProperties: IServerProperties? = null
         private set
     override var state: ServerState = ServerState.Stopped
         private set
     override val logger = LogManager.getLogger(Server::class.java)!!
-    override val console = KatanaConsole(this)
-    override val factoryManager: IFactoryManager = FactoryManager(this)
-    override val eventManager: IEventManager = EventManager()
+    override var console = KatanaConsole(this)
+    override var factoryManager: IFactoryManager = FactoryManager(this)
+    override var eventManager: IEventManager = EventManager()
     override var networkManager: INetworkManager? = null
         private set
-    override val resourcePackManager: IResourcePackManager = ResourcePackManager(this)
+    override var resourcePackManager: IResourcePackManager = ResourcePackManager(this)
 
     override val serverPort: Int
         get() = serverProperties!!.serverPort
@@ -123,7 +123,9 @@ class Server : IServer {
     override val defineActors: IActorDefinitions = ActorDefinitions()
     override val defineBiomes: IBiomeDefinitions = BiomeDefinitions()
 
-    private val katanaConfigFile: File = File("katana.yml")
+    var networkManagerCreator: (Server) -> INetworkManager = { server -> NetworkManager(server) }
+
+    var katanaConfigFile: File = File("katana.yml")
     var katanaConfig: KatanaConfig? = null
 
     private val serverCommandSender: ServerCommandSender = ServerCommandSender(this)
@@ -146,7 +148,7 @@ class Server : IServer {
             loadKatanaConfig()
 
             logger.info(I18n["katana.server.network.starting"])
-            networkManager = NetworkManager(this)
+            networkManager = networkManagerCreator(this)
             if (state == ServerState.Stopped)
                 return
             networkManager?.start()
