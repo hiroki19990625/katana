@@ -5,7 +5,7 @@ import jp.katana.server.factory.SimpleFactory
 
 interface IGameRules {
     companion object {
-        val factory: SimpleFactory<Byte, (String) -> IGameRule<*>> = GameRuleTypeFactory()
+        var factory: SimpleFactory<Byte, (String) -> IGameRule<*>> = GameRuleTypeFactory()
     }
 
     fun put(rule: IGameRule<*>)
