@@ -36,11 +36,6 @@ class GameRules : IGameRules {
     }
 
     override fun getRuleType(name: String, type: Byte): IGameRule<*> {
-        return when (type) {
-            1.toByte() -> BooleanGameRule(name, false)
-            2.toByte() -> IntGameRule(name, 0)
-            3.toByte() -> FloatGameRule(name, 0f)
-            else -> throw Exception()
-        }
+        return IGameRules.factory[type]!!(name)
     }
 }

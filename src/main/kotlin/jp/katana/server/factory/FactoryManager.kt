@@ -2,14 +2,18 @@ package jp.katana.server.factory
 
 import jp.katana.core.factory.IFactory
 import jp.katana.core.factory.IFactoryManager
+import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.server.Server
+import jp.katana.server.nbt.tag.INamedTag
 
-class FactoryManager(private val server: Server) : IFactoryManager {
+class FactoryManager(server: Server) : IFactoryManager {
     private val factories: HashMap<Class<*>, IFactory<*, *>> = HashMap()
 
     init {
         register(CommandFactory(server))
         register(PacketFactory())
+        register(INamedTag.factory)
+        register(IGameRules.factory)
     }
 
     override fun <K, V> register(handler: IFactory<K, V>) {
