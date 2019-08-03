@@ -23,7 +23,11 @@ interface INamedTag {
         var factory: SimpleFactory<Byte, (String) -> INamedTag> = NBTTagFactory()
 
         fun getTag(type: Byte, name: String = ""): INamedTag {
-            return factory[type]!!(name)
+            val f = factory[type]
+            return if (f != null)
+                f(name)
+            else
+                EndTag()
         }
     }
 
