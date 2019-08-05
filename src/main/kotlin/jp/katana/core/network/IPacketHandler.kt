@@ -13,6 +13,8 @@ interface IPacketHandler {
     fun handleResourcePackStackPacket(resourcePackStackPacket: ResourcePackStackPacket) // 0x07
     fun handleResourcePackClientResponsePacket(resourcePackClientResponsePacket: ResourcePackClientResponsePacket) // 0x08
 
+    fun handleLevelChunkPacket(levelChunkPacket: LevelChunkPacket) // 0x3a
+
     fun handleRequestChunkRadiusPacket(requestChunkRadiusPacket: RequestChunkRadiusPacket) // 0x45
     fun handleChunkRadiusUpdatedPacket(chunkRadiusUpdatedPacket: ChunkRadiusUpdatedPacket) // 0x46
 

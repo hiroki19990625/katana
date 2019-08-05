@@ -17,6 +17,8 @@ class PacketFactory : SimpleFactory<Int, () -> MinecraftPacket>() {
         this += { StartGamePacket() } // 0x0b
         this += { AddPlayerPacket() } // 0x0c
 
+        this += { LevelChunkPacket() } // 0x3a
+
         this += { RequestChunkRadiusPacket() } // 0x45
         this += { ChunkRadiusUpdatedPacket() } // 0x46
 

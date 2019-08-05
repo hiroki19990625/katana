@@ -48,6 +48,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
                 handleResourcePackStackPacket(packet)
             is ResourcePackClientResponsePacket -> // 0x08
                 handleResourcePackClientResponsePacket(packet)
+            is LevelChunkPacket -> // 0x3a
+                handleLevelChunkPacket(packet)
             is RequestChunkRadiusPacket -> // 0x45
                 handleRequestChunkRadiusPacket(packet)
             is ChunkRadiusUpdatedPacket -> // 0x46
@@ -188,6 +190,10 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
                 startGame()
             }
         }
+    }
+
+    override fun handleLevelChunkPacket(levelChunkPacket: LevelChunkPacket) {
+        // No cause
     }
 
     override fun handleRequestChunkRadiusPacket(requestChunkRadiusPacket: RequestChunkRadiusPacket) {
