@@ -8,6 +8,7 @@ import com.nimbusds.jose.JWSObject
 import jp.katana.core.data.ILoginData
 import jp.katana.i18n.I18n
 import jp.katana.utils.Jwt
+import net.minidev.json.JSONObject
 import java.security.PublicKey
 import java.util.*
 
@@ -43,10 +44,10 @@ class LoginData : ILoginData {
 
                 val obj = jwt.payload.toJSONObject()
                 val exData = obj["extraData"]
-                if (exData != null && exData is JsonObject) {
-                    xuid = exData["XUID"].asString
-                    displayName = exData["displayName"].asString
-                    clientUuid = UUID.fromString(exData["identity"].asString)
+                if (exData != null && exData is JSONObject) {
+                    xuid = exData["XUID"] as String
+                    displayName = exData["displayName"] as String
+                    clientUuid = UUID.fromString(exData["identity"] as String)
                 }
                 val base64Key = obj.getAsString("identityPublicKey") ?: throw RuntimeException("error")
                 lastKey = Jwt.genECKey(base64Key)

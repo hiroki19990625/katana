@@ -43,6 +43,8 @@ class ServerListener(private val server: Server, private val networkManager: Net
     ) {
         if (peer != null) {
             val address = peer.address
+            val player = networkManager.getPlayer(address)!!
+            player.onDisconnect(reason)
             logger.info(I18n["katana.server.client.disConnection", address, reason ?: "none"])
             networkManager.removePlayer(address)
             networkManager.removeSession(address)

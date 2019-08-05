@@ -1,10 +1,12 @@
 package jp.katana.server.actor
 
+import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.actor.PlayerState
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
-import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
+import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.network.PacketHandler
 import jp.katana.server.network.packet.mcpe.DisconnectPacket
@@ -38,6 +40,12 @@ class Player(override val address: InetSocketAddress, private val server: Server
     override var encryptCounter: Long = 0
     override var decryptCounter: Long = 0
 
+    override var displayName: String = ""
+        internal set
+
+    override var state: PlayerState = PlayerState.Connected
+        internal set
+
     override val uuid: UUID = UUID.randomUUID()
 
     override fun handlePacket(packet: MinecraftPacket) {
@@ -52,5 +60,10 @@ class Player(override val address: InetSocketAddress, private val server: Server
         val disconnectPacket = DisconnectPacket()
         disconnectPacket.message = reason;
         sendPacket(disconnectPacket)
+    }
+
+    override fun onDisconnect(reason: String?) {
+        if (state == PlayerState.Joined)
+            logger.info(I18n["katana.server.player.leave", displayName])
     }
 }

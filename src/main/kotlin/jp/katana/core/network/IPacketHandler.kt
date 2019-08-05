@@ -20,6 +20,8 @@ interface IPacketHandler {
     fun handleResourcePackChunkDataPacket(resourcePackChunkDataPacket: ResourcePackChunkDataPacket) // 0x53
     fun handleResourcePackChunkRequestPacket(resourcePackChunkRequestPacket: ResourcePackChunkRequestPacket) // 0x54
 
+    fun handleSetLocalPlayerAsInitializedPacket(setLocalPlayerAsInitializedPacket: SetLocalPlayerAsInitializedPacket) // 0x71
+
     fun handleAvailableActorIdentifiersPacket(availableActorIdentifiersPacket: AvailableActorIdentifiersPacket) // 0x77
     fun handleBiomeDefinitionListPacket(biomeDefinitionListPacket: BiomeDefinitionListPacket) // 0x7a
 }
