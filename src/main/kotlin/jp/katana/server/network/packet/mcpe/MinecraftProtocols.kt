@@ -61,7 +61,7 @@ class MinecraftProtocols {
         const val ADVENTURE_SETTINGS_PACKET = 0x37
         const val BLOCK_ACTOR_DATA_PACKET = 0x38
         const val PLAYER_INPUT_PACKET = 0x39
-        const val LEVEL_CHUNK_DATA_PACKET = 0x3a
+        const val LEVEL_CHUNK_PACKET = 0x3a
         const val SET_COMMANDS_ENABLED_PACKET = 0x3b
         const val SET_DIFFICULTY_PACKET = 0x3c
         const val CHANGE_DIMENSION_PACKET = 0x3d
