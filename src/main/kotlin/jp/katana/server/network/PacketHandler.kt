@@ -57,6 +57,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
                 handleResourcePackChunkDataPacket(packet)
             is ResourcePackChunkRequestPacket -> // 0x54
                 handleResourcePackChunkRequestPacket(packet)
+            is SetLocalPlayerAsInitializedPacket -> // 0x71
+                handleSetLocalPlayerAsInitializedPacket(packet)
             is AvailableActorIdentifiersPacket -> // 0x77
                 handleAvailableActorIdentifiersPacket(packet)
             is BiomeDefinitionListPacket -> // 0x7a
@@ -216,6 +218,13 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         resourcePackChunkDataPacket.progress = offset.toLong()
 
         player.sendPacket(resourcePackChunkDataPacket)
+    }
+
+    override fun handleSetLocalPlayerAsInitializedPacket(setLocalPlayerAsInitializedPacket: SetLocalPlayerAsInitializedPacket) {
+        server.logger.info(I18n["katana.server.player.join", player.displayName])
+        // TODO: Send Chat
+
+        // TODO: Event
     }
 
     override fun handleAvailableActorIdentifiersPacket(availableActorIdentifiersPacket: AvailableActorIdentifiersPacket) {
