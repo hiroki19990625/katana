@@ -27,8 +27,12 @@ interface IActorPlayer : IActorLiving {
 
     val displayName: String
 
+    val state: PlayerState
+
     fun handlePacket(packet: MinecraftPacket)
     fun sendPacket(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
 
     fun disconnect(reason: String)
+
+    fun onDisconnect(reason: String?)
 }

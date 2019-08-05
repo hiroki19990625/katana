@@ -8,6 +8,7 @@ import com.nimbusds.jose.jwk.Curve
 import com.nimbusds.jose.jwk.ECKey
 import com.nimbusds.jwt.JWTClaimsSet
 import com.nimbusds.jwt.SignedJWT
+import jp.katana.core.actor.PlayerState
 import jp.katana.core.network.IPacketHandler
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
@@ -94,12 +95,16 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.displayName = loginPacket.loginData.displayName
 
         if (server.serverProperties!!.secureMode && player.loginData!!.jwtVerify) {
+            player.state = PlayerState.PreLogined
+
             initSecure()
         } else {
             playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
             player.sendPacket(playStatusPacket)
 
-            server.logger.info(I18n["katana.server.player.login", player.displayName])
+            player.state = PlayerState.Logined
+
+            server.logger.info(I18n["katana.server.player.login", player.displayName, player.address])
 
             val resourcePacksInfoPacket = ResourcePacksInfoPacket()
             resourcePacksInfoPacket.resourcePackEntries.addAll(server.resourcePackManager.getResourcePacks())
@@ -123,7 +128,9 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
         player.sendPacket(playStatusPacket)
 
-        server.logger.info(I18n["katana.server.player.login", player.displayName])
+        player.state = PlayerState.Logined
+
+        server.logger.info(I18n["katana.server.player.login", player.displayName, player.address])
 
         val resourcePacksInfoPacket = ResourcePacksInfoPacket()
         resourcePacksInfoPacket.resourcePackEntries.addAll(server.resourcePackManager.getResourcePacks())
@@ -222,6 +229,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     override fun handleSetLocalPlayerAsInitializedPacket(setLocalPlayerAsInitializedPacket: SetLocalPlayerAsInitializedPacket) {
         server.logger.info(I18n["katana.server.player.join", player.displayName])
+
+        player.state = PlayerState.Joined
         // TODO: Send Chat
 
         // TODO: Event
@@ -327,5 +336,7 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val playStatusPacket = PlayStatusPacket()
         playStatusPacket.status = PlayStatusPacket.PLAYER_SPAWN
         player.sendPacket(playStatusPacket)
+
+        player.state = PlayerState.Spawned
     }
 }
