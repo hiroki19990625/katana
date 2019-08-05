@@ -89,11 +89,15 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         player.loginData = loginPacket.loginData
         player.clientData = loginPacket.clientData
 
+        player.displayName = loginPacket.loginData.displayName
+
         if (server.serverProperties!!.secureMode && player.loginData!!.jwtVerify) {
             initSecure()
         } else {
             playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
             player.sendPacket(playStatusPacket)
+
+            server.logger.info(I18n["katana.server.player.login", player.displayName])
 
             val resourcePacksInfoPacket = ResourcePacksInfoPacket()
             resourcePacksInfoPacket.resourcePackEntries.addAll(server.resourcePackManager.getResourcePacks())
@@ -116,6 +120,8 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
         val playStatusPacket = PlayStatusPacket()
         playStatusPacket.status = PlayStatusPacket.LOGIN_SUCCESS
         player.sendPacket(playStatusPacket)
+
+        server.logger.info(I18n["katana.server.player.login", player.displayName])
 
         val resourcePacksInfoPacket = ResourcePacksInfoPacket()
         resourcePacksInfoPacket.resourcePackEntries.addAll(server.resourcePackManager.getResourcePacks())

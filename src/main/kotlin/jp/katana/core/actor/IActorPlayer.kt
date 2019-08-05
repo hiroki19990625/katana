@@ -25,6 +25,8 @@ interface IActorPlayer : IActorLiving {
     var encryptCounter: Long
     var decryptCounter: Long
 
+    val displayName: String
+
     fun handlePacket(packet: MinecraftPacket)
     fun sendPacket(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
 

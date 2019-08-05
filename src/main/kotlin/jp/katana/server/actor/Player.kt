@@ -1,8 +1,8 @@
 package jp.katana.server.actor
 
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
-import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
 import jp.katana.server.Server
@@ -37,6 +37,9 @@ class Player(override val address: InetSocketAddress, private val server: Server
         internal set
     override var encryptCounter: Long = 0
     override var decryptCounter: Long = 0
+
+    override var displayName: String = ""
+        internal set
 
     override val uuid: UUID = UUID.randomUUID()
 
