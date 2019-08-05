@@ -19,16 +19,16 @@ class VarInt {
         }
 
         private fun write(stream: BinaryStream, value: Long) {
-            var value = value
+            var vl = value
             do {
-                var temp = (value and 127).toByte()
+                var temp = (vl and 127).toByte()
                 // Note: >>> means that the sign bit is shifted with the rest of the number rather than being left alone
-                value = value ushr 7
-                if (value != 0L) {
+                vl = vl ushr 7
+                if (vl != 0L) {
                     temp = (temp.toInt() or 128).toByte()
                 }
                 stream.writeByte(temp.toInt())
-            } while (value != 0L)
+            } while (vl != 0L)
         }
 
         fun readVarInt(stream: BinaryStream): Int {
