@@ -8,6 +8,8 @@ build
 build/
 build/*
 
+.gradle/
+
 logs
 logs/*
 resource_packs
