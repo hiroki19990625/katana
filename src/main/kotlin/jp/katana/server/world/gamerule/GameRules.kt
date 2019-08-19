@@ -7,6 +7,16 @@ import jp.katana.core.world.gamerule.IGameRules
 class GameRules : IGameRules {
     private val map = mutableMapOf<String, IGameRule<*>>()
 
+    val commandBlockOutput = get<BooleanGameRule>("commandblockoutput")
+    val commandBlockSenabled = get<BooleanGameRule>("commandblocksenabled")
+    val doDayLightCycle = get<BooleanGameRule>("dodaylightcycle")
+    val doEntityDrops = get<BooleanGameRule>("doentitydrops")
+    val doFireTick = get<BooleanGameRule>("dofiretick")
+    val doImmediatereSpawn = get<BooleanGameRule>("doimmediaterespawn")
+    val doInsomnia = get<BooleanGameRule>("doinsomnia")
+    val doMobLoot = get<BooleanGameRule>("domobloot")
+    val doMobSpawning = get<BooleanGameRule>("domobspawning")
+
     init {
         put(BooleanGameRule("commandblockoutput", true))
         put(BooleanGameRule("commandblocksenabled", true))
