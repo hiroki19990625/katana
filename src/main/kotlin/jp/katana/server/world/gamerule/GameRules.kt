@@ -7,6 +7,44 @@ import jp.katana.core.world.gamerule.IGameRules
 class GameRules : IGameRules {
     private val map = mutableMapOf<String, IGameRule<*>>()
 
+    val commandBlockOutput = get<BooleanGameRule>("commandblockoutput")
+    val commandBlockSenabled = get<BooleanGameRule>("commandblocksenabled")
+    val doDayLightCycle = get<BooleanGameRule>("dodaylightcycle")
+    val doEntityDrops = get<BooleanGameRule>("doentitydrops")
+    val doFireTick = get<BooleanGameRule>("dofiretick")
+    val doImmediatereSpawn = get<BooleanGameRule>("doimmediaterespawn")
+    val doInsomnia = get<BooleanGameRule>("doinsomnia")
+    val doMobLoot = get<BooleanGameRule>("domobloot")
+    val doMobSpawning = get<BooleanGameRule>("domobspawning")
+
+    init {
+        put(BooleanGameRule("commandblockoutput", true))
+        put(BooleanGameRule("commandblocksenabled", true))
+        put(BooleanGameRule("dodaylightcycle", true))
+        put(BooleanGameRule("doentitydrops", true))
+        put(BooleanGameRule("dofiretick", true))
+        put(BooleanGameRule("doimmediaterespawn", false))
+        put(BooleanGameRule("doinsomnia", true))
+        put(BooleanGameRule("domobloot", true))
+        put(BooleanGameRule("domobspawning", true))
+        put(BooleanGameRule("dotiledrops", true))
+        put(BooleanGameRule("doweathercycle", true))
+        put(BooleanGameRule("drowningdamage", true))
+        put(BooleanGameRule("falldamage", true))
+        put(BooleanGameRule("firedamage", true))
+        put(IntGameRule("functioncommandlimit", 10000))
+        put(BooleanGameRule("keepinventory", true))
+        put(IntGameRule("maxcommandchainlength", 65535))
+        put(BooleanGameRule("mobgriefing", true))
+        put(BooleanGameRule("naturalregeneration", true))
+        put(BooleanGameRule("pvp", true))
+        put(IntGameRule("randomtickspeed", 1))
+        put(BooleanGameRule("sendcommandfeedback", true))
+        put(BooleanGameRule("showcoordinates", false))
+        put(BooleanGameRule("showdeathmessages", true))
+        put(BooleanGameRule("tntexplodes", true))
+    }
+
     override fun put(rule: IGameRule<*>) {
         map[rule.name] = rule
     }
