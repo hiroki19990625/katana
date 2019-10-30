@@ -5,10 +5,16 @@ import jp.katana.core.world.chunk.IChunkLoader
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3Int
+import java.io.File
 
 interface IWorld {
     val name: String
     val gameRules: IGameRules
+
+    fun loadData()
+    fun loadData(file: File)
+
+    fun save()
 
     fun getChunk(x: Int, z: Int, useShift: Boolean = true): IChunk
     fun getChunk(pos: Vector2Int, useShift: Boolean = true): IChunk

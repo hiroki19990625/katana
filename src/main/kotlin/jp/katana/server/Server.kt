@@ -12,6 +12,7 @@ import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
+import jp.katana.core.world.IWorldManager
 import jp.katana.core.world.biome.IBiomeDefinitions
 import jp.katana.i18n.I18n
 import jp.katana.server.actor.ActorDefinitions
@@ -74,7 +75,7 @@ class Server : IServer {
         }
 
         const val PROTOCOL_VERSION = 361
-        const val GAME_VERSION = "1.12.0"
+        const val GAME_VERSION = "1.12.1"
     }
 
     override val protocolVersion: Int = PROTOCOL_VERSION
@@ -92,6 +93,8 @@ class Server : IServer {
     override var networkManager: INetworkManager? = null
         private set
     override var resourcePackManager: IResourcePackManager = ResourcePackManager(this)
+    override var worldManager: IWorldManager? = null
+        private set
 
     override val serverPort: Int
         get() = serverProperties!!.serverPort

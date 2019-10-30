@@ -7,6 +7,7 @@ import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3Int
 import jp.katana.server.world.gamerule.GameRules
+import java.io.File
 
 class World(override val name: String) : IWorld {
     private val chunks: MutableMap<Vector2Int, IChunk> = mutableMapOf()
@@ -14,6 +15,18 @@ class World(override val name: String) : IWorld {
 
     override val gameRules: IGameRules
         get() = GameRules()
+
+    override fun loadData() {
+
+    }
+
+    override fun loadData(file: File) {
+
+    }
+
+    override fun save() {
+        
+    }
 
     override fun getChunk(x: Int, z: Int, useShift: Boolean): IChunk {
         return (if (useShift)
