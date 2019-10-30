@@ -9,7 +9,12 @@ class WorldManager : IWorldManager {
     private val worlds: MutableMap<UUID, IWorld> = mutableMapOf()
 
     override var defaultWorld: IWorld? = null
-        internal set
+        private set
+
+    override fun loadDefaultWorld(name: String) {
+        // TODO: Create...
+        // defaultWorld = loadWorld(name)
+    }
 
     override fun loadWorld(name: String): IWorld {
         val guid = UUID.randomUUID()

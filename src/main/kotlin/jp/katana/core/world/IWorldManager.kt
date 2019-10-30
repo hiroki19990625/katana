@@ -6,6 +6,8 @@ import java.util.*
 interface IWorldManager {
     val defaultWorld: IWorld?
 
+    fun loadDefaultWorld(name: String)
+
     fun loadWorld(name: String): IWorld
     fun loadWorldFromFile(file: File, name: String): IWorld
 

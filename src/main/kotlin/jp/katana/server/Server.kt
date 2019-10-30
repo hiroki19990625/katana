@@ -28,6 +28,7 @@ import jp.katana.server.factory.FactoryManager
 import jp.katana.server.item.ItemDefinitions
 import jp.katana.server.network.NetworkManager
 import jp.katana.server.resourcepack.ResourcePackManager
+import jp.katana.server.world.WorldManager
 import jp.katana.server.world.biome.BiomeDefinitions
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
@@ -156,6 +157,9 @@ class Server : IServer {
                 return
             networkManager?.start()
             logger.info(I18n["katana.server.network.startInfo", serverPort])
+
+            worldManager = WorldManager()
+            worldManager!!.loadDefaultWorld(serverProperties!!.levelName)
         } catch (e: Exception) {
             logger.error("", e)
             shutdownForce()
