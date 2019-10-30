@@ -92,6 +92,7 @@ open class BinaryStream : Packet() {
         val capeDataW = readIntLE()
         val capeDataH = readIntLE()
         val capeData = String(read(readUnsignedVarInt()))
+        readIntLE()
         val geometryData = readVarString()
         val animationData = readVarString()
         val premiumSkin = readBoolean()
