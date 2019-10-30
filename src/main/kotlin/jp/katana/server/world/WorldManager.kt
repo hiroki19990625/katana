@@ -79,6 +79,7 @@ class WorldManager(private val server: Server) : IWorldManager {
     override fun createWorld(name: String, worldType: WorldType): IWorld {
         val worldFile = File("worlds/$name/level.dat")
         if (!worldFile.exists()) {
+            worldFile.parentFile.mkdir()
             worldFile.createNewFile()
 
             val world = World(name)

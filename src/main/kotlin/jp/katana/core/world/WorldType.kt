@@ -8,5 +8,11 @@ enum class WorldType {
 }
 
 fun String.toWorldType(): WorldType {
-    return WorldType.valueOf(this)
+    return when (this.toLowerCase()) {
+        "default" -> WorldType.Default
+        "flat" -> WorldType.Flat
+        "custom" -> WorldType.Customize
+        "empty" -> WorldType.Empty
+        else -> WorldType.valueOf(this)
+    }
 }
