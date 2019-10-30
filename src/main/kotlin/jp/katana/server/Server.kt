@@ -158,7 +158,7 @@ class Server : IServer {
             networkManager?.start()
             logger.info(I18n["katana.server.network.startInfo", serverPort])
 
-            worldManager = WorldManager()
+            worldManager = WorldManager(this)
             worldManager!!.loadDefaultWorld(serverProperties!!.levelName)
         } catch (e: Exception) {
             logger.error("", e)
