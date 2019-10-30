@@ -51,8 +51,8 @@ class WorldManager : IWorldManager {
     }
 
     override fun unloadWorld(world: IWorld) {
-        val world = worlds.entries.firstOrNull { w -> w.value.name == world.name }
-        if (world != null)
-            worlds.remove(world.key)
+        val w = worlds.entries.firstOrNull { w -> w.value.name == world.name }
+        if (w != null)
+            worlds.remove(w.key)
     }
 }
