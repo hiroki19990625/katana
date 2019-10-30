@@ -55,10 +55,12 @@ class StartGamePacket : MinecraftPacket() {
     var isFromWorldTemplate = false
     var isWorldTemplateOptionLocked = false
     var isOnlySpawningV1Villagers = false
+    var vanillaVersion = ""
     var levelId = "" //base64 string, usually the same as world folder name in vanilla
     var worldName: String = ""
     var premiumWorldTemplateId = ""
     var isTrial = false
+    var isMovementServerAuthoritative = false
     var currentTick: Long = 0
     var enchantmentSeed: Int = 0
 
@@ -135,12 +137,14 @@ class StartGamePacket : MinecraftPacket() {
         writeBoolean(isFromWorldTemplate)
         writeBoolean(isWorldTemplateOptionLocked)
         writeBoolean(isOnlySpawningV1Villagers)
+        writeVarString(vanillaVersion)
 
         writeVarString(levelId)
         writeVarString(worldName)
         writeVarString(premiumWorldTemplateId)
 
         writeBoolean(isTrial)
+        writeBoolean(isMovementServerAuthoritative)
 
         writeLongLE(currentTick)
 

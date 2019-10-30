@@ -12,14 +12,14 @@ class ResourcePackChunkDataPacket : MinecraftPacket() {
         packId = readVarString()
         chunkIndex = readIntLE()
         progress = readLongLE()
-        data = read(readIntLE())
+        data = read(readUnsignedVarInt())
     }
 
     override fun encodePayload() {
         writeVarString(packId)
         writeIntLE(chunkIndex)
         writeLongLE(progress)
-        writeIntLE(data.size)
+        writeUnsignedVarInt(data.size)
         write(*data)
     }
 }

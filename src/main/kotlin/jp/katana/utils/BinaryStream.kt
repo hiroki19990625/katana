@@ -3,9 +3,10 @@ package jp.katana.utils
 import com.whirvis.jraknet.Packet
 import jp.katana.core.data.ISkin
 import jp.katana.core.world.gamerule.IGameRules
-import jp.katana.server.data.Skin
 import jp.katana.math.Vector3
 import jp.katana.math.Vector3Int
+import jp.katana.server.data.Skin
+import jp.katana.server.data.SkinImage
 import java.nio.charset.Charset
 
 /**
@@ -84,27 +85,62 @@ open class BinaryStream : Packet() {
 
     fun readSkin(): ISkin {
         val skinId = readVarString()
+        val resource = readVarString()
+        val skinDataW = readIntLE()
+        val skinDataH = readIntLE()
         val skinData = String(read(readUnsignedVarInt()))
+        val capeDataW = readIntLE()
+        val capeDataH = readIntLE()
         val capeData = String(read(readUnsignedVarInt()))
-        val geometryName = readVarString()
         val geometryData = readVarString()
+        val animationData = readVarString()
+        val premiumSkin = readBoolean()
+        val personaSkin = readBoolean()
+        val capeOnClassicSkin = readBoolean()
+        val capeId = readVarString()
 
-        return Skin(capeData, skinData, geometryData, geometryName, skinId)
+        return Skin(
+            SkinImage(skinDataW, skinDataH, skinData),
+            SkinImage(capeDataW, capeDataH, capeData),
+            geometryData,
+            animationData,
+            resource,
+            skinId,
+            capeId,
+            premiumSkin,
+            personaSkin,
+            capeOnClassicSkin
+        )
     }
 
     fun writeSkin(skin: ISkin) {
         writeVarString(skin.skinId)
+        writeVarString(skin.skinResourcePatch)
 
-        val skinData = skin.skinData.toByteArray()
+        val skinData = skin.skinData.data.toByteArray()
+        writeIntLE(skin.skinData.width)
+        writeIntLE(skin.skinData.height)
         writeUnsignedVarInt(skinData.size)
         write(*skinData)
 
-        val capeData = skin.capeData.toByteArray()
+        val capeData = skin.capeData.data.toByteArray()
+        writeIntLE(skin.capeData.width)
+        writeIntLE(skin.capeData.height)
         writeUnsignedVarInt(capeData.size)
         write(*capeData)
 
-        writeVarString(skin.skinGeometryName)
+        writeIntLE(0)
+        //TODO: Animation
+
         writeVarString(skin.skinGeometry)
+        writeVarString(skin.skinAnimation)
+
+        writeBoolean(skin.premiumSkin)
+        writeBoolean(skin.personaSkin)
+        writeBoolean(skin.capeOnClassicSkin)
+
+        writeString(skin.capeId)
+        writeString(skin.fullSkinId)
     }
 
     fun readBlockPosition(): Vector3Int {
