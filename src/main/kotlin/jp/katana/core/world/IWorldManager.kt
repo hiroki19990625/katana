@@ -19,4 +19,7 @@ interface IWorldManager {
     fun unloadWorld(name: String)
     fun unloadWorld(uuid: UUID)
     fun unloadWorld(world: IWorld)
+
+    fun createWorld(name: String): IWorld
+    fun createWorld(name: String, worldType: WorldType): IWorld
 }

@@ -114,7 +114,6 @@ class StartGamePacket : MinecraftPacket() {
 
         writeBoolean(isTexturePacksRequired)
 
-        //TODO: GameRules
         if (gameRules == null)
             writeUnsignedVarInt(0)
         else {
