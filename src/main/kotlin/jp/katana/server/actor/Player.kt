@@ -46,6 +46,9 @@ class Player(override val address: InetSocketAddress, private val server: Server
     override var state: PlayerState = PlayerState.Connected
         internal set
 
+    override var chunkRadius: Int = 0
+        internal set
+
     override val uuid: UUID = UUID.randomUUID()
 
     override fun handlePacket(packet: MinecraftPacket) {
@@ -66,4 +69,13 @@ class Player(override val address: InetSocketAddress, private val server: Server
         if (state == PlayerState.Joined)
             logger.info(I18n["katana.server.player.leave", displayName])
     }
+
+    override fun getLoaderId(): Long {
+        return uuid.leastSignificantBits
+    }
+
+    override fun getRadius(): Int {
+        return chunkRadius;
+    }
+
 }

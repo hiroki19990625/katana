@@ -7,16 +7,6 @@ import jp.katana.core.world.gamerule.IGameRules
 class GameRules : IGameRules {
     private val map = mutableMapOf<String, IGameRule<*>>()
 
-    val commandBlockOutput = get<BooleanGameRule>("commandblockoutput")
-    val commandBlockSenabled = get<BooleanGameRule>("commandblocksenabled")
-    val doDayLightCycle = get<BooleanGameRule>("dodaylightcycle")
-    val doEntityDrops = get<BooleanGameRule>("doentitydrops")
-    val doFireTick = get<BooleanGameRule>("dofiretick")
-    val doImmediatereSpawn = get<BooleanGameRule>("doimmediaterespawn")
-    val doInsomnia = get<BooleanGameRule>("doinsomnia")
-    val doMobLoot = get<BooleanGameRule>("domobloot")
-    val doMobSpawning = get<BooleanGameRule>("domobspawning")
-
     init {
         put(BooleanGameRule("commandblockoutput", true))
         put(BooleanGameRule("commandblocksenabled", true))
@@ -33,7 +23,7 @@ class GameRules : IGameRules {
         put(BooleanGameRule("falldamage", true))
         put(BooleanGameRule("firedamage", true))
         put(IntGameRule("functioncommandlimit", 10000))
-        put(BooleanGameRule("keepinventory", true))
+        put(BooleanGameRule("keepinventory", false))
         put(IntGameRule("maxcommandchainlength", 65535))
         put(BooleanGameRule("mobgriefing", true))
         put(BooleanGameRule("naturalregeneration", true))
@@ -43,7 +33,35 @@ class GameRules : IGameRules {
         put(BooleanGameRule("showcoordinates", false))
         put(BooleanGameRule("showdeathmessages", true))
         put(BooleanGameRule("tntexplodes", true))
+        put(BooleanGameRule("experimentalgameplay", false))
     }
+
+    val commandBlockOutput = get<BooleanGameRule>("commandblockoutput")
+    val commandBlockSenabled = get<BooleanGameRule>("commandblocksenabled")
+    val doDayLightCycle = get<BooleanGameRule>("dodaylightcycle")
+    val doEntityDrops = get<BooleanGameRule>("doentitydrops")
+    val doFireTick = get<BooleanGameRule>("dofiretick")
+    val doImmediatereSpawn = get<BooleanGameRule>("doimmediaterespawn")
+    val doInsomnia = get<BooleanGameRule>("doinsomnia")
+    val doMobLoot = get<BooleanGameRule>("domobloot")
+    val doMobSpawning = get<BooleanGameRule>("domobspawning")
+    val doTileDrops = get<BooleanGameRule>("dotiledrops")
+    val doWeatherCycle = get<BooleanGameRule>("doweathercycle")
+    val drowningDamage = get<BooleanGameRule>("drowningdamage")
+    val fallDamage = get<BooleanGameRule>("falldamage")
+    val fireDamage = get<BooleanGameRule>("firedamage")
+    val functionCommandLimit = get<IntGameRule>("functioncommandlimit")
+    val keepInventory = get<BooleanGameRule>("keepinventory")
+    val maxCommandChainLength = get<IntGameRule>("maxcommandchainlength")
+    val mobGriefing = get<BooleanGameRule>("mobgriefing")
+    val naturalRegeneration = get<BooleanGameRule>("naturalregeneration")
+    val pvp = get<BooleanGameRule>("pvp")
+    val randomTickSpeed = get<IntGameRule>("randomtickspeed")
+    val sendCommandFeedback = get<BooleanGameRule>("sendcommandfeedback")
+    val showCoordinates = get<BooleanGameRule>("showcoordinates")
+    val showDeathMessages = get<BooleanGameRule>("showdeathmessages")
+    val tntExplodes = get<BooleanGameRule>("tntexplodes")
+    val experimentalGameplay = get<BooleanGameRule>("experimentalgameplay")
 
     override fun put(rule: IGameRule<*>) {
         map[rule.name] = rule

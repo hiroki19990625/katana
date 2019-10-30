@@ -9,6 +9,7 @@ import jp.katana.core.factory.IFactoryManager
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
+import jp.katana.core.world.IWorldManager
 import jp.katana.core.world.biome.IBiomeDefinitions
 import org.apache.logging.log4j.Logger
 import java.io.File
@@ -47,6 +48,7 @@ interface IServer {
     val eventManager: IEventManager
     val networkManager: INetworkManager?
     val resourcePackManager: IResourcePackManager
+    val worldManager: IWorldManager?
 
     val serverPort: Int
     val serverAddress: InetAddress

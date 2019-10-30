@@ -198,12 +198,17 @@ class PacketHandler(private val player: Player, private val server: Server) : IP
 
     override fun handleRequestChunkRadiusPacket(requestChunkRadiusPacket: RequestChunkRadiusPacket) {
         val chunkRadiusUpdatedPacket = ChunkRadiusUpdatedPacket()
-        chunkRadiusUpdatedPacket.radius = requestChunkRadiusPacket.radius
+        val maxRadius = server.serverProperties!!.viewDistance.toInt();
+        if (requestChunkRadiusPacket.radius > maxRadius) {
+            chunkRadiusUpdatedPacket.radius = maxRadius
+        } else {
+            chunkRadiusUpdatedPacket.radius = requestChunkRadiusPacket.radius
+        }
         player.sendPacket(chunkRadiusUpdatedPacket)
     }
 
     override fun handleChunkRadiusUpdatedPacket(chunkRadiusUpdatedPacket: ChunkRadiusUpdatedPacket) {
-        // No cause
+        player.chunkRadius = chunkRadiusUpdatedPacket.radius
     }
 
     override fun handleResourcePackDataInfoPacket(resourcePackDataInfoPacket: ResourcePackDataInfoPacket) {
