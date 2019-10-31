@@ -112,14 +112,6 @@
         "rid": 20
     },
     {
-        "hasspawnegg": 0,
-        "experimental": 0,
-        "summonable": 1,
-        "id": "minecraft:snow_golem",
-        "bid": "",
-        "rid": 21
-    },
-    {
         "hasspawnegg": 1,
         "experimental": 0,
         "summonable": 1,
@@ -446,6 +438,14 @@
         "id": "minecraft:elder_guardian",
         "bid": "",
         "rid": 50
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:elder_guardian_ghost",
+        "bid": "",
+        "rid": 120
     },
     {
         "hasspawnegg": 1,
@@ -784,11 +784,59 @@
         "rid": 107
     },
     {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:tripod_camera",
+        "bid": "",
+        "rid": 62
+    },
+    {
         "hasspawnegg": 1,
         "experimental": 0,
         "summonable": 1,
         "id": "minecraft:cow",
         "bid": "",
         "rid": 11
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:wandering_trader",
+        "bid": "",
+        "rid": 118
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:snow_golem",
+        "bid": "",
+        "rid": 21
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:fox",
+        "bid": "",
+        "rid": 121
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:player",
+        "bid": "minecraft:",
+        "rid": 257
+    },
+    {
+        "hasspawnegg": 0,
+        "experimental": 0,
+        "summonable": 0,
+        "id": "minecraft:npc",
+        "bid": "minecraft:",
+        "rid": 258
     }
 ]
