@@ -4,8 +4,8 @@ import jp.katana.core.block.IBlockDefine
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.nbt.Endian
 import jp.katana.nbt.io.NBTIO
+import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
-import jp.katana.nbt.tag.ListTag
 import java.io.IOException
 
 class BlockDefinitions : IBlockDefinitions {
@@ -14,7 +14,7 @@ class BlockDefinitions : IBlockDefinitions {
     private var binaryData: ByteArray = ByteArray(0)
 
     init {
-        val stream =
+        /*val stream =
             this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
         binaryData = stream.readBytes()
         val list = NBTIO.readTag(binaryData, Endian.Little, true) as ListTag
@@ -33,7 +33,13 @@ class BlockDefinitions : IBlockDefinitions {
                     states
                 )
             defines.add(define)
-        }
+        }*/
+        val stream =
+            this::class.java.classLoader.getResourceAsStream("runtime_block_states.dat") ?: throw IOException()
+
+        val list = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
+        binaryData = NBTIO.writeTag(list.getList("Palette"), Endian.Little, true)
+        println(list.toString())
     }
 
     override fun fromRuntime(runtimeId: Int): IBlockDefine {
