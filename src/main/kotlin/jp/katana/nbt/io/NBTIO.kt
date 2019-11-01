@@ -3,7 +3,6 @@ package jp.katana.nbt.io
 import jp.katana.nbt.Endian
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
-import java.io.IOException
 import java.util.zip.Deflater
 import java.util.zip.Inflater
 
@@ -29,7 +28,7 @@ class NBTIO {
             return tag
         }
 
-        fun writeTag(tag: CompoundTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
+        fun writeTag(tag: INamedTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
             val stream = NBTStream(endian, isNetwork)
             stream.writeByte(tag.type)
             stream.writeString(tag.name)
@@ -40,20 +39,16 @@ class NBTIO {
             return buf
         }
 
-        fun readTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): CompoundTag {
+        fun readTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): INamedTag {
             val stream = NBTStream(endian, isNetwork)
             stream.setBuffer(buffer)
 
             val type = stream.readByte()
-            if (type == INamedTag.COMPOUND) {
-                val tag = CompoundTag(stream.readString())
-                tag.read(stream)
+            val tag = INamedTag.getTag(type, stream.readString())
+            tag.read(stream)
 
-                stream.close()
-                return tag
-            }
-
-            throw IOException("Not Compound")
+            stream.close()
+            return tag
         }
 
         fun writeZlibTag(tag: CompoundTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
@@ -69,7 +64,7 @@ class NBTIO {
             return output.copyOf(length)
         }
 
-        fun readZlibTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): CompoundTag {
+        fun readZlibTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): INamedTag {
             val payload = ByteArray(1024 * 1024 * 64)
             val decompresser = Inflater()
             decompresser.setInput(buffer)

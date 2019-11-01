@@ -24,7 +24,7 @@ class NBTIOTests {
         com.put(list)
 
         val buf = NBTIO.writeTag(com, Endian.Big, false)
-        val ncom = NBTIO.readTag(buf, Endian.Big, false)
+        val ncom = NBTIO.readTag(buf, Endian.Big, false) as CompoundTag
         Assertions.assertTrue(ncom.getList("test").getInt(0).value == 1234)
         Assertions.assertTrue(ncom.getList("test").getInt(0).name == "")
     }
@@ -37,7 +37,7 @@ class NBTIOTests {
         com.put(list)
 
         val buf = NBTIO.writeZlibTag(com, Endian.Big, false)
-        val ncom = NBTIO.readZlibTag(buf, Endian.Big, false)
+        val ncom = NBTIO.readZlibTag(buf, Endian.Big, false) as CompoundTag
         Assertions.assertTrue(ncom.getList("test").getInt(0).value == 1234)
         Assertions.assertTrue(ncom.getList("test").getInt(0).name == "")
     }
