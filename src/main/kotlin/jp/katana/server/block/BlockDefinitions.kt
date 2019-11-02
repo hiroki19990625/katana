@@ -35,7 +35,7 @@ class BlockDefinitions : IBlockDefinitions {
             defines.add(define)
         }*/
         val stream =
-            this::class.java.classLoader.getResourceAsStream("runtime_block_states.dat") ?: throw IOException()
+            this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
 
         val list = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
         binaryData = NBTIO.writeTag(list.getList("Palette"), Endian.Little, true)
