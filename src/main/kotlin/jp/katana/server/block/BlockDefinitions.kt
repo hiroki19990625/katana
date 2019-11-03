@@ -39,7 +39,6 @@ class BlockDefinitions : IBlockDefinitions {
 
         val list = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
         binaryData = NBTIO.writeTag(list.getList("Palette"), Endian.Little, true)
-        println(list.toString())
     }
 
     override fun fromRuntime(runtimeId: Int): IBlockDefine {
