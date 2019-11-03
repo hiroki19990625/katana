@@ -26,7 +26,7 @@ class MinecraftProtocols {
         const val RIDER_JUMP_PACKET = 0x14
         const val UPDATE_BLOCK_PACKET = 0x15
         const val ADD_PAINTING_PACKET = 0x16
-        const val EXPLODE_PACKET = 0x17
+        const val TICK_SYNC_PACKET = 0x17
         const val LEVEL_SOUND_EVENT_PACKET_V1 = 0x18
         const val LEVEL_EVENT_PACKET = 0x19
         const val BLOCK_EVENT_PACKET = 0x1a
@@ -110,7 +110,7 @@ class MinecraftProtocols {
         const val SHOW_PROFILE_PACKET = 0x68
         const val SET_DEFAULT_GAME_TYPE_PACKET = 0x69
         const val MOVE_ACTOR_DELTA_PACKET = 0x6f
-        const val SET_SCOREBOARD_IDACTOR_PACKET = 0x70
+        const val SET_SCOREBOARD_IDENTITY_PACKET = 0x70
         const val SET_LOCAL_PLAYER_AS_INITIALIZED_PACKET = 0x71
         const val UPDATE_SOFT_ENUM_PACKET = 0x72
         const val NETWORK_STACK_LATENCY_PACKET = 0x73
@@ -135,6 +135,14 @@ class MinecraftProtocols {
         const val UPDATE_BLOCK_PROPERTIES = 0x86
         const val CLIENT_CACHE_BLOB_STATUS_PACKET = 0x87
         const val CLIENT_CACHE_MISS_RESPONSE_PACKET = 0x88
+        const val EDUCATION_SETTINGS_PACKET = 0x89
+        const val EMOTE_PACKET = 0x8a
+        const val MULTIPLAYER_SETTINGS_PACKET = 0x8b
+        const val SETTINGS_COMMAND_PACKET = 0x8c
+        const val ANVIL_DAMAGE_PACKET = 0x8d
+        const val COMPLETED_USING_ITEM_PACKET = 0x8e
+        const val NETWORK_SETTINGS_PACKET = 0x8f
+        const val PLAYER_AUTH_INPUT_PACKET = 0x90
 
         const val BATCH_PACKET = 0xfe
     }
