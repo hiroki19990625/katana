@@ -17,7 +17,7 @@ import java.security.KeyPair
 import java.util.*
 import javax.crypto.Cipher
 
-class Player(override val address: InetSocketAddress, private val server: Server) : IActorPlayer {
+class ActorPlayer(override val address: InetSocketAddress, private val server: Server) : IActorPlayer {
     private val logger = LogManager.getLogger()
     override val packetHandler: IPacketHandler = PacketHandler(this, server)
 

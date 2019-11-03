@@ -1,5 +1,8 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
+
 class ResourcePackDataInfoPacket : MinecraftPacket() {
     companion object {
         const val TYPE_INVALID = 0
@@ -48,5 +51,9 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
         write(*hash)
         writeBoolean(premium)
         writeByte(type)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }

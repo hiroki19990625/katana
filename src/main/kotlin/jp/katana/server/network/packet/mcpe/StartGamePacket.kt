@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.world.gamerule.IGameRules
@@ -154,7 +156,6 @@ class StartGamePacket : MinecraftPacket() {
         if (blockDefinitions == null)
             writeUnsignedVarInt(0)
         else {
-            writeUnsignedVarInt(blockDefinitions!!.size())
             write(*blockDefinitions!!.binary())
         }
 
@@ -166,5 +167,9 @@ class StartGamePacket : MinecraftPacket() {
         }
 
         writeVarString(multiplayerCorrelationId)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }
