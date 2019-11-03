@@ -36,7 +36,7 @@ class StartGamePacket : MinecraftPacket() {
     var spawnZ: Int = 0
     var hasAchievementsDisabled = true
     var dayCycleStopTime = -1 //-1 = not stopped, any positive value = stopped at that time
-    var eduMode = false
+    var eduEditionOffer = 0
     var hasEduFeaturesEnabled = false
     var rainLevel: Float = 0.0f
     var lightningLevel: Float = 0.0f
@@ -102,7 +102,7 @@ class StartGamePacket : MinecraftPacket() {
 
         writeVarInt(dayCycleStopTime)
 
-        writeBoolean(eduMode)
+        writeVarInt(eduEditionOffer)
         writeBoolean(hasEduFeaturesEnabled)
 
         writeFloatLE(rainLevel.toDouble())
