@@ -5,7 +5,9 @@ import jp.katana.core.data.IClientData
 import jp.katana.core.data.ISkin
 import jp.katana.i18n.I18n
 import jp.katana.utils.Jwt
+import java.nio.charset.StandardCharsets
 import java.security.PublicKey
+import java.util.*
 
 class ClientData : IClientData {
     override var clientRandomId: String = ""
@@ -29,8 +31,6 @@ class ClientData : IClientData {
     override var platformOfflineId: String = ""
         private set
     override var platformOnlineId: String = ""
-        private set
-    override var premiumSkin: Boolean = false
         private set
     override var selfSignedId: String = ""
         private set
@@ -61,15 +61,23 @@ class ClientData : IClientData {
         languageCode = obj.getAsString("LanguageCode")
         platformOfflineId = obj.getAsString("PlatformOfflineId")
         platformOnlineId = obj.getAsString("PlatformOnlineId")
-        premiumSkin = obj.getAsString("PremiumSkin")!!.toBoolean()
         selfSignedId = obj.getAsString("SelfSignedId")
         serverAddress = obj.getAsString("ServerAddress")
+        //TODO: Animation
         skin = Skin(
-            obj.getAsString("CapeData"),
-            obj.getAsString("SkinData"),
-            obj.getAsString("SkinGeometry"),
-            obj.getAsString("SkinGeometryName"),
-            obj.getAsString("SkinId")
+            SkinImage.create(obj, "Cape"),
+            SkinImage.create(obj, "Skin"),
+            String(Base64.getDecoder().decode(obj.getAsString("SkinGeometryData")), StandardCharsets.UTF_8),
+            if (obj.containsKey("AnimationData")) String(
+                Base64.getDecoder().decode(obj.getAsString("AnimationData")),
+                StandardCharsets.UTF_8
+            ) else "",
+            String(Base64.getDecoder().decode(obj.getAsString("SkinResourcePatch")), StandardCharsets.UTF_8),
+            obj.getAsString("SkinId"),
+            obj.getAsString("CapeId"),
+            obj.getAsString("PremiumSkin")!!.toBoolean(),
+            obj.getAsString("PersonaSkin")!!.toBoolean(),
+            obj.getAsString("CapeOnClassicSkin")!!.toBoolean()
         )
         thirdPartyName = obj.getAsString("ThirdPartyName")
         uiProfile = obj.getAsString("UIProfile")

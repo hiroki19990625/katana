@@ -75,8 +75,9 @@ class Server : IServer {
             Thread.currentThread().name = I18n["katana.server.thread.hostThread"]
         }
 
-        const val PROTOCOL_VERSION = 361
-        const val GAME_VERSION = "1.12.1"
+        const val PROTOCOL_VERSION = 388
+        const val GAME_VERSION = "1.13.0"
+        const val INTERNAL_GAME_VERSION = 17694723
     }
 
     override val protocolVersion: Int = PROTOCOL_VERSION

@@ -1,6 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.data.IResourcePackInfo
+import jp.katana.server.Server
 import jp.katana.server.data.ResourcePackInfo
 
 
@@ -10,7 +11,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
     var mustAccept = false
     var behaviourPackStack = mutableListOf<IResourcePackInfo>()
     var resourcePackStack = mutableListOf<IResourcePackInfo>()
-    var isExperimental = false
+    var gameVersion = Server.GAME_VERSION
 
     override fun decodePayload() {
         mustAccept = readBoolean()
@@ -18,7 +19,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
         readPacks(behaviourPackStack)
         readPacks(resourcePackStack)
 
-        isExperimental = readBoolean()
+        gameVersion = readVarString()
     }
 
     override fun encodePayload() {
@@ -27,13 +28,25 @@ class ResourcePackStackPacket : MinecraftPacket() {
         writePacks(behaviourPackStack)
         writePacks(resourcePackStack)
 
-        writeBoolean(isExperimental)
+        writeVarString(gameVersion)
     }
 
     private fun readPacks(list: MutableList<IResourcePackInfo>) {
         val len = readUnsignedVarInt()
         for (pack in 1..len) {
-            list.add(ResourcePackInfo(null, readVarString(), readVarString(), 0, "", readVarString(), "", false, ByteArray(0)))
+            list.add(
+                ResourcePackInfo(
+                    null,
+                    readVarString(),
+                    readVarString(),
+                    0,
+                    "",
+                    readVarString(),
+                    "",
+                    false,
+                    ByteArray(0)
+                )
+            )
         }
     }
 

@@ -1,15 +1,12 @@
 package jp.katana.server.block
 
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.google.gson.stream.JsonReader
 import jp.katana.core.block.IBlockDefine
 import jp.katana.core.block.IBlockDefinitions
-import jp.katana.utils.BinaryStream
+import jp.katana.nbt.Endian
+import jp.katana.nbt.io.NBTIO
+import jp.katana.nbt.tag.CompoundTag
+import jp.katana.nbt.tag.INamedTag
 import java.io.IOException
-import java.io.InputStreamReader
-import java.nio.charset.StandardCharsets
 
 class BlockDefinitions : IBlockDefinitions {
     private val defines: MutableList<IBlockDefine> = mutableListOf()
@@ -17,27 +14,31 @@ class BlockDefinitions : IBlockDefinitions {
     private var binaryData: ByteArray = ByteArray(0)
 
     init {
-        val parser = JsonParser()
-        val stream = this::class.java.classLoader.getResourceAsStream("runtime_block_ids.json") ?: throw IOException()
+        /*val stream =
+            this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
+        binaryData = stream.readBytes()
+        val list = NBTIO.readTag(binaryData, Endian.Little, true) as ListTag
+        for (i in 0 until list.size()) {
+            val com = list.getCompound(i)
+            val block = com.getCompound("block")
+            val states = mutableMapOf<String, INamedTag>()
+            for (state in block.getCompound("states").getAll())
+                states[state.key] = state.value
+            val define =
+                BlockDefine(
+                    i,
+                    block.getString("name").value,
+                    com.getShort("id").value,
+                    block.getInt("version").value,
+                    states
+                )
+            defines.add(define)
+        }*/
+        val stream =
+            this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
 
-        val element = parser.parse(JsonReader(InputStreamReader(stream, StandardCharsets.UTF_8)))
-        if (element is JsonArray) {
-            var id = 0
-            element.forEach { el ->
-                run {
-                    if (el is JsonObject) {
-                        defines.add(
-                            BlockDefine(
-                                id++,
-                                el.getAsJsonPrimitive("name").asString,
-                                el.getAsJsonPrimitive("id").asShort,
-                                el.getAsJsonPrimitive("data").asShort
-                            )
-                        )
-                    }
-                }
-            }
-        }
+        val list = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
+        binaryData = NBTIO.writeTag(list.getList("Palette"), Endian.Little, true)
     }
 
     override fun fromRuntime(runtimeId: Int): IBlockDefine {
@@ -48,8 +49,8 @@ class BlockDefinitions : IBlockDefinitions {
         return defines.first { define -> define.id == id.toShort() }
     }
 
-    override fun fromIdAndData(id: Int, data: Int): IBlockDefine {
-        return defines.first { define -> define.id == id.toShort() && define.data == data.toShort() }
+    override fun fromIdAndStates(id: Int, states: MutableMap<String, INamedTag>): IBlockDefine {
+        return defines.first { define -> define.id == id.toShort() && define.states == states }
     }
 
     override fun fromName(name: String): IBlockDefine {
@@ -66,22 +67,7 @@ class BlockDefinitions : IBlockDefinitions {
     }
 
     override fun binary(): ByteArray {
-        return if (prevSize != defines.size) {
-            val stream = BinaryStream()
-            defines.forEach { define ->
-                run {
-                    stream.writeVarString(define.name)
-                    stream.writeShortLE(define.data.toInt())
-                    stream.writeShortLE(define.id.toInt())
-                }
-            }
-
-            binaryData = stream.array()
-            stream.clear()
-            stream.buffer().release()
-            binaryData
-        } else {
-            binaryData
-        }
+        // TODO: Update Binary...
+        return binaryData
     }
 }

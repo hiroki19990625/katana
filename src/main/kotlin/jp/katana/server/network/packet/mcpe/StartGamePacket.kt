@@ -5,6 +5,7 @@ import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector3
 import jp.katana.math.Vector3Int
+import jp.katana.server.Server
 
 class StartGamePacket : MinecraftPacket() {
     companion object {
@@ -55,10 +56,12 @@ class StartGamePacket : MinecraftPacket() {
     var isFromWorldTemplate = false
     var isWorldTemplateOptionLocked = false
     var isOnlySpawningV1Villagers = false
+    var vanillaVersion = Server.GAME_VERSION
     var levelId = "" //base64 string, usually the same as world folder name in vanilla
     var worldName: String = ""
     var premiumWorldTemplateId = ""
     var isTrial = false
+    var isMovementServerAuthoritative = false
     var currentTick: Long = 0
     var enchantmentSeed: Int = 0
 
@@ -135,12 +138,14 @@ class StartGamePacket : MinecraftPacket() {
         writeBoolean(isFromWorldTemplate)
         writeBoolean(isWorldTemplateOptionLocked)
         writeBoolean(isOnlySpawningV1Villagers)
+        writeVarString(vanillaVersion)
 
         writeVarString(levelId)
         writeVarString(worldName)
         writeVarString(premiumWorldTemplateId)
 
         writeBoolean(isTrial)
+        writeBoolean(isMovementServerAuthoritative)
 
         writeLongLE(currentTick)
 

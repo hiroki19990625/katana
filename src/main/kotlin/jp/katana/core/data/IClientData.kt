@@ -17,7 +17,6 @@ interface IClientData {
     val languageCode: String
     val platformOfflineId: String
     val platformOnlineId: String
-    val premiumSkin: Boolean
     val selfSignedId: String
     val serverAddress: String
     val skin: ISkin?

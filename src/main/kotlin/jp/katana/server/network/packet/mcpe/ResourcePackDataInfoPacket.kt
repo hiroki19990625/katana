@@ -3,14 +3,17 @@ package jp.katana.server.network.packet.mcpe
 class ResourcePackDataInfoPacket : MinecraftPacket() {
     companion object {
         const val TYPE_INVALID = 0
-        const val TYPE_RESOURCE = 1
-        const val TYPE_BEHAVIOR = 2
-        const val TYPE_WORLD_TEMPLATE = 3
-        const val TYPE_ADDON = 4
-        const val TYPE_SKINS = 5
-        const val TYPE_CACHED = 6
-        const val TYPE_COPY_PROTECTED = 7
+        const val TYPE_ADDON = 1
+        const val TYPE_CACHED = 2
+        const val TYPE_COPY_PROTECTED = 3
+        const val TYPE_BEHAVIOR = 4
+        const val TYPE_PERSONA_PIECE = 5
+        const val TYPE_RESOURCE = 6
+        const val TYPE_SKINS = 7
+        const val TYPE_WORLD_TEMPLATE = 8
+        const val TYPE_COUNT = 9
 
+        const val MB_10 = 10485760
         const val MB_1 = 1048576
         const val KB_512 = 524288
         const val KB_256 = 262144
