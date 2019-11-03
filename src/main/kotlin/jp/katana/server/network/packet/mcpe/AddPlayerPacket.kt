@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.math.Vector3
 import java.util.*
 
@@ -25,10 +27,10 @@ class AddPlayerPacket : MinecraftPacket() {
 
     override fun decodePayload() {
         uuid = readUUID()
-        username = readString()
+        username = readVarString()
         actorUniqueId = readActorUniqueId()
         actorRuntimeId = readActorRuntimeId()
-        platformChatId = readString()
+        platformChatId = readVarString()
         position = readVector3()
         motion = readVector3()
         pitch = readFloatLE()
@@ -39,15 +41,15 @@ class AddPlayerPacket : MinecraftPacket() {
         // adventure settings
         long = readLongLE()
         // actor link
-        deviceId = readString()
+        deviceId = readVarString()
     }
 
     override fun encodePayload() {
         writeUUID(uuid)
-        writeString(username)
+        writeVarString(username)
         writeActorUniqueId(actorUniqueId)
         writeActorRuntimeId(actorRuntimeId)
-        writeString(platformChatId)
+        writeVarString(platformChatId)
         writeVector3(position)
         writeVector3(motion)
         writeFloatLE(pitch.toDouble())
@@ -58,6 +60,10 @@ class AddPlayerPacket : MinecraftPacket() {
         // adventure settings
         writeLongLE(long)
         // actor link
-        writeString(deviceId)
+        writeVarString(deviceId)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }

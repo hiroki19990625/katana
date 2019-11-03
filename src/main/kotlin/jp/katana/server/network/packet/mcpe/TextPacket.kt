@@ -1,5 +1,8 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
+
 class TextPacket : MinecraftPacket() {
     companion object {
         const val TYPE_RAW: Byte = 0
@@ -29,23 +32,23 @@ class TextPacket : MinecraftPacket() {
         needTranslation = readBoolean()
         when (type) {
             TYPE_CHAT, TYPE_WHISPER, TYPE_ANNOUNCEMENT -> {
-                sourceName = readString()
-                message = readString()
+                sourceName = readVarString()
+                message = readVarString()
             }
             TYPE_RAW, TYPE_TIP, TYPE_SYSTEM, TYPE_JSON -> {
-                message = readString()
+                message = readVarString()
             }
             TYPE_TRANSLATION, TYPE_POPUP, TYPE_JUKEBOX_POPUP -> {
-                message = readString()
+                message = readVarString()
                 val count = readUnsignedVarInt()
                 for (i in 0 until count) {
-                    parameters[i] = readString()
+                    parameters[i] = readVarString()
                 }
             }
         }
 
-        xboxUserId = readString()
-        platformChatId = readString()
+        xboxUserId = readVarString()
+        platformChatId = readVarString()
     }
 
     override fun encodePayload() {
@@ -53,22 +56,26 @@ class TextPacket : MinecraftPacket() {
         writeBoolean(needTranslation)
         when (type) {
             TYPE_CHAT, TYPE_WHISPER, TYPE_ANNOUNCEMENT -> {
-                writeString(sourceName)
-                writeString(message)
+                writeVarString(sourceName)
+                writeVarString(message)
             }
             TYPE_RAW, TYPE_TIP, TYPE_SYSTEM, TYPE_JSON -> {
-                writeString(message)
+                writeVarString(message)
             }
             TYPE_TRANSLATION, TYPE_POPUP, TYPE_JUKEBOX_POPUP -> {
-                writeString(message)
+                writeVarString(message)
                 writeUnsignedVarInt(parameters.size)
                 for (parameter in parameters) {
-                    writeString(parameter)
+                    writeVarString(parameter)
                 }
             }
         }
 
-        writeString(xboxUserId)
-        writeString(platformChatId)
+        writeVarString(xboxUserId)
+        writeVarString(platformChatId)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }

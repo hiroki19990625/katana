@@ -6,7 +6,7 @@ import com.whirvis.jraknet.server.RakNetServer
 import com.whirvis.jraknet.server.RakNetServerListener
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
-import jp.katana.server.actor.Player
+import jp.katana.server.actor.ActorPlayer
 import jp.katana.server.event.player.PlayerCreateEvent
 import jp.katana.server.factory.PacketFactory
 import jp.katana.server.network.packet.BatchPacket
@@ -27,7 +27,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             server.eventManager(event)
 
             if (event.player == null)
-                event.player = Player(address, server)
+                event.player = ActorPlayer(address, server)
 
             networkManager.addPlayer(address, event.player!!)
             networkManager.addSession(address, peer)

@@ -1,5 +1,8 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
+
 class ServerToClientHandshakePacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.SERVER_TO_CLIENT_HANDSHAKE_PACKET
 
@@ -11,5 +14,9 @@ class ServerToClientHandshakePacket : MinecraftPacket() {
 
     override fun encodePayload() {
         writeVarString(token)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }

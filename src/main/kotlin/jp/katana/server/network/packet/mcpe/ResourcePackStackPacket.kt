@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.data.IResourcePackInfo
 import jp.katana.server.Server
 import jp.katana.server.data.ResourcePackInfo
@@ -29,6 +31,10 @@ class ResourcePackStackPacket : MinecraftPacket() {
         writePacks(resourcePackStack)
 
         writeVarString(gameVersion)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 
     private fun readPacks(list: MutableList<IResourcePackInfo>) {

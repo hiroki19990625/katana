@@ -140,8 +140,8 @@ open class BinaryStream : Packet() {
         writeBoolean(skin.personaSkin)
         writeBoolean(skin.capeOnClassicSkin)
 
-        writeString(skin.capeId)
-        writeString(skin.fullSkinId)
+        writeVarString(skin.capeId)
+        writeVarString(skin.fullSkinId)
     }
 
     fun readBlockPosition(): Vector3Int {

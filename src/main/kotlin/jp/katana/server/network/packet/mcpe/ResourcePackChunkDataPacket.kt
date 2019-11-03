@@ -1,5 +1,8 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
+
 class ResourcePackChunkDataPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACK_CHUNK_DATA_PACKET
 
@@ -21,5 +24,9 @@ class ResourcePackChunkDataPacket : MinecraftPacket() {
         writeLongLE(progress)
         writeUnsignedVarInt(data.size)
         write(*data)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }
