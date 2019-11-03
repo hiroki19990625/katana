@@ -1,5 +1,8 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
+
 class SetTimePacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.SET_TIME_PACKET
 
@@ -11,5 +14,9 @@ class SetTimePacket : MinecraftPacket() {
 
     override fun encodePayload() {
         writeVarInt(time)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }

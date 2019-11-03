@@ -1,5 +1,7 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.math.Vector2Int
 
 class LevelChunkPacket : MinecraftPacket() {
@@ -48,5 +50,9 @@ class LevelChunkPacket : MinecraftPacket() {
 
         writeUnsignedVarInt(data.size)
         write(*data)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }

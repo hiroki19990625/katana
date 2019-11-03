@@ -1,5 +1,8 @@
 package jp.katana.server.network.packet.mcpe
 
+import jp.katana.core.IServer
+import jp.katana.core.actor.IActorPlayer
+
 class PlayStatusPacket : MinecraftPacket() {
     companion object {
         const val LOGIN_SUCCESS = 0
@@ -22,5 +25,9 @@ class PlayStatusPacket : MinecraftPacket() {
 
     override fun encodePayload() {
         writeInt(status)
+    }
+
+    override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
     }
 }
