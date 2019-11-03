@@ -75,11 +75,12 @@ tasks.test {
 
 dokka {
     outputFormat = 'html'
-    outputDirectory = "$buildDir/javadoc"
+    outputDirectory = "$buildDir/dokka"
+    outputFormat = "javadoc"
 }
 
 gitProperties {
-    gitPropertiesDir = "${project.rootDir}/src/main/resources"
+    gitPropertiesResourceDir = "${project.rootDir}/src/main/resources"
 }
 
 publishing {
