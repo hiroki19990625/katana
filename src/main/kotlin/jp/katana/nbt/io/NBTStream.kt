@@ -11,7 +11,7 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
     }
 
     fun writeByte(value: Byte) {
-        stream.writeByte(value.toInt())
+        stream.writeByte(value)
     }
 
     fun readShort(): Short {
@@ -23,9 +23,9 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
 
     fun writeShort(value: Short) {
         if (endian == Endian.Little)
-            stream.writeShortLE(value.toInt())
+            stream.writeShortLE(value)
         else
-            stream.writeShort(value.toInt())
+            stream.writeShort(value)
     }
 
     fun readInt(): Int {
@@ -81,9 +81,9 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
 
     fun writeFloat(value: Float) {
         if (endian == Endian.Little)
-            stream.writeFloatLE(value.toDouble())
+            stream.writeFloatLE(value)
         else
-            stream.writeFloat(value.toDouble())
+            stream.writeFloat(value)
     }
 
     fun readDouble(): Double {
@@ -117,7 +117,7 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
 
         val buf = value.toByteArray()
         writeShort(buf.size.toShort())
-        stream.write(*buf)
+        stream.write(buf)
     }
 
     fun getBuffer(): ByteArray {
@@ -129,11 +129,10 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
     }
 
     fun readRemaining(): ByteArray {
-        return stream.read(stream.remaining())
+        return stream.readRemaining()
     }
 
     fun close() {
-        stream.clear()
-        stream.buffer().release()
+        stream.close()
     }
 }

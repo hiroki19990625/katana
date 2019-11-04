@@ -34,15 +34,14 @@ class SubChunk(override val y: Int) : ISubChunk {
 
     override fun networkSerialize(): ByteArray {
         val stream = BinaryStream()
-        stream.writeByte(ISubChunk.VERSION)
+        stream.writeByte(ISubChunk.VERSION.toByte())
 
-        stream.writeByte(ISubChunk.LAYER)
+        stream.writeByte(ISubChunk.LAYER.toByte())
         writePalette(stream, blocks)
         writePalette(stream, liquids)
 
         val buf = stream.array()
-        stream.clear()
-        stream.buffer().release()
+        stream.close()
         return buf
     }
 
@@ -76,7 +75,7 @@ class SubChunk(override val y: Int) : ISubChunk {
             in 9..16 -> bitsPerBlock = 16
         }
 
-        stream.writeByte(bitsPerBlock shl 1 or 1)
+        stream.writeByte((bitsPerBlock shl 1 or 1).toByte())
 
         val blocksPerWord = floor(32f / bitsPerBlock).toInt()
         val wordsPerChunk = ceil(4096f / blocksPerWord).toInt()

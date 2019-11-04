@@ -9,9 +9,7 @@ class VarInt {
             var b: Int = stream.readByte().toInt()
             while (b and 0x80 == 0x80) {
                 value = value or ((b and 0x7F).toLong() shl size++ * 7)
-                if (size >= maxSize) {
-                    throw IllegalArgumentException("VarLong too big")
-                }
+                require(size < maxSize) { "VarLong too big" }
                 b = stream.readByte().toInt()
             }
 
@@ -27,7 +25,7 @@ class VarInt {
                 if (vl != 0L) {
                     temp = (temp.toInt() or 128).toByte()
                 }
-                stream.writeByte(temp.toInt())
+                stream.writeByte(temp)
             } while (vl != 0L)
         }
 

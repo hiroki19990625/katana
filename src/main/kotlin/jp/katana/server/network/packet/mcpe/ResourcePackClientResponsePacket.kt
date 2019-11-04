@@ -33,8 +33,8 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
     }
 
     override fun encodePayload() {
-        writeByte(status.toInt())
-        writeShortLE(packEntries.size)
+        writeByte(status)
+        writeShortLE(packEntries.size.toShort())
         for (entry in packEntries) {
             writeVarString(entry.uuid.toString() + '_' + entry.version)
         }

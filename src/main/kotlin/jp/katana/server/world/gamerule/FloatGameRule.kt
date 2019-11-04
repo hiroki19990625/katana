@@ -10,8 +10,8 @@ class FloatGameRule(name: String, override var value: Float) : IGameRule<Float> 
 
     override fun write(stream: BinaryStream) {
         stream.writeVarString(name.toLowerCase())
-        stream.writeByte(type.toInt())
-        stream.writeFloatLE(value.toDouble())
+        stream.writeByte(type)
+        stream.writeFloatLE(value)
     }
 
     override fun read(stream: BinaryStream) {

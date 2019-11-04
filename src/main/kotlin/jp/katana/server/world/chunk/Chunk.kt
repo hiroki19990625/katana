@@ -36,10 +36,10 @@ class Chunk(override val world: IWorld, override val pos: Vector2Int) : IChunk {
 
         val stream = BinaryStream()
         for (i in 0 until sendChunk) {
-            stream.write(*columns[i].networkSerialize())
+            stream.write(columns[i].networkSerialize())
         }
 
-        stream.write(*biomes)
+        stream.write(biomes)
         stream.writeByte(0) // Border
 
         // TODO: BlockEntity
@@ -48,8 +48,7 @@ class Chunk(override val world: IWorld, override val pos: Vector2Int) : IChunk {
         packet.subChunkCount = sendChunk
         packet.data = stream.array()
 
-        stream.clear()
-        stream.buffer().release()
+        stream.close()
 
         return packet
     }

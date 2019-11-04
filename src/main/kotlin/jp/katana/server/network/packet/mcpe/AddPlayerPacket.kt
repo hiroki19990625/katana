@@ -52,9 +52,9 @@ class AddPlayerPacket : MinecraftPacket() {
         writeVarString(platformChatId)
         writeVector3(position)
         writeVector3(motion)
-        writeFloatLE(pitch.toDouble())
-        writeFloatLE(yaw.toDouble())
-        writeFloatLE(headYaw.toDouble())
+        writeFloatLE(pitch)
+        writeFloatLE(yaw)
+        writeFloatLE(headYaw)
         // item
         // metadata
         // adventure settings

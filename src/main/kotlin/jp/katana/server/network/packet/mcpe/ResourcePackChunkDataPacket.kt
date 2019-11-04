@@ -23,7 +23,7 @@ class ResourcePackChunkDataPacket : MinecraftPacket() {
         writeIntLE(chunkIndex)
         writeLongLE(progress)
         writeUnsignedVarInt(data.size)
-        write(*data)
+        write(data)
     }
 
     override fun handle(player: IActorPlayer, server: IServer) {
