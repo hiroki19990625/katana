@@ -168,7 +168,7 @@ class Server : IServer {
         }
 
         val event = ServerStartEvent(this)
-        eventManager(event)
+        eventManager(event, ServerStartEvent::class.java)
 
         mainThread.start()
     }
@@ -182,7 +182,7 @@ class Server : IServer {
         logger.info(I18n["katana.server.stopping"])
 
         val event = ServerStopEvent(this)
-        eventManager(event)
+        eventManager(event, ServerStopEvent::class.java)
 
         try {
             saveServerProperties()
@@ -330,7 +330,7 @@ class Server : IServer {
 
             if (update(totalTick++)) {
                 val event = ServerUpdateTickEvent(this, totalTick - 1)
-                eventManager(event)
+                eventManager(event, ServerUpdateTickEvent::class.java)
             }
 
             now = System.currentTimeMillis() shl 16
