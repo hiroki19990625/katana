@@ -4,7 +4,9 @@ import jp.katana.core.block.IBlockDefine
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.nbt.Endian
 import jp.katana.nbt.io.NBTIO
-import jp.katana.nbt.tag.*
+import jp.katana.nbt.tag.CompoundTag
+import jp.katana.nbt.tag.INamedTag
+import jp.katana.nbt.tag.ListTag
 import java.io.IOException
 
 class BlockDefinitions : IBlockDefinitions {
@@ -17,19 +19,19 @@ class BlockDefinitions : IBlockDefinitions {
             this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
 
         val root = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
-        val list = root.getList("Palette");
+        val list = root.getListTag("Palette");
         for (i in 0 until list.size()) {
             val com = list.getCompoundTag(i)
-            val block = com.getCompound("block")
+            val block = com.getCompoundTag("block")
             val states = mutableMapOf<String, INamedTag>()
-            for (state in block.getCompound("states").getAll())
+            for (state in block.getCompoundTag("states").getAllTag())
                 states[state.key] = state.value
             val define =
                 BlockDefine(
                     i,
-                    block.getString("name").value,
-                    com.getShort("id").value,
-                    block.getInt("version").value,
+                    block.getString("name"),
+                    com.getShort("id"),
+                    block.getInt("version"),
                     states
                 )
             defines.add(define)
@@ -72,14 +74,14 @@ class BlockDefinitions : IBlockDefinitions {
                 val bt = CompoundTag("block")
                 val states = CompoundTag("states")
                 for (state in block.states) {
-                    states.put(state.value)
+                    states.putTag(state.value)
                 }
-                bt.put(StringTag("name", block.name))
-                bt.put(IntTag("version", block.version))
-                bt.put(states)
-                el.put(bt)
-                el.put(ShortTag("id", block.id))
-                list.add(el)
+                bt.putString("name", block.name)
+                bt.putInt("version", block.version)
+                bt.putTag(states)
+                el.putTag(bt)
+                el.putShort("id", block.id)
+                list.addTag(el)
             }
 
             prevSize = size()

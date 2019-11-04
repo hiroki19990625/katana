@@ -16,98 +16,98 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
     }
 
     fun addBoolean(value: Boolean): Boolean {
-        return if (type == INamedTag.BYTE)
+        return if (listType == INamedTag.BYTE)
             list.add(ByteTag("", if (value) 1 else 0))
         else
             false
     }
 
     fun addByte(value: Byte): Boolean {
-        return if (type == INamedTag.BYTE)
+        return if (listType == INamedTag.BYTE)
             list.add(ByteTag("", value))
         else
             false
     }
 
     fun addShort(value: Short): Boolean {
-        return if (type == INamedTag.SHORT)
+        return if (listType == INamedTag.SHORT)
             list.add(ShortTag("", value))
         else
             false
     }
 
     fun addInt(value: Int): Boolean {
-        return if (type == INamedTag.INT)
+        return if (listType == INamedTag.INT)
             list.add(IntTag("", value))
         else
             false
     }
 
     fun addLong(value: Long): Boolean {
-        return if (type == INamedTag.LONG)
+        return if (listType == INamedTag.LONG)
             list.add(LongTag("", value))
         else
             false
     }
 
     fun addFloat(value: Float): Boolean {
-        return if (type == INamedTag.FLOAT)
+        return if (listType == INamedTag.FLOAT)
             list.add(FloatTag("", value))
         else
             false
     }
 
     fun addDouble(value: Double): Boolean {
-        return if (type == INamedTag.DOUBLE)
+        return if (listType == INamedTag.DOUBLE)
             list.add(DoubleTag("", value))
         else
             false
     }
 
     fun addString(value: String): Boolean {
-        return if (type == INamedTag.STRING)
+        return if (listType == INamedTag.STRING)
             list.add(StringTag("", value))
         else
             false
     }
 
     fun addByteArray(value: Array<Byte>): Boolean {
-        return if (type == INamedTag.BYTE_ARRAY)
+        return if (listType == INamedTag.BYTE_ARRAY)
             list.add(ByteArrayTag("", value))
         else
             false
     }
 
     fun addByteArray(value: ByteArray): Boolean {
-        return if (type == INamedTag.BYTE_ARRAY)
+        return if (listType == INamedTag.BYTE_ARRAY)
             list.add(ByteArrayTag("", value.toTypedArray()))
         else
             false
     }
 
     fun addIntArray(value: Array<Int>): Boolean {
-        return if (type == INamedTag.INT_ARRAY)
+        return if (listType == INamedTag.INT_ARRAY)
             list.add(IntArrayTag("", value))
         else
             false
     }
 
     fun addIntArray(value: IntArray): Boolean {
-        return if (type == INamedTag.INT_ARRAY)
+        return if (listType == INamedTag.INT_ARRAY)
             list.add(IntArrayTag("", value.toTypedArray()))
         else
             false
     }
 
     fun addLongArray(value: Array<Long>): Boolean {
-        return if (type == INamedTag.LONG_ARRAY)
+        return if (listType == INamedTag.LONG_ARRAY)
             list.add(LongArrayTag("", value))
         else
             false
     }
 
     fun addLongArray(value: LongArray): Boolean {
-        return if (type == INamedTag.LONG_ARRAY)
+        return if (listType == INamedTag.LONG_ARRAY)
             list.add(LongArrayTag("", value.toTypedArray()))
         else
             false

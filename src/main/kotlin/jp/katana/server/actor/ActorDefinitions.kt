@@ -8,7 +8,9 @@ import jp.katana.core.actor.IActorDefine
 import jp.katana.core.actor.IActorDefinitions
 import jp.katana.nbt.Endian
 import jp.katana.nbt.io.NBTIO
-import jp.katana.nbt.tag.*
+import jp.katana.nbt.tag.CompoundTag
+import jp.katana.nbt.tag.INamedTag
+import jp.katana.nbt.tag.ListTag
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
@@ -66,15 +68,15 @@ class ActorDefinitions : IActorDefinitions {
             val list = ListTag("idlist", INamedTag.COMPOUND)
             for (actor in defines) {
                 val define = CompoundTag("")
-                define.put(ByteTag("hasspawnegg", actor.hasSpawnEgg.toByte()))
-                define.put(ByteTag("experimental", actor.experimental.toByte()))
-                define.put(ByteTag("summonable", actor.summonable.toByte()))
-                define.put(StringTag("id", actor.id))
-                define.put(StringTag("bid", actor.bid))
-                define.put(IntTag("rid", actor.rid))
-                list.add(define)
+                define.putByte("hasspawnegg", actor.hasSpawnEgg.toByte())
+                define.putByte("experimental", actor.experimental.toByte())
+                define.putByte("summonable", actor.summonable.toByte())
+                define.putString("id", actor.id)
+                define.putString("bid", actor.bid)
+                define.putInt("rid", actor.rid)
+                list.addTag(define)
             }
-            compound.put(list)
+            compound.putTag(list)
             prevSize = size()
             binaryData = NBTIO.writeTag(compound, Endian.Little, true)
             binaryData
