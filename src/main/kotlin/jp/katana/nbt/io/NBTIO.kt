@@ -6,6 +6,7 @@ import jp.katana.nbt.tag.INamedTag
 import java.util.zip.Deflater
 import java.util.zip.Inflater
 
+@Suppress("UNCHECKED_CAST")
 class NBTIO {
     companion object {
         fun write(tag: CompoundTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
