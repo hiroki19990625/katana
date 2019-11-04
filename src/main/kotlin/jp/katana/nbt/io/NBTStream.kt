@@ -128,8 +128,8 @@ class NBTStream(private val endian: Endian, private val isNetwork: Boolean) {
         stream.setBuffer(buffer)
     }
 
-    fun remaining(): Int {
-        return stream.remaining()
+    fun readRemaining(): ByteArray {
+        return stream.read(stream.remaining())
     }
 
     fun close() {

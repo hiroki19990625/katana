@@ -55,7 +55,7 @@ class NBTIO {
             buffer: ByteArray,
             endian: Endian = Endian.Little,
             isNetwork: Boolean = false
-        ): Pair<INamedTag, Int> {
+        ): Pair<INamedTag, ByteArray> {
             val stream = NBTStream(endian, isNetwork)
             stream.setBuffer(buffer)
 
@@ -63,12 +63,12 @@ class NBTIO {
             val tag = INamedTag.getTag(type, stream.readString())
             tag.read(stream)
 
-            val r = tag to stream.remaining()
+            val r = tag to stream.readRemaining()
             stream.close()
 
             return r
         }
-        
+
         fun <T : INamedTag> readTagCast(
             buffer: ByteArray,
             endian: Endian = Endian.Little,
@@ -81,7 +81,7 @@ class NBTIO {
             buffer: ByteArray,
             endian: Endian = Endian.Little,
             isNetwork: Boolean = false
-        ): Pair<T, Int> {
+        ): Pair<T, ByteArray> {
             val pair = readTagRemaining(buffer, endian, isNetwork)
             return pair.first as T to pair.second
         }
