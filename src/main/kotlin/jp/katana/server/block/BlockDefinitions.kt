@@ -4,8 +4,7 @@ import jp.katana.core.block.IBlockDefine
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.nbt.Endian
 import jp.katana.nbt.io.NBTIO
-import jp.katana.nbt.tag.CompoundTag
-import jp.katana.nbt.tag.INamedTag
+import jp.katana.nbt.tag.*
 import java.io.IOException
 
 class BlockDefinitions : IBlockDefinitions {
@@ -14,10 +13,11 @@ class BlockDefinitions : IBlockDefinitions {
     private var binaryData: ByteArray = ByteArray(0)
 
     init {
-        /*val stream =
+        val stream =
             this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
-        binaryData = stream.readBytes()
-        val list = NBTIO.readTag(binaryData, Endian.Little, true) as ListTag
+
+        val root = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
+        val list = root.getList("Palette");
         for (i in 0 until list.size()) {
             val com = list.getCompound(i)
             val block = com.getCompound("block")
@@ -33,12 +33,10 @@ class BlockDefinitions : IBlockDefinitions {
                     states
                 )
             defines.add(define)
-        }*/
-        val stream =
-            this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
+        }
 
-        val list = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
-        binaryData = NBTIO.writeTag(list.getList("Palette"), Endian.Little, true)
+        prevSize = size()
+        binaryData = NBTIO.writeTag(list, Endian.Little, true)
     }
 
     override fun fromRuntime(runtimeId: Int): IBlockDefine {
@@ -67,7 +65,28 @@ class BlockDefinitions : IBlockDefinitions {
     }
 
     override fun binary(): ByteArray {
-        // TODO: Update Binary...
-        return binaryData
+        return if (prevSize != defines.size) {
+            val list = ListTag("Palette", INamedTag.COMPOUND)
+            for (block in defines) {
+                val el = CompoundTag("")
+                val bt = CompoundTag("block")
+                val states = CompoundTag("states")
+                for (state in block.states) {
+                    states.put(state.value)
+                }
+                bt.put(StringTag("name", block.name))
+                bt.put(IntTag("version", block.version))
+                bt.put(states)
+                el.put(bt)
+                el.put(ShortTag("id", block.id))
+                list.add(el)
+            }
+
+            prevSize = size()
+            binaryData = NBTIO.writeTag(list, Endian.Little, true)
+            binaryData
+        } else {
+            binaryData
+        }
     }
 }

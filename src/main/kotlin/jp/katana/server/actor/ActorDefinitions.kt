@@ -75,6 +75,7 @@ class ActorDefinitions : IActorDefinitions {
                 list.add(define)
             }
             compound.put(list)
+            prevSize = size()
             binaryData = NBTIO.writeTag(compound, Endian.Little, true)
             binaryData
         } else {
