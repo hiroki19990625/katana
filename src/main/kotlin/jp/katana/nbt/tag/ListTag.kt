@@ -8,7 +8,7 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
         private set
     private val list = mutableListOf<INamedTag>()
 
-    fun add(tag: INamedTag): Boolean {
+    fun addTag(tag: INamedTag): Boolean {
         return if (tag.type == listType)
             list.add(tag)
         else
@@ -237,7 +237,7 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
         return list.contains(tag)
     }
 
-    fun removeAll() {
+    fun removeAllTag() {
         list.clear()
     }
 
