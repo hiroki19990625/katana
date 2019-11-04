@@ -69,6 +69,8 @@ class BiomeDefinitions : IBiomeDefinitions {
                 define.put(FloatTag("downfall", biome.downfall))
                 compound.put(define)
             }
+
+            prevSize = size()
             binaryData = NBTIO.writeTag(compound, Endian.Little, true)
             binaryData
         } else {

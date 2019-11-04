@@ -71,6 +71,7 @@ class ItemDefinitions : IItemDefinitions {
                 }
             }
 
+            prevSize = size()
             binaryData = stream.array()
             stream.clear()
             stream.buffer().release()
