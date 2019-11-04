@@ -19,7 +19,7 @@ class BlockDefinitions : IBlockDefinitions {
         val root = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
         val list = root.getList("Palette");
         for (i in 0 until list.size()) {
-            val com = list.getCompound(i)
+            val com = list.getCompoundTag(i)
             val block = com.getCompound("block")
             val states = mutableMapOf<String, INamedTag>()
             for (state in block.getCompound("states").getAll())
