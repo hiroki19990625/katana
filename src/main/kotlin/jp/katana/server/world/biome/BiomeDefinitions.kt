@@ -9,7 +9,6 @@ import jp.katana.core.world.biome.IBiomeDefinitions
 import jp.katana.nbt.Endian
 import jp.katana.nbt.io.NBTIO
 import jp.katana.nbt.tag.CompoundTag
-import jp.katana.nbt.tag.FloatTag
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
@@ -65,9 +64,9 @@ class BiomeDefinitions : IBiomeDefinitions {
             val compound = CompoundTag("")
             for (biome in defines) {
                 val define = CompoundTag(biome.name)
-                define.put(FloatTag("temperature", biome.temperature))
-                define.put(FloatTag("downfall", biome.downfall))
-                compound.put(define)
+                define.putFloat("temperature", biome.temperature)
+                define.putFloat("downfall", biome.downfall)
+                compound.putTag(define)
             }
 
             prevSize = size()

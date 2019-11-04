@@ -6,7 +6,7 @@ class CompoundTag(override var name: String) : INamedTag {
     override val type: Byte = INamedTag.COMPOUND
     private val map = mutableMapOf<String, INamedTag>()
 
-    fun put(tag: INamedTag): Boolean {
+    fun putTag(tag: INamedTag): Boolean {
         val name = tag.name
         if (name.isNotEmpty()) {
             map[tag.name] = tag
@@ -16,67 +16,171 @@ class CompoundTag(override var name: String) : INamedTag {
         return false
     }
 
-    fun getByte(name: String): ByteTag {
+    fun putBoolean(name: String, value: Boolean): Boolean {
+        return putTag(ByteTag(name, if (value) 1 else 0))
+    }
+
+    fun putByte(name: String, value: Byte): Boolean {
+        return putTag(ByteTag(name, value))
+    }
+
+    fun putShort(name: String, value: Short): Boolean {
+        return putTag(ShortTag(name, value))
+    }
+
+    fun putInt(name: String, value: Int): Boolean {
+        return putTag(IntTag(name, value))
+    }
+
+    fun putLong(name: String, value: Long): Boolean {
+        return putTag(LongTag(name, value))
+    }
+
+    fun putFloat(name: String, value: Float): Boolean {
+        return putTag(FloatTag(name, value))
+    }
+
+    fun putDouble(name: String, value: Double): Boolean {
+        return putTag(DoubleTag(name, value))
+    }
+
+    fun putString(name: String, value: String): Boolean {
+        return putTag(StringTag(name, value))
+    }
+
+    fun putByteArray(name: String, value: Array<Byte>): Boolean {
+        return putTag(ByteArrayTag(name, value))
+    }
+
+    fun putByteArray(name: String, value: ByteArray): Boolean {
+        return putByteArray(name, value.toTypedArray())
+    }
+
+    fun putIntArray(name: String, value: Array<Int>): Boolean {
+        return putTag(IntArrayTag(name, value))
+    }
+
+    fun putIntArray(name: String, value: IntArray): Boolean {
+        return putIntArray(name, value.toTypedArray())
+    }
+
+    fun putLongArray(name: String, value: Array<Long>): Boolean {
+        return putTag(LongArrayTag(name, value))
+    }
+
+    fun putLongArray(name: String, value: LongArray): Boolean {
+        return putLongArray(name, value.toTypedArray())
+    }
+
+    fun getBoolean(name: String): Boolean {
+        return getByteTag(name).value == 1.toByte()
+    }
+
+    fun getByteTag(name: String): ByteTag {
         return map[name] as ByteTag
     }
 
-    fun getShort(name: String): ShortTag {
+    fun getByte(name: String): Byte {
+        return getByteTag(name).value
+    }
+
+    fun getShortTag(name: String): ShortTag {
         return map[name] as ShortTag
     }
 
-    fun getInt(name: String): IntTag {
+    fun getShort(name: String): Short {
+        return getShortTag(name).value
+    }
+
+    fun getIntTag(name: String): IntTag {
         return map[name] as IntTag
     }
 
-    fun getLong(name: String): LongTag {
+    fun getInt(name: String): Int {
+        return getIntTag(name).value
+    }
+
+    fun getLongTag(name: String): LongTag {
         return map[name] as LongTag
     }
 
-    fun getFloat(name: String): FloatTag {
+    fun getLong(name: String): Long {
+        return getLongTag(name).value
+    }
+
+    fun getFloatTag(name: String): FloatTag {
         return map[name] as FloatTag
     }
 
-    fun getDouble(name: String): DoubleTag {
+    fun getFloat(): Float {
+        return getFloatTag(name).value
+    }
+
+    fun getDoubleTag(name: String): DoubleTag {
         return map[name] as DoubleTag
     }
 
-    fun getByteArray(name: String): ByteArrayTag {
+    fun getDouble(name: String): Double {
+        return getDoubleTag(name).value
+    }
+
+    fun getByteArrayTag(name: String): ByteArrayTag {
         return map[name] as ByteArrayTag
     }
 
-    fun getString(name: String): StringTag {
+    fun getByteArray(name: String): Array<Byte> {
+        return getByteArrayTag(name).value
+    }
+
+    fun getStringTag(name: String): StringTag {
         return map[name] as StringTag
     }
 
-    fun getList(name: String): ListTag {
+    fun getString(name: String): String {
+        return getStringTag(name).value
+    }
+
+    fun getListTag(name: String): ListTag {
         return map[name] as ListTag
     }
 
-    fun getCompound(name: String): CompoundTag {
+    fun getCompoundTag(name: String): CompoundTag {
         return map[name] as CompoundTag
     }
 
-    fun getIntArray(name: String): IntArrayTag {
+    fun getIntArrayTag(name: String): IntArrayTag {
         return map[name] as IntArrayTag
     }
 
-    fun getLongArray(name: String): LongArrayTag {
+    fun getIntArray(name: String): Array<Int> {
+        return getIntArrayTag(name).value
+    }
+
+    fun getLongArrayTag(name: String): LongArrayTag {
         return map[name] as LongArrayTag
+    }
+
+    fun getLongArray(name: String): Array<Long> {
+        return getLongArrayTag(name).value
     }
 
     operator fun get(name: String): INamedTag {
         return map[name]!!
     }
 
-    fun getAll(): Map<String, INamedTag> {
+    operator fun set(name: String, tag: INamedTag) {
+        map[name] = tag
+    }
+
+    fun getAllTag(): Map<String, INamedTag> {
         return map.toMap()
     }
 
-    fun remove(name: String) {
+    fun removeTag(name: String) {
         map.remove(name)
     }
 
-    fun removeAll() {
+    fun removeAllTag() {
         map.clear()
     }
 
