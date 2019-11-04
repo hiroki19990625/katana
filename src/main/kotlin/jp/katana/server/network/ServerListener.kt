@@ -24,7 +24,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             logger.info(I18n["katana.server.client.connection", address, peer.maximumTransferUnit])
 
             val event = PlayerCreateEvent()
-            server.eventManager(event)
+            server.eventManager(event, PlayerCreateEvent::class.java)
 
             if (event.player == null)
                 event.player = ActorPlayer(address, server)
