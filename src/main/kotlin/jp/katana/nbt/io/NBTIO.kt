@@ -51,6 +51,41 @@ class NBTIO {
             return tag
         }
 
+        fun readTagRemaining(
+            buffer: ByteArray,
+            endian: Endian = Endian.Little,
+            isNetwork: Boolean = false
+        ): Pair<INamedTag, Int> {
+            val stream = NBTStream(endian, isNetwork)
+            stream.setBuffer(buffer)
+
+            val type = stream.readByte()
+            val tag = INamedTag.getTag(type, stream.readString())
+            tag.read(stream)
+
+            val r = tag to stream.remaining()
+            stream.close()
+
+            return r
+        }
+        
+        fun <T : INamedTag> readTagCast(
+            buffer: ByteArray,
+            endian: Endian = Endian.Little,
+            isNetwork: Boolean = false
+        ): T {
+            return readTag(buffer, endian, isNetwork) as T
+        }
+
+        fun <T : INamedTag> readTagCastRemaining(
+            buffer: ByteArray,
+            endian: Endian = Endian.Little,
+            isNetwork: Boolean = false
+        ): Pair<T, Int> {
+            val pair = readTagRemaining(buffer, endian, isNetwork)
+            return pair.first as T to pair.second
+        }
+
         fun writeZlibTag(tag: CompoundTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
             val buffer = writeTag(tag, endian, isNetwork)
 
