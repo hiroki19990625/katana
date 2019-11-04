@@ -10,7 +10,7 @@ class BooleanGameRule(name: String, override var value: Boolean) : IGameRule<Boo
 
     override fun write(stream: BinaryStream) {
         stream.writeVarString(name.toLowerCase())
-        stream.writeByte(type.toInt())
+        stream.writeByte(type)
         stream.writeBoolean(value)
     }
 

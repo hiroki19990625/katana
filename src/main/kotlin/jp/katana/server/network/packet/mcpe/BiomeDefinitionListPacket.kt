@@ -9,11 +9,11 @@ class BiomeDefinitionListPacket : MinecraftPacket() {
     var tag: ByteArray = ByteArray(0)
 
     override fun decodePayload() {
-        tag = read(remaining())
+        tag = readRemaining()
     }
 
     override fun encodePayload() {
-        write(*tag)
+        write(tag)
     }
 
     override fun handle(player: IActorPlayer, server: IServer) {

@@ -10,7 +10,7 @@ class IntGameRule(name: String, override var value: Int) : IGameRule<Int> {
 
     override fun write(stream: BinaryStream) {
         stream.writeVarString(name.toLowerCase())
-        stream.writeByte(type.toInt())
+        stream.writeByte(type)
         stream.writeVarInt(value)
     }
 

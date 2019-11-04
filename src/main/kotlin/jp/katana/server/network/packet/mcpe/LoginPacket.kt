@@ -54,8 +54,7 @@ class LoginPacket : MinecraftPacket() {
         val client = String(stream.read(clientLen), Charset.forName("utf8"))
         clientData.decode(loginData.publicKey!!, client)
 
-        stream.clear()
-        stream.buffer().release()
+        stream.close()
     }
 
     override fun encodePayload() {

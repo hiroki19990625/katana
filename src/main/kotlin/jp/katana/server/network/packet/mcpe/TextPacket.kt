@@ -52,7 +52,7 @@ class TextPacket : MinecraftPacket() {
     }
 
     override fun encodePayload() {
-        writeByte(type.toInt())
+        writeByte(type)
         writeBoolean(needTranslation)
         when (type) {
             TYPE_CHAT, TYPE_WHISPER, TYPE_ANNOUNCEMENT -> {

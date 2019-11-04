@@ -42,18 +42,18 @@ class ServerListener(private val server: Server, private val networkManager: Net
         reason: String?
     ) {
         if (peer != null) {
-            val address = peer.address
-            val player = networkManager.getPlayer(address)!!
+            val socketAddress = peer.address
+            val player = networkManager.getPlayer(socketAddress)!!
             player.onDisconnect(reason)
-            logger.info(I18n["katana.server.client.disConnection", address, reason ?: "none"])
-            networkManager.removePlayer(address)
-            networkManager.removeSession(address)
+            logger.info(I18n["katana.server.client.disConnection", socketAddress, reason ?: "none"])
+            networkManager.removePlayer(socketAddress)
+            networkManager.removeSession(socketAddress)
             networkManager.updateOnlinePlayerCount()
         }
     }
 
     override fun handleMessage(server: RakNetServer?, peer: RakNetClientPeer?, packet: RakNetPacket?, channel: Int) {
-        if (peer != null) {
+        if (peer != null && packet != null) {
             val address = peer.address
             val player = networkManager.getPlayer(address)!!
             val batch = BatchPacket()
@@ -63,7 +63,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             batch.decryptCounter = player.decryptCounter
             batch.encryptCounter = player.encryptCounter
             batch.sharedKey = player.sharedKey
-            batch.setBuffer(packet?.array())
+            batch.setBuffer(packet.array())
             batch.decode()
 
             if (player.isEncrypted)
@@ -87,15 +87,12 @@ class ServerListener(private val server: Server, private val networkManager: Net
 
                 networkManager.handlePacket(address, pk)
 
-                pk.clear()
-                pk.buffer()?.release()
+                pk.close()
             }
-            data.clear()
-            data.buffer().release()
-            batch.clear()
-            batch.buffer().release()
-            packet?.clear()
-            packet?.buffer()?.release()
+            data.close()
+            batch.close()
+            packet.clear()
+            packet.buffer()?.release()
         }
     }
 

@@ -69,7 +69,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
             val binary = BinaryStream()
             val buf = packet.array()
             binary.writeUnsignedVarInt(buf.size)
-            binary.write(*buf)
+            binary.write(buf)
 
             if (this.server.katanaConfig!!.showPacketId)
                 server.logger.info("Send 0x" + packet.packetId.toString(16))
@@ -94,12 +94,9 @@ class NetworkManager(private val server: Server) : INetworkManager {
                 packet.channel,
                 Packet(batch.array())
             )
-            packet.clear()
-            packet.buffer().release()
-            binary.clear()
-            binary.buffer().release()
-            batch.clear()
-            batch.buffer().release()
+            packet.close()
+            binary.close()
+            batch.close()
         }
     }
 

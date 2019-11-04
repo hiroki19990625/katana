@@ -7,22 +7,200 @@ import jp.katana.math.Vector3
 import jp.katana.math.Vector3Int
 import jp.katana.server.data.Skin
 import jp.katana.server.data.SkinImage
+import java.math.BigInteger
 import java.nio.charset.Charset
+import java.util.*
 
 /**
  * バイナリのストリームを提供します。
  */
-open class BinaryStream : Packet() {
+open class BinaryStream {
+    val stream: Packet = Packet()
+
+    fun read(len: Int): ByteArray {
+        return stream.read(len)
+    }
+
+    fun write(value: ByteArray) {
+        stream.write(*value)
+    }
+
+    fun readBoolean(): Boolean {
+        return stream.readBoolean()
+    }
+
+    fun writeBoolean(value: Boolean) {
+        stream.writeBoolean(value)
+    }
+
+    fun readByte(): Byte {
+        return stream.readByte()
+    }
+
+    fun writeByte(value: Byte) {
+        stream.writeByte(value.toInt())
+    }
+
+    fun readShort(): Short {
+        return stream.readShort()
+    }
+
+    fun writeShort(value: Short) {
+        stream.writeShort(value.toInt())
+    }
+
+    fun readShortLE(): Short {
+        return stream.readShortLE()
+    }
+
+    fun writeShortLE(value: Short) {
+        stream.writeShortLE(value.toInt())
+    }
+
+    fun readUnsignedShort(): Int {
+        return stream.readUnsignedShort()
+    }
+
+    fun writeUnsignedShort(value: Int) {
+        stream.writeUnsignedShort(value)
+    }
+
+    fun readUnsignedShortLE(): Int {
+        return stream.readUnsignedShortLE()
+    }
+
+    fun writeUnsignedShortLE(value: Int) {
+        stream.writeUnsignedShortLE(value)
+    }
+
+    fun readInt(): Int {
+        return stream.readInt()
+    }
+
+    fun writeInt(value: Int) {
+        stream.writeInt(value)
+    }
+
+    fun readIntLE(): Int {
+        return stream.readIntLE()
+    }
+
+    fun writeIntLE(value: Int) {
+        stream.writeIntLE(value)
+    }
+
+    fun readUnsignedInt(): Long {
+        return stream.readUnsignedInt()
+    }
+
+    fun writeUnsignedInt(value: Long) {
+        stream.writeUnsignedInt(value)
+    }
+
+    fun readUnsignedIntLE(): Long {
+        return stream.readUnsignedIntLE()
+    }
+
+    fun writeUnsignedIntLE(value: Long) {
+        stream.writeUnsignedIntLE(value)
+    }
+
+    fun readLong(): Long {
+        return stream.readLong()
+    }
+
+    fun writeLong(value: Long) {
+        stream.writeLong(value)
+    }
+
+    fun readLongLE(): Long {
+        return stream.readLongLE()
+    }
+
+    fun writeLongLE(value: Long) {
+        stream.writeLongLE(value)
+    }
+
+    fun readUnsignedLong(): BigInteger {
+        return stream.readUnsignedLong()
+    }
+
+    fun writeUnsignedLong(value: BigInteger) {
+        stream.writeUnsignedLong(value)
+    }
+
+    fun readUnsignedLongLE(): BigInteger {
+        return stream.readUnsignedLongLE()
+    }
+
+    fun writeUnsignedLongLE(value: BigInteger) {
+        stream.writeUnsignedLongLE(value)
+    }
+
+    fun readUtf8String(): String {
+        return stream.readString()
+    }
+
+    fun writeUtf8String(value: String) {
+        stream.writeString(value)
+    }
+
+    fun readUtf8StringLE(): String {
+        return stream.readStringLE()
+    }
+
+    fun writeUtf8StringLE(value: String) {
+        stream.writeStringLE(value)
+    }
+
+    fun readFloat(): Float {
+        return stream.readFloat()
+    }
+
+    fun writeFloat(value: Float) {
+        stream.writeFloat(value.toDouble())
+    }
+
+    fun readFloatLE(): Float {
+        return stream.readFloatLE()
+    }
+
+    fun writeFloatLE(value: Float) {
+        stream.writeFloatLE(value.toDouble())
+    }
+
+    fun readDouble(): Double {
+        return stream.readDouble()
+    }
+
+    fun writeDouble(value: Double) {
+        stream.writeDouble(value)
+    }
+
+    fun readDoubleLE(): Double {
+        return stream.readDoubleLE()
+    }
+
+    fun writeDoubleLE(value: Double) {
+        stream.writeDoubleLE(value)
+    }
+
+    fun readUUID(): UUID {
+        return stream.readUUID()
+    }
+
+    fun writeUUID(value: UUID) {
+        stream.writeUUID(value)
+    }
+
     fun readVarString(): String {
         return String(read(readUnsignedVarInt()))
     }
 
-    fun writeVarString(s: String): Packet {
+    fun writeVarString(s: String) {
         val array: ByteArray = s.toByteArray(Charset.forName("utf8"))
         writeUnsignedVarInt(array.size)
-        write(*array)
-
-        return this
+        write(array)
     }
 
     fun readUnsignedVarIntByLong(): Long {
@@ -122,13 +300,13 @@ open class BinaryStream : Packet() {
         writeIntLE(skin.skinData.width)
         writeIntLE(skin.skinData.height)
         writeUnsignedVarInt(skinData.size)
-        write(*skinData)
+        write(skinData)
 
         val capeData = skin.capeData.data.toByteArray()
         writeIntLE(skin.capeData.width)
         writeIntLE(skin.capeData.height)
         writeUnsignedVarInt(capeData.size)
-        write(*capeData)
+        write(capeData)
 
         writeIntLE(0)
         //TODO: Animation
@@ -169,9 +347,9 @@ open class BinaryStream : Packet() {
     }
 
     fun writeVector3(pos: Vector3) {
-        writeFloatLE(pos.x)
-        writeFloatLE(pos.y)
-        writeFloatLE(pos.z)
+        writeFloatLE(pos.x.toFloat())
+        writeFloatLE(pos.y.toFloat())
+        writeFloatLE(pos.z.toFloat())
     }
 
     fun readActorUniqueId(): Long {
@@ -188,5 +366,26 @@ open class BinaryStream : Packet() {
 
     fun writeActorRuntimeId(id: Long) {
         writeUnsignedVarLong(id)
+    }
+
+    fun readRemaining(): ByteArray {
+        return read(stream.remaining())
+    }
+
+    fun setBuffer(buf: ByteArray) {
+        stream.setBuffer(buf)
+    }
+
+    fun array(): ByteArray {
+        return stream.array()
+    }
+
+    fun clear() {
+        stream.clear()
+    }
+
+    fun close() {
+        clear()
+        stream.buffer().release()
     }
 }

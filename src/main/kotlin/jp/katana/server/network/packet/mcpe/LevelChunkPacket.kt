@@ -44,12 +44,12 @@ class LevelChunkPacket : MinecraftPacket() {
         writeBoolean(cacheEnabled)
         if (cacheEnabled) {
             writeUnsignedVarInt(blobIds.size)
-            for (i in 0 until blobIds.size)
-                writeLongLE(blobIds[i])
+            for (element in blobIds)
+                writeLongLE(element)
         }
 
         writeUnsignedVarInt(data.size)
-        write(*data)
+        write(data)
     }
 
     override fun handle(player: IActorPlayer, server: IServer) {

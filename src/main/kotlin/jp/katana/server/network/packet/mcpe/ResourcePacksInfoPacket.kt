@@ -52,7 +52,7 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
     }
 
     private fun writePacks(list: MutableList<IResourcePackInfo>) {
-        writeShortLE(list.size)
+        writeShortLE(list.size.toShort())
         for (pack in list) {
             writeVarString(pack.packId)
             writeVarString(pack.packVersion)

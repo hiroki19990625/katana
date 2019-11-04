@@ -87,8 +87,8 @@ class StartGamePacket : MinecraftPacket() {
         writeVarInt(playerGamemode)
 
         writeVector3(Vector3(x.toDouble(), y.toDouble(), z.toDouble()))
-        writeFloatLE(yaw.toDouble())
-        writeFloatLE(pitch.toDouble())
+        writeFloatLE(yaw)
+        writeFloatLE(pitch)
 
         writeVarInt(seed)
         writeVarInt(dimension)
@@ -105,8 +105,8 @@ class StartGamePacket : MinecraftPacket() {
         writeVarInt(eduEditionOffer)
         writeBoolean(hasEduFeaturesEnabled)
 
-        writeFloatLE(rainLevel.toDouble())
-        writeFloatLE(lightningLevel.toDouble())
+        writeFloatLE(rainLevel)
+        writeFloatLE(lightningLevel)
 
         writeBoolean(hasConfirmedPlatformLockedContent)
         writeBoolean(multiplayerGame)
@@ -156,14 +156,14 @@ class StartGamePacket : MinecraftPacket() {
         if (blockDefinitions == null)
             writeUnsignedVarInt(0)
         else {
-            write(*blockDefinitions!!.binary())
+            write(blockDefinitions!!.binary())
         }
 
         if (itemDefinitions == null)
             writeUnsignedVarInt(0)
         else {
             writeUnsignedVarInt(itemDefinitions!!.size())
-            write(*itemDefinitions!!.binary())
+            write(itemDefinitions!!.binary())
         }
 
         writeVarString(multiplayerCorrelationId)

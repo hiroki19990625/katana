@@ -48,9 +48,9 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
         writeIntLE(chunkCount)
         writeLongLE(packSize)
         writeUnsignedVarInt(hash.size)
-        write(*hash)
+        write(hash)
         writeBoolean(premium)
-        writeByte(type)
+        writeByte(type.toByte())
     }
 
     override fun handle(player: IActorPlayer, server: IServer) {

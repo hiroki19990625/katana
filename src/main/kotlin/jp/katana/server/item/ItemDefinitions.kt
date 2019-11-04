@@ -67,14 +67,13 @@ class ItemDefinitions : IItemDefinitions {
             defines.forEach { define ->
                 run {
                     stream.writeVarString(define.name)
-                    stream.writeShortLE(define.id.toInt())
+                    stream.writeShortLE(define.id)
                 }
             }
 
             prevSize = size()
             binaryData = stream.array()
-            stream.clear()
-            stream.buffer().release()
+            stream.close()
             binaryData
         } else {
             binaryData
