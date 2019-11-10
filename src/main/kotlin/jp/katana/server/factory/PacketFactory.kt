@@ -16,6 +16,13 @@ class PacketFactory : SimpleFactory<Int, () -> MinecraftPacket>() {
         this += { SetTimePacket() } // 0x0a
         this += { StartGamePacket() } // 0x0b
         this += { AddPlayerPacket() } // 0x0c
+        this += { AddActorPacket() } // 0x0d
+        this += { RemoveActorPacket() } // 0x0e
+        this += { AddItemActorPacket() } // 0x0f
+
+        this += { TakeItemActorPacket() } // 0x11
+        this += { MoveActorAbsolutePacket() } // 0x12
+        this += { MovePlayerPacket() } // 0x13
 
         this += { LevelChunkPacket() } // 0x3a
 
