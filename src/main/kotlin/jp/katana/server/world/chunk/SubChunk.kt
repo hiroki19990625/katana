@@ -68,8 +68,6 @@ class SubChunk(override val y: Int) : ISubChunk {
                 palettes.add(d)
         }
 
-        println(palettes.size)
-
         var bitsPerBlock = ceil(log(palettes.size.toDouble(), 2.0)).toInt()
         when (bitsPerBlock) {
             0 -> bitsPerBlock = 1
