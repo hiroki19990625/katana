@@ -37,5 +37,5 @@ interface IWorld {
     fun unregisterChunkLoader(loader: IChunkLoader)
     fun unregisterChunkLoader(id: Long)
 
-    fun getChunkRadius(x: Int, z: Int, loader: IChunkLoader): Array<IChunk>
+    fun getChunkRadius(x: Int, z: Int, loader: IChunkLoader): Sequence<IChunk>
 }
