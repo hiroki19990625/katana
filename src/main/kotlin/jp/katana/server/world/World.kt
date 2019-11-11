@@ -10,13 +10,11 @@ import jp.katana.math.Vector3Int
 import jp.katana.server.world.gamerule.GameRules
 import java.io.File
 
-class World(override val name: String) : IWorld {
+class World(override val name: String, override val worldType: WorldType) : IWorld {
     private val chunks: MutableMap<Vector2Int, IChunk> = mutableMapOf()
     private val chunkLoaders: MutableMap<Long, IChunkLoader> = mutableMapOf()
 
-    constructor(name: String, worldType: WorldType) : this(name) {
-
-    }
+    constructor(name: String) : this(name, WorldType.Default)
 
     override val gameRules: IGameRules
         get() = GameRules()

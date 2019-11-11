@@ -9,6 +9,7 @@ import java.io.File
 
 interface IWorld {
     val name: String
+    val worldType: WorldType
     val gameRules: IGameRules
 
     fun loadData()
