@@ -16,3 +16,13 @@ fun String.toWorldType(): WorldType {
         else -> WorldType.valueOf(this)
     }
 }
+
+fun String.toWorldTypeId(): Int {
+    return when (this.toLowerCase()) {
+        "default" -> WorldType.Default
+        "flat" -> WorldType.Flat
+        "custom" -> WorldType.Customize
+        "empty" -> WorldType.Empty
+        else -> WorldType.valueOf(this)
+    }
+}

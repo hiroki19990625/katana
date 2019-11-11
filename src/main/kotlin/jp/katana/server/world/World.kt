@@ -1,6 +1,7 @@
 package jp.katana.server.world
 
 import jp.katana.core.world.IWorld
+import jp.katana.core.world.WorldType
 import jp.katana.core.world.chunk.IChunk
 import jp.katana.core.world.chunk.IChunkLoader
 import jp.katana.core.world.gamerule.IGameRules
@@ -12,6 +13,10 @@ import java.io.File
 class World(override val name: String) : IWorld {
     private val chunks: MutableMap<Vector2Int, IChunk> = mutableMapOf()
     private val chunkLoaders: MutableMap<Long, IChunkLoader> = mutableMapOf()
+
+    constructor(name: String, worldType: WorldType) : this(name) {
+
+    }
 
     override val gameRules: IGameRules
         get() = GameRules()
@@ -25,7 +30,7 @@ class World(override val name: String) : IWorld {
     }
 
     override fun save() {
-        
+
     }
 
     override fun getChunk(x: Int, z: Int, useShift: Boolean): IChunk {

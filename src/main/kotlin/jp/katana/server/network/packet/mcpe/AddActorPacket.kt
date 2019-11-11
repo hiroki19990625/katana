@@ -22,7 +22,7 @@ class AddActorPacket : MinecraftPacket() {
     override fun decodePayload() {
         actorUniqueId = readActorUniqueId()
         actorRuntimeId = readActorRuntimeId()
-        type = readUtf8String()
+        type = readVarString()
         position = readVector3()
         motion = readVector3()
         pitch = readFloatLE()
@@ -36,7 +36,7 @@ class AddActorPacket : MinecraftPacket() {
     override fun encodePayload() {
         writeActorUniqueId(actorUniqueId)
         writeActorRuntimeId(actorRuntimeId)
-        writeUtf8String(type)
+        writeVarString(type)
         writeVector3(position)
         writeVector3(motion)
         writeFloatLE(pitch)
