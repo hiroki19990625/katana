@@ -76,7 +76,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
             data.setBuffer(buf)
             val id = data.readUnsignedVarInt()
             if (this.server.katanaConfig!!.showPacketId)
-                logger.info("Handle 0x" + id.toString(16))
+                logger.info("Handle 0x" + id.toString(16) + " -> Size " + data.array().size)
             if (this.server.katanaConfig!!.packetDump)
                 logger.info("Handle " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
             val f = factory[id]
