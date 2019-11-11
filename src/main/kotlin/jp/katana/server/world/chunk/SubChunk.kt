@@ -5,7 +5,6 @@ import jp.katana.math.Vector3Int
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.utils.BinaryStream
 import kotlin.math.ceil
-import kotlin.math.floor
 import kotlin.math.log
 
 class SubChunk(override val y: Int) : ISubChunk {
@@ -38,7 +37,7 @@ class SubChunk(override val y: Int) : ISubChunk {
 
         stream.writeByte(ISubChunk.LAYER.toByte())
         writePalette(stream, blocks)
-        writePalette(stream, liquids)
+        //writePalette(stream, liquids)
 
         val buf = stream.array()
         stream.close()
@@ -75,7 +74,7 @@ class SubChunk(override val y: Int) : ISubChunk {
             in 9..16 -> bitsPerBlock = 16
         }
 
-        stream.writeByte((bitsPerBlock shl 1 or 1).toByte())
+        /*stream.writeByte((bitsPerBlock shl 1 or 1).toByte())
 
         val blocksPerWord = floor(32f / bitsPerBlock).toInt()
         val wordsPerChunk = ceil(4096f / blocksPerWord).toInt()
@@ -86,10 +85,14 @@ class SubChunk(override val y: Int) : ISubChunk {
             for (block in 0 until blocksPerWord) {
                 if (point >= 4096)
                     continue
-                word = word or data[point++] shl (bitsPerBlock * block)
+                word = word or palettes.indexOf(data[point++]) shl (bitsPerBlock * block)
             }
 
-            stream.writeInt(word)
+            stream.writeIntLE(word)
+        }*/
+        stream.writeByte(8 shl 1 or 1)
+        for (d in data) {
+            stream.writeByte(palettes.indexOf(d).toByte())
         }
 
         stream.writeUnsignedVarInt(palettes.size)

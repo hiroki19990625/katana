@@ -1,5 +1,6 @@
 package jp.katana.server.world
 
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.world.IWorld
 import jp.katana.core.world.WorldType
 import jp.katana.core.world.chunk.IChunk
@@ -105,7 +106,7 @@ class World(override val name: String, override val worldType: WorldType) : IWor
         chunkLoaders.remove(id)
     }
 
-    override fun getChunkRadius(x: Int, z: Int, loader: IChunkLoader): Sequence<IChunk> {
+    override fun getChunkRadius(loader: IChunkLoader): Sequence<IChunk> {
         val newOrders = mutableMapOf<Vector2Int, Double>()
 
         val radius = loader.getRadius()
@@ -144,6 +145,16 @@ class World(override val name: String, override val worldType: WorldType) : IWor
                 yield(chunk)
             }
         }
+    }
+
+    override fun sendChunks(player: IActorPlayer): Boolean {
+        val chunks = getChunkRadius(player)
+        for (chunk in chunks) {
+            chunk.columns[0].setRuntimeId(Vector3Int(0, 0, 0), 10)
+            player.sendPacket(chunk.getChunkPacket())
+        }
+
+        return true
     }
 
     private fun getChunk(x: Int, z: Int): IChunk? {

@@ -91,7 +91,7 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     }
 
     override fun getRadius(): Int {
-        return chunkRadius;
+        return chunkRadius
     }
 
     override fun getChunkPosition(): Vector2Int {

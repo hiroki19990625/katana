@@ -1,5 +1,6 @@
 package jp.katana.core.world
 
+import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.world.chunk.IChunk
 import jp.katana.core.world.chunk.IChunkLoader
 import jp.katana.core.world.gamerule.IGameRules
@@ -37,5 +38,6 @@ interface IWorld {
     fun unregisterChunkLoader(loader: IChunkLoader)
     fun unregisterChunkLoader(id: Long)
 
-    fun getChunkRadius(x: Int, z: Int, loader: IChunkLoader): Sequence<IChunk>
+    fun getChunkRadius(loader: IChunkLoader): Sequence<IChunk>
+    fun sendChunks(player: IActorPlayer): Boolean
 }
