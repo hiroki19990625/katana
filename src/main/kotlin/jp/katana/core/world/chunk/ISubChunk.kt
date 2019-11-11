@@ -8,7 +8,7 @@ interface ISubChunk {
         const val BLOCK_SIZE = 4096
 
         const val VERSION = 8
-        const val LAYER = 2
+        const val LAYER = 1
 
         const val MAX = 16
         const val MAX2 = 256
@@ -26,11 +26,11 @@ interface ISubChunk {
     fun setLiquidRuntimeId(pos: Vector3Int, runtime: Int)
 
     fun isEmptyBlocks(): Boolean {
-        return blocks.none { b -> b == 0 }
+        return blocks.none { b -> b != 0 }
     }
 
     fun isEmptyLiquids(): Boolean {
-        return liquids.none { b -> b == 0 }
+        return liquids.none { b -> b != 0 }
     }
 
     fun isEmpty(): Boolean {

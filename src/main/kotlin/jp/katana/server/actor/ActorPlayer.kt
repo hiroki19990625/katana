@@ -6,7 +6,10 @@ import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
 import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
+import jp.katana.core.world.IWorld
 import jp.katana.i18n.I18n
+import jp.katana.math.Vector2Int
+import jp.katana.math.Vector3
 import jp.katana.server.Server
 import jp.katana.server.network.PacketHandler
 import jp.katana.server.network.packet.mcpe.DisconnectPacket
@@ -19,6 +22,9 @@ import javax.crypto.Cipher
 
 class ActorPlayer(override val address: InetSocketAddress, private val server: Server) : IActorPlayer {
     private val logger = LogManager.getLogger()
+
+    private val loadedChunks: MutableMap<Vector2Int, Double> = mutableMapOf()
+
     override val packetHandler: IPacketHandler = PacketHandler(this, server)
 
     override var loginData: ILoginData? = null
@@ -49,6 +55,16 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     override var chunkRadius: Int = 0
         internal set
 
+    override var world: IWorld? = null
+        internal set
+
+    override var position: Vector3 = Vector3(0.0, 0.0, 0.0)
+        internal set
+    override var yaw: Double = 0.0
+        internal set
+    override var pitch: Double = 0.0
+        internal set
+
     override val uuid: UUID = UUID.randomUUID()
 
     override fun handlePacket(packet: MinecraftPacket) {
@@ -75,7 +91,14 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     }
 
     override fun getRadius(): Int {
-        return chunkRadius;
+        return chunkRadius
     }
 
+    override fun getChunkPosition(): Vector2Int {
+        return Vector2Int(position.x.toInt() shr 4, position.z.toInt() shr 4)
+    }
+
+    override fun getLoadedChunksMap(): MutableMap<Vector2Int, Double> {
+        return loadedChunks
+    }
 }

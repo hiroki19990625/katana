@@ -2,6 +2,7 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.actor.PlayerState
 import jp.katana.server.actor.ActorPlayer
 
 class RequestChunkRadiusPacket : MinecraftPacket() {
@@ -26,7 +27,18 @@ class RequestChunkRadiusPacket : MinecraftPacket() {
             } else {
                 chunkRadiusUpdatedPacket.radius = radius
             }
+            player.chunkRadius = chunkRadiusUpdatedPacket.radius
             player.sendPacket(chunkRadiusUpdatedPacket)
+
+
+            player.world!!.registerChunkLoader(player)
+            player.world!!.sendChunks(player)
+
+            val playStatusPacket = PlayStatusPacket()
+            playStatusPacket.status = PlayStatusPacket.PLAYER_SPAWN
+            player.sendPacket(playStatusPacket)
+
+            player.state = PlayerState.Spawned
         }
     }
 }

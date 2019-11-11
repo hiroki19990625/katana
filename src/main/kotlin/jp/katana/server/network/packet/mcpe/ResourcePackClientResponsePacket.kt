@@ -2,7 +2,6 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
-import jp.katana.core.actor.PlayerState
 import jp.katana.core.data.IResourcePackEntry
 import jp.katana.server.actor.ActorPlayer
 import jp.katana.server.data.ResourcePackEntry
@@ -90,6 +89,7 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
             startGamePacket.blockDefinitions = server.defineBlocks
             startGamePacket.itemDefinitions = server.defineItems
             startGamePacket.gameRules = gameRules
+            startGamePacket.playerGamemode = 1
             player.sendPacket(startGamePacket)
 
             val biomeDefinitionListPacket = BiomeDefinitionListPacket()
@@ -99,12 +99,6 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
             val availableActorIdentifiersPacket = AvailableActorIdentifiersPacket()
             availableActorIdentifiersPacket.tag = server.defineActors.binary()
             player.sendPacket(availableActorIdentifiersPacket)
-
-            val playStatusPacket = PlayStatusPacket()
-            playStatusPacket.status = PlayStatusPacket.PLAYER_SPAWN
-            player.sendPacket(playStatusPacket)
-
-            player.state = PlayerState.Spawned
         }
     }
 }

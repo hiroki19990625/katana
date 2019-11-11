@@ -89,6 +89,8 @@ class LoginPacket : MinecraftPacket() {
 
             player.displayName = loginData.displayName
 
+            player.world = server.worldManager!!.defaultWorld
+
             if (server.serverProperties!!.secureMode && player.loginData!!.jwtVerify) {
                 player.state = PlayerState.PreLogined
 

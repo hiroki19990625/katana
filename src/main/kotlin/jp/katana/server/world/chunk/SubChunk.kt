@@ -38,7 +38,7 @@ class SubChunk(override val y: Int) : ISubChunk {
 
         stream.writeByte(ISubChunk.LAYER.toByte())
         writePalette(stream, blocks)
-        writePalette(stream, liquids)
+        //writePalette(stream, liquids)
 
         val buf = stream.array()
         stream.close()
@@ -86,7 +86,7 @@ class SubChunk(override val y: Int) : ISubChunk {
             for (block in 0 until blocksPerWord) {
                 if (point >= 4096)
                     continue
-                word = word or data[point++] shl (bitsPerBlock * block)
+                word = word or palettes.indexOf(data[point++]) shl (bitsPerBlock * block)
             }
 
             stream.writeInt(word)
