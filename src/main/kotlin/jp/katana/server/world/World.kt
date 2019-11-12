@@ -137,7 +137,7 @@ class World(override val name: String, override val worldType: WorldType) : IWor
             for (pair in newOrders.toList().sortedBy { e -> e.second }) {
                 if (loader.getLoadedChunksMap().containsKey(pair.first)) continue
 
-                val chunk = getChunk(pair.first)
+                val chunk = getChunk(pair.first, false)
                 if (!chunks.containsKey(pair.first))
                     chunks[pair.first] = chunk
 
