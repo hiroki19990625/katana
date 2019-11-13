@@ -1,5 +1,6 @@
 package jp.katana.server.world
 
+import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.world.IWorld
 import jp.katana.core.world.WorldType
@@ -8,17 +9,22 @@ import jp.katana.core.world.chunk.IChunkLoader
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3Int
+import jp.katana.server.network.packet.mcpe.NetworkChunkPublisherUpdatePacket
 import jp.katana.server.world.chunk.Chunk
 import jp.katana.server.world.gamerule.GameRules
 import java.io.File
 import kotlin.math.pow
 
 
-class World(override val name: String, override val worldType: WorldType) : IWorld {
+class World(
+    override val name: String,
+    override val server: IServer,
+    override val worldType: WorldType
+) : IWorld {
     private val chunks: MutableMap<Vector2Int, IChunk> = mutableMapOf()
     private val chunkLoaders: MutableMap<Long, IChunkLoader> = mutableMapOf()
 
-    constructor(name: String) : this(name, WorldType.Default)
+    constructor(name: String, server: IServer) : this(name, server, WorldType.Default)
 
     override val gameRules: IGameRules
         get() = GameRules()
@@ -150,9 +156,16 @@ class World(override val name: String, override val worldType: WorldType) : IWor
     override fun sendChunks(player: IActorPlayer): Boolean {
         val chunks = getChunkRadius(player)
         for (chunk in chunks) {
-            chunk.columns[0].setRuntimeId(Vector3Int(0, 0, 0), 10)
+            chunk.columns[0].setRuntimeId(Vector3Int(0, 0, 0), server.defineBlocks.fromId(1).runtimeId)
+            chunk.columns[1].setRuntimeId(Vector3Int(0, 0, 0), server.defineBlocks.fromId(1).runtimeId)
             player.sendPacket(chunk.getChunkPacket())
         }
+
+        val center = player.getChunkPosition()
+        val publisherUpdatePacket = NetworkChunkPublisherUpdatePacket()
+        publisherUpdatePacket.position = player.position.toVector3Int()
+        publisherUpdatePacket.radius = player.getRadius() + 1 shl 4
+        player.sendPacket(publisherUpdatePacket)
 
         return true
     }

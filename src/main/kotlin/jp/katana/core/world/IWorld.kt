@@ -1,5 +1,6 @@
 package jp.katana.core.world
 
+import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.world.chunk.IChunk
 import jp.katana.core.world.chunk.IChunkLoader
@@ -10,6 +11,7 @@ import java.io.File
 
 interface IWorld {
     val name: String
+    val server: IServer
     val worldType: WorldType
     val gameRules: IGameRules
 

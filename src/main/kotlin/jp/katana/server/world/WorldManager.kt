@@ -29,7 +29,7 @@ class WorldManager(private val server: Server) : IWorldManager {
 
     override fun loadWorld(name: String): IWorld {
         val guid = UUID.randomUUID()
-        val world = World(name)
+        val world = World(name, server)
         world.loadData()
         worlds[guid] = world
         return world
@@ -37,7 +37,7 @@ class WorldManager(private val server: Server) : IWorldManager {
 
     override fun loadWorldFromFile(file: File, name: String): IWorld {
         val guid = UUID.randomUUID()
-        val world = World(name)
+        val world = World(name, server)
         world.loadData(file)
         worlds[guid] = world
         return world
@@ -82,7 +82,7 @@ class WorldManager(private val server: Server) : IWorldManager {
             worldFile.parentFile.mkdir()
             worldFile.createNewFile()
 
-            val world = World(name)
+            val world = World(name, server)
             // TODO: Set WorldType
             return world
         }
