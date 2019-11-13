@@ -153,11 +153,7 @@ class StartGamePacket : MinecraftPacket() {
 
         writeVarInt(enchantmentSeed)
 
-        if (blockDefinitions == null)
-            writeUnsignedVarInt(0)
-        else {
-            write(blockDefinitions!!.binary())
-        }
+        write(blockDefinitions!!.binary())
 
         if (itemDefinitions == null)
             writeUnsignedVarInt(0)
