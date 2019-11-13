@@ -75,7 +75,7 @@ class SubChunk(override val y: Int) : ISubChunk {
             in 9..16 -> bitsPerBlock = 16
         }
 
-        stream.writeByte((bitsPerBlock shl 1 or 1).toByte())
+        stream.writeByte(((bitsPerBlock shl 1) or 1).toByte())
 
         val blocksPerWord = floor(32f / bitsPerBlock).toInt()
         val wordsPerChunk = ceil(4096f / blocksPerWord).toInt()
