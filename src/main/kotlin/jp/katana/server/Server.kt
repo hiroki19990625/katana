@@ -70,7 +70,7 @@ class Server : IServer {
             System.setProperty("log4j.configurationFile", "log4j2-katana.xml")
 
             // TODO: Memory Leak Ignore
-            ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.DISABLED)
+            ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.ADVANCED)
 
             Thread.currentThread().name = I18n["katana.server.thread.hostThread"]
         }

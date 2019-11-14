@@ -84,6 +84,8 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     override fun onDisconnect(reason: String?) {
         if (state == PlayerState.Joined)
             logger.info(I18n["katana.server.player.leave", displayName])
+
+        world?.unregisterChunkLoader(this)
     }
 
     override fun getLoaderId(): Long {

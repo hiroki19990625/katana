@@ -62,10 +62,15 @@ class World(
 
     override fun loadChunk(x: Int, z: Int, useShift: Boolean): IChunk {
         // TODO: Load Chunk
-        return if (useShift)
-            Chunk(this, Vector2Int(x shr 4, z shr 4))
-        else
-            Chunk(this, Vector2Int(x, z))
+        return if (useShift) {
+            val c = Chunk(this, Vector2Int(x shr 4, z shr 4))
+            chunks[c.pos] = c
+            c
+        } else {
+            val c = Chunk(this, Vector2Int(x, z))
+            chunks[c.pos] = c
+            c
+        }
     }
 
     override fun loadChunk(pos: Vector2Int, useShift: Boolean): IChunk {
@@ -106,6 +111,8 @@ class World(
 
     override fun unregisterChunkLoader(loader: IChunkLoader) {
         unregisterChunkLoader(loader.getLoaderId())
+
+
     }
 
     override fun unregisterChunkLoader(id: Long) {
@@ -134,9 +141,11 @@ class World(
         }
 
         for (key in chunks.keys) {
-            if (newOrders.containsKey(key)) {
-                newOrders.remove(key)
+            if (!newOrders.containsKey(key)) {
+                unloadChunk(key, false)
             }
+
+            loader.getLoadedChunksMap().remove(key)
         }
 
         return sequence {
@@ -156,8 +165,7 @@ class World(
     override fun sendChunks(player: IActorPlayer): Boolean {
         val chunks = getChunkRadius(player)
         for (chunk in chunks) {
-            chunk.columns[0].setRuntimeId(Vector3Int(0, 0, 0), server.defineBlocks.fromId(1).runtimeId)
-            chunk.columns[1].setRuntimeId(Vector3Int(0, 0, 0), server.defineBlocks.fromId(1).runtimeId)
+            chunk.columns[0].setRuntimeId(Vector3Int(1, 0, 0), server.defineBlocks.fromId(1).runtimeId)
             player.sendPacket(chunk.getChunkPacket())
         }
 
