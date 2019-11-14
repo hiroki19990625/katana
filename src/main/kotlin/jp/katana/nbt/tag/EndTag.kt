@@ -13,4 +13,15 @@ class EndTag : INamedTag {
     override fun read(stream: NBTStream) {
 
     }
+
+    override fun toString(): String {
+        val builder = StringBuilder()
+        print(builder)
+        return builder.toString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.appendIndent(indent)
+        builder.append("${this.javaClass.simpleName} : $name\n")
+    }
 }

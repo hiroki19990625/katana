@@ -216,12 +216,18 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
     }
 
     override fun toString(): String {
-        var str = "${this.javaClass.simpleName} : $name = [" + "\n"
-        for (tag in list) {
-            str += tag.toString() + "\n"
-        }
-        str += "]"
+        val builder = StringBuilder()
+        print(builder, 0)
+        return builder.toString()
+    }
 
-        return str
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.appendIndent(indent)
+        builder.append("${this.javaClass.simpleName} : $name = [" + "\n")
+        for (tag in list) {
+            tag.print(builder, indent + 1)
+        }
+        builder.appendIndent(indent)
+        builder.append("]\n")
     }
 }

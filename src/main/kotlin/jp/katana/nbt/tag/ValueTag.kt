@@ -6,6 +6,13 @@ abstract class ValueTag<T> : INamedTag {
     abstract var value: T
 
     override fun toString(): String {
-        return "${this.javaClass.simpleName} : $name = $value"
+        val builder = StringBuilder()
+        print(builder, 0)
+        return builder.toString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.appendIndent(indent)
+        builder.append("${this.javaClass.simpleName} : $name = $value\n")
     }
 }
