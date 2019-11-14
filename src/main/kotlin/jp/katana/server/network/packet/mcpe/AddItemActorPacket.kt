@@ -36,6 +36,20 @@ class AddItemActorPacket : MinecraftPacket() {
     }
 
     override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
+    }
 
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.appendProperty(AddItemActorPacket::actorUniqueId, this, indent + 1)
+        builder.appendProperty(AddItemActorPacket::actorRuntimeId, this, indent + 1)
+        builder.appendProperty(AddItemActorPacket::position, this, indent + 1)
+        builder.appendProperty(AddItemActorPacket::motion, this, indent + 1)
+        builder.appendProperty(AddItemActorPacket::isFromFishing, this, indent + 1)
+        builder.append("}\n")
     }
 }

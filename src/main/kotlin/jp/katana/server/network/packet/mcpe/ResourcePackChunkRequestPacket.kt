@@ -37,4 +37,13 @@ class ResourcePackChunkRequestPacket : MinecraftPacket() {
 
         player.sendPacket(resourcePackChunkDataPacket)
     }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.append("}\n")
+    }
 }

@@ -66,4 +66,23 @@ class AddPlayerPacket : MinecraftPacket() {
     override fun handle(player: IActorPlayer, server: IServer) {
         // No cause
     }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.appendProperty(AddPlayerPacket::uuid, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::username, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::actorUniqueId, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::actorRuntimeId, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::platformChatId, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::position, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::motion, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::pitch, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::yaw, this, indent + 1)
+        builder.appendProperty(AddPlayerPacket::headYaw, this, indent + 1)
+        builder.append("}\n")
+    }
 }

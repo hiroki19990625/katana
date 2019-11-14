@@ -6,9 +6,7 @@ abstract class ArrayTag<T> : INamedTag {
     abstract var value: Array<T>
 
     override fun toString(): String {
-        val builder = StringBuilder()
-        print(builder, 0)
-        return builder.toString()
+        return toPrintString()
     }
 
     override fun print(builder: StringBuilder, indent: Int) {

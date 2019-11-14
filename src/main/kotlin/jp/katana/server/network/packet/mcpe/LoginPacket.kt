@@ -180,4 +180,13 @@ class LoginPacket : MinecraftPacket() {
 
         player.isEncrypted = true
     }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.append("}\n")
+    }
 }

@@ -7,9 +7,9 @@ import jp.katana.math.Vector3
 class MovePlayerPacket : MinecraftPacket() {
     companion object {
         const val MODE_NORMAL: Byte = 0
-        const val MODE_RESET: Byte  = 1
-        const val MODE_TELEPORT: Byte  = 2
-        const val MODE_PITCH: Byte  = 3
+        const val MODE_RESET: Byte = 1
+        const val MODE_TELEPORT: Byte = 2
+        const val MODE_PITCH: Byte = 3
     }
 
     override val packetId: Int = MinecraftProtocols.MOVE_PLAYER_PACKET
@@ -57,5 +57,14 @@ class MovePlayerPacket : MinecraftPacket() {
 
     override fun handle(player: IActorPlayer, server: IServer) {
 
+    }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.append("}\n")
     }
 }

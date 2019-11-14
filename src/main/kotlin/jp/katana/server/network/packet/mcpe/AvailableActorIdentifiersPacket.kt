@@ -19,4 +19,14 @@ class AvailableActorIdentifiersPacket : MinecraftPacket() {
     override fun handle(player: IActorPlayer, server: IServer) {
         // No cause
     }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.appendPropertyBufferNetworkNBT(AvailableActorIdentifiersPacket::tag, this, indent + 1)
+        builder.append("}\n")
+    }
 }

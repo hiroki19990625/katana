@@ -2,13 +2,14 @@ package jp.katana.core.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.debug.IPrintable
 
 /**
  * Minecraftで使用データパケットのベースを提供します。
  * @property packetId パケットのID
  * @property channel パケットの送信チャンネル
  */
-interface IMinecraftPacket {
+interface IMinecraftPacket : IPrintable {
     val packetId: Int
     val channel: Int
 

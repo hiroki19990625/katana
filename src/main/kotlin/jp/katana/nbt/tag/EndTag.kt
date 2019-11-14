@@ -15,9 +15,7 @@ class EndTag : INamedTag {
     }
 
     override fun toString(): String {
-        val builder = StringBuilder()
-        print(builder)
-        return builder.toString()
+        return toPrintString()
     }
 
     override fun print(builder: StringBuilder, indent: Int) {

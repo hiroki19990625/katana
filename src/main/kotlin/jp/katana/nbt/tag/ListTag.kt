@@ -216,9 +216,7 @@ class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INam
     }
 
     override fun toString(): String {
-        val builder = StringBuilder()
-        print(builder, 0)
-        return builder.toString()
+        return toPrintString()
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
