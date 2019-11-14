@@ -8,7 +8,7 @@ class NetworkChunkPublisherUpdatePacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.NETWORK_CHUNK_PUBLISHER_UPDATE_PACKET
 
     var position: Vector3Int = Vector3Int(0, 0, 0)
-    var radius: Int = 0;
+    var radius: Int = 0
 
     override fun decodePayload() {
         position = readBlockPosition()

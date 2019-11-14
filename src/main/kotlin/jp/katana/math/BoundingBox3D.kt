@@ -35,7 +35,7 @@ data class BoundingBox3D(val pos: Vector3, val bound: Vector3) {
         val minY1 = min(sum1.y, pos.y)
         val minZ1 = min(sum1.z, pos.z)
 
-        val sum2 = contain.pos + contain.bound;
+        val sum2 = contain.pos + contain.bound
         val maxX2 = max(sum2.x, contain.pos.x)
         val maxY2 = max(sum2.y, contain.pos.y)
         val maxZ2 = max(sum2.z, contain.pos.z)

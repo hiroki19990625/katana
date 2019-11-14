@@ -53,7 +53,7 @@ class ClientData : IClientData {
         clientRandomId = obj.getAsString("ClientRandomId")
         currentInputMode = obj.getAsNumber("CurrentInputMode").toByte()
         defaultInputMode = obj.getAsNumber("DefaultInputMode").toByte()
-        deviceId = obj.getAsString("DeviceId");
+        deviceId = obj.getAsString("DeviceId")
         deviceModel = obj.getAsString("DeviceModel")
         deviceOS = obj.getAsNumber("DeviceOS").toByte()
         gameVersion = obj.getAsString("GameVersion")

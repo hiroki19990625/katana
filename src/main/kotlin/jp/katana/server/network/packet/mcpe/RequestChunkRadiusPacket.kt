@@ -21,7 +21,7 @@ class RequestChunkRadiusPacket : MinecraftPacket() {
     override fun handle(player: IActorPlayer, server: IServer) {
         if (player is ActorPlayer) {
             val chunkRadiusUpdatedPacket = ChunkRadiusUpdatedPacket()
-            val maxRadius = server.serverProperties!!.viewDistance.toInt();
+            val maxRadius = server.serverProperties!!.viewDistance.toInt()
             if (radius > maxRadius) {
                 chunkRadiusUpdatedPacket.radius = maxRadius
             } else {
