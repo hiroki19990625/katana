@@ -1,10 +1,11 @@
 package jp.katana.nbt.tag
 
+import jp.katana.core.debug.IPrintable
 import jp.katana.server.factory.NBTTagFactory
 import jp.katana.server.factory.SimpleFactory
 import jp.katana.nbt.io.NBTStream
 
-interface INamedTag {
+interface INamedTag : IPrintable {
     companion object {
         const val END: Byte = 0
         const val BYTE: Byte = 1

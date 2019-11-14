@@ -6,6 +6,11 @@ abstract class ArrayTag<T> : INamedTag {
     abstract var value: Array<T>
 
     override fun toString(): String {
-        return "${this.javaClass.simpleName} : $name = length ${value.size}"
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.appendIndent(indent)
+        builder.append("${this.javaClass.simpleName} : $name = length ${value.size}\n")
     }
 }

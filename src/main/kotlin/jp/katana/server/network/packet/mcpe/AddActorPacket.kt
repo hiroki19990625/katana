@@ -48,6 +48,23 @@ class AddActorPacket : MinecraftPacket() {
     }
 
     override fun handle(player: IActorPlayer, server: IServer) {
+        // No cause
+    }
 
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.appendProperty(AddActorPacket::actorUniqueId, this, indent + 1)
+        builder.appendProperty(AddActorPacket::actorRuntimeId, this, indent + 1)
+        builder.appendProperty(AddActorPacket::type, this, indent + 1)
+        builder.appendProperty(AddActorPacket::position, this, indent + 1)
+        builder.appendProperty(AddActorPacket::motion, this, indent + 1)
+        builder.appendProperty(AddActorPacket::pitch, this, indent + 1)
+        builder.appendProperty(AddActorPacket::yaw, this, indent + 1)
+        builder.appendProperty(AddActorPacket::headYaw, this, indent + 1)
+        builder.append("}\n")
     }
 }

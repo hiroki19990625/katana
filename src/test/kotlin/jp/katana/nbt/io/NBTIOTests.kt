@@ -40,4 +40,14 @@ class NBTIOTests {
         Assertions.assertTrue(ncom.getListTag("test").getInt(0) == 1234)
         Assertions.assertTrue(ncom.getListTag("test").getIntTag(0).name == "")
     }
+
+    @Test
+    fun toStringTests(){
+        val com = CompoundTag("")
+        val list = ListTag("test", INamedTag.INT)
+        list.addInt(1234)
+        com.putTag(list)
+
+        println(com.toString())
+    }
 }

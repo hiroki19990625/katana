@@ -19,4 +19,13 @@ class RemoveActorPacket : MinecraftPacket() {
     override fun handle(player: IActorPlayer, server: IServer) {
 
     }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.append("${this.javaClass.simpleName} {\n")
+        builder.append("}\n")
+    }
 }

@@ -13,4 +13,13 @@ class EndTag : INamedTag {
     override fun read(stream: NBTStream) {
 
     }
+
+    override fun toString(): String {
+        return toPrintString()
+    }
+
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.appendIndent(indent)
+        builder.append("${this.javaClass.simpleName} : $name\n")
+    }
 }

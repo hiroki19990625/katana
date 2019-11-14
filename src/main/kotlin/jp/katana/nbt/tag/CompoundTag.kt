@@ -214,12 +214,16 @@ class CompoundTag(override var name: String) : INamedTag {
     }
 
     override fun toString(): String {
-        var str = "${this.javaClass.simpleName} : $name = {" + "\n"
-        for (tag in map.values) {
-            str += tag.toString() + "\n"
-        }
-        str += "}"
+        return toPrintString()
+    }
 
-        return str
+    override fun print(builder: StringBuilder, indent: Int) {
+        builder.appendIndent(indent)
+        builder.append("${this.javaClass.simpleName} : $name = {" + "\n")
+        for (tag in map.values) {
+            tag.print(builder, indent + 1)
+        }
+        builder.appendIndent(indent)
+        builder.append("}\n")
     }
 }
