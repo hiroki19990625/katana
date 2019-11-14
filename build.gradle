@@ -23,7 +23,7 @@ configurations {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    extraLibs files("libs/jraknet-2.11.8.jar")
+    extraLibs files("libs/jraknet-2.12.0.jar")
 
     implementation "com.nimbusds:nimbus-jose-jwt:7.3"
 
