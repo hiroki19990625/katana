@@ -19,7 +19,7 @@ class BlockDefinitions : IBlockDefinitions {
             this::class.java.classLoader.getResourceAsStream("runtime_block_ids.dat") ?: throw IOException()
 
         val root = NBTIO.readTag(stream.readBytes(), Endian.Big) as CompoundTag
-        val list = root.getListTag("Palette");
+        val list = root.getListTag("Palette")
         for (i in 0 until list.size()) {
             val com = list.getCompoundTag(i)
             val block = com.getCompoundTag("block")

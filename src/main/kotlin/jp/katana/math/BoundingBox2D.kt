@@ -29,7 +29,7 @@ data class BoundingBox2D(val pos: Vector2, val bound: Vector2) {
         val minX1 = min(sum1.x, pos.x)
         val minY1 = min(sum1.y, pos.y)
 
-        val sum2 = contain.pos + contain.bound;
+        val sum2 = contain.pos + contain.bound
         val maxX2 = max(sum2.x, contain.pos.x)
         val maxY2 = max(sum2.y, contain.pos.y)
         val minX2 = min(sum2.x, contain.pos.x)

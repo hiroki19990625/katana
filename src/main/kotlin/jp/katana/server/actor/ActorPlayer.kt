@@ -77,7 +77,7 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
 
     override fun disconnect(reason: String) {
         val disconnectPacket = DisconnectPacket()
-        disconnectPacket.message = reason;
+        disconnectPacket.message = reason
         sendPacket(disconnectPacket)
     }
 
