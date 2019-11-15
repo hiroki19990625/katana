@@ -75,15 +75,18 @@ class ServerListener(private val server: Server, private val networkManager: Net
             data = BinaryStream()
             data.setBuffer(buf)
             val id = data.readUnsignedVarInt()
-            if (this.server.katanaConfig!!.showPacketId)
+            if (this.server.katanaConfig!!.showHandlePacketId)
                 logger.info("Handle 0x" + id.toString(16) + " -> Size " + data.array().size)
-            if (this.server.katanaConfig!!.packetDump)
-                logger.info("Handle " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
+            if (this.server.katanaConfig!!.handlePacketDump)
+                logger.info("HandleDump " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
             val f = factory[id]
             if (f != null) {
                 val pk = f()
                 pk.setBuffer(buf)
                 pk.decode()
+
+                if (this.server.katanaConfig!!.printHandlePacket)
+                    logger.info("HandlePrint $pk")
 
                 networkManager.handlePacket(address, pk)
 

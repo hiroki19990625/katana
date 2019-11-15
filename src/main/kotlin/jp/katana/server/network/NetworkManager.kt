@@ -71,10 +71,12 @@ class NetworkManager(private val server: Server) : INetworkManager {
             binary.writeUnsignedVarInt(buf.size)
             binary.write(buf)
 
-            if (this.server.katanaConfig!!.showPacketId)
+            if (this.server.katanaConfig!!.showSendPacketId)
                 server.logger.info("Send 0x" + packet.packetId.toString(16) + " -> Size " + packet.array().size)
-            if (this.server.katanaConfig!!.packetDump)
-                server.logger.info("Send " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
+            if (this.server.katanaConfig!!.sendPacketDump)
+                server.logger.info("SendDump " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
+            if (this.server.katanaConfig!!.printSendPacket)
+                server.logger.info("SendPrint $packet")
 
             val batch = BatchPacket()
             batch.isEncrypt = player.isEncrypted

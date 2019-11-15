@@ -8,8 +8,12 @@ package jp.katana.server
 class KatanaConfig {
     var serverTickRate: Byte = 20
 
-    var showPacketId: Boolean = false
-    var packetDump: Boolean = false
+    var showSendPacketId: Boolean = false
+    var showHandlePacketId: Boolean = false
+    var sendPacketDump: Boolean = false
+    var handlePacketDump: Boolean = false
+    var printSendPacket: Boolean = false
+    var printHandlePacket: Boolean = false
 
     var logLevel: String = "INFO"
 }
