@@ -47,6 +47,16 @@ interface IPrintable {
         appendIndent("${property.name} = Length: ${property.get(instance).size}\n", indent)
     }
 
+    fun <I, V> StringBuilder.appendListProperty(property: KProperty1<I, List<V>>, instance: I, indent: Int) {
+        // TODO: ArrayDumping
+        appendIndent("${property.name} = Length: ${property.get(instance).size}\n", indent)
+    }
+
+    fun <I, K, V> StringBuilder.appendMapProperty(property: KProperty1<I, Map<K, V>>, instance: I, indent: Int) {
+        // TODO: ArrayDumping
+        appendIndent("${property.name} = Length: ${property.get(instance).size}\n", indent)
+    }
+
     fun <I> StringBuilder.appendPropertyBufferNetworkNBT(property: KProperty1<I, ByteArray>, instance: I, indent: Int) {
         appendIndent("${property.name} = {\n", indent)
         NBTIO.read(property.get(instance), Endian.Little, true).print(this, indent + 1)

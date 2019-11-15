@@ -28,7 +28,9 @@ class TakeItemActorPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(TakeItemActorPacket::actorRuntimeId, this, indent + 1)
+        builder.appendProperty(TakeItemActorPacket::targetRuntimeId, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

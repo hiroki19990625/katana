@@ -62,7 +62,14 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(ResourcePackDataInfoPacket::packId, this, indent + 1)
+        builder.appendProperty(ResourcePackDataInfoPacket::maxChunkSize, this, indent + 1)
+        builder.appendProperty(ResourcePackDataInfoPacket::chunkCount, this, indent + 1)
+        builder.appendProperty(ResourcePackDataInfoPacket::packSize, this, indent + 1)
+        builder.appendByteArrayProperty(ResourcePackDataInfoPacket::hash, this, indent + 1)
+        builder.appendProperty(ResourcePackDataInfoPacket::premium, this, indent + 1)
+        builder.appendProperty(ResourcePackDataInfoPacket::type, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

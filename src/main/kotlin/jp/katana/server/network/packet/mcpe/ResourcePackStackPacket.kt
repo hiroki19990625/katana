@@ -70,7 +70,11 @@ class ResourcePackStackPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(ResourcePackStackPacket::mustAccept, this, indent + 1)
+        builder.appendListProperty(ResourcePackStackPacket::behaviourPackStack, this, indent + 1)
+        builder.appendListProperty(ResourcePackStackPacket::resourcePackStack, this, indent + 1)
+        builder.appendProperty(ResourcePackStackPacket::gameVersion, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }
