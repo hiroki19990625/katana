@@ -56,7 +56,7 @@ class AddActorPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
         builder.appendProperty(AddActorPacket::actorUniqueId, this, indent + 1)
         builder.appendProperty(AddActorPacket::actorRuntimeId, this, indent + 1)
         builder.appendProperty(AddActorPacket::type, this, indent + 1)
@@ -65,6 +65,6 @@ class AddActorPacket : MinecraftPacket() {
         builder.appendProperty(AddActorPacket::pitch, this, indent + 1)
         builder.appendProperty(AddActorPacket::yaw, this, indent + 1)
         builder.appendProperty(AddActorPacket::headYaw, this, indent + 1)
-        builder.append("}\n")
+        builder.appendIndent("}\n", indent)
     }
 }

@@ -61,7 +61,11 @@ class LevelChunkPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(LevelChunkPacket::pos, this, indent + 1)
+        builder.appendProperty(LevelChunkPacket::cacheEnabled, this, indent + 1)
+        builder.appendLongArrayProperty(LevelChunkPacket::blobIds, this, indent + 1)
+        builder.appendByteArrayProperty(LevelChunkPacket::data, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

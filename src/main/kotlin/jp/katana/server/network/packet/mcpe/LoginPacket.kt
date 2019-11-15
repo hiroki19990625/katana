@@ -186,7 +186,10 @@ class LoginPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(LoginPacket::protocol, this, indent + 1)
+        builder.appendProperty(LoginPacket::loginData, this, indent + 1)
+        builder.appendProperty(LoginPacket::clientData, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }
