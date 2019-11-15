@@ -33,7 +33,7 @@ class ClientToServerHandshakePacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendIndent("}\n", indent)
     }
 }

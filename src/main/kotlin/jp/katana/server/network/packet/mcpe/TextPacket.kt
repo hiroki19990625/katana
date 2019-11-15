@@ -84,7 +84,14 @@ class TextPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(TextPacket::type, this, indent + 1)
+        builder.appendProperty(TextPacket::needTranslation, this, indent + 1)
+        builder.appendProperty(TextPacket::sourceName, this, indent + 1)
+        builder.appendProperty(TextPacket::message, this, indent + 1)
+        builder.appendArrayProperty(TextPacket::parameters, this, indent + 1)
+        builder.appendProperty(TextPacket::xboxUserId, this, indent + 1)
+        builder.appendProperty(TextPacket::platformChatId, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

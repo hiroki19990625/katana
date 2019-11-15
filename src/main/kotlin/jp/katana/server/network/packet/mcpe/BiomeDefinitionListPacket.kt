@@ -25,8 +25,8 @@ class BiomeDefinitionListPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
         builder.appendPropertyBufferNetworkNBT(BiomeDefinitionListPacket::tag, this, indent + 1)
-        builder.append("}\n")
+        builder.appendIndent("}\n", indent)
     }
 }

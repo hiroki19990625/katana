@@ -43,7 +43,9 @@ class ResourcePackChunkRequestPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(ResourcePackChunkRequestPacket::packId, this, indent + 1)
+        builder.appendProperty(ResourcePackChunkRequestPacket::chunkIndex, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

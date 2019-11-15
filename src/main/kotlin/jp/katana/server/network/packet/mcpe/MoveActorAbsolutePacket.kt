@@ -49,7 +49,14 @@ class MoveActorAbsolutePacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(MoveActorAbsolutePacket::actorRuntimeId, this, indent + 1)
+        builder.appendProperty(MoveActorAbsolutePacket::position, this, indent + 1)
+        builder.appendProperty(MoveActorAbsolutePacket::pitch, this, indent + 1)
+        builder.appendProperty(MoveActorAbsolutePacket::yaw, this, indent + 1)
+        builder.appendProperty(MoveActorAbsolutePacket::headYaw, this, indent + 1)
+        builder.appendProperty(MoveActorAbsolutePacket::teleport, this, indent + 1)
+        builder.appendProperty(MoveActorAbsolutePacket::onGround, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

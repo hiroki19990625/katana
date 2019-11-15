@@ -64,7 +64,17 @@ class MovePlayerPacket : MinecraftPacket() {
     }
 
     override fun print(builder: StringBuilder, indent: Int) {
-        builder.append("${this.javaClass.simpleName} {\n")
-        builder.append("}\n")
+        builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
+        builder.appendProperty(MovePlayerPacket::actorRuntimeId, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::position, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::pitch, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::yaw, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::headYaw, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::mode, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::onGround, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::ridingRuntimeId, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::teleportCause, this, indent + 1)
+        builder.appendProperty(MovePlayerPacket::teleportItem, this, indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }
