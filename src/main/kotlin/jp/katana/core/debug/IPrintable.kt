@@ -14,7 +14,7 @@ interface IPrintable {
     }
 
     fun StringBuilder.appendIndent(indent: Int) {
-        for (i in 0..indent)
+        for (i in 1..indent)
             append('\t')
     }
 
@@ -59,7 +59,7 @@ interface IPrintable {
 
     fun <I> StringBuilder.appendPropertyBufferNetworkNBT(property: KProperty1<I, ByteArray>, instance: I, indent: Int) {
         appendIndent("${property.name} = {\n", indent)
-        NBTIO.read(property.get(instance), Endian.Little, true).print(this, indent + 1)
+        NBTIO.readTag(property.get(instance), Endian.Little, true).print(this, indent + 1)
         appendIndent("}", indent)
     }
 }

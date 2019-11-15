@@ -38,6 +38,6 @@ class PlayStatusPacket : MinecraftPacket() {
     override fun print(builder: StringBuilder, indent: Int) {
         builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
         builder.appendProperty(PlayStatusPacket::status, this, indent + 1)
-        builder.appendIndent("}\n", indent + 1)
+        builder.appendIndent("}\n", indent)
     }
 }

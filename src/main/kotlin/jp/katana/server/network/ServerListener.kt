@@ -86,7 +86,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
                 pk.decode()
 
                 if (this.server.katanaConfig!!.printHandlePacket)
-                    logger.info("HandlePrint $pk")
+                    logger.info("HandlePrint \n$pk")
 
                 networkManager.handlePacket(address, pk)
 

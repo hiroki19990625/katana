@@ -76,7 +76,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
             if (this.server.katanaConfig!!.sendPacketDump)
                 server.logger.info("SendDump " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
             if (this.server.katanaConfig!!.printSendPacket)
-                server.logger.info("SendPrint $packet")
+                server.logger.info("SendPrint \n$packet")
 
             val batch = BatchPacket()
             batch.isEncrypt = player.isEncrypted
