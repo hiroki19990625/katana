@@ -12,185 +12,185 @@ fun nList(name: String, init: ListTag.() -> Unit): ListTag {
     return tag
 }
 
-fun CompoundTag.tByte(name: String, value: Byte): ByteTag {
+fun CompoundTag.comByte(name: String, value: Byte): ByteTag {
     val tag = ByteTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tShort(name: String, value: Short): ShortTag {
+fun CompoundTag.comShort(name: String, value: Short): ShortTag {
     val tag = ShortTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tInt(name: String, value: Int): IntTag {
+fun CompoundTag.comInt(name: String, value: Int): IntTag {
     val tag = IntTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tLong(name: String, value: Short): ShortTag {
+fun CompoundTag.comLong(name: String, value: Short): ShortTag {
     val tag = ShortTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tFloat(name: String, value: Float): FloatTag {
+fun CompoundTag.comFloat(name: String, value: Float): FloatTag {
     val tag = FloatTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tDouble(name: String, value: Double): DoubleTag {
+fun CompoundTag.comDouble(name: String, value: Double): DoubleTag {
     val tag = DoubleTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tString(name: String, value: String): StringTag {
+fun CompoundTag.comString(name: String, value: String): StringTag {
     val tag = StringTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tByteArray(name: String, value: ByteArray): ByteArrayTag {
+fun CompoundTag.comByteArray(name: String, value: ByteArray): ByteArrayTag {
     val tag = ByteArrayTag(name, value.toTypedArray())
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tByteArray(name: String, value: Array<Byte>): ByteArrayTag {
+fun CompoundTag.comByteArray(name: String, value: Array<Byte>): ByteArrayTag {
     val tag = ByteArrayTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tIntArray(name: String, value: IntArray): IntArrayTag {
+fun CompoundTag.comIntArray(name: String, value: IntArray): IntArrayTag {
     val tag = IntArrayTag(name, value.toTypedArray())
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tIntArray(name: String, value: Array<Int>): IntArrayTag {
+fun CompoundTag.comIntArray(name: String, value: Array<Int>): IntArrayTag {
     val tag = IntArrayTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tLongArray(name: String, value: LongArray): LongArrayTag {
+fun CompoundTag.comLongArray(name: String, value: LongArray): LongArrayTag {
     val tag = LongArrayTag(name, value.toTypedArray())
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tLongArray(name: String, value: Array<Long>): LongArrayTag {
+fun CompoundTag.comLongArray(name: String, value: Array<Long>): LongArrayTag {
     val tag = LongArrayTag(name, value)
     this.putTag(tag)
     return tag
 }
 
-fun CompoundTag.tCompound(name: String, init: CompoundTag.() -> Unit): CompoundTag {
+fun CompoundTag.comCompound(name: String, init: CompoundTag.() -> Unit): CompoundTag {
     val tag = CompoundTag(name)
     this.putTag(tag)
     tag.apply(init)
     return tag
 }
 
-fun CompoundTag.tList(name: String, listType: Byte, init: ListTag.() -> Unit): ListTag {
+fun CompoundTag.comList(name: String, listType: Byte, init: ListTag.() -> Unit): ListTag {
     val tag = ListTag(name, listType)
     this.putTag(tag)
     tag.apply(init)
     return tag
 }
 
-fun ListTag.tByte(value: Byte): ByteTag {
+fun ListTag.listByte(value: Byte): ByteTag {
     val tag = ByteTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tShort(value: Short): ShortTag {
+fun ListTag.listShort(value: Short): ShortTag {
     val tag = ShortTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tInt(value: Int): IntTag {
+fun ListTag.listInt(value: Int): IntTag {
     val tag = IntTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tLong(value: Long): LongTag {
+fun ListTag.listLong(value: Long): LongTag {
     val tag = LongTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tFloat(value: Float): FloatTag {
+fun ListTag.listFloat(value: Float): FloatTag {
     val tag = FloatTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tDouble(value: Double): DoubleTag {
+fun ListTag.listDouble(value: Double): DoubleTag {
     val tag = DoubleTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tString(value: String): StringTag {
+fun ListTag.listString(value: String): StringTag {
     val tag = StringTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tByteArray(value: ByteArray): ByteArrayTag {
+fun ListTag.listByteArray(value: ByteArray): ByteArrayTag {
     val tag = ByteArrayTag("", value.toTypedArray())
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tByteArray(value: Array<Byte>): ByteArrayTag {
+fun ListTag.listByteArray(value: Array<Byte>): ByteArrayTag {
     val tag = ByteArrayTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tIntArray(value: IntArray): IntArrayTag {
+fun ListTag.listIntArray(value: IntArray): IntArrayTag {
     val tag = IntArrayTag("", value.toTypedArray())
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tIntArray(value: Array<Int>): IntArrayTag {
+fun ListTag.listIntArray(value: Array<Int>): IntArrayTag {
     val tag = IntArrayTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tLongArray(value: LongArray): LongArrayTag {
+fun ListTag.listLongArray(value: LongArray): LongArrayTag {
     val tag = LongArrayTag("", value.toTypedArray())
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tLongArray(value: Array<Long>): LongArrayTag {
+fun ListTag.listLongArray(value: Array<Long>): LongArrayTag {
     val tag = LongArrayTag("", value)
     this.addTag(tag)
     return tag
 }
 
-fun ListTag.tCompound(name: String, init: CompoundTag.() -> Unit): CompoundTag {
-    val tag = CompoundTag(name)
+fun ListTag.listCompound(init: CompoundTag.() -> Unit): CompoundTag {
+    val tag = CompoundTag("")
     this.addTag(tag)
     tag.apply(init)
     return tag
 }
 
-fun ListTag.tList(name: String, listType: Byte, init: ListTag.() -> Unit): ListTag {
-    val tag = ListTag(name, listType)
+fun ListTag.listList(listType: Byte, init: ListTag.() -> Unit): ListTag {
+    val tag = ListTag("", listType)
     this.addTag(tag)
     tag.apply(init)
     return tag
