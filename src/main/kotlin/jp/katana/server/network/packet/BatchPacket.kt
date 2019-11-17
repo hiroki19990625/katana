@@ -4,11 +4,12 @@ import jp.katana.server.network.packet.mcpe.MinecraftProtocols
 import jp.katana.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.security.MessageDigest
 import java.util.*
-import java.util.zip.Deflater
-import java.util.zip.Inflater
+import java.util.zip.DeflaterOutputStream
+import java.util.zip.InflaterOutputStream
 import javax.crypto.Cipher
 
 
@@ -31,22 +32,21 @@ class BatchPacket : BinaryStream() {
         readByte()
 
         if (!isEncrypt) {
-            val payload = ByteArray(1024 * 1024 * 64)
-            val decompresser = Inflater()
-            decompresser.setInput(readRemaining())
-
             try {
-                val length = decompresser.inflate(payload)
-                decompresser.end()
+                val outPayload = ByteArrayOutputStream()
+                val decompresser = InflaterOutputStream(outPayload)
+                decompresser.write(readRemaining())
+                decompresser.close()
 
-                this.payload = payload.copyOf(length)
+                this.payload = outPayload.toByteArray()
+                outPayload.close()
             } catch (e: Exception) {
                 logger.error("", e)
             }
         } else {
             val buffer = decrypt!!.update(readRemaining())
             val payload = ByteArray(buffer.size - 8)
-            val outPayload = ByteArray(1024 * 1024 * 64)
+            val outPayload = ByteArrayOutputStream()
             val calculateCheckSum = ByteArray(8)
             System.arraycopy(buffer, 0, payload, 0, buffer.size - 8)
             System.arraycopy(buffer, buffer.size - 8, calculateCheckSum, 0, 8)
@@ -66,14 +66,13 @@ class BatchPacket : BinaryStream() {
                 throw IOException("Not Decrypt")
             }
 
-            val decompresser = Inflater()
-            decompresser.setInput(payload)
-
             try {
-                val length = decompresser.inflate(outPayload)
-                decompresser.end()
+                val decompresser = InflaterOutputStream(outPayload)
+                decompresser.write(payload)
+                decompresser.close()
 
-                this.payload = outPayload.copyOf(length)
+                this.payload = outPayload.toByteArray()
+                outPayload.close()
             } catch (e: Exception) {
                 logger.error("", e)
             }
@@ -85,14 +84,13 @@ class BatchPacket : BinaryStream() {
     fun encode() {
         writeByte(MinecraftProtocols.BATCH_PACKET.toByte())
 
-        val output = ByteArray(1024 * 1024 * 64)
-        val compresser = Deflater()
-        compresser.setInput(payload)
-        compresser.finish()
-        val length = compresser.deflate(output)
-        compresser.end()
+        val output = ByteArrayOutputStream()
+        val compresser = DeflaterOutputStream(output)
+        compresser.write(payload)
+        compresser.close()
 
-        var buffer = output.copyOf(length)
+        var buffer = output.toByteArray()
+        output.close()
         if (isEncrypt) {
             val binaryStream = BinaryStream()
             binaryStream.writeLongLE(encryptCounter)
