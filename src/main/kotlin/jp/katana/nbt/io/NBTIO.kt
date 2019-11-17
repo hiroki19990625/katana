@@ -3,8 +3,9 @@ package jp.katana.nbt.io
 import jp.katana.nbt.Endian
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
-import java.util.zip.Deflater
-import java.util.zip.Inflater
+import java.io.ByteArrayOutputStream
+import java.util.zip.DeflaterOutputStream
+import java.util.zip.InflaterOutputStream
 
 @Suppress("UNCHECKED_CAST")
 class NBTIO {
@@ -90,24 +91,25 @@ class NBTIO {
         fun writeZlibTag(tag: CompoundTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
             val buffer = writeTag(tag, endian, isNetwork)
 
-            val output = ByteArray(1024 * 1024 * 64)
-            val compresser = Deflater()
-            compresser.setInput(buffer)
-            compresser.finish()
-            val length = compresser.deflate(output)
-            compresser.end()
+            val output = ByteArrayOutputStream()
+            val compresser = DeflaterOutputStream(output)
+            compresser.write(buffer)
+            compresser.close()
 
-            return output.copyOf(length)
+            val buf = output.toByteArray()
+            output.close()
+            return buf
         }
 
         fun readZlibTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): INamedTag {
-            val payload = ByteArray(1024 * 1024 * 64)
-            val decompresser = Inflater()
-            decompresser.setInput(buffer)
+            val payload = ByteArrayOutputStream()
+            val decompresser = InflaterOutputStream(payload)
+            decompresser.write(buffer)
+            decompresser.close()
 
-            val length = decompresser.inflate(payload)
-            decompresser.end()
-            return readTag(payload.copyOf(length), endian, isNetwork)
+            val buf = payload.toByteArray()
+            payload.close()
+            return readTag(buf, endian, isNetwork)
         }
     }
 }
