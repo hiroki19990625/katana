@@ -8,24 +8,24 @@ class VarInt {
             var size = 0
             var b: Int = stream.readByte().toInt()
             while (b and 0x80 == 0x80) {
-                value = value or ((b and 0x7F).toLong() shl size++ * 7)
+                value = value or ((b and 0x7F).toLong() shl (size++ * 7))
                 require(size < maxSize) { "VarLong too big" }
                 b = stream.readByte().toInt()
             }
 
-            return value or ((b and 0x7F).toLong() shl size * 7)
+            return value or ((b and 0x7F).toLong() shl (size * 7))
         }
 
         private fun write(stream: BinaryStream, value: Long) {
             var vl = value
             do {
-                var temp = (vl and 127).toByte()
+                var temp = (vl and 0b01111111)
                 // Note: >>> means that the sign bit is shifted with the rest of the number rather than being left alone
                 vl = vl ushr 7
                 if (vl != 0L) {
-                    temp = (temp.toInt() or 128).toByte()
+                    temp = temp or 0b10000000
                 }
-                stream.writeByte(temp)
+                stream.writeByte(temp.toByte())
             } while (vl != 0L)
         }
 
