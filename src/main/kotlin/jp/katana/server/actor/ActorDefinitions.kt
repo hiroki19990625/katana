@@ -43,6 +43,8 @@ class ActorDefinitions : IActorDefinitions {
                 }
             }
         }
+
+        stream.close()
     }
 
     override fun fromId(id: Int): IActorDefine {

@@ -38,6 +38,8 @@ class ItemDefinitions : IItemDefinitions {
                 }
             }
         }
+
+        stream.close()
     }
 
     override fun fromRuntime(runtimeId: Int): IItemDefine {

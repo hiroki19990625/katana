@@ -44,6 +44,8 @@ class BiomeDefinitions : IBiomeDefinitions {
                 }
             }
         }
+
+        stream.close()
     }
 
     override fun fromName(name: String): IBiomeDefine {
