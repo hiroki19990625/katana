@@ -37,6 +37,7 @@ class BlockDefinitions : IBlockDefinitions {
             defines.add(define)
         }
 
+        stream.close()
         prevSize = size()
         binaryData = NBTIO.writeTag(list, Endian.Little, true)
     }
