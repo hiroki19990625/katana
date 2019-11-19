@@ -60,7 +60,7 @@ class StartGamePacket : MinecraftPacket() {
     var isOnlySpawningV1Villagers = false
     var vanillaVersion = Server.GAME_VERSION
     var levelId = "" //base64 string, usually the same as world folder name in vanilla
-    var worldName: String = ""
+    var worldName: String = "World"
     var premiumWorldTemplateId = ""
     var isTrial = false
     var isMovementServerAuthoritative = false

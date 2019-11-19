@@ -152,6 +152,8 @@ class Server : IServer {
             loadServerProperties()
             loadKatanaConfig()
 
+            updateLogger()
+
             logger.info(I18n["katana.server.network.starting"])
             networkManager = networkManagerCreator(this)
             if (state == ServerState.Stopped)
@@ -187,8 +189,6 @@ class Server : IServer {
         try {
             saveServerProperties()
             saveKatanaConfig()
-
-            updateLogger()
 
             networkManager?.shutdown()
         } catch (e: Exception) {
