@@ -211,6 +211,7 @@ class Server : IServer {
     override fun shutdownForce(): Boolean {
         state = ServerState.Stopped
         logger.info(I18n["katana.server.stop"])
+
         return true
     }
 
@@ -266,13 +267,28 @@ class Server : IServer {
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
         if (propertiesFile.isFile && propertiesFile.exists()) {
-            serverProperties = yaml.loadAs(propertiesFile.reader(), ServerProperties::class.java)
-            logger.info(I18n["katana.server.file.load", propertiesFile.name])
+            val reader = propertiesFile.reader()
+            try {
+                serverProperties = yaml.loadAs(reader, ServerProperties::class.java)!!
+                logger.info(I18n["katana.server.file.load", propertiesFile.name])
+            } catch (e: Exception) {
+                reader.close()
+                logger.info(I18n["katana.server.file.error", propertiesFile.name, e.toString()])
+                logger.info(I18n["katana.server.file.backup", propertiesFile.name])
+                val f = File(propertiesFile.name + ".${System.currentTimeMillis()}-old")
+                propertiesFile.copyTo(f, true)
+                propertiesFile.delete()
+                loadServerProperties()
+            }
         } else {
-            serverProperties = ServerProperties()
-            propertiesFile.createNewFile()
-            yaml.dump(serverProperties, propertiesFile.writer())
-            logger.info(I18n["katana.server.file.create", propertiesFile.name])
+            try {
+                serverProperties = ServerProperties()
+                propertiesFile.createNewFile()
+                yaml.dump(serverProperties, propertiesFile.writer())
+                logger.info(I18n["katana.server.file.create", propertiesFile.name])
+            } catch (e: Exception) {
+                throw ServerException(e)
+            }
         }
     }
 
@@ -280,8 +296,12 @@ class Server : IServer {
         val options = DumperOptions()
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
-        yaml.dump(serverProperties, propertiesFile.writer())
-        logger.info(I18n["katana.server.file.save", propertiesFile.name])
+        try {
+            yaml.dump(serverProperties, propertiesFile.writer())
+            logger.info(I18n["katana.server.file.save", propertiesFile.name])
+        } catch (e: Exception) {
+            throw ServerException(e)
+        }
     }
 
     private fun loadKatanaConfig() {
@@ -289,13 +309,28 @@ class Server : IServer {
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
         if (katanaConfigFile.isFile && katanaConfigFile.exists()) {
-            katanaConfig = yaml.loadAs(katanaConfigFile.reader(), KatanaConfig::class.java)
-            logger.info(I18n["katana.server.file.load", katanaConfigFile.name])
+            val reader = propertiesFile.reader()
+            try {
+                katanaConfig = yaml.loadAs(katanaConfigFile.reader(), KatanaConfig::class.java)!!
+                logger.info(I18n["katana.server.file.load", katanaConfigFile.name])
+            } catch (e: Exception) {
+                reader.close()
+                logger.info(I18n["katana.server.file.error", propertiesFile.name, e.toString()])
+                logger.info(I18n["katana.server.file.backup", propertiesFile.name])
+                val f = File(propertiesFile.name + ".${System.currentTimeMillis()}-old")
+                propertiesFile.copyTo(f, true)
+                propertiesFile.delete()
+                loadKatanaConfig()
+            }
         } else {
-            katanaConfig = KatanaConfig()
-            katanaConfigFile.createNewFile()
-            yaml.dump(katanaConfig, katanaConfigFile.writer())
-            logger.info(I18n["katana.server.file.create", katanaConfigFile.name])
+            try {
+                katanaConfig = KatanaConfig()
+                katanaConfigFile.createNewFile()
+                yaml.dump(katanaConfig, katanaConfigFile.writer())
+                logger.info(I18n["katana.server.file.create", katanaConfigFile.name])
+            } catch (e: Exception) {
+                throw ServerException(e)
+            }
         }
     }
 
@@ -303,8 +338,12 @@ class Server : IServer {
         val options = DumperOptions()
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
-        yaml.dump(katanaConfig, katanaConfigFile.writer())
-        logger.info(I18n["katana.server.file.save", katanaConfigFile.name])
+        try {
+            yaml.dump(katanaConfig, katanaConfigFile.writer())
+            logger.info(I18n["katana.server.file.save", katanaConfigFile.name])
+        } catch (e: Exception) {
+            throw ServerException(e)
+        }
     }
 
     private fun updateLogger() {
