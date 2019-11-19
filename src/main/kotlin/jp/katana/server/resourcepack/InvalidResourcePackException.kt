@@ -1,4 +1,4 @@
-package jp.katana.core.resourcepack
+package jp.katana.server.resourcepack
 
 import jp.katana.i18n.I18n
 import java.io.IOException

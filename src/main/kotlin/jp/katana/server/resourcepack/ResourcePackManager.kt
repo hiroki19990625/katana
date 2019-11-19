@@ -4,8 +4,6 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import jp.katana.core.data.IResourcePackInfo
 import jp.katana.core.resourcepack.IResourcePackManager
-import jp.katana.core.resourcepack.InvalidResourcePackException
-import jp.katana.core.resourcepack.ResourcePackFormatException
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.data.ResourcePackInfo
