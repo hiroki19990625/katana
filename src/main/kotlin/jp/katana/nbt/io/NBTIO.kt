@@ -1,9 +1,13 @@
 package jp.katana.nbt.io
 
 import jp.katana.nbt.Endian
+import jp.katana.nbt.NBTFormatException
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
+import jp.katana.server.io.CompressException
+import jp.katana.server.io.DecompressException
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.util.zip.DeflaterOutputStream
 import java.util.zip.InflaterOutputStream
 
@@ -12,45 +16,70 @@ class NBTIO {
     companion object {
         fun write(tag: CompoundTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
             val stream = NBTStream(endian, isNetwork)
-            tag.write(stream)
-
-            val buf = stream.getBuffer()
-            stream.close()
-            return buf
+            try {
+                tag.write(stream)
+                return stream.getBuffer()
+            } catch (e: IOException) {
+                throw NBTIOException(e.toString())
+            } catch (e: Exception) {
+                throw NBTFormatException(e.toString())
+            } finally {
+                stream.close()
+            }
         }
 
         fun read(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): CompoundTag {
             val stream = NBTStream(endian, isNetwork)
-            stream.setBuffer(buffer)
+            try {
+                stream.setBuffer(buffer)
 
-            val tag = CompoundTag("")
-            tag.read(stream)
+                val tag = CompoundTag("")
+                tag.read(stream)
 
-            stream.close()
-            return tag
+                return tag
+            } catch (e: IOException) {
+                throw NBTIOException(e.toString())
+            } catch (e: Exception) {
+                throw NBTFormatException(e.toString())
+            } finally {
+                stream.close()
+            }
         }
 
         fun writeTag(tag: INamedTag, endian: Endian = Endian.Little, isNetwork: Boolean = false): ByteArray {
             val stream = NBTStream(endian, isNetwork)
-            stream.writeByte(tag.type)
-            stream.writeString(tag.name)
-            tag.write(stream)
+            try {
+                stream.writeByte(tag.type)
+                stream.writeString(tag.name)
+                tag.write(stream)
 
-            val buf = stream.getBuffer()
-            stream.close()
-            return buf
+                return stream.getBuffer()
+            } catch (e: IOException) {
+                throw NBTIOException(e.toString())
+            } catch (e: Exception) {
+                throw NBTFormatException(e.toString())
+            } finally {
+                stream.close()
+            }
         }
 
         fun readTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): INamedTag {
             val stream = NBTStream(endian, isNetwork)
-            stream.setBuffer(buffer)
+            try {
+                stream.setBuffer(buffer)
 
-            val type = stream.readByte()
-            val tag = INamedTag.getTag(type, stream.readString())
-            tag.read(stream)
+                val type = stream.readByte()
+                val tag = INamedTag.getTag(type, stream.readString())
+                tag.read(stream)
 
-            stream.close()
-            return tag
+                return tag
+            } catch (e: IOException) {
+                throw NBTIOException(e.toString())
+            } catch (e: Exception) {
+                throw NBTFormatException(e.toString())
+            } finally {
+                stream.close()
+            }
         }
 
         fun readTagRemaining(
@@ -59,16 +88,21 @@ class NBTIO {
             isNetwork: Boolean = false
         ): Pair<INamedTag, ByteArray> {
             val stream = NBTStream(endian, isNetwork)
-            stream.setBuffer(buffer)
+            try {
+                stream.setBuffer(buffer)
 
-            val type = stream.readByte()
-            val tag = INamedTag.getTag(type, stream.readString())
-            tag.read(stream)
+                val type = stream.readByte()
+                val tag = INamedTag.getTag(type, stream.readString())
+                tag.read(stream)
 
-            val r = tag to stream.readRemaining()
-            stream.close()
-
-            return r
+                return tag to stream.readRemaining()
+            } catch (e: IOException) {
+                throw NBTIOException(e.toString())
+            } catch (e: Exception) {
+                throw NBTFormatException(e.toString())
+            } finally {
+                stream.close()
+            }
         }
 
         fun <T : INamedTag> readTagCast(
@@ -93,8 +127,13 @@ class NBTIO {
 
             val output = ByteArrayOutputStream()
             val compresser = DeflaterOutputStream(output)
-            compresser.write(buffer)
-            compresser.close()
+            try {
+                compresser.write(buffer)
+            } catch (e: Exception) {
+                throw CompressException(e.toString())
+            } finally {
+                compresser.close()
+            }
 
             val buf = output.toByteArray()
             output.close()
@@ -104,8 +143,13 @@ class NBTIO {
         fun readZlibTag(buffer: ByteArray, endian: Endian = Endian.Little, isNetwork: Boolean = false): INamedTag {
             val payload = ByteArrayOutputStream()
             val decompresser = InflaterOutputStream(payload)
-            decompresser.write(buffer)
-            decompresser.close()
+            try {
+                decompresser.write(buffer)
+            } catch (e: Exception) {
+                throw DecompressException(e.toString())
+            } finally {
+                decompresser.close()
+            }
 
             val buf = payload.toByteArray()
             payload.close()
