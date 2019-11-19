@@ -1,5 +1,10 @@
 package jp.katana.server.network.packet
 
+import jp.katana.i18n.I18n
+import jp.katana.server.io.CompressException
+import jp.katana.server.io.DecompressException
+import jp.katana.server.network.DecryptException
+import jp.katana.server.network.EncryptException
 import jp.katana.server.network.packet.mcpe.MinecraftProtocols
 import jp.katana.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
@@ -41,7 +46,7 @@ class BatchPacket : BinaryStream() {
                 this.payload = outPayload.toByteArray()
                 outPayload.close()
             } catch (e: Exception) {
-                logger.error("", e)
+                throw DecompressException(e.toString())
             }
         } else {
             val buffer = decrypt!!.update(readRemaining())
@@ -56,14 +61,18 @@ class BatchPacket : BinaryStream() {
             binaryStream.write(payload)
             binaryStream.write(sharedKey!!)
 
-            val messageDigest = MessageDigest.getInstance("SHA-256")
-            messageDigest.update(binaryStream.array())
-            val result = messageDigest.digest()
-            val checkSum = ByteArray(8)
-            System.arraycopy(result, 0, checkSum, 0, 8)
+            try {
+                val messageDigest = MessageDigest.getInstance("SHA-256")
+                messageDigest.update(binaryStream.array())
+                val result = messageDigest.digest()
+                val checkSum = ByteArray(8)
+                System.arraycopy(result, 0, checkSum, 0, 8)
 
-            if (!Arrays.equals(calculateCheckSum, checkSum)) {
-                throw IOException("Not Decrypt")
+                if (!Arrays.equals(calculateCheckSum, checkSum)) {
+                    throw IOException(I18n["katana.server.network.decryptFailed"])
+                }
+            } catch (e: Exception) {
+                throw DecryptException(e)
             }
 
             try {
@@ -74,7 +83,7 @@ class BatchPacket : BinaryStream() {
                 this.payload = outPayload.toByteArray()
                 outPayload.close()
             } catch (e: Exception) {
-                logger.error("", e)
+                throw DecompressException(e.toString())
             }
 
             binaryStream.close()
@@ -85,9 +94,13 @@ class BatchPacket : BinaryStream() {
         writeByte(MinecraftProtocols.BATCH_PACKET.toByte())
 
         val output = ByteArrayOutputStream()
-        val compresser = DeflaterOutputStream(output)
-        compresser.write(payload)
-        compresser.close()
+        try {
+            val compresser = DeflaterOutputStream(output)
+            compresser.write(payload)
+            compresser.close()
+        } catch (e: Exception) {
+            throw CompressException(e.toString())
+        }
 
         var buffer = output.toByteArray()
         output.close()
@@ -112,7 +125,7 @@ class BatchPacket : BinaryStream() {
 
                 digst.close()
             } catch (e: Exception) {
-                logger.warn("Encrypt Error!")
+                throw EncryptException(e)
             }
 
             binaryStream.close()

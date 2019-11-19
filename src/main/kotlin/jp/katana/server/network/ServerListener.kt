@@ -9,6 +9,7 @@ import jp.katana.server.Server
 import jp.katana.server.actor.ActorPlayer
 import jp.katana.server.event.player.PlayerCreateEvent
 import jp.katana.server.factory.PacketFactory
+import jp.katana.server.io.DecompressException
 import jp.katana.server.network.packet.BatchPacket
 import jp.katana.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
@@ -57,45 +58,60 @@ class ServerListener(private val server: Server, private val networkManager: Net
             val address = peer.address
             val player = networkManager.getPlayer(address)!!
             val batch = BatchPacket()
-            batch.isEncrypt = player.isEncrypted
-            batch.decrypt = player.decrypt
-            batch.encrypt = player.encrypt
-            batch.decryptCounter = player.decryptCounter
-            batch.encryptCounter = player.encryptCounter
-            batch.sharedKey = player.sharedKey
-            batch.setBuffer(packet.array())
-            batch.decode()
+            try {
+                batch.isEncrypt = player.isEncrypted
+                batch.decrypt = player.decrypt
+                batch.encrypt = player.encrypt
+                batch.decryptCounter = player.decryptCounter
+                batch.encryptCounter = player.encryptCounter
+                batch.sharedKey = player.sharedKey
+                batch.setBuffer(packet.array())
+                batch.decode()
 
-            if (player.isEncrypted)
-                player.decryptCounter++
+                if (player.isEncrypted)
+                    player.decryptCounter++
 
-            var data = BinaryStream()
-            data.setBuffer(batch.payload)
-            val buf = data.read(data.readUnsignedVarInt())
-            data = BinaryStream()
-            data.setBuffer(buf)
-            val id = data.readUnsignedVarInt()
-            if (this.server.katanaConfig!!.showHandlePacketId)
-                logger.info("Handle 0x" + id.toString(16) + " -> Size " + data.array().size)
-            if (this.server.katanaConfig!!.handlePacketDump)
-                logger.info("HandleDump " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
-            val f = factory[id]
-            if (f != null) {
-                val pk = f()
-                pk.setBuffer(buf)
-                pk.decode()
+                var data = BinaryStream()
+                data.setBuffer(batch.payload)
+                val buf = data.read(data.readUnsignedVarInt())
+                data.close()
 
-                if (this.server.katanaConfig!!.printHandlePacket)
-                    logger.info("HandlePrint \n$pk")
+                data = BinaryStream()
+                data.setBuffer(buf)
+                val id = data.readUnsignedVarInt()
+                if (this.server.katanaConfig!!.showHandlePacketId)
+                    logger.info("Handle 0x" + id.toString(16) + " -> Size " + data.array().size)
+                if (this.server.katanaConfig!!.handlePacketDump)
+                    logger.info("HandleDump " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
 
-                networkManager.handlePacket(address, pk)
+                val f = factory[id]
+                if (f != null) {
+                    try {
+                        val pk = f()
+                        pk.setBuffer(buf)
+                        pk.decode()
 
-                pk.close()
+                        if (this.server.katanaConfig!!.printHandlePacket)
+                            logger.info("HandlePrint \n$pk")
+
+                        networkManager.handlePacket(address, pk)
+
+                        pk.close()
+                    } catch (e: Exception) {
+                        throw InvalidPacketException(e.localizedMessage)
+                    }
+                }
+            } catch (e: DecompressException) {
+                this.server.logger.warn("", e)
+            } catch (e: DecryptException) {
+                this.server.logger.warn("", e)
+            } catch (e: InvalidPacketException) {
+                this.server.logger.warn("", e)
+            } finally {
+                batch.close()
+                packet.clear()
+                packet.buffer()?.release()
             }
-            data.close()
-            batch.close()
-            packet.clear()
-            packet.buffer()?.release()
         }
     }
 

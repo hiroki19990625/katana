@@ -9,6 +9,7 @@ import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.Reliability
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
+import jp.katana.server.io.CompressException
 import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.utils.BinaryStream
@@ -63,42 +64,63 @@ class NetworkManager(private val server: Server) : INetworkManager {
 
     override fun sendPacket(player: IActorPlayer, packet: MinecraftPacket, reliability: Reliability) {
         val address = player.address
-        if (sessions.containsKey(address)) {
-            packet.encode()
+        try {
+            if (sessions.containsKey(address)) {
+                try {
+                    packet.encode()
+                } catch (e: Exception) {
+                    throw InvalidPacketException(e.toString())
+                }
 
-            val binary = BinaryStream()
-            val buf = packet.array()
-            binary.writeUnsignedVarInt(buf.size)
-            binary.write(buf)
+                val binary = BinaryStream()
+                val buf = packet.array()
+                binary.writeUnsignedVarInt(buf.size)
+                binary.write(buf)
 
-            if (this.server.katanaConfig!!.showSendPacketId)
-                server.logger.info("Send 0x" + packet.packetId.toString(16) + " -> Size " + packet.array().size)
-            if (this.server.katanaConfig!!.sendPacketDump)
-                server.logger.info("SendDump " + buf.joinToString("") { String.format("%02X", (it.toInt() and 0xFF)) })
-            if (this.server.katanaConfig!!.printSendPacket)
-                server.logger.info("SendPrint \n$packet")
+                if (this.server.katanaConfig!!.showSendPacketId)
+                    server.logger.info("Send 0x" + packet.packetId.toString(16) + " -> Size " + packet.array().size)
+                if (this.server.katanaConfig!!.sendPacketDump)
+                    server.logger.info("SendDump " + buf.joinToString("") {
+                        String.format(
+                            "%02X",
+                            (it.toInt() and 0xFF)
+                        )
+                    })
+                if (this.server.katanaConfig!!.printSendPacket)
+                    server.logger.info("SendPrint \n$packet")
 
-            val batch = BatchPacket()
-            batch.isEncrypt = player.isEncrypted
-            batch.decrypt = player.decrypt
-            batch.encrypt = player.encrypt
-            batch.decryptCounter = player.decryptCounter
-            batch.encryptCounter = player.encryptCounter
-            batch.sharedKey = player.sharedKey
-            batch.payload = binary.array()
-            batch.encode()
+                val batch = BatchPacket()
+                try {
+                    batch.isEncrypt = player.isEncrypted
+                    batch.decrypt = player.decrypt
+                    batch.encrypt = player.encrypt
+                    batch.decryptCounter = player.decryptCounter
+                    batch.encryptCounter = player.encryptCounter
+                    batch.sharedKey = player.sharedKey
+                    batch.payload = binary.array()
+                    batch.encode()
 
-            if (player.isEncrypted)
-                player.encryptCounter++
+                    if (player.isEncrypted)
+                        player.encryptCounter++
 
-            sessions[address]!!.sendMessage(
-                com.whirvis.jraknet.protocol.Reliability.lookup(reliability.id.toInt()),
-                packet.channel,
-                Packet(batch.array())
-            )
+                    sessions[address]!!.sendMessage(
+                        com.whirvis.jraknet.protocol.Reliability.lookup(reliability.id.toInt()),
+                        packet.channel,
+                        Packet(batch.array())
+                    )
+                } catch (e: CompressException) {
+                    server.logger.warn("", e)
+                } catch (e: EncryptException) {
+                    server.logger.warn("", e)
+                } finally {
+                    binary.close()
+                    batch.close()
+                }
+            }
+        } catch (e: InvalidPacketException) {
+            server.logger.warn("", e)
+        } finally {
             packet.close()
-            binary.close()
-            batch.close()
         }
     }
 
