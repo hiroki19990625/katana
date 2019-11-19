@@ -4,6 +4,8 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import jp.katana.core.data.IResourcePackInfo
 import jp.katana.core.resourcepack.IResourcePackManager
+import jp.katana.core.resourcepack.InvalidResourcePackException
+import jp.katana.core.resourcepack.ResourcePackFormatException
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.data.ResourcePackInfo
@@ -20,8 +22,14 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
     init {
         if (packDirectory.isDirectory && packDirectory.exists()) {
             for (packFile in packDirectory.listFiles()!!) {
-                if (packFile.isFile && packFile.extension == "zip") {
-                    loadPack(packFile)
+                try {
+                    if (packFile.isFile && (packFile.extension == "zip" || packFile.extension == "mcpack")) {
+                        loadPack(packFile)
+                    }
+                } catch (e: InvalidResourcePackException) {
+                    server.logger.warn("", e)
+                } catch (e: ResourcePackFormatException) {
+                    server.logger.error("", e)
                 }
             }
         } else {
@@ -30,7 +38,7 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
     }
 
     override fun loadPack(pack: File) {
-        val zipFile = ZipFile(pack, Charset.forName("Shift-JIS"))
+        val zipFile = ZipFile(pack, Charset.forName("utf8"))
         val entry = zipFile.getEntry("manifest.json")
         if (entry != null && !entry.isDirectory) {
             val stream = zipFile.getInputStream(entry)
@@ -39,6 +47,8 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
                 resourcePacks.put(packInfo.packId, packInfo)
 
             stream.close()
+        } else {
+            throw InvalidResourcePackException(pack.name)
         }
         zipFile.close()
     }
@@ -72,11 +82,12 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
             val versionStr = String.format("%s.%s.%s", version[0].asInt, version[1].asInt, version[2].asInt)
 
             server.logger.info(I18n["katana.server.resourcePack.load", name, versionStr])
+            stream.close()
             return ResourcePackInfo(pack, uuid, versionStr, packLength, "", "", "", false, hash)
+        } else {
+            stream.close()
+            throw ResourcePackFormatException(pack.name)
         }
-        stream.close()
-
-        return null
     }
 
     private fun validate(jsonObject: JsonObject): Boolean {
