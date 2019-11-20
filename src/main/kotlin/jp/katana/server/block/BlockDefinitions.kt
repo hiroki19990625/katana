@@ -10,6 +10,30 @@ import jp.katana.nbt.tag.ListTag
 import java.io.IOException
 
 class BlockDefinitions : IBlockDefinitions {
+    companion object {
+        private lateinit var instance: BlockDefinitions
+
+        fun fromRuntime(runtimeId: Int): IBlockDefine {
+            return instance.fromRuntime(runtimeId)
+        }
+
+        fun fromId(id: Int): IBlockDefine {
+            return instance.fromId(id)
+        }
+
+        fun fromIdAllStates(id: Int): List<IBlockDefine> {
+            return instance.fromIdAllStates(id)
+        }
+
+        fun fromIdAndStates(id: Int, states: Map<String, INamedTag>): IBlockDefine {
+            return instance.fromIdAndStates(id, states)
+        }
+
+        fun fromName(name: String): IBlockDefine {
+            return instance.fromName(name)
+        }
+    }
+
     private val defines: MutableList<IBlockDefine> = mutableListOf()
     private var prevSize: Int = 0
     private var binaryData: ByteArray = ByteArray(0)
@@ -35,6 +59,8 @@ class BlockDefinitions : IBlockDefinitions {
                     states
                 )
             defines.add(define)
+
+            instance = this
         }
 
         stream.close()
@@ -50,7 +76,11 @@ class BlockDefinitions : IBlockDefinitions {
         return defines.first { define -> define.id == id.toShort() }
     }
 
-    override fun fromIdAndStates(id: Int, states: MutableMap<String, INamedTag>): IBlockDefine {
+    override fun fromIdAllStates(id: Int): List<IBlockDefine> {
+        return defines.filter { define -> define.id == id.toShort() }.toList()
+    }
+
+    override fun fromIdAndStates(id: Int, states: Map<String, INamedTag>): IBlockDefine {
         return defines.first { define -> define.id == id.toShort() && define.states == states }
     }
 

@@ -8,5 +8,5 @@ class BlockDefine(
     override val name: String,
     override val id: Short,
     override val version: Int,
-    override val states: MutableMap<String, INamedTag>
+    override val states: Map<String, INamedTag>
 ) : IBlockDefine
