@@ -7,5 +7,5 @@ interface IBlockDefine {
     val name: String
     val id: Short
     val version: Int
-    val states: MutableMap<String, INamedTag>
+    val states: Map<String, INamedTag>
 }
