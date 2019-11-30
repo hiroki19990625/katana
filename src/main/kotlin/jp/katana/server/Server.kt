@@ -76,7 +76,7 @@ class Server : IServer {
         }
 
         const val PROTOCOL_VERSION = 388
-        const val GAME_VERSION = "1.13.0"
+        const val GAME_VERSION = "1.13.1"
         const val INTERNAL_GAME_VERSION = 17694723
     }
 

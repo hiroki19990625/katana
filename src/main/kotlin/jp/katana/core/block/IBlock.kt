@@ -2,6 +2,7 @@ package jp.katana.core.block
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.world.IWorld
 import jp.katana.math.Vector3Int
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
@@ -15,6 +16,9 @@ interface IBlock {
     val blockStates: List<Map<String, INamedTag>>?
     val nowState: Map<String, INamedTag>?
 
+    val runtimeId: Int
+
+    val world: IWorld?
     val position: Vector3Int
 
     val customTag: CompoundTag
