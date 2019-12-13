@@ -9,6 +9,7 @@ import jp.katana.core.world.chunk.IChunkLoader
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3Int
+import jp.katana.server.block.BlockStone
 import jp.katana.server.network.packet.mcpe.NetworkChunkPublisherUpdatePacket
 import jp.katana.server.world.chunk.Chunk
 import jp.katana.server.world.gamerule.GameRules
@@ -165,7 +166,7 @@ class World(
     override fun sendChunks(player: IActorPlayer): Boolean {
         val chunks = getChunkRadius(player)
         for (chunk in chunks) {
-            chunk.columns[0].setRuntimeId(Vector3Int(1, 0, 0), server.defineBlocks.fromId(1).runtimeId)
+            chunk.columns[0].setRuntimeId(Vector3Int(1, 0, 0), server.defineBlocks.fromRuntime(BlockStone(BlockStone.StoneType.Stone).runtimeId).runtimeId)
             player.sendPacket(chunk.getChunkPacket())
         }
 
