@@ -803,6 +803,14 @@
         "hasspawnegg": 1,
         "experimental": 0,
         "summonable": 1,
+        "id": "minecraft:bee",
+        "bid": "",
+        "rid": 122
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
         "id": "minecraft:wandering_trader",
         "bid": "",
         "rid": 118

@@ -1,5 +1,21 @@
 [
     {
+        "name": "minecraft:honeycomb_block",
+        "id": -221
+    },
+    {
+        "name": "minecraft:honey_block",
+        "id": -220
+    },
+    {
+        "name": "minecraft:beehive",
+        "id": -219
+    },
+    {
+        "name": "minecraft:bee_nest",
+        "id": -218
+    },
+    {
         "name": "minecraft:stickypistonarmcollision",
         "id": -217
     },
@@ -2782,5 +2798,13 @@
     {
         "name": "minecraft:suspicious_stew",
         "id": 734
+    },
+    {
+        "name": "minecraft:honeycomb",
+        "id": 736
+    },
+    {
+        "name": "minecraft:honey_bottle",
+        "id": 737
     }
 ]
