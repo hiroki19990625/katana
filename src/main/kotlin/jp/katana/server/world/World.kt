@@ -166,7 +166,7 @@ class World(
     override fun sendChunks(player: IActorPlayer): Boolean {
         val chunks = getChunkRadius(player)
         for (chunk in chunks) {
-            chunk.columns[0].setRuntimeId(Vector3Int(1, 0, 0), server.defineBlocks.fromRuntime(BlockStone(BlockStone.StoneType.Stone).runtimeId).runtimeId)
+            chunk.columns[0].setRuntimeId(Vector3Int(1, 0, 0), BlockStone(BlockStone.StoneType.Stone).runtimeId)
             player.sendPacket(chunk.getChunkPacket())
         }
 
