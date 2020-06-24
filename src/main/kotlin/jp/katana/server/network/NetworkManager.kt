@@ -78,7 +78,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
                 binary.write(buf)
 
                 if (this.server.katanaConfig!!.showSendPacketId)
-                    server.logger.info("Send 0x" + packet.packetId.toString(16) + " -> Size " + packet.array().size)
+                    server.logger.info("Send 0x" + packet.packetId.toString(16) + " -> Size " + buf.size)
                 if (this.server.katanaConfig!!.sendPacketDump)
                     server.logger.info("SendDump " + buf.joinToString("") {
                         String.format(
