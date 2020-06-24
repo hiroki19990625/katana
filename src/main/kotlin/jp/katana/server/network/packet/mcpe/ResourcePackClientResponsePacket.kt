@@ -56,7 +56,6 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
 
                     val resourcePackDataInfoPacket = ResourcePackDataInfoPacket()
                     resourcePackDataInfoPacket.packId = pack.packId
-                    resourcePackDataInfoPacket.maxChunkSize = ResourcePackDataInfoPacket.MB_1
                     resourcePackDataInfoPacket.chunkCount =
                         ceil(pack.packSize.toDouble() / resourcePackDataInfoPacket.maxChunkSize).toInt()
                     resourcePackDataInfoPacket.packSize = pack.packSize

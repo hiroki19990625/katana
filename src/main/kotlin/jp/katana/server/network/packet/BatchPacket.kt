@@ -31,6 +31,8 @@ class BatchPacket : BinaryStream() {
     var encrypt: Cipher? = null
     var sharedKey: ByteArray? = null
 
+    var compressionLevel: Int = 7
+
     var payload: ByteArray = ByteArray(0)
 
     fun decode() {
@@ -95,6 +97,7 @@ class BatchPacket : BinaryStream() {
 
         val output = ByteArrayOutputStream()
         try {
+            // val deflater = Deflater(compressionLevel)
             val compresser = DeflaterOutputStream(output)
             compresser.write(payload)
             compresser.close()
