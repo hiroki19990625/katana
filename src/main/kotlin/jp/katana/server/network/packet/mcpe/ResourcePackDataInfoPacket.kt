@@ -20,6 +20,14 @@ class ResourcePackDataInfoPacket : MinecraftPacket() {
         const val MB_1 = 1048576
         const val KB_512 = 524288
         const val KB_256 = 262144
+        const val KB_128 = 131072
+        const val KB_64 = 65536
+        const val KB_32 = 32768
+        const val KB_16 = 16384
+        const val KB_8 = 8192
+        const val KB_4 = 4096
+        const val KB_2 = 2048
+        const val KB_1 = 1024
     }
 
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACK_DATA_INFO_PACKET
