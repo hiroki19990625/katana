@@ -7,6 +7,9 @@ local_env/*
 build
 build/
 build/*
+out
+out/
+out/*
 
 .gradle/
 

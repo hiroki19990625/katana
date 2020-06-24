@@ -75,8 +75,8 @@ class Server : IServer {
             Thread.currentThread().name = I18n["katana.server.thread.hostThread"]
         }
 
-        const val PROTOCOL_VERSION = 389
-        const val GAME_VERSION = "1.14.0"
+        const val PROTOCOL_VERSION = 390
+        const val GAME_VERSION = "1.14.60"
         const val INTERNAL_GAME_VERSION = 17694723
     }
 
@@ -309,17 +309,17 @@ class Server : IServer {
         options.defaultFlowStyle = DumperOptions.FlowStyle.BLOCK
         val yaml = Yaml(options)
         if (katanaConfigFile.isFile && katanaConfigFile.exists()) {
-            val reader = propertiesFile.reader()
+            val reader = katanaConfigFile.reader()
             try {
-                katanaConfig = yaml.loadAs(katanaConfigFile.reader(), KatanaConfig::class.java)!!
+                katanaConfig = yaml.loadAs(reader, KatanaConfig::class.java)!!
                 logger.info(I18n["katana.server.file.load", katanaConfigFile.name])
             } catch (e: Exception) {
                 reader.close()
-                logger.info(I18n["katana.server.file.error", propertiesFile.name, e.toString()])
-                logger.info(I18n["katana.server.file.backup", propertiesFile.name])
-                val f = File(propertiesFile.name + ".${System.currentTimeMillis()}-old")
-                propertiesFile.copyTo(f, true)
-                propertiesFile.delete()
+                logger.info(I18n["katana.server.file.error", katanaConfigFile.name, e.toString()])
+                logger.info(I18n["katana.server.file.backup", katanaConfigFile.name])
+                val f = File(katanaConfigFile.name + ".${System.currentTimeMillis()}-old")
+                katanaConfigFile.copyTo(f, true)
+                katanaConfigFile.delete()
                 loadKatanaConfig()
             }
         } else {

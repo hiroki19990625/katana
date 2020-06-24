@@ -8,6 +8,7 @@ import jp.katana.server.data.ResourcePackEntry
 import jp.katana.server.world.gamerule.BooleanGameRule
 import jp.katana.server.world.gamerule.GameRules
 import java.util.*
+import kotlin.math.ceil
 
 class ResourcePackClientResponsePacket : MinecraftPacket() {
     companion object {
@@ -57,7 +58,7 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
                     resourcePackDataInfoPacket.packId = pack.packId
                     resourcePackDataInfoPacket.maxChunkSize = ResourcePackDataInfoPacket.MB_1
                     resourcePackDataInfoPacket.chunkCount =
-                        (pack.packSize / resourcePackDataInfoPacket.maxChunkSize).toInt()
+                        ceil(pack.packSize.toDouble() / resourcePackDataInfoPacket.maxChunkSize).toInt()
                     resourcePackDataInfoPacket.packSize = pack.packSize
                     resourcePackDataInfoPacket.hash = pack.hash
 

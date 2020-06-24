@@ -21,10 +21,10 @@ configurations {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.50"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.50"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
 
-    extraLibs files("libs/jraknet-2.12.0.jar")
+    extraLibs files("libs/jraknet-2.12.2.jar")
 
     implementation "com.nimbusds:nimbus-jose-jwt:7.3"
 
