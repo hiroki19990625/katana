@@ -68,9 +68,9 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
     private fun readJson(bytes: ByteArray, pack: File): IResourcePackInfo? {
         val jsonParser = JsonParser()
         val data = jsonParser.parse(String(bytes, Charset.forName("utf8")))
-        val packLength = pack.length()
         val stream = pack.inputStream()
-        val hash = MessageDigest.getInstance("SHA-256").digest(stream.readBytes())
+        val bytes = stream.readBytes()
+        val hash = MessageDigest.getInstance("SHA-256").digest(bytes)
         if (data is JsonObject && validate(data)) {
             val formatVersion = data["format_version"].asInt
             val header = data["header"].asJsonObject
@@ -81,7 +81,7 @@ class ResourcePackManager(private val server: Server) : IResourcePackManager {
 
             server.logger.info(I18n["katana.server.resourcePack.load", name, versionStr])
             stream.close()
-            return ResourcePackInfo(pack, uuid, versionStr, packLength, "", "", "", false, hash)
+            return ResourcePackInfo(pack, uuid, versionStr, bytes.size.toLong(), "", "", "", false, hash)
         } else {
             stream.close()
             throw ResourcePackFormatException(pack.name)
