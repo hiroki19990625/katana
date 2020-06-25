@@ -14,6 +14,7 @@ import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.utils.BinaryStream
 import java.net.InetSocketAddress
+import java.util.zip.Deflater
 
 class NetworkManager(private val server: Server) : INetworkManager {
     private val raknetServer: RakNetServer = RakNetServer(server.serverPort, server.maxPlayer)
@@ -89,7 +90,8 @@ class NetworkManager(private val server: Server) : INetworkManager {
                 if (this.server.katanaConfig!!.printSendPacket)
                     server.logger.info("SendPrint \n$packet")
 
-                val batch = BatchPacket()
+                // TODO: キャッシュ
+                val batch = BatchPacket(null, Deflater(Deflater.DEFAULT_COMPRESSION, true))
                 try {
                     batch.isEncrypt = player.isEncrypted
                     batch.decrypt = player.decrypt

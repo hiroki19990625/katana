@@ -13,12 +13,14 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.security.MessageDigest
 import java.util.*
+import java.util.zip.Deflater
 import java.util.zip.DeflaterOutputStream
+import java.util.zip.Inflater
 import java.util.zip.InflaterOutputStream
 import javax.crypto.Cipher
 
 
-class BatchPacket : BinaryStream() {
+class BatchPacket(val inflater: Inflater?, val deflater: Deflater?) : BinaryStream() {
     companion object {
         private val logger: Logger = LogManager.getLogger()
     }
@@ -31,8 +33,6 @@ class BatchPacket : BinaryStream() {
     var encrypt: Cipher? = null
     var sharedKey: ByteArray? = null
 
-    var compressionLevel: Int = 7
-
     var payload: ByteArray = ByteArray(0)
 
     fun decode() {
@@ -41,7 +41,7 @@ class BatchPacket : BinaryStream() {
         if (!isEncrypt) {
             try {
                 val outPayload = ByteArrayOutputStream()
-                val decompresser = InflaterOutputStream(outPayload)
+                val decompresser = InflaterOutputStream(outPayload, inflater)
                 decompresser.write(readRemaining())
                 decompresser.close()
 
@@ -78,7 +78,7 @@ class BatchPacket : BinaryStream() {
             }
 
             try {
-                val decompresser = InflaterOutputStream(outPayload)
+                val decompresser = InflaterOutputStream(outPayload, inflater)
                 decompresser.write(payload)
                 decompresser.close()
 
@@ -97,8 +97,7 @@ class BatchPacket : BinaryStream() {
 
         val output = ByteArrayOutputStream()
         try {
-            // val deflater = Deflater(compressionLevel)
-            val compresser = DeflaterOutputStream(output)
+            val compresser = DeflaterOutputStream(output, deflater)
             compresser.write(payload)
             compresser.close()
         } catch (e: Exception) {

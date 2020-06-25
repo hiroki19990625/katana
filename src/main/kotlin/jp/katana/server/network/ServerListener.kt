@@ -14,6 +14,7 @@ import jp.katana.server.network.packet.BatchPacket
 import jp.katana.utils.BinaryStream
 import org.apache.logging.log4j.LogManager
 import java.net.InetSocketAddress
+import java.util.zip.Inflater
 
 class ServerListener(private val server: Server, private val networkManager: NetworkManager) : RakNetServerListener {
     private val logger = LogManager.getLogger()
@@ -57,7 +58,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
         if (peer != null && packet != null) {
             val address = peer.address
             val player = networkManager.getPlayer(address)!!
-            val batch = BatchPacket()
+            val batch = BatchPacket(Inflater(true), null)
             try {
                 batch.isEncrypt = player.isEncrypted
                 batch.decrypt = player.decrypt
