@@ -144,6 +144,8 @@ class MinecraftProtocols {
         const val NETWORK_SETTINGS_PACKET = 0x8f
         const val PLAYER_AUTH_INPUT_PACKET = 0x90
 
+        const val PACKET_VIOLATION_WARNING_PACKET = 0x9c
+
         const val BATCH_PACKET = 0xfe
     }
 }

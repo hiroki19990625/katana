@@ -38,6 +38,8 @@ class PacketFactory : SimpleFactory<Int, () -> MinecraftPacket>() {
         this += { AvailableActorIdentifiersPacket() }// 0x77
 
         this += { BiomeDefinitionListPacket() }// 0x7a
+
+        this += { PacketViolationWarningPacket() }// 0x9c
     }
 
     override fun plusAssign(value: () -> MinecraftPacket) {
