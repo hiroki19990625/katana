@@ -8,7 +8,7 @@ class PacketViolationWarningPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.PACKET_VIOLATION_WARNING_PACKET;
 
     var type: PacketViolationType = PacketViolationType.None;
-    var severity: PacketViolationSeverity = PacketViolationSeverity.None
+    var severity: PacketViolationSeverity = PacketViolationSeverity.WARNING
     var violationPacketId: Int = 0
     var context: String = ""
 
@@ -50,9 +50,8 @@ class PacketViolationWarningPacket : MinecraftPacket() {
     }
 
     enum class PacketViolationSeverity(val severity: Int) {
-        None(0),
-        WARNING(1),
-        FINAL_WARNING(2),
-        TERMINATING_CONNECTION(3)
+        WARNING(0),
+        FINAL_WARNING(1),
+        TERMINATING_CONNECTION(2)
     }
 }

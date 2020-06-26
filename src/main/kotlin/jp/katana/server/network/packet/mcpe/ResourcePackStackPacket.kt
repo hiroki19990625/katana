@@ -13,6 +13,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
     var mustAccept = false
     var behaviourPackStack = mutableListOf<IResourcePackInfo>()
     var resourcePackStack = mutableListOf<IResourcePackInfo>()
+    var isExperimental = false
     var gameVersion = Server.GAME_VERSION
 
     override fun decodePayload() {
@@ -21,6 +22,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
         readPacks(behaviourPackStack)
         readPacks(resourcePackStack)
 
+        isExperimental = readBoolean()
         gameVersion = readVarString()
     }
 
@@ -30,6 +32,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
         writePacks(behaviourPackStack)
         writePacks(resourcePackStack)
 
+        writeBoolean(isExperimental)
         writeVarString(gameVersion)
     }
 
@@ -74,6 +77,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
         builder.appendProperty(ResourcePackStackPacket::mustAccept, this, indent + 1)
         builder.appendListProperty(ResourcePackStackPacket::behaviourPackStack, this, indent + 1)
         builder.appendListProperty(ResourcePackStackPacket::resourcePackStack, this, indent + 1)
+        builder.appendProperty(ResourcePackStackPacket::isExperimental, this, indent + 1)
         builder.appendProperty(ResourcePackStackPacket::gameVersion, this, indent + 1)
         builder.appendIndent("}\n", indent)
     }
