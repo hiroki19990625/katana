@@ -60,7 +60,7 @@ class ResourcePackStackPacket : MinecraftPacket() {
     }
 
     private fun writePacks(list: MutableList<IResourcePackInfo>) {
-        writeUnsignedInt(list.size.toLong())
+        writeUnsignedVarInt(list.size.toLong())
         for (pack in list) {
             writeVarString(pack.packId)
             writeVarString(pack.packVersion)
