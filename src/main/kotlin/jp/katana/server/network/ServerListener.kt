@@ -99,7 +99,7 @@ class ServerListener(private val server: Server, private val networkManager: Net
 
                         pk.close()
                     } catch (e: Exception) {
-                        throw InvalidPacketException(e.localizedMessage)
+                        throw InvalidPacketException(e.toString())
                     }
                 }
             } catch (e: DecompressException) {
