@@ -1,10 +1,13 @@
 package jp.katana.utils
 
 import com.whirvis.jraknet.Packet
+import jp.katana.core.actor.data.IActorData
+import jp.katana.core.actor.data.IActorDataManager
 import jp.katana.core.data.ISkin
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector3
 import jp.katana.math.Vector3Int
+import jp.katana.server.actor.data.*
 import jp.katana.server.data.Skin
 import jp.katana.server.data.SkinImage
 import java.math.BigInteger
@@ -266,6 +269,40 @@ open class BinaryStream {
         writeUnsignedVarInt(rules.size())
         for (rule in rules.getAll()) {
             rule.write(this)
+        }
+    }
+
+    fun readActorData(actorData: IActorDataManager) {
+        val c = readUnsignedVarInt()
+        for (i in 1..c) {
+            val id = readUnsignedVarInt()
+            val type = readUnsignedVarInt()
+            var data: IActorData<*>? = null
+            when (type) {
+                IActorData.BYTE -> data = ByteActorData()
+                IActorData.SHORT -> data = ShortActorData()
+                IActorData.INT -> data = IntActorData()
+                IActorData.LONG -> data = LongActorData()
+                IActorData.FLOAT -> data = FloatActorData()
+                IActorData.NBT -> data = NBTActorData()
+                IActorData.STRING -> data = StringActorData()
+                IActorData.POS -> data = PositionActorData()
+                IActorData.VECTOR3F -> data = Vector3ActorData()
+            }
+
+            data!!.read(this)
+            actorData.setData(id, data)
+        }
+    }
+
+    fun writeActorData(actorData: IActorDataManager) {
+        val map = actorData.getAllData();
+        writeUnsignedVarInt(map.size)
+        for (pair in map) {
+            writeUnsignedVarInt(pair.key)
+            writeUnsignedVarInt(pair.value.type)
+
+            pair.value.write(this)
         }
     }
 
