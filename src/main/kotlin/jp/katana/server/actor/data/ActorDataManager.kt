@@ -60,7 +60,7 @@ class ActorDataManager(val actor: IActor, val server: IServer) : IActorDataManag
         if (actor is IActorPlayer) {
             actor.sendPacket(packet)
         } else {
-            server.networkManager!!.sendBroadcast(packet)
+            server.networkManager!!.sendBroadcastPacket(packet)
         }
     }
 }

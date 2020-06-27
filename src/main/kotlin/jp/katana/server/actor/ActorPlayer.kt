@@ -2,6 +2,7 @@ package jp.katana.server.actor
 
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.actor.PlayerState
+import jp.katana.core.actor.attribute.IActorAttributes
 import jp.katana.core.actor.data.IActorDataManager
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
@@ -12,6 +13,7 @@ import jp.katana.i18n.I18n
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3
 import jp.katana.server.Server
+import jp.katana.server.actor.attribute.ActorAttributes
 import jp.katana.server.actor.data.*
 import jp.katana.server.network.PacketHandler
 import jp.katana.server.network.packet.mcpe.DisconnectPacket
@@ -67,11 +69,19 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     override var pitch: Double = 0.0
         internal set
 
+    override val attributes: IActorAttributes = ActorAttributes(this, server)
     override val data: IActorDataManager = ActorDataManager(this, server)
 
     override val uuid: UUID = UUID.randomUUID()
 
     init {
+        attributes.setAttribute(ActorAttributes.HUNGER)
+        attributes.setAttribute(ActorAttributes.SATURATION)
+        attributes.setAttribute(ActorAttributes.EXHAUSTION)
+        attributes.setAttribute(ActorAttributes.EXPERIENCE)
+        attributes.setAttribute(ActorAttributes.EXPERIENCE_LEVEL)
+        attributes.setAttribute(ActorAttributes.MOVEMENT_SPEED)
+
         data.setData(ActorDataIds.DATA_FLAGS, LongActorData())
         data.setData(ActorDataIds.DATA_COLOR, ByteActorData())
         data.setData(ActorDataIds.DATA_AIR, ShortActorData(400))

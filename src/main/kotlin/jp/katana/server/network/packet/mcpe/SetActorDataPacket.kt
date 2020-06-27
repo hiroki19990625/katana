@@ -24,6 +24,10 @@ class SetActorDataPacket : MinecraftPacket() {
         // No cause
     }
 
+    override fun toString(): String {
+        return toPrintString()
+    }
+
     override fun print(builder: StringBuilder, indent: Int) {
         builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
         builder.appendProperty(SetActorDataPacket::actorId, this, indent + 1)

@@ -127,7 +127,13 @@ class NetworkManager(private val server: Server) : INetworkManager {
         }
     }
 
-    override fun sendBroadcast(packet: MinecraftPacket, reliability: Reliability) {
+    override fun sendPacket(players: List<IActorPlayer>, packet: MinecraftPacket, reliability: Reliability) {
+        for (player in players) {
+            sendPacket(player, packet, reliability)
+        }
+    }
+
+    override fun sendBroadcastPacket(packet: MinecraftPacket, reliability: Reliability) {
         for (player in players.filter { entry -> entry.value.state == PlayerState.Joined }) {
             sendPacket(player.value, packet, reliability)
         }

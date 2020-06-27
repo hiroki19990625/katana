@@ -100,6 +100,7 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
             availableActorIdentifiersPacket.tag = server.defineActors.binary()
             player.sendPacket(availableActorIdentifiersPacket)
 
+            player.attributes.update()
             player.data.update()
         }
     }
