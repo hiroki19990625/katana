@@ -40,7 +40,7 @@ class MoveActorAbsolutePacket : MinecraftPacket() {
         writeByte((headYaw / (360f / 256f)).toByte())
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
 
     }
 

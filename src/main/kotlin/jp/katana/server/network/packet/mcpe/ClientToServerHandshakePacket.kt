@@ -9,7 +9,7 @@ import jp.katana.server.actor.ActorPlayer
 class ClientToServerHandshakePacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.CLIENT_TO_SERVER_HANDSHAKE_PACKET
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         if (player is ActorPlayer) {
             server.logger.info(I18n["katana.server.network.encryptStarted", player.address])
 

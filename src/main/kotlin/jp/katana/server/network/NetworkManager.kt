@@ -5,6 +5,7 @@ import com.whirvis.jraknet.identifier.MinecraftIdentifier
 import com.whirvis.jraknet.peer.RakNetClientPeer
 import com.whirvis.jraknet.server.RakNetServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.actor.PlayerState
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.Reliability
 import jp.katana.i18n.I18n
@@ -123,6 +124,12 @@ class NetworkManager(private val server: Server) : INetworkManager {
             server.logger.warn("", e)
         } finally {
             packet.close()
+        }
+    }
+
+    override fun sendBroadcast(packet: MinecraftPacket, reliability: Reliability) {
+        for (player in players.filter { entry -> entry.value.state == PlayerState.Joined }) {
+            sendPacket(player.value, packet, reliability)
         }
     }
 

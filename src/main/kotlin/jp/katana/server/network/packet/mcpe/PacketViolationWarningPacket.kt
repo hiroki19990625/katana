@@ -27,7 +27,7 @@ class PacketViolationWarningPacket : MinecraftPacket() {
         this.writeVarString(context)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         server.logger.warn(I18n["katana.server.network.packetViolation", violationPacketId, context])
     }
 

@@ -16,7 +16,7 @@ class RemoveActorPacket : MinecraftPacket() {
         writeActorUniqueId(actorUniqueId)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
 
     }
 

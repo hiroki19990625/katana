@@ -61,7 +61,7 @@ class LoginPacket : MinecraftPacket() {
         //TODO generate jwt
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         if (player is ActorPlayer) {
             val protocol = protocol
 

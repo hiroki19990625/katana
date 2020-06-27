@@ -40,7 +40,7 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
         }
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         when (status) {
             STATUS_REFUSED -> {
                 player.disconnect("disconnectionScreen.resourcePack")
@@ -99,6 +99,8 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
             val availableActorIdentifiersPacket = AvailableActorIdentifiersPacket()
             availableActorIdentifiersPacket.tag = server.defineActors.binary()
             player.sendPacket(availableActorIdentifiersPacket)
+
+            player.data.update()
         }
     }
 

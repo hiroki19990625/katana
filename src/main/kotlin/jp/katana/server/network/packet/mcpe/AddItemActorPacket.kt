@@ -35,7 +35,7 @@ class AddItemActorPacket : MinecraftPacket() {
         writeBoolean(isFromFishing)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         // No cause
     }
 

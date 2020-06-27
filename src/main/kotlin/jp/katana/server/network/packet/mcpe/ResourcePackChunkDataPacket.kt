@@ -26,7 +26,7 @@ class ResourcePackChunkDataPacket : MinecraftPacket() {
         write(data)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         // No cause
     }
 
