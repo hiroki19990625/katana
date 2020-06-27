@@ -1,5 +1,6 @@
 package jp.katana.core.actor
 
+import jp.katana.core.actor.data.IActorDataManager
 import jp.katana.core.world.IWorld
 import jp.katana.math.Vector3
 import java.util.*
@@ -12,4 +13,6 @@ interface IActor {
     val position: Vector3
     val yaw: Double
     val pitch: Double
+
+    val data: IActorDataManager
 }

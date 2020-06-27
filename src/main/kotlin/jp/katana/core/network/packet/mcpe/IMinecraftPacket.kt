@@ -28,5 +28,7 @@ interface IMinecraftPacket : IPrintable {
      * @param player IActorPlayer
      * @param server IServer
      */
-    fun handle(player: IActorPlayer, server: IServer)
+    fun handleServer(player: IActorPlayer, server: IServer)
+
+    // TODO: Handle Client
 }
