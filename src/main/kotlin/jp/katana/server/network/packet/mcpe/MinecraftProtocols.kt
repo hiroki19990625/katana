@@ -143,7 +143,17 @@ class MinecraftProtocols {
         const val COMPLETED_USING_ITEM_PACKET = 0x8e
         const val NETWORK_SETTINGS_PACKET = 0x8f
         const val PLAYER_AUTH_INPUT_PACKET = 0x90
-
+        const val CREATIVE_CONTENT_PACKET = 0x91
+        const val PLAYER_ENCHANT_OPTIONS_PACKET = 0x92
+        const val ITEM_STACK_REQUEST_PACKET = 0x93
+        const val ITEM_STACK_RESPONSE_PACKET = 0x94
+        const val PLAYER_ARMOR_DAMAGE_PACKET = 0x95
+        const val CODE_BUILDER_PACKET = 0x96
+        const val UPDATE_PLAYER_GAME_TYPE_PACKET = 0x97
+        const val EMOTE_LIST_PACKET = 0x98
+        const val POS_TRACKING_SERVER_BROADCAST_PACKET = 0x99
+        const val POS_TRACKING_CLIENT_REQUEST_PACKET = 0x9a
+        const val DEBUG_INFO_PACKET = 0x9b
         const val PACKET_VIOLATION_WARNING_PACKET = 0x9c
 
         const val BATCH_PACKET = 0xfe
