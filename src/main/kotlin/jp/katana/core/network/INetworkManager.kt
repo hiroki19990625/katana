@@ -31,11 +31,23 @@ interface INetworkManager : IPlayerManager {
     )
 
     /**
+     * 複数のプレイヤにパケットを送信します。
+     * @param players 送信するプレイヤー
+     * @param packet Minecraftのパケット
+     * @param reliability パケットの信頼性
+     */
+    fun sendPacket(
+        players: List<IActorPlayer>,
+        packet: MinecraftPacket,
+        reliability: Reliability = Reliability.RELIABLE_ORDERED
+    )
+
+    /**
      * パケットをブロードキャスト送信します。
      * @param packet Minecraftのパケット
      * @param reliability パケットの信頼性
      */
-    fun sendBroadcast(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
+    fun sendBroadcastPacket(packet: MinecraftPacket, reliability: Reliability = Reliability.RELIABLE_ORDERED)
 
     /**
      * パケットを受信した時に呼び出されます。
