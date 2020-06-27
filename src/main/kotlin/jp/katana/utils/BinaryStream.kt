@@ -41,6 +41,14 @@ open class BinaryStream {
         stream.writeByte(value.toInt())
     }
 
+    fun readUnsignedByte(): Short {
+        return stream.readUnsignedByte()
+    }
+
+    fun writeUnsignedByte(value: Short) {
+        stream.writeUnsignedByte(value.toInt())
+    }
+
     fun readShort(): Short {
         return stream.readShort()
     }
