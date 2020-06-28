@@ -3,6 +3,7 @@ package jp.katana.server.network.packet.mcpe
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.math.Vector3
+import jp.katana.server.actor.ActorPlayer
 
 class MovePlayerPacket : MinecraftPacket() {
     companion object {
@@ -56,7 +57,13 @@ class MovePlayerPacket : MinecraftPacket() {
     }
 
     override fun handleServer(player: IActorPlayer, server: IServer) {
+        if (player is ActorPlayer) {
+            player.position = position
+            player.pitch = pitch.toDouble()
+            player.yaw = yaw.toDouble()
 
+            //player.world!!.sendChunks(player)
+        }
     }
 
     override fun toString(): String {
