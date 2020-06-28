@@ -7,10 +7,10 @@ class IntActorData(override var value: Int = 0) : IActorData<Int> {
     override val type: Int = IActorData.INT
 
     override fun read(stream: BinaryStream) {
-        value = stream.readIntLE()
+        value = stream.readVarInt()
     }
 
     override fun write(stream: BinaryStream) {
-        stream.writeIntLE(value)
+        stream.writeVarInt(value)
     }
 }

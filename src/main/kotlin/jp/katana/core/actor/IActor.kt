@@ -15,6 +15,9 @@ interface IActor {
     val yaw: Double
     val pitch: Double
 
+    val height: Double
+    val width: Double
+
     val attributes: IActorAttributes
     val data: IActorDataManager
 }

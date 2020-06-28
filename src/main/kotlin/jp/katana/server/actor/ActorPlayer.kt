@@ -69,6 +69,9 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     override var pitch: Double = 0.0
         internal set
 
+    override val height: Double = 1.8
+    override val width: Double = 0.6
+
     override val attributes: IActorAttributes = ActorAttributes(this, server)
     override val data: IActorDataManager = ActorDataManager(this, server)
 
@@ -89,8 +92,9 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
         data.setData(ActorDataIds.DATA_NAME_TAG, StringActorData(displayName))
         data.setData(ActorDataIds.DATA_LEAD_HOLDER_EID, LongActorData(-1))
         data.setData(ActorDataIds.DATA_SCALE, FloatActorData(1f))
-        data.setData(ActorDataIds.DATA_BOUNDING_BOX_WIDTH, FloatActorData())
-        data.setData(ActorDataIds.DATA_BOUNDING_BOX_HEIGHT, FloatActorData())
+        data.setData(ActorDataIds.DATA_BOUNDING_BOX_WIDTH, FloatActorData(width.toFloat()))
+        data.setData(ActorDataIds.DATA_BOUNDING_BOX_HEIGHT, FloatActorData(height.toFloat()))
+        data.setData(ActorDataIds.DATA_HEALTH, IntActorData(20))
 
         data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_HAS_COLLISION)
         data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_GRAVITY)
