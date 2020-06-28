@@ -38,7 +38,7 @@ class SubChunk(override val y: Int) : ISubChunk {
 
         stream.writeByte(ISubChunk.LAYER.toByte())
         writePalette(stream, blocks)
-        //writePalette(stream, liquids)
+        writePalette(stream, liquids)
 
         val buf = stream.array()
         stream.close()
