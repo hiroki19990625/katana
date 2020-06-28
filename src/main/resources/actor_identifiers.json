@@ -538,7 +538,7 @@
     {
         "hasspawnegg": 0,
         "experimental": 0,
-        "summonable": 1,
+        "summonable": 0,
         "id": "minecraft:xp_orb",
         "bid": "",
         "rid": 69
@@ -784,6 +784,14 @@
         "rid": 107
     },
     {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:npc",
+        "bid": "",
+        "rid": 51
+    },
+    {
         "hasspawnegg": 0,
         "experimental": 0,
         "summonable": 0,
@@ -795,9 +803,25 @@
         "hasspawnegg": 1,
         "experimental": 0,
         "summonable": 1,
+        "id": "minecraft:piglin",
+        "bid": "",
+        "rid": 123
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
         "id": "minecraft:cow",
         "bid": "",
         "rid": 11
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:zoglin",
+        "bid": "",
+        "rid": 126
     },
     {
         "hasspawnegg": 1,
@@ -832,19 +856,27 @@
         "rid": 121
     },
     {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:strider",
+        "bid": "",
+        "rid": 125
+    },
+    {
+        "hasspawnegg": 1,
+        "experimental": 0,
+        "summonable": 1,
+        "id": "minecraft:hoglin",
+        "bid": "",
+        "rid": 124
+    },
+    {
         "hasspawnegg": 0,
         "experimental": 0,
         "summonable": 0,
         "id": "minecraft:player",
         "bid": "minecraft:",
         "rid": 257
-    },
-    {
-        "hasspawnegg": 0,
-        "experimental": 0,
-        "summonable": 0,
-        "id": "minecraft:npc",
-        "bid": "minecraft:",
-        "rid": 258
     }
 ]
