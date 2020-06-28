@@ -11,7 +11,6 @@ import jp.katana.server.actor.data.*
 import jp.katana.server.data.Skin
 import jp.katana.server.data.SkinImage
 import java.math.BigInteger
-import java.nio.charset.Charset
 import java.util.*
 
 /**
@@ -205,11 +204,11 @@ open class BinaryStream {
     }
 
     fun readVarString(): String {
-        return String(read(readUnsignedVarInt()))
+        return String(read(readUnsignedVarInt()), Charsets.UTF_8)
     }
 
     fun writeVarString(s: String) {
-        val array: ByteArray = s.toByteArray(Charset.forName("utf8"))
+        val array: ByteArray = s.toByteArray(Charsets.UTF_8)
         writeUnsignedVarInt(array.size)
         write(array)
     }
