@@ -1,5 +1,329 @@
 [
     {
+        "name": "minecraft:quartz_bricks",
+        "id": -304
+    },
+    {
+        "name": "minecraft:cracked_nether_bricks",
+        "id": -303
+    },
+    {
+        "name": "minecraft:chiseled_nether_bricks",
+        "id": -302
+    },
+    {
+        "name": "minecraft:stripped_warped_hyphae",
+        "id": -301
+    },
+    {
+        "name": "minecraft:stripped_crimson_hyphae",
+        "id": -300
+    },
+    {
+        "name": "minecraft:crimson_hyphae",
+        "id": -299
+    },
+    {
+        "name": "minecraft:warped_hyphae",
+        "id": -298
+    },
+    {
+        "name": "minecraft:polished_blackstone_wall",
+        "id": -297
+    },
+    {
+        "name": "minecraft:polished_blackstone_button",
+        "id": -296
+    },
+    {
+        "name": "minecraft:polished_blackstone_pressure_plate",
+        "id": -295
+    },
+    {
+        "name": "minecraft:polished_blackstone_double_slab",
+        "id": -294
+    },
+    {
+        "name": "minecraft:polished_blackstone_slab",
+        "id": -293
+    },
+    {
+        "name": "minecraft:polished_blackstone_stairs",
+        "id": -292
+    },
+    {
+        "name": "minecraft:polished_blackstone",
+        "id": -291
+    },
+    {
+        "name": "minecraft:item.soul_campfire",
+        "id": -290
+    },
+    {
+        "name": "minecraft:crying_obsidian",
+        "id": -289
+    },
+    {
+        "name": "minecraft:nether_gold_ore",
+        "id": -288
+    },
+    {
+        "name": "minecraft:twisting_vines",
+        "id": -287
+    },
+    {
+        "name": "minecraft:item.chain",
+        "id": -286
+    },
+    {
+        "name": "minecraft:polished_blackstone_brick_double_slab",
+        "id": -285
+    },
+    {
+        "name": "minecraft:polished_blackstone_brick_slab",
+        "id": -284
+    },
+    {
+        "name": "minecraft:blackstone_double_slab",
+        "id": -283
+    },
+    {
+        "name": "minecraft:blackstone_slab",
+        "id": -282
+    },
+    {
+        "name": "minecraft:gilded_blackstone",
+        "id": -281
+    },
+    {
+        "name": "minecraft:cracked_polished_blackstone_bricks",
+        "id": -280
+    },
+    {
+        "name": "minecraft:chiseled_polished_blackstone",
+        "id": -279
+    },
+    {
+        "name": "minecraft:polished_blackstone_brick_wall",
+        "id": -278
+    },
+    {
+        "name": "minecraft:blackstone_wall",
+        "id": -277
+    },
+    {
+        "name": "minecraft:blackstone_stairs",
+        "id": -276
+    },
+    {
+        "name": "minecraft:polished_blackstone_brick_stairs",
+        "id": -275
+    },
+    {
+        "name": "minecraft:polished_blackstone_bricks",
+        "id": -274
+    },
+    {
+        "name": "minecraft:blackstone",
+        "id": -273
+    },
+    {
+        "name": "minecraft:respawn_anchor",
+        "id": -272
+    },
+    {
+        "name": "minecraft:ancient_debris",
+        "id": -271
+    },
+    {
+        "name": "minecraft:netherite_block",
+        "id": -270
+    },
+    {
+        "name": "minecraft:soul_lantern",
+        "id": -269
+    },
+    {
+        "name": "minecraft:soul_torch",
+        "id": -268
+    },
+    {
+        "name": "minecraft:warped_double_slab",
+        "id": -267
+    },
+    {
+        "name": "minecraft:crimson_double_slab",
+        "id": -266
+    },
+    {
+        "name": "minecraft:warped_slab",
+        "id": -265
+    },
+    {
+        "name": "minecraft:crimson_slab",
+        "id": -264
+    },
+    {
+        "name": "minecraft:warped_pressure_plate",
+        "id": -263
+    },
+    {
+        "name": "minecraft:crimson_pressure_plate",
+        "id": -262
+    },
+    {
+        "name": "minecraft:warped_button",
+        "id": -261
+    },
+    {
+        "name": "minecraft:crimson_button",
+        "id": -260
+    },
+    {
+        "name": "minecraft:warped_fence_gate",
+        "id": -259
+    },
+    {
+        "name": "minecraft:crimson_fence_gate",
+        "id": -258
+    },
+    {
+        "name": "minecraft:warped_fence",
+        "id": -257
+    },
+    {
+        "name": "minecraft:crimson_fence",
+        "id": -256
+    },
+    {
+        "name": "minecraft:warped_stairs",
+        "id": -255
+    },
+    {
+        "name": "minecraft:crimson_stairs",
+        "id": -254
+    },
+    {
+        "name": "minecraft:warped_wall_sign",
+        "id": -253
+    },
+    {
+        "name": "minecraft:crimson_wall_sign",
+        "id": -252
+    },
+    {
+        "name": "minecraft:warped_standing_sign",
+        "id": -251
+    },
+    {
+        "name": "minecraft:crimson_standing_sign",
+        "id": -250
+    },
+    {
+        "name": "minecraft:warped_trapdoor",
+        "id": -247
+    },
+    {
+        "name": "minecraft:crimson_trapdoor",
+        "id": -246
+    },
+    {
+        "name": "minecraft:item.warped_door",
+        "id": -245
+    },
+    {
+        "name": "minecraft:item.crimson_door",
+        "id": -244
+    },
+    {
+        "name": "minecraft:warped_planks",
+        "id": -243
+    },
+    {
+        "name": "minecraft:crimson_planks",
+        "id": -242
+    },
+    {
+        "name": "minecraft:stripped_warped_stem",
+        "id": -241
+    },
+    {
+        "name": "minecraft:stripped_crimson_stem",
+        "id": -240
+    },
+    {
+        "name": "minecraft:target",
+        "id": -239
+    },
+    {
+        "name": "minecraft:item.nether_sprouts",
+        "id": -238
+    },
+    {
+        "name": "minecraft:soul_fire",
+        "id": -237
+    },
+    {
+        "name": "minecraft:soul_soil",
+        "id": -236
+    },
+    {
+        "name": "minecraft:polished_basalt",
+        "id": -235
+    },
+    {
+        "name": "minecraft:basalt",
+        "id": -234
+    },
+    {
+        "name": "minecraft:warped_nylium",
+        "id": -233
+    },
+    {
+        "name": "minecraft:crimson_nylium",
+        "id": -232
+    },
+    {
+        "name": "minecraft:weeping_vines",
+        "id": -231
+    },
+    {
+        "name": "minecraft:shroomlight",
+        "id": -230
+    },
+    {
+        "name": "minecraft:warped_fungus",
+        "id": -229
+    },
+    {
+        "name": "minecraft:crimson_fungus",
+        "id": -228
+    },
+    {
+        "name": "minecraft:warped_wart_block",
+        "id": -227
+    },
+    {
+        "name": "minecraft:warped_stem",
+        "id": -226
+    },
+    {
+        "name": "minecraft:crimson_stem",
+        "id": -225
+    },
+    {
+        "name": "minecraft:warped_roots",
+        "id": -224
+    },
+    {
+        "name": "minecraft:crimson_roots",
+        "id": -223
+    },
+    {
+        "name": "minecraft:lodestone",
+        "id": -222
+    },
+    {
         "name": "minecraft:honeycomb_block",
         "id": -221
     },
@@ -1712,6 +2036,18 @@
         "id": 209
     },
     {
+        "name": "minecraft:allow",
+        "id": 210
+    },
+    {
+        "name": "minecraft:deny",
+        "id": 211
+    },
+    {
+        "name": "minecraft:border_block",
+        "id": 212
+    },
+    {
         "name": "minecraft:magma",
         "id": 213
     },
@@ -2806,5 +3142,89 @@
     {
         "name": "minecraft:honey_bottle",
         "id": 737
+    },
+    {
+        "name": "minecraft:lodestonecompass",
+        "id": 741
+    },
+    {
+        "name": "minecraft:netherite_ingot",
+        "id": 742
+    },
+    {
+        "name": "minecraft:netherite_sword",
+        "id": 743
+    },
+    {
+        "name": "minecraft:netherite_shovel",
+        "id": 744
+    },
+    {
+        "name": "minecraft:netherite_pickaxe",
+        "id": 745
+    },
+    {
+        "name": "minecraft:netherite_axe",
+        "id": 746
+    },
+    {
+        "name": "minecraft:netherite_hoe",
+        "id": 747
+    },
+    {
+        "name": "minecraft:netherite_helmet",
+        "id": 748
+    },
+    {
+        "name": "minecraft:netherite_chestplate",
+        "id": 749
+    },
+    {
+        "name": "minecraft:netherite_leggings",
+        "id": 750
+    },
+    {
+        "name": "minecraft:netherite_boots",
+        "id": 751
+    },
+    {
+        "name": "minecraft:netherite_scrap",
+        "id": 752
+    },
+    {
+        "name": "minecraft:crimson_sign",
+        "id": 753
+    },
+    {
+        "name": "minecraft:warped_sign",
+        "id": 754
+    },
+    {
+        "name": "minecraft:crimson_door",
+        "id": 755
+    },
+    {
+        "name": "minecraft:warped_door",
+        "id": 756
+    },
+    {
+        "name": "minecraft:warped_fungus_on_a_stick",
+        "id": 757
+    },
+    {
+        "name": "minecraft:chain",
+        "id": 758
+    },
+    {
+        "name": "minecraft:record_pigstep",
+        "id": 759
+    },
+    {
+        "name": "minecraft:nether_sprouts",
+        "id": 760
+    },
+    {
+        "name": "minecraft:soul_campfire",
+        "id": 801
     }
 ]
