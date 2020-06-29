@@ -49,6 +49,7 @@ class StartGamePacket : MinecraftPacket() {
     var isTexturePacksRequired = false
     var bonusChest = false
     var hasStartWithMapEnabled = false
+    var trustingPlayers = false
     var permissionLevel = 1
     var serverChunkTickRange = 4
     var hasLockedBehaviorPack = false
@@ -64,6 +65,7 @@ class StartGamePacket : MinecraftPacket() {
     var premiumWorldTemplateId = ""
     var isTrial = false
     var isMovementServerAuthoritative = false
+    var isInventoryServerAuthoritative = false
     var currentTick: Long = 0
     var enchantmentSeed: Int = 0
 
@@ -91,6 +93,8 @@ class StartGamePacket : MinecraftPacket() {
         writeFloatLE(pitch)
 
         writeVarInt(seed)
+        writeShortLE(0)
+        writeVarString("")
         writeVarInt(dimension)
         writeVarInt(generator)
         writeVarInt(worldGamemode)
@@ -104,6 +108,8 @@ class StartGamePacket : MinecraftPacket() {
 
         writeVarInt(eduEditionOffer)
         writeBoolean(hasEduFeaturesEnabled)
+
+        writeVarString("")
 
         writeFloatLE(rainLevel)
         writeFloatLE(lightningLevel)
@@ -141,6 +147,10 @@ class StartGamePacket : MinecraftPacket() {
         writeBoolean(isWorldTemplateOptionLocked)
         writeBoolean(isOnlySpawningV1Villagers)
         writeVarString(vanillaVersion)
+        writeIntLE(0)
+        writeIntLE(0)
+        writeBoolean(false)
+        writeBoolean(false)
 
         writeVarString(levelId)
         writeVarString(worldName)
@@ -163,9 +173,10 @@ class StartGamePacket : MinecraftPacket() {
         }
 
         writeVarString(multiplayerCorrelationId)
+        writeBoolean(isInventoryServerAuthoritative)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         // No cause
     }
 

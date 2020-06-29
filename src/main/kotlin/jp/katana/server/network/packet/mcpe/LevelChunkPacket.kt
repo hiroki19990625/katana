@@ -6,6 +6,7 @@ import jp.katana.math.Vector2Int
 
 class LevelChunkPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.LEVEL_CHUNK_PACKET
+    override val channel: Int = CHANNEL_CHUNK
 
     var pos: Vector2Int = Vector2Int(0, 0)
 
@@ -52,7 +53,7 @@ class LevelChunkPacket : MinecraftPacket() {
         write(data)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         // No cause
     }
 

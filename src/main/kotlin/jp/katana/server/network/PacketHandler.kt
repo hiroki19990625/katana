@@ -8,6 +8,6 @@ import jp.katana.server.network.packet.mcpe.MinecraftPacket
 
 class PacketHandler(private val player: ActorPlayer, private val server: Server) : IPacketHandler {
     override fun handlePacket(packet: MinecraftPacket) {
-        packet.handle(player, server)
+        packet.handleServer(player, server)
     }
 }

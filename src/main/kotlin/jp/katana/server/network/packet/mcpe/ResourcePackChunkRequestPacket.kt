@@ -19,7 +19,7 @@ class ResourcePackChunkRequestPacket : MinecraftPacket() {
         writeIntLE(chunkIndex)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         val pack = server.resourcePackManager.getResourcePack(packId)
         if (pack == null) {
             player.disconnect("disconnectionScreen.resourcePack")

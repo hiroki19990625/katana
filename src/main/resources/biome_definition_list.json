@@ -1,427 +1,751 @@
 [
     {
         "roofed_forest_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "warm_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "sunflower_plains": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.8,
+            "red_spores": 0.0,
             "downfall": 0.4
         }
     },
     {
         "mushroom_island_shore": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.9,
+            "red_spores": 0.0,
             "downfall": 1.0
         }
     },
     {
         "ice_plains": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "jungle_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.9
         }
     },
     {
         "flower_forest": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "cold_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "the_end": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "hell": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "desert_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "extreme_hills_edge": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.2,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     },
     {
         "lukewarm_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "forest_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "savanna": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 1.2,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "ice_plains_spikes": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 1.0
         }
     },
     {
         "cold_taiga_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": -0.5,
+            "red_spores": 0.0,
             "downfall": 0.4
         }
     },
     {
         "mesa_plateau": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "frozen_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "mega_taiga_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.3,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "savanna_plateau": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 1.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "bamboo_jungle_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.9
         }
     },
     {
         "taiga_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.25,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "extreme_hills_plus_trees": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.2,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     },
     {
         "mega_taiga": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.3,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "savanna_plateau_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 1.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "deep_warm_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "extreme_hills_plus_trees_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.2,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     },
     {
         "jungle": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.9
         }
     },
     {
         "jungle_edge_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
+        "warped_forest": {
+            "blue_spores": 0.25,
+            "white_ash": 0.0,
+            "ash": 0.0,
+            "temperature": 2.0,
+            "red_spores": 0.0,
+            "downfall": 0.0
+        }
+    },
+    {
         "frozen_river": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "forest": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "birch_forest": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.6,
+            "red_spores": 0.0,
             "downfall": 0.6
         }
     },
     {
         "deep_lukewarm_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "swampland": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.8,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "deep_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "deep_frozen_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "legacy_frozen_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "taiga_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.25,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "bamboo_jungle": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.9
         }
     },
     {
         "birch_forest_hills_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "birch_forest_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "desert_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "mesa": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "jungle_edge": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "jungle_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.95,
+            "red_spores": 0.0,
             "downfall": 0.9
         }
     },
     {
         "plains": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.8,
+            "red_spores": 0.0,
             "downfall": 0.4
         }
     },
     {
         "redwood_taiga_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.25,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "swampland_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.8,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "ice_mountains": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.0,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
-        "mesa_plateau_stone_mutated": {
+        "basalt_deltas": {
+            "blue_spores": 0.0,
+            "white_ash": 2.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
+            "downfall": 0.0
+        }
+    },
+    {
+        "mesa_plateau_stone_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
+            "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "taiga": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.25,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "extreme_hills_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.2,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     },
     {
-        "mesa_plateau_stone": {
+        "crimson_forest": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.25,
+            "downfall": 0.0
+        }
+    },
+    {
+        "mesa_plateau_stone": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
+            "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "birch_forest_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.6,
+            "red_spores": 0.0,
             "downfall": 0.6
         }
     },
     {
         "mushroom_island": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.9,
+            "red_spores": 0.0,
             "downfall": 1.0
         }
     },
     {
         "mesa_bryce": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "mesa_plateau_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "deep_cold_ocean": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "cold_taiga_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": -0.5,
+            "red_spores": 0.0,
             "downfall": 0.4
         }
     },
     {
         "cold_taiga": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": -0.5,
+            "red_spores": 0.0,
             "downfall": 0.4
         }
     },
     {
         "extreme_hills": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.2,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     },
     {
+        "soulsand_valley": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.05,
+            "temperature": 2.0,
+            "red_spores": 0.0,
+            "downfall": 0.0
+        }
+    },
+    {
         "beach": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.8,
+            "red_spores": 0.0,
             "downfall": 0.4
         }
     },
     {
         "roofed_forest": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.7,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "cold_beach": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.05,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     },
     {
         "savanna_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 1.1,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "redwood_taiga_hills_mutated": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.3,
+            "red_spores": 0.0,
             "downfall": 0.8
         }
     },
     {
         "river": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.5,
+            "red_spores": 0.0,
             "downfall": 0.5
         }
     },
     {
         "desert": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 2.0,
+            "red_spores": 0.0,
             "downfall": 0.0
         }
     },
     {
         "stone_beach": {
+            "blue_spores": 0.0,
+            "white_ash": 0.0,
+            "ash": 0.0,
             "temperature": 0.2,
+            "red_spores": 0.0,
             "downfall": 0.3
         }
     }

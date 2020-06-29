@@ -19,7 +19,7 @@ class SetLocalPlayerAsInitializedPacket : MinecraftPacket() {
         writeActorRuntimeId(actorId)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         if (player is ActorPlayer) {
             server.logger.info(I18n["katana.server.player.join", player.displayName])
 

@@ -9,27 +9,27 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.RESOURCE_PACKS_INFO_PACKET
 
     var mustAccept: Boolean = false
-    var unknownBool: Boolean = false
+    var containsScript: Boolean = false
     var behaviourPackEntries = mutableListOf<IResourcePackInfo>()
     var resourcePackEntries = mutableListOf<IResourcePackInfo>()
 
     override fun decodePayload() {
         mustAccept = readBoolean()
-        unknownBool = readBoolean()
+        containsScript = readBoolean()
         readPacks(behaviourPackEntries)
         readPacks(resourcePackEntries)
     }
 
     override fun encodePayload() {
         writeBoolean(mustAccept)
-        writeBoolean(unknownBool)
+        writeBoolean(containsScript)
 
         writePacks(behaviourPackEntries)
         writePacks(resourcePackEntries)
     }
 
     private fun readPacks(list: MutableList<IResourcePackInfo>) {
-        val len = readShortLE()
+        val len = readUnsignedShortLE()
         for (i in 1..len) {
             list.add(
                 ResourcePackInfo(
@@ -47,12 +47,12 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
         }
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         // No cause
     }
 
     private fun writePacks(list: MutableList<IResourcePackInfo>) {
-        writeShortLE(list.size.toShort())
+        writeUnsignedShortLE(list.size)
         for (pack in list) {
             writeVarString(pack.packId)
             writeVarString(pack.packVersion)
@@ -73,7 +73,7 @@ class ResourcePacksInfoPacket : MinecraftPacket() {
     override fun print(builder: StringBuilder, indent: Int) {
         builder.appendIndent("${this.javaClass.simpleName} : 0x${packetId.toString(16)} {\n", indent)
         builder.appendProperty(ResourcePacksInfoPacket::mustAccept, this, indent + 1)
-        builder.appendProperty(ResourcePacksInfoPacket::unknownBool, this, indent + 1)
+        builder.appendProperty(ResourcePacksInfoPacket::containsScript, this, indent + 1)
         builder.appendListProperty(ResourcePacksInfoPacket::behaviourPackEntries, this, indent + 1)
         builder.appendListProperty(ResourcePacksInfoPacket::resourcePackEntries, this, indent + 1)
         builder.appendIndent("}\n", indent)

@@ -16,7 +16,7 @@ class ChunkRadiusUpdatedPacket : MinecraftPacket() {
         writeVarInt(radius)
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         // No cause
     }
 

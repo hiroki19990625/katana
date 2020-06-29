@@ -34,7 +34,11 @@ class BiomeDefinitions : IBiomeDefinitions {
                                 defines.add(
                                     BiomeDefine(
                                         entry.key,
+                                        data.get("blue_spores").asFloat,
+                                        data.get("white_ash").asFloat,
+                                        data.get("ash").asFloat,
                                         data.get("temperature").asFloat,
+                                        data.get("red_spores").asFloat,
                                         data.get("downfall").asFloat
                                     )
                                 )
@@ -68,6 +72,10 @@ class BiomeDefinitions : IBiomeDefinitions {
                 val define = CompoundTag(biome.name)
                 define.putFloat("temperature", biome.temperature)
                 define.putFloat("downfall", biome.downfall)
+                define.putFloat("whiteAsh", biome.whiteAsh)
+                define.putFloat("ash", biome.ash)
+                define.putFloat("blueSpores", biome.blueSpores)
+                define.putFloat("whiteAsh", biome.whiteAsh)
                 compound.putTag(define)
             }
 

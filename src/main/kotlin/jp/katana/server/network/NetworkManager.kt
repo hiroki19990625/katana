@@ -5,6 +5,7 @@ import com.whirvis.jraknet.identifier.MinecraftIdentifier
 import com.whirvis.jraknet.peer.RakNetClientPeer
 import com.whirvis.jraknet.server.RakNetServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.actor.PlayerState
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.Reliability
 import jp.katana.i18n.I18n
@@ -14,6 +15,7 @@ import jp.katana.server.network.packet.BatchPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.utils.BinaryStream
 import java.net.InetSocketAddress
+import java.util.zip.Deflater
 
 class NetworkManager(private val server: Server) : INetworkManager {
     private val raknetServer: RakNetServer = RakNetServer(server.serverPort, server.maxPlayer)
@@ -89,7 +91,8 @@ class NetworkManager(private val server: Server) : INetworkManager {
                 if (this.server.katanaConfig!!.printSendPacket)
                     server.logger.info("SendPrint \n$packet")
 
-                val batch = BatchPacket()
+                // TODO: キャッシュ
+                val batch = BatchPacket(null, Deflater(Deflater.DEFAULT_COMPRESSION, true))
                 try {
                     batch.isEncrypt = player.isEncrypted
                     batch.decrypt = player.decrypt
@@ -121,6 +124,18 @@ class NetworkManager(private val server: Server) : INetworkManager {
             server.logger.warn("", e)
         } finally {
             packet.close()
+        }
+    }
+
+    override fun sendPacket(players: List<IActorPlayer>, packet: MinecraftPacket, reliability: Reliability) {
+        for (player in players) {
+            sendPacket(player, packet, reliability)
+        }
+    }
+
+    override fun sendBroadcastPacket(packet: MinecraftPacket, reliability: Reliability) {
+        for (player in players.filter { entry -> entry.value.state == PlayerState.Joined }) {
+            sendPacket(player.value, packet, reliability)
         }
     }
 

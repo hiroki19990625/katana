@@ -8,7 +8,7 @@ interface ISubChunk {
         const val BLOCK_SIZE = 4096
 
         const val VERSION = 8
-        const val LAYER = 1
+        const val LAYER = 2
 
         const val MAX = 16
         const val MAX2 = 256

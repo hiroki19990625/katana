@@ -9,7 +9,7 @@ import jp.katana.core.world.chunk.IChunkLoader
 import jp.katana.core.world.gamerule.IGameRules
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3Int
-import jp.katana.server.block.BlockStone
+import jp.katana.server.block.BlockDefinitions
 import jp.katana.server.network.packet.mcpe.NetworkChunkPublisherUpdatePacket
 import jp.katana.server.world.chunk.Chunk
 import jp.katana.server.world.gamerule.GameRules
@@ -87,19 +87,26 @@ class World(
     }
 
     override fun unloadChunk(chunk: IChunk): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return unloadChunk(chunk.pos.x, chunk.pos.y, false)
     }
 
     override fun unloadChunk(x: Int, z: Int, useShift: Boolean): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: Save Chunk
+        if (useShift) {
+            chunks.remove(Vector2Int(x shr 4, z shr 4))
+        } else {
+            chunks.remove(Vector2Int(x, z))
+        }
+
+        return true
     }
 
     override fun unloadChunk(pos: Vector2Int, useShift: Boolean): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return unloadChunk(pos.x, pos.y, useShift)
     }
 
     override fun unloadChunk(x: Int, y: Int, z: Int, useShift: Boolean): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return unloadChunk(x, z, useShift)
     }
 
     override fun unloadChunk(pos: Vector3Int, useShift: Boolean): Boolean {
@@ -112,8 +119,6 @@ class World(
 
     override fun unregisterChunkLoader(loader: IChunkLoader) {
         unregisterChunkLoader(loader.getLoaderId())
-
-
     }
 
     override fun unregisterChunkLoader(id: Long) {
@@ -166,14 +171,30 @@ class World(
     override fun sendChunks(player: IActorPlayer): Boolean {
         val chunks = getChunkRadius(player)
         for (chunk in chunks) {
-            chunk.columns[0].setRuntimeId(Vector3Int(1, 0, 0), BlockStone(BlockStone.StoneType.Stone).runtimeId)
+            var i = 0
+            for (x in 1..5) {
+                for (y in 1..5) {
+                    for (z in 1..5) {
+                        for (p in 0..1) {
+                            chunk.columns[p].setRuntimeId(
+                                Vector3Int(x, y, z),
+                                BlockDefinitions.fromId(i).runtimeId
+                            )
+                            chunk.columns[p].setLiquidRuntimeId(
+                                Vector3Int(x, y, z),
+                                BlockDefinitions.fromId(8).runtimeId
+                            )
+                        }
+                        i++
+                    }
+                }
+            }
             player.sendPacket(chunk.getChunkPacket())
         }
 
-        val center = player.getChunkPosition()
         val publisherUpdatePacket = NetworkChunkPublisherUpdatePacket()
         publisherUpdatePacket.position = player.position.toVector3Int()
-        publisherUpdatePacket.radius = player.getRadius() + 1 shl 4
+        publisherUpdatePacket.radius = (player.getRadius() + 1) shl 4
         player.sendPacket(publisherUpdatePacket)
 
         return true

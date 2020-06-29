@@ -40,7 +40,7 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
         }
     }
 
-    override fun handle(player: IActorPlayer, server: IServer) {
+    override fun handleServer(player: IActorPlayer, server: IServer) {
         when (status) {
             STATUS_REFUSED -> {
                 player.disconnect("disconnectionScreen.resourcePack")
@@ -56,7 +56,6 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
 
                     val resourcePackDataInfoPacket = ResourcePackDataInfoPacket()
                     resourcePackDataInfoPacket.packId = pack.packId
-                    resourcePackDataInfoPacket.maxChunkSize = ResourcePackDataInfoPacket.MB_1
                     resourcePackDataInfoPacket.chunkCount =
                         ceil(pack.packSize.toDouble() / resourcePackDataInfoPacket.maxChunkSize).toInt()
                     resourcePackDataInfoPacket.packSize = pack.packSize
@@ -100,6 +99,9 @@ class ResourcePackClientResponsePacket : MinecraftPacket() {
             val availableActorIdentifiersPacket = AvailableActorIdentifiersPacket()
             availableActorIdentifiersPacket.tag = server.defineActors.binary()
             player.sendPacket(availableActorIdentifiersPacket)
+
+            player.attributes.update()
+            player.data.update()
         }
     }
 

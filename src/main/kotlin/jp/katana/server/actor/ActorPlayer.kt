@@ -2,6 +2,8 @@ package jp.katana.server.actor
 
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.actor.PlayerState
+import jp.katana.core.actor.attribute.IActorAttributes
+import jp.katana.core.actor.data.IActorDataManager
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
 import jp.katana.core.network.IPacketHandler
@@ -11,6 +13,8 @@ import jp.katana.i18n.I18n
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3
 import jp.katana.server.Server
+import jp.katana.server.actor.attribute.ActorAttributes
+import jp.katana.server.actor.data.*
 import jp.katana.server.network.PacketHandler
 import jp.katana.server.network.packet.mcpe.DisconnectPacket
 import jp.katana.server.network.packet.mcpe.MinecraftPacket
@@ -65,7 +69,38 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
     override var pitch: Double = 0.0
         internal set
 
+    override val height: Double = 1.8
+    override val width: Double = 0.6
+
+    override val attributes: IActorAttributes = ActorAttributes(this, server)
+    override val data: IActorDataManager = ActorDataManager(this, server)
+
     override val uuid: UUID = UUID.randomUUID()
+
+    init {
+        attributes.setAttribute(ActorAttributes.HUNGER)
+        attributes.setAttribute(ActorAttributes.SATURATION)
+        attributes.setAttribute(ActorAttributes.EXHAUSTION)
+        attributes.setAttribute(ActorAttributes.EXPERIENCE)
+        attributes.setAttribute(ActorAttributes.EXPERIENCE_LEVEL)
+        attributes.setAttribute(ActorAttributes.MOVEMENT_SPEED)
+
+        data.setData(ActorDataIds.DATA_FLAGS, LongActorData())
+        data.setData(ActorDataIds.DATA_COLOR, ByteActorData())
+        data.setData(ActorDataIds.DATA_AIR, ShortActorData(400))
+        data.setData(ActorDataIds.DATA_MAX_AIR, ShortActorData(400))
+        data.setData(ActorDataIds.DATA_NAME_TAG, StringActorData(displayName))
+        data.setData(ActorDataIds.DATA_LEAD_HOLDER_EID, LongActorData(-1))
+        data.setData(ActorDataIds.DATA_SCALE, FloatActorData(1f))
+        data.setData(ActorDataIds.DATA_BOUNDING_BOX_WIDTH, FloatActorData(width.toFloat()))
+        data.setData(ActorDataIds.DATA_BOUNDING_BOX_HEIGHT, FloatActorData(height.toFloat()))
+        data.setData(ActorDataIds.DATA_HEALTH, IntActorData(20))
+
+        data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_HAS_COLLISION)
+        data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_GRAVITY)
+        data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_BREATHING)
+        data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_CAN_CLIMB)
+    }
 
     override fun handlePacket(packet: MinecraftPacket) {
         packetHandler.handlePacket(packet)
