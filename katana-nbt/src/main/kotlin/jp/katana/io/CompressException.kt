@@ -1,4 +1,4 @@
-package jp.katana.nbt.io
+package jp.katana.io
 
 import java.io.IOException
 

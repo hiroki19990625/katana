@@ -1,6 +1,6 @@
 package jp.katana.nbt.tag
 
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class ShortTag(override var name: String, override var value: Short) : ValueTag<Short>() {
     override val type: Byte = INamedTag.SHORT

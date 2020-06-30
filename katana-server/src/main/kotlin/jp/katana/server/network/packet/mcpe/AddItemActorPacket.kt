@@ -2,6 +2,12 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.utils.readActorUniqueId
+import jp.katana.core.utils.readVector3
+import jp.katana.core.utils.writeActorUniqueId
+import jp.katana.core.utils.writeVector3
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendProperty
 import jp.katana.math.Vector3
 
 class AddItemActorPacket : MinecraftPacket() {

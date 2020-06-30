@@ -3,9 +3,12 @@ package jp.katana.server.network.packet.mcpe
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.data.IResourcePackEntry
+import jp.katana.core.world.gamerule.BooleanGameRule
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendListProperty
+import jp.katana.debug.appendProperty
 import jp.katana.server.actor.ActorPlayer
 import jp.katana.server.data.ResourcePackEntry
-import jp.katana.core.world.gamerule.BooleanGameRule
 import jp.katana.server.world.gamerule.GameRules
 import java.util.*
 import kotlin.math.ceil

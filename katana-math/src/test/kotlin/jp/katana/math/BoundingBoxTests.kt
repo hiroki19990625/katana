@@ -34,9 +34,26 @@ class BoundingBoxTests {
         val box2d = BoundingBox2D(t1.toVector2XY(), t1.toVector2XY())
 
         Assertions.assertTrue(box3d == BoundingBox3D(t1, t1))
-        Assertions.assertTrue(box3d != BoundingBox3D(Vector3(0.0, 0.0, 0.0), t1))
-        Assertions.assertTrue(box2d == BoundingBox2D(t1.toVector2XY(), t1.toVector2XY()))
-        Assertions.assertTrue(box2d != BoundingBox2D(Vector2(0.0, 0.0), t1.toVector2XY()))
+        Assertions.assertTrue(box3d != BoundingBox3D(
+            Vector3(
+                0.0,
+                0.0,
+                0.0
+            ), t1
+        )
+        )
+        Assertions.assertTrue(box2d == BoundingBox2D(
+            t1.toVector2XY(),
+            t1.toVector2XY()
+        )
+        )
+        Assertions.assertTrue(box2d != BoundingBox2D(
+            Vector2(
+                0.0,
+                0.0
+            ), t1.toVector2XY()
+        )
+        )
 
         Assertions.assertTrue(box3d + box3d == box3d * 2.0)
         Assertions.assertTrue(box3d - box3d == box3d * 0.0)
@@ -46,9 +63,21 @@ class BoundingBoxTests {
 
         Assertions.assertTrue(box2d + box2d == box2d * 2.0)
         Assertions.assertTrue(box2d - box2d == box2d * 0.0)
-        Assertions.assertTrue(box2d * 2.0 == BoundingBox2D(t1.toVector2XY() * 2.0, t1.toVector2XY() * 2.0))
-        Assertions.assertTrue(box2d / 2.0 == BoundingBox2D(t1.toVector2XY() / 2.0, t1.toVector2XY() / 2.0))
-        Assertions.assertTrue(box2d % 2.0 == BoundingBox2D(t1.toVector2XY() % 2.0, t1.toVector2XY() % 2.0))
+        Assertions.assertTrue(box2d * 2.0 == BoundingBox2D(
+            t1.toVector2XY() * 2.0,
+            t1.toVector2XY() * 2.0
+        )
+        )
+        Assertions.assertTrue(box2d / 2.0 == BoundingBox2D(
+            t1.toVector2XY() / 2.0,
+            t1.toVector2XY() / 2.0
+        )
+        )
+        Assertions.assertTrue(box2d % 2.0 == BoundingBox2D(
+            t1.toVector2XY() % 2.0,
+            t1.toVector2XY() % 2.0
+        )
+        )
 
         Assertions.assertTrue(box3d `+b` t1 == BoundingBox3D(t1, t1 + t1))
         Assertions.assertTrue(box3d `-b` t1 == BoundingBox3D(t1, t1 - t1))

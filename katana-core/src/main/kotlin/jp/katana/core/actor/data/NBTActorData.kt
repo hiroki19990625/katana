@@ -1,8 +1,7 @@
 package jp.katana.core.actor.data
 
-import jp.katana.core.actor.data.IActorData
 import jp.katana.nbt.Endian
-import jp.katana.nbt.io.NBTIO
+import jp.katana.io.NBTIO
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.utils.BinaryStream
 

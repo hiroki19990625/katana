@@ -1,6 +1,6 @@
 package jp.katana.nbt.tag
 
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class DoubleTag(override var name: String, override var value: Double) : ValueTag<Double>() {
     override val type: Byte = INamedTag.DOUBLE

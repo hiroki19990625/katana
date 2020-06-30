@@ -2,6 +2,9 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.debug.appendArrayProperty
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendProperty
 
 class TextPacket : MinecraftPacket() {
     companion object {

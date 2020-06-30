@@ -1,7 +1,7 @@
 package jp.katana.nbt.tag
 
 import jp.katana.debug.appendIndent
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class CompoundTag(override var name: String) : INamedTag {
     override val type: Byte = INamedTag.COMPOUND

@@ -7,7 +7,7 @@ import com.google.gson.stream.JsonReader
 import jp.katana.core.actor.IActorDefine
 import jp.katana.core.actor.IActorDefinitions
 import jp.katana.nbt.Endian
-import jp.katana.nbt.io.NBTIO
+import jp.katana.io.NBTIO
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
 import jp.katana.nbt.tag.ListTag

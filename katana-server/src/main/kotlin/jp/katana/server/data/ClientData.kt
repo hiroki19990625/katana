@@ -3,6 +3,8 @@ package jp.katana.server.data
 import com.nimbusds.jose.JWSObject
 import jp.katana.core.data.IClientData
 import jp.katana.core.data.ISkin
+import jp.katana.core.data.Skin
+import jp.katana.core.data.SkinImage
 import jp.katana.i18n.I18n
 import jp.katana.utils.Jwt
 import java.nio.charset.StandardCharsets

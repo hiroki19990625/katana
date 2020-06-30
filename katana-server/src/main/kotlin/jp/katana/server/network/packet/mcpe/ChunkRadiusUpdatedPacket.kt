@@ -2,6 +2,8 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendProperty
 
 class ChunkRadiusUpdatedPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.CHUNK_RADIUS_UPDATED_PACKET

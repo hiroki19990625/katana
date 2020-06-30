@@ -1,6 +1,6 @@
 package jp.katana.nbt.tag
 
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class FloatTag(override var name: String, override var value: Float) : ValueTag<Float>() {
     override val type: Byte = INamedTag.FLOAT

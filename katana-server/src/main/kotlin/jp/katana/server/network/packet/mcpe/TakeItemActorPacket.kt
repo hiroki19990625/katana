@@ -2,6 +2,8 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendProperty
 
 class TakeItemActorPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.TAKE_ITEM_ACTOR_PACKET

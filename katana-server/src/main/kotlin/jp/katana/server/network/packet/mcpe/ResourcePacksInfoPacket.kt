@@ -3,6 +3,9 @@ package jp.katana.server.network.packet.mcpe
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.data.IResourcePackInfo
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendListProperty
+import jp.katana.debug.appendProperty
 import jp.katana.server.data.ResourcePackInfo
 
 class ResourcePacksInfoPacket : MinecraftPacket() {

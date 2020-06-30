@@ -8,16 +8,18 @@ import jp.katana.core.data.IClientData
 import jp.katana.core.data.ILoginData
 import jp.katana.core.network.IPacketHandler
 import jp.katana.core.network.Reliability
+import jp.katana.core.network.packet.mcpe.IMinecraftPacket
 import jp.katana.core.world.IWorld
 import jp.katana.i18n.I18n
 import jp.katana.math.Vector2Int
 import jp.katana.math.Vector3
 import jp.katana.server.Server
 import jp.katana.server.actor.attribute.ActorAttributes
-import jp.katana.server.actor.data.*
+import jp.katana.server.actor.data.ActorDataIds
+import jp.katana.server.actor.data.ActorDataManager
+import jp.katana.server.actor.data.ActorFlags
 import jp.katana.server.network.PacketHandler
 import jp.katana.server.network.packet.mcpe.DisconnectPacket
-import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import org.apache.logging.log4j.LogManager
 import java.net.InetSocketAddress
 import java.security.KeyPair
@@ -108,11 +110,11 @@ class ActorPlayer(override val address: InetSocketAddress, private val server: S
         data.setFlag(ActorDataIds.DATA_FLAGS, ActorFlags.DATA_FLAG_CAN_CLIMB)
     }
 
-    override fun handlePacket(packet: MinecraftPacket) {
+    override fun handlePacket(packet: IMinecraftPacket) {
         packetHandler.handlePacket(packet)
     }
 
-    override fun sendPacket(packet: MinecraftPacket, reliability: Reliability) {
+    override fun sendPacket(packet: IMinecraftPacket, reliability: Reliability) {
         server.networkManager?.sendPacket(this, packet, reliability)
     }
 

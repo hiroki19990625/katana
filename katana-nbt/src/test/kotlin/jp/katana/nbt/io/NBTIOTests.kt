@@ -1,5 +1,6 @@
 package jp.katana.nbt.io
 
+import jp.katana.io.NBTIO
 import jp.katana.nbt.Endian
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag

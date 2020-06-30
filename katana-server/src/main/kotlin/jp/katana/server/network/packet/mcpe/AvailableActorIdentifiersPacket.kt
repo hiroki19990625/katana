@@ -2,6 +2,8 @@ package jp.katana.server.network.packet.mcpe
 
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
+import jp.katana.core.debug.appendPropertyBufferNetworkNBT
+import jp.katana.debug.appendIndent
 
 class AvailableActorIdentifiersPacket : MinecraftPacket() {
     override val packetId: Int = MinecraftProtocols.AVAILABLE_ACTOR_IDENTIFIERS_PACKET

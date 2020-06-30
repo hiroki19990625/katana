@@ -14,6 +14,7 @@ import jp.katana.server.network.packet.mcpe.NetworkChunkPublisherUpdatePacket
 import jp.katana.server.world.chunk.Chunk
 import jp.katana.server.world.gamerule.GameRules
 import java.io.File
+import kotlin.math.pow
 
 
 class World(

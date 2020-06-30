@@ -8,11 +8,11 @@ import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.actor.PlayerState
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.network.Reliability
+import jp.katana.core.network.packet.mcpe.IMinecraftPacket
 import jp.katana.i18n.I18n
 import jp.katana.server.Server
 import jp.katana.server.io.CompressException
 import jp.katana.server.network.packet.BatchPacket
-import jp.katana.server.network.packet.mcpe.MinecraftPacket
 import jp.katana.utils.BinaryStream
 import java.net.InetSocketAddress
 import java.util.zip.Deflater
@@ -64,7 +64,7 @@ class NetworkManager(private val server: Server) : INetworkManager {
         return players.values.toList()
     }
 
-    override fun sendPacket(player: IActorPlayer, packet: MinecraftPacket, reliability: Reliability) {
+    override fun sendPacket(player: IActorPlayer, packet: IMinecraftPacket, reliability: Reliability) {
         val address = player.address
         try {
             if (sessions.containsKey(address)) {
@@ -127,19 +127,19 @@ class NetworkManager(private val server: Server) : INetworkManager {
         }
     }
 
-    override fun sendPacket(players: List<IActorPlayer>, packet: MinecraftPacket, reliability: Reliability) {
+    override fun sendPacket(players: List<IActorPlayer>, packet: IMinecraftPacket, reliability: Reliability) {
         for (player in players) {
             sendPacket(player, packet, reliability)
         }
     }
 
-    override fun sendBroadcastPacket(packet: MinecraftPacket, reliability: Reliability) {
+    override fun sendBroadcastPacket(packet: IMinecraftPacket, reliability: Reliability) {
         for (player in players.filter { entry -> entry.value.state == PlayerState.Joined }) {
             sendPacket(player.value, packet, reliability)
         }
     }
 
-    override fun handlePacket(address: InetSocketAddress, packet: MinecraftPacket) {
+    override fun handlePacket(address: InetSocketAddress, packet: IMinecraftPacket) {
         if (players.containsKey(address)) {
             players[address]!!.handlePacket(packet)
         }

@@ -3,7 +3,7 @@ package jp.katana.server.block
 import jp.katana.core.block.IBlockDefine
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.nbt.Endian
-import jp.katana.nbt.io.NBTIO
+import jp.katana.io.NBTIO
 import jp.katana.nbt.tag.CompoundTag
 import jp.katana.nbt.tag.INamedTag
 import jp.katana.nbt.tag.ListTag

@@ -3,7 +3,7 @@ package jp.katana.nbt.tag
 import jp.katana.debug.IPrintable
 import jp.katana.factory.SimpleFactory
 import jp.katana.nbt.factory.NBTTagFactory
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 interface INamedTag : IPrintable {
     companion object {

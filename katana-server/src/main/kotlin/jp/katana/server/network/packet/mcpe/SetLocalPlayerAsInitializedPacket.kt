@@ -3,6 +3,8 @@ package jp.katana.server.network.packet.mcpe
 import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.actor.PlayerState
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendProperty
 import jp.katana.i18n.I18n
 import jp.katana.server.actor.ActorPlayer
 

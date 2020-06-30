@@ -1,6 +1,7 @@
 package jp.katana.server.world.chunk
 
 import jp.katana.core.actor.IActor
+import jp.katana.core.network.packet.mcpe.IMinecraftPacket
 import jp.katana.core.world.IWorld
 import jp.katana.core.world.chunk.IChunk
 import jp.katana.core.world.chunk.ISubChunk

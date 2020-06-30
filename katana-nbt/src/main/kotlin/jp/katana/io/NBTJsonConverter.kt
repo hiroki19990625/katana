@@ -1,4 +1,4 @@
-package jp.katana.nbt.io
+package jp.katana.io
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

@@ -4,7 +4,13 @@ import jp.katana.core.IServer
 import jp.katana.core.actor.IActorPlayer
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.item.IItemDefinitions
+import jp.katana.core.utils.writeActorUniqueId
+import jp.katana.core.utils.writeBlockPosition
+import jp.katana.core.utils.writeGameRules
+import jp.katana.core.utils.writeVector3
 import jp.katana.core.world.gamerule.IGameRules
+import jp.katana.debug.appendIndent
+import jp.katana.debug.appendProperty
 import jp.katana.math.Vector3
 import jp.katana.math.Vector3Int
 import jp.katana.server.Server

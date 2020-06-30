@@ -31,4 +31,14 @@ interface IMinecraftPacket : IPrintable {
     fun handleServer(player: IActorPlayer, server: IServer)
 
     // TODO: Handle Client
+
+    /**
+     * パケットをバイト配列に変換します。
+     */
+    fun array(): ByteArray
+
+    /**
+     * パケットをメモリから解放します。
+     */
+    fun close()
 }

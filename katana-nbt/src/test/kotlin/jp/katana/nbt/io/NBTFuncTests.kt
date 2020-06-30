@@ -1,5 +1,6 @@
 package jp.katana.nbt.io
 
+import jp.katana.nbt.tag.*
 import org.junit.jupiter.api.Test
 
 class NBTFuncTests {

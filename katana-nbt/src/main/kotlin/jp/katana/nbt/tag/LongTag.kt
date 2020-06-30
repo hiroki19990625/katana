@@ -1,6 +1,6 @@
 package jp.katana.nbt.tag
 
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class LongTag(override var name: String, override var value: Long) : ValueTag<Long>() {
     override val type: Byte = INamedTag.LONG

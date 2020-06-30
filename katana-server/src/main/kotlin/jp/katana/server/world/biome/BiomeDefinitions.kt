@@ -7,7 +7,7 @@ import com.google.gson.stream.JsonReader
 import jp.katana.core.world.biome.IBiomeDefine
 import jp.katana.core.world.biome.IBiomeDefinitions
 import jp.katana.nbt.Endian
-import jp.katana.nbt.io.NBTIO
+import jp.katana.io.NBTIO
 import jp.katana.nbt.tag.CompoundTag
 import java.io.IOException
 import java.io.InputStreamReader

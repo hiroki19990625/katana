@@ -1,7 +1,7 @@
 package jp.katana.nbt.tag
 
 import jp.katana.debug.appendIndent
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class ListTag(override var name: String, listType: Byte = INamedTag.BYTE) : INamedTag {
     override val type: Byte = INamedTag.LIST

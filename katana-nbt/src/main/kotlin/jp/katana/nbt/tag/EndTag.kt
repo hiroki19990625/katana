@@ -1,7 +1,7 @@
 package jp.katana.nbt.tag
 
 import jp.katana.debug.appendIndent
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class EndTag : INamedTag {
     override var name: String = ""

@@ -1,6 +1,6 @@
 package jp.katana.nbt.tag
 
-import jp.katana.nbt.io.NBTStream
+import jp.katana.io.NBTStream
 
 class StringTag(override var name: String, override var value: String) : ValueTag<String>() {
     override val type: Byte = INamedTag.STRING
