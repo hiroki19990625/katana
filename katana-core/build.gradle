@@ -1,0 +1,45 @@
+plugins {
+    id 'com.github.johnrengelman.shadow'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.dokka'
+
+    id "com.gorylenko.gradle-git-properties"
+
+    id 'maven-publish'
+}
+
+group 'jp.katana.core'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+configurations {
+    extraLibs
+}
+
+dependencies {
+    implementation project(":katana-math")
+    implementation project(":katana-nbt")
+    implementation project(":katana-utils")
+    implementation project(":katana-debug")
+    implementation project(":katana-factory")
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+
+    implementation "com.nimbusds:nimbus-jose-jwt:7.3"
+
+    implementation "com.google.code.gson:gson:2.8.5"
+
+    implementation "org.apache.logging.log4j:log4j-core:2.12.0"
+    implementation "org.apache.logging.log4j:log4j-api:2.12.0"
+}
+
+jar {
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
