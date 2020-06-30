@@ -5,5 +5,7 @@ interface IClientProperties {
     var serverPort: Int
     var userName: String
 
+    var logLevel: String
+
     var tickRate: Byte
 }
