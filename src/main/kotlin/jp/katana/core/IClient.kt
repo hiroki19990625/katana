@@ -2,6 +2,7 @@ package jp.katana.core
 
 import jp.katana.core.command.ICommandSender
 import jp.katana.core.console.IConsole
+import jp.katana.core.event.IEventManager
 import org.apache.logging.log4j.Logger
 import java.io.File
 import java.net.InetAddress
@@ -15,6 +16,8 @@ interface IClient {
     val state: ClientState
     val logger: Logger
     val console: IConsole
+
+    val eventManager: IEventManager
 
     val serverPort: Int
     val serverAddress: InetAddress

@@ -1,7 +1,8 @@
-package jp.katana.server
+package jp.katana
 
 import jp.katana.client.Client
 import jp.katana.i18n.I18n
+import jp.katana.server.Server
 
 class Main {
     companion object {

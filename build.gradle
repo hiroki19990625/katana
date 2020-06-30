@@ -58,7 +58,7 @@ compileTestKotlin {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'jp.katana.server.Main'
+        attributes 'Main-Class': 'jp.katana.Main'
         attributes 'Multi-Release': 'true'
     }
 
