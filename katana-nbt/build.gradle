@@ -16,10 +16,6 @@ repositories {
     jcenter()
 }
 
-configurations {
-    extraLibs
-}
-
 dependencies {
     implementation project(":katana-utils")
     implementation project(":katana-debug")
@@ -31,12 +27,4 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.5"
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
-
-    configurations.implementation.extendsFrom(configurations.extraLibs)
-}
-
-jar {
-    from {
-        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }

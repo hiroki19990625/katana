@@ -16,21 +16,9 @@ repositories {
     jcenter()
 }
 
-configurations {
-    extraLibs
-}
-
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
-
-    configurations.implementation.extendsFrom(configurations.extraLibs)
-}
-
-jar {
-    from {
-        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }
