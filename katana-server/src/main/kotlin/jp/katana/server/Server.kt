@@ -8,12 +8,12 @@ import jp.katana.core.actor.IActorDefinitions
 import jp.katana.core.block.IBlockDefinitions
 import jp.katana.core.command.ICommandSender
 import jp.katana.core.event.IEventManager
-import jp.katana.factory.IFactoryManager
 import jp.katana.core.item.IItemDefinitions
 import jp.katana.core.network.INetworkManager
 import jp.katana.core.resourcepack.IResourcePackManager
 import jp.katana.core.world.IWorldManager
 import jp.katana.core.world.biome.IBiomeDefinitions
+import jp.katana.factory.IFactoryManager
 import jp.katana.i18n.I18n
 import jp.katana.server.actor.ActorDefinitions
 import jp.katana.server.block.BlockDefinitions
@@ -133,6 +133,8 @@ class Server : IServer {
     var katanaConfigFile: File = File("katana.yml")
     var katanaConfig: KatanaConfig? = null
 
+    var useGui: Boolean = false
+
     private val serverCommandSender: ServerCommandSender = ServerCommandSender(this)
 
     private val consoleThread = Thread { startConsole() }
@@ -144,7 +146,9 @@ class Server : IServer {
     override fun start() {
         state = ServerState.Running
         consoleThread.name = I18n["katana.server.thread.consoleThread"]
-        consoleThread.start()
+
+        if (!useGui)
+            consoleThread.start()
 
         logger.info(I18n["katana.server.starting"])
 
