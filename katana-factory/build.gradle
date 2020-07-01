@@ -1,6 +1,8 @@
 plugins {
     id 'com.github.johnrengelman.shadow'
     id 'org.jetbrains.kotlin.jvm'
+
+    id 'maven-publish'
 }
 
 group 'jp.katana.factory'
@@ -16,4 +18,21 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
 
     testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'jp.katana.factory'
+            artifactId = 'katana-factory'
+            version = '1.0-SNAPSHOT'
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = "$buildDir/../../repo"
+        }
+    }
 }

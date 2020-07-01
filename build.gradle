@@ -100,20 +100,3 @@ dokka {
 gitProperties {
     gitPropertiesResourceDir = "${project.rootDir}/src/main/resources"
 }
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'jp.katana'
-            artifactId = 'katana'
-            version = '1.0-SNAPSHOT'
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            url = "$buildDir/../repo"
-        }
-    }
-}

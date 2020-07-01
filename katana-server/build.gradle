@@ -1,6 +1,8 @@
 plugins {
     id 'com.github.johnrengelman.shadow'
     id 'org.jetbrains.kotlin.jvm'
+
+    id 'maven-publish'
 }
 
 group 'jp.katana.server'
@@ -55,5 +57,22 @@ dependencies {
 jar {
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'jp.katana.server'
+            artifactId = 'katana-server'
+            version = '1.0-SNAPSHOT'
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = "$buildDir/../../repo"
+        }
     }
 }
