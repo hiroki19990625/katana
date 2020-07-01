@@ -1,2 +1,11 @@
 rootProject.name = 'katana'
 
+include 'katana-core',
+        'katana-client',
+        'katana-math',
+        'katana-i18n',
+        'katana-nbt',
+        'katana-utils',
+        'katana-debug',
+        'katana-factory',
+        'katana-server'

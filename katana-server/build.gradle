@@ -1,14 +1,11 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
-    id 'org.jetbrains.dokka' version '0.10.1'
-
-    id "com.gorylenko.gradle-git-properties" version "2.2.0"
+    id 'com.github.johnrengelman.shadow'
+    id 'org.jetbrains.kotlin.jvm'
 
     id 'maven-publish'
 }
 
-group 'jp.katana'
+group 'jp.katana.server'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -22,14 +19,17 @@ configurations {
 
 dependencies {
     implementation project(":katana-core")
-    implementation project(":katana-client")
-    implementation project(":katana-server")
     implementation project(":katana-i18n")
+    implementation project(":katana-nbt")
+    implementation project(":katana-factory")
+    implementation project(":katana-math")
+    implementation project(":katana-utils")
+    implementation project(":katana-debug")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
 
-    extraLibs files("libs/jraknet-2.12.3.jar")
+    extraLibs files("../libs/jraknet-2.12.3.jar")
 
     implementation "com.nimbusds:nimbus-jose-jwt:7.3"
 
@@ -54,49 +54,25 @@ dependencies {
     configurations.implementation.extendsFrom(configurations.extraLibs)
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
 jar {
-    manifest {
-        attributes 'Main-Class': 'jp.katana.Main'
-        attributes 'Multi-Release': 'true'
-    }
-
     from {
         configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'jp.katana.server'
+            artifactId = 'katana-server'
+            version = '1.0-SNAPSHOT'
+            from components.java
+        }
     }
-}
 
-dokka {
-    outputFormat = 'html'
-    outputDirectory = "$buildDir/dokka"
-    outputFormat = "javadoc"
-
-    subProjects = [
-            "katana-client",
-            "katana-core",
-            'katana-debug',
-            'katana-factory',
-            'katana-i18n',
-            'katana-math',
-            'katana-nbt',
-            'katana-server',
-            'katana-utils'
-    ]
-}
-
-gitProperties {
-    gitPropertiesResourceDir = "${project.rootDir}/src/main/resources"
+    repositories {
+        maven {
+            url = "$buildDir/../../repo"
+        }
+    }
 }
