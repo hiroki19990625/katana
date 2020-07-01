@@ -98,5 +98,5 @@ dokka {
 }
 
 gitProperties {
-    gitPropertiesResourceDir = "${project.rootDir}/src/main/resources"
+    gitPropertiesResourceDir = "${project.rootDir}/katana-server/src/main/resources"
 }
